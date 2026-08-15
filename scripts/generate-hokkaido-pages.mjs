@@ -156,8 +156,12 @@ function localityFrom(address) {
   const withoutPrefecture = normalized.startsWith(prefecture.label)
     ? normalized.slice(prefecture.label.length)
     : normalized;
-  const match = withoutPrefecture.match(/^(.*?市.*?区|.*?市|.*?郡.*?[町村]|.*?[町村])/);
-  return match?.[1] ?? prefecture.shortLabel;
+  const designatedCity = withoutPrefecture.match(/^(.+?市[一-龯々ぁ-んァ-ヶー]{1,8}区)/);
+  const city = withoutPrefecture.match(/^(.+?市)/);
+  const tokyoWard = prefecture.label === "東京都" ? withoutPrefecture.match(/^([^0-9０-９\s]+?区)/) : null;
+  const district = withoutPrefecture.match(/^(.+?郡.+?[町村])/);
+  const townOrVillage = withoutPrefecture.match(/^(.+?[町村])/);
+  return designatedCity?.[1] ?? tokyoWard?.[1] ?? city?.[1] ?? district?.[1] ?? townOrVillage?.[1] ?? prefecture.shortLabel;
 }
 
 function shopId(shop) {
@@ -389,14 +393,20 @@ function shopPage(shop, nearbyRakutenShops) {
 }
 
 function indexPage(shops) {
-  const groups = Object.keys(carrierLabels).map((carrier) => {
-    const carrierShops = shops.filter((shop) => shop.carrier === carrier);
-    const links = carrierShops.map((shop) => `<li><a href="${pagePath(shop)}"><span class="shop-link-name">${escapeHtml(shop.name)}</span><span class="shop-link-meta">${escapeHtml(localityFrom(shop.address))}</span><span class="shop-link-arrow" aria-hidden="true">→</span></a></li>`).join("\n");
-    return `<section class="shop-group" id="${carrier}">
-      <div class="group-heading"><div><p class="section-label">${escapeHtml(carrierLabels[carrier])}</p><h2>${escapeHtml(carrierLabels[carrier])}の店舗</h2></div><strong>${carrierShops.length}<small>店舗</small></strong></div>
-      <ul class="shop-grid">${links}</ul>
-    </section>`;
-  }).join("\n");
+  const shopsByLocality = Map.groupBy(shops, (shop) => localityFrom(shop.address));
+  const localityGroups = [...shopsByLocality.entries()]
+    .sort(([a], [b]) => a.localeCompare(b, "ja"))
+    .map(([locality, localityShops]) => {
+      const links = localityShops
+        .sort((a, b) => a.name.localeCompare(b.name, "ja"))
+        .map((shop) => `<li data-shop-card data-carrier="${shop.carrier}"><a href="${pagePath(shop)}"><span class="shop-link-name">${escapeHtml(shop.name)}<em class="carrier-badge carrier-${shop.carrier}">${escapeHtml(carrierLabels[shop.carrier])}</em></span><span class="shop-link-meta">${escapeHtml(locality)}</span><span class="shop-link-arrow" aria-hidden="true">→</span></a></li>`)
+        .join("\n");
+      return `<details class="locality-group" data-locality-group>
+        <summary><span>${escapeHtml(locality)}</span><strong><b data-locality-count>${localityShops.length}</b><small>店舗</small></strong><i aria-hidden="true">＋</i></summary>
+        <ul class="shop-grid">${links}</ul>
+      </details>`;
+    })
+    .join("\n");
 
   const title = `${prefecture.label}のキャリアショップから楽天モバイルへ乗り換える方法 | 店舗別ガイド`;
   const description = `${prefecture.label}のau・ドコモ・ソフトバンク店舗を地域別に掲載。楽天モバイルへ乗り換える前の準備やMNP手続きを店舗ごとに確認できます。`;
@@ -407,11 +417,22 @@ function indexPage(shops) {
       <p class="eyebrow">${prefecture.english} SHOP GUIDE</p>
       <h1>${prefecture.label}のキャリアショップから<br><span>楽天モバイルへ乗り換える前に</span></h1>
       <p class="lead">au・ドコモ・ソフトバンクを利用中の方向けに、店舗へ行く前に確認したい乗り換え準備をまとめました。現在利用している店舗から選んでください。</p>
-      <div class="count-row"><div><strong>${shops.length}</strong><span>掲載店舗</span></div><a href="#au">au</a><a href="#docomo">ドコモ</a><a href="#softbank">ソフトバンク</a></div>
+      <div class="count-row"><div><strong>${shops.length}</strong><span>掲載店舗</span></div><a href="#shop-finder" data-carrier-jump="au">au</a><a href="#shop-finder" data-carrier-jump="docomo">ドコモ</a><a href="#shop-finder" data-carrier-jump="softbank">ソフトバンク</a></div>
     </section>
     <section class="index-note"><h2>店舗名から探す理由</h2><p>同じ通信会社でも、普段使う店舗や地域によって検索する言葉は異なります。各ページでは店舗固有の住所と公式ページを確認しながら、楽天モバイルへの乗り換え手順を整理できます。</p></section>
-    ${groups}
+    <section class="shop-finder" id="shop-finder">
+      <div class="shop-finder-heading"><div><p class="section-label">SHOP FINDER</p><h2>店舗を絞り込む</h2></div><p><strong data-result-count>${shops.length}</strong>店舗を表示</p></div>
+      <label class="shop-search"><span>店舗名・市区町村から検索</span><input type="search" data-shop-search placeholder="例：新宿、渋谷、店舗名" autocomplete="off"><i aria-hidden="true">⌕</i></label>
+      <div class="carrier-filters" aria-label="通信会社で絞り込む">
+        <button type="button" data-carrier-filter="all" aria-pressed="true">すべて <small>${shops.length}</small></button>
+        ${Object.entries(carrierLabels).map(([carrier, label]) => `<button type="button" data-carrier-filter="${carrier}" aria-pressed="false">${escapeHtml(label)} <small>${shops.filter((shop) => shop.carrier === carrier).length}</small></button>`).join("\n")}
+      </div>
+      <p class="filter-status" data-filter-status aria-live="polite"></p>
+      <div class="locality-list">${localityGroups}</div>
+      <p class="no-shop-results" data-no-results hidden>条件に一致する店舗がありません。検索語または通信会社を変更してください。</p>
+    </section>
     <section class="final-cta"><h2>オンラインで乗り換えを始める</h2><p>紹介キャンペーンの条件を先に確認し、納得してから申し込みへ進んでください。</p><a class="button light" href="${referralUrl}" rel="sponsored nofollow noopener">紹介キャンペーンを確認する <span aria-hidden="true">→</span></a><p class="updated">情報確認日：${updated}</p></section>
+    <script src="/js/prefecture-search.js" defer></script>
   </main>`;
 
   return layout({
