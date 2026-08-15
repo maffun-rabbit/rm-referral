@@ -18,6 +18,9 @@ const prefectures = {
   群馬県: { slug: "gunma", label: "群馬県", shortLabel: "群馬", english: "GUNMA", expectedShops: 83 },
   茨城県: { slug: "ibaraki", label: "茨城県", shortLabel: "茨城", english: "IBARAKI", expectedShops: 118 },
   埼玉県: { slug: "saitama", label: "埼玉県", shortLabel: "埼玉", english: "SAITAMA", expectedShops: 253 },
+  千葉県: { slug: "chiba", label: "千葉県", shortLabel: "千葉", english: "CHIBA", expectedShops: 227 },
+  東京都: { slug: "tokyo", label: "東京都", shortLabel: "東京", english: "TOKYO", expectedShops: 539 },
+  神奈川県: { slug: "kanagawa", label: "神奈川県", shortLabel: "神奈川", english: "KANAGAWA", expectedShops: 296 },
 };
 const prefecture = prefectures[prefectureName];
 if (!prefecture) throw new Error(`Unsupported prefecture: ${prefectureName}`);

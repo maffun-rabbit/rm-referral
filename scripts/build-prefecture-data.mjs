@@ -17,6 +17,9 @@ const prefectures = {
   群馬県: { slug: "gunma", region: "関東", auRegionPage: "kanto" },
   茨城県: { slug: "ibaraki", region: "関東", auRegionPage: "kanto" },
   埼玉県: { slug: "saitama", region: "関東", auRegionPage: "kanto" },
+  千葉県: { slug: "chiba", region: "関東", auRegionPage: "kanto" },
+  東京都: { slug: "tokyo", region: "関東", auRegionPage: "kanto" },
+  神奈川県: { slug: "kanagawa", region: "関東", auRegionPage: "kanto" },
 };
 
 const prefectureArg = process.argv.find((arg) => arg.startsWith("--prefecture="));
@@ -72,7 +75,38 @@ function decodeHtml(value) {
     .replaceAll("&gt;", ">");
 }
 
-async function fetchAuShops() {
+async function mapWithConcurrency(items, limit, mapper) {
+  const results = new Array(items.length);
+  let nextIndex = 0;
+  async function worker() {
+    while (nextIndex < items.length) {
+      const index = nextIndex;
+      nextIndex += 1;
+      results[index] = await mapper(items[index]);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+  return results;
+}
+
+async function fetchJsonWithRetry(url, label) {
+  let lastError;
+  for (let attempt = 1; attempt <= 4; attempt += 1) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`returned ${response.status}`);
+      const text = await response.text();
+      if (!text.trim()) throw new Error("returned an empty response");
+      return JSON.parse(text);
+    } catch (error) {
+      lastError = error;
+      if (attempt < 4) await new Promise((resolve) => setTimeout(resolve, attempt * 300));
+    }
+  }
+  throw new Error(`${label}: au API failed after retries (${lastError.message})`);
+}
+
+async function fetchAuShops(sourceByUrl, coordinatesByUrl) {
   const listUrl = `https://www.au.com/storelocator/${config.auRegionPage}/`;
   const response = await fetch(listUrl);
   if (!response.ok) throw new Error(`au list returned ${response.status}`);
@@ -87,11 +121,33 @@ async function fetchAuShops() {
     .filter((shop) => shop.name.startsWith("au Style") || shop.name.startsWith("ａｕショップ"));
   if (!links.length) throw new Error(`No au Style/au shop links found for ${prefecture}`);
 
-  return Promise.all(links.map(async (shop) => {
+  return mapWithConcurrency(links, 8, async (shop) => {
     const detailUrl = `https://www.au.com/bin/wcm/au-com/storelocator.json?shopId=${encodeURIComponent(shop.shopId)}&locale=ja`;
-    const detailResponse = await fetch(detailUrl);
-    if (!detailResponse.ok) throw new Error(`${shop.name}: au API returned ${detailResponse.status}`);
-    const detail = await detailResponse.json();
+    let detail;
+    try {
+      detail = await fetchJsonWithRetry(detailUrl, shop.name);
+    } catch (error) {
+      const source = sourceByUrl.get(shop.url);
+      if (!source) throw error;
+      const coordinates = coordinatesByUrl.get(shop.url);
+      const coordinateOverrides = {
+        "E-00372": { 緯度: "35.37474", 経度: "139.57744" },
+      };
+      const fallbackCoordinates = coordinates?.取得結果 === "ok" ? coordinates : coordinateOverrides[shop.shopId];
+      if (!fallbackCoordinates) throw error;
+      console.warn(`${shop.name}: using the existing verified address and coordinates because the au detail API returned no data`);
+      return {
+        キャリア: "au",
+        地域: config.region,
+        都道府県: prefecture,
+        店名: source.店名.replace(/^auショップ/, "auショップ"),
+        住所: source.住所,
+        URL: shop.url,
+        緯度: fallbackCoordinates.緯度,
+        経度: fallbackCoordinates.経度,
+        取得結果: "ok",
+      };
+    }
     return {
       キャリア: "au",
       地域: config.region,
@@ -103,16 +159,18 @@ async function fetchAuShops() {
       経度: detail.longitude,
       取得結果: "ok",
     };
-  }));
+  });
 }
 
-const [sourceText, coordinateText, auShops] = await Promise.all([
+const [sourceText, coordinateText] = await Promise.all([
   readFile(sourcePath, "utf8"),
   readFile(nationwideCoordinatesPath, "utf8"),
-  fetchAuShops(),
 ]);
+const sourceShops = parseCsv(sourceText);
+const sourceByUrl = new Map(sourceShops.map((shop) => [shop.URL, shop]));
 const coordinatesByUrl = new Map(parseCsv(coordinateText).map((shop) => [shop.URL, shop]));
-const otherShops = parseCsv(sourceText)
+const auShops = await fetchAuShops(sourceByUrl, coordinatesByUrl);
+const otherShops = sourceShops
   .filter((shop) => shop.都道府県 === prefecture && ["docomo", "softbank"].includes(shop.キャリア))
   .map((shop) => {
     const coordinates = coordinatesByUrl.get(shop.URL);
