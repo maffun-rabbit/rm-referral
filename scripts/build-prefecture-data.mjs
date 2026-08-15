@@ -40,6 +40,10 @@ const prefectures = {
   岡山県: { slug: "okayama", region: "中国", auRegionPage: "chugoku" },
   広島県: { slug: "hiroshima", region: "中国", auRegionPage: "chugoku" },
   山口県: { slug: "yamaguchi", region: "中国", auRegionPage: "chugoku" },
+  徳島県: { slug: "tokushima", region: "四国", auRegionPage: "shikoku" },
+  香川県: { slug: "kagawa", region: "四国", auRegionPage: "shikoku" },
+  愛媛県: { slug: "ehime", region: "四国", auRegionPage: "shikoku" },
+  高知県: { slug: "kochi", region: "四国", auRegionPage: "shikoku" },
 };
 
 const prefectureArg = process.argv.find((arg) => arg.startsWith("--prefecture="));
