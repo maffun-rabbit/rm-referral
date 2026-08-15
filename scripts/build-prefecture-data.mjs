@@ -35,6 +35,11 @@ const prefectures = {
   兵庫県: { slug: "hyogo", region: "近畿", auRegionPage: "kinki" },
   奈良県: { slug: "nara", region: "近畿", auRegionPage: "kinki" },
   和歌山県: { slug: "wakayama", region: "近畿", auRegionPage: "kinki" },
+  鳥取県: { slug: "tottori", region: "中国", auRegionPage: "chugoku" },
+  島根県: { slug: "shimane", region: "中国", auRegionPage: "chugoku" },
+  岡山県: { slug: "okayama", region: "中国", auRegionPage: "chugoku" },
+  広島県: { slug: "hiroshima", region: "中国", auRegionPage: "chugoku" },
+  山口県: { slug: "yamaguchi", region: "中国", auRegionPage: "chugoku" },
 };
 
 const prefectureArg = process.argv.find((arg) => arg.startsWith("--prefecture="));

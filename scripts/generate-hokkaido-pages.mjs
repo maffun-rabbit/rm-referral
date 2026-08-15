@@ -36,6 +36,11 @@ const prefectures = {
   兵庫県: { slug: "hyogo", label: "兵庫県", shortLabel: "兵庫", english: "HYOGO", expectedShops: 265 },
   奈良県: { slug: "nara", label: "奈良県", shortLabel: "奈良", english: "NARA", expectedShops: 67 },
   和歌山県: { slug: "wakayama", label: "和歌山県", shortLabel: "和歌山", english: "WAKAYAMA", expectedShops: 54 },
+  鳥取県: { slug: "tottori", label: "鳥取県", shortLabel: "鳥取", english: "TOTTORI", expectedShops: 31 },
+  島根県: { slug: "shimane", label: "島根県", shortLabel: "島根", english: "SHIMANE", expectedShops: 43 },
+  岡山県: { slug: "okayama", label: "岡山県", shortLabel: "岡山", english: "OKAYAMA", expectedShops: 110 },
+  広島県: { slug: "hiroshima", label: "広島県", shortLabel: "広島", english: "HIROSHIMA", expectedShops: 163 },
+  山口県: { slug: "yamaguchi", label: "山口県", shortLabel: "山口", english: "YAMAGUCHI", expectedShops: 78 },
 };
 const prefecture = prefectures[prefectureName];
 if (!prefecture) throw new Error(`Unsupported prefecture: ${prefectureName}`);
