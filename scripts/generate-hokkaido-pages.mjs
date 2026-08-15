@@ -4,6 +4,8 @@ import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
 const dataPath = path.join(root, "data", "hokkaido-shops.csv");
+const carrierCoordinatesPath = path.join(root, "data", "carrier-shops-geocoded.csv");
+const rakutenShopsPath = path.join(root, "data", "rakuten-shops-geocoded.csv");
 const outputRoot = path.join(root, "hokkaido");
 const siteUrl = "https://rm-referral.maffun.workers.dev";
 const referralUrl = "https://r10.to/hNearm";
@@ -39,12 +41,60 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+function parseCsvRows(text) {
+  const rows = [];
+  let row = [];
+  let cell = "";
+  let quoted = false;
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    if (char === '"' && quoted && text[index + 1] === '"') {
+      cell += '"';
+      index += 1;
+    } else if (char === '"') quoted = !quoted;
+    else if (char === "," && !quoted) {
+      row.push(cell);
+      cell = "";
+    } else if ((char === "\n" || char === "\r") && !quoted) {
+      if (char === "\r" && text[index + 1] === "\n") index += 1;
+      row.push(cell);
+      if (row.some(Boolean)) rows.push(row);
+      row = [];
+      cell = "";
+    } else cell += char;
+  }
+  if (cell || row.length) {
+    row.push(cell);
+    rows.push(row);
+  }
+  const headers = rows.shift().map((value) => value.replace(/^\uFEFF/, ""));
+  return rows.map((values) => Object.fromEntries(headers.map((header, index) => [header, values[index] ?? ""])));
+}
+
 function parseCsv(text) {
-  const lines = text.replace(/^\uFEFF/, "").trim().split(/\r?\n/);
-  return lines.slice(1).map((line) => {
-    const [carrier, region, prefecture, name, address, officialUrl] = line.split(",");
-    return { carrier, region, prefecture, name, address, officialUrl };
-  });
+  return parseCsvRows(text).map((row) => ({
+    carrier: row.キャリア,
+    region: row.地域,
+    prefecture: row.都道府県,
+    name: row.店名,
+    address: row.住所,
+    officialUrl: row.URL,
+  }));
+}
+
+function radians(value) {
+  return value * Math.PI / 180;
+}
+
+function distanceKm(from, to) {
+  const earthRadiusKm = 6371.0088;
+  const deltaLatitude = radians(to.latitude - from.latitude);
+  const deltaLongitude = radians(to.longitude - from.longitude);
+  const startLatitude = radians(from.latitude);
+  const endLatitude = radians(to.latitude);
+  const a = Math.sin(deltaLatitude / 2) ** 2
+    + Math.cos(startLatitude) * Math.cos(endLatitude) * Math.sin(deltaLongitude / 2) ** 2;
+  return earthRadiusKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
 function localityFrom(address) {
@@ -107,7 +157,7 @@ function layout({ title, description, canonical, body, jsonLd = [] }) {
 </html>`;
 }
 
-function shopPage(shop, related) {
+function shopPage(shop, nearbyRakutenShops) {
   const carrier = carrierLabels[shop.carrier];
   const locality = localityFrom(shop.address);
   const title = `${shop.name}から楽天モバイルへ乗り換える前に確認すること | 楽天モバイル乗り換えガイド`;
@@ -115,8 +165,9 @@ function shopPage(shop, related) {
   const pathname = pagePath(shop);
   const canonical = `${siteUrl}${pathname}`;
   const note = carrierNotes[shop.carrier];
-  const relatedLinks = related.map((item) => `
-          <li><a href="${pagePath(item)}"><span class="shop-link-name">${escapeHtml(item.name)}</span><span class="shop-link-meta">${escapeHtml(localityFrom(item.address))}</span><span class="shop-link-arrow" aria-hidden="true">→</span></a></li>`).join("");
+  const nearestRakuten = nearbyRakutenShops[0];
+  const relatedLinks = nearbyRakutenShops.map((item) => `
+          <li><a href="${escapeHtml(item.officialUrl)}" rel="noopener"><span class="shop-link-name">${escapeHtml(item.name)}</span><span class="shop-link-meta">${escapeHtml(localityFrom(item.address))}・直線距離 約${item.distanceKm.toFixed(1)}km</span><span class="shop-link-arrow" aria-hidden="true">↗</span></a></li>`).join("");
 
   const body = `<main>
     <nav class="breadcrumb" aria-label="パンくずリスト">
@@ -217,10 +268,28 @@ function shopPage(shop, related) {
       </div>
     </section>
 
+    <section class="nearby-shop-section" id="nearby-rakuten">
+      <p class="section-label">NEARBY RAKUTEN MOBILE</p>
+      <h2>${escapeHtml(shop.name)}から近い楽天モバイルショップ</h2>
+      <div class="nearby-shop-grid">
+        <div class="nearby-shop-card">
+          <p class="pill">直線距離 約${nearestRakuten.distanceKm.toFixed(1)}km</p>
+          <h3>${escapeHtml(nearestRakuten.name)}</h3>
+          <p>${escapeHtml(nearestRakuten.address)}</p>
+          <div class="nearby-shop-actions">
+            <a class="button" href="${escapeHtml(nearestRakuten.directionsUrl)}" rel="noopener">Googleマップで経路を見る <span aria-hidden="true">↗</span></a>
+            <a class="official-link" href="${escapeHtml(nearestRakuten.officialUrl)}" rel="noopener">楽天モバイル公式店舗ページ <span>↗</span></a>
+          </div>
+          <p class="small">距離は両店舗の公式座標から算出した直線距離です。実際の移動距離・時間はGoogleマップで確認してください。</p>
+        </div>
+        <iframe class="shop-map" title="${escapeHtml(nearestRakuten.name)}の地図" src="${escapeHtml(nearestRakuten.embedUrl)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+    </section>
+
     <section class="related-section">
-      <h2>${escapeHtml(locality)}周辺の${escapeHtml(carrier)}店舗</h2>
+      <h2>${escapeHtml(locality)}周辺の楽天モバイルショップ</h2>
       <ul class="related-list">${relatedLinks}</ul>
-      <a class="text-link" href="/hokkaido/">北海道の全店舗を見る →</a>
+      <a class="text-link" href="https://network.mobile.rakuten.co.jp/shop/" rel="noopener">楽天モバイルの全店舗を公式サイトで見る ↗</a>
     </section>
 
     <section class="final-cta">
@@ -303,17 +372,29 @@ function indexPage(shops) {
   });
 }
 
-function relatedShops(shop, shops) {
-  const locality = localityFrom(shop.address);
-  const sameLocality = shops.filter((item) => item !== shop && item.carrier === shop.carrier && localityFrom(item.address) === locality);
-  const sameCarrier = shops.filter((item) => item !== shop && item.carrier === shop.carrier && localityFrom(item.address) !== locality);
-  return [...sameLocality, ...sameCarrier].slice(0, 5);
-}
-
 async function main() {
-  const csv = await readFile(dataPath, "utf8");
+  const [csv, coordinateCsv, rakutenCsv] = await Promise.all([
+    readFile(dataPath, "utf8"),
+    readFile(carrierCoordinatesPath, "utf8"),
+    readFile(rakutenShopsPath, "utf8"),
+  ]);
   const shops = parseCsv(csv);
   if (shops.length !== 309) throw new Error(`Expected 309 shops, received ${shops.length}`);
+
+  const coordinatesByUrl = new Map(parseCsvRows(coordinateCsv).map((row) => [row.URL, {
+    latitude: Number(row.緯度),
+    longitude: Number(row.経度),
+  }]));
+  const rakutenShops = parseCsvRows(rakutenCsv)
+    .filter((row) => row.都道府県 === "北海道")
+    .map((row) => ({
+      name: row.店名,
+      address: row.住所,
+      officialUrl: row.URL,
+      latitude: Number(row.緯度),
+      longitude: Number(row.経度),
+    }));
+  if (!rakutenShops.length) throw new Error("No Hokkaido Rakuten Mobile shops found");
 
   const paths = shops.map(pagePath);
   if (new Set(paths).size !== shops.length) throw new Error("Duplicate shop paths detected");
@@ -323,9 +404,21 @@ async function main() {
   await writeFile(path.join(outputRoot, "index.html"), indexPage(shops));
 
   for (const shop of shops) {
+    const coordinates = coordinatesByUrl.get(shop.officialUrl);
+    if (!coordinates || !Number.isFinite(coordinates.latitude) || !Number.isFinite(coordinates.longitude)) {
+      throw new Error(`Coordinates missing for ${shop.name}`);
+    }
+    const nearbyRakutenShops = rakutenShops
+      .map((rakutenShop) => ({ ...rakutenShop, distanceKm: distanceKm(coordinates, rakutenShop) }))
+      .sort((a, b) => a.distanceKm - b.distanceKm)
+      .slice(0, 5);
+    const nearest = nearbyRakutenShops[0];
+    const destination = `${nearest.latitude},${nearest.longitude}`;
+    nearest.directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(shop.address)}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
+    nearest.embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(destination)}&z=15&output=embed`;
     const directory = path.join(root, pagePath(shop));
     await mkdir(directory, { recursive: true });
-    await writeFile(path.join(directory, "index.html"), shopPage(shop, relatedShops(shop, shops)));
+    await writeFile(path.join(directory, "index.html"), shopPage(shop, nearbyRakutenShops));
   }
 
   const urls = ["/", "/hokkaido/", ...paths];
