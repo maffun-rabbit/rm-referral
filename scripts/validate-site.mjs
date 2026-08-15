@@ -35,7 +35,7 @@ for (const file of htmlFiles) {
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
   const canonical = html.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
   if (!title) errors.push(`${file}: title is missing`);
-  if (["hokkaido", "aomori", "iwate", "miyagi", "akita", "yamagata", "fukushima"].some((area) => file.includes(`${path.sep}${area}${path.sep}`)) && !canonical) errors.push(`${file}: canonical is missing`);
+  if (["hokkaido", "aomori", "iwate", "miyagi", "akita", "yamagata", "fukushima", "niigata", "tochigi", "gunma", "ibaraki", "saitama"].some((area) => file.includes(`${path.sep}${area}${path.sep}`)) && !canonical) errors.push(`${file}: canonical is missing`);
   if (title) {
     if (titles.has(title)) errors.push(`${file}: duplicate title with ${titles.get(title)}`);
     titles.set(title, file);
@@ -56,7 +56,7 @@ for (const file of htmlFiles) {
   }
 }
 
-const expectedByArea = { hokkaido: 309, aomori: 57, iwate: 62, miyagi: 123, akita: 46, yamagata: 59, fukushima: 98 };
+const expectedByArea = { hokkaido: 309, aomori: 57, iwate: 62, miyagi: 123, akita: 46, yamagata: 59, fukushima: 98, niigata: 94, tochigi: 78, gunma: 83, ibaraki: 118, saitama: 253 };
 const shopPages = [];
 for (const [area, expected] of Object.entries(expectedByArea)) {
   const areaPages = htmlFiles.filter((file) => file.includes(`${path.sep}${area}${path.sep}`) && !file.endsWith(`${path.sep}${area}${path.sep}index.html`));

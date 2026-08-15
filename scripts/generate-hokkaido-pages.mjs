@@ -13,6 +13,11 @@ const prefectures = {
   秋田県: { slug: "akita", label: "秋田県", shortLabel: "秋田", english: "AKITA", expectedShops: 46 },
   山形県: { slug: "yamagata", label: "山形県", shortLabel: "山形", english: "YAMAGATA", expectedShops: 59 },
   福島県: { slug: "fukushima", label: "福島県", shortLabel: "福島", english: "FUKUSHIMA", expectedShops: 98 },
+  新潟県: { slug: "niigata", label: "新潟県", shortLabel: "新潟", english: "NIIGATA", expectedShops: 94 },
+  栃木県: { slug: "tochigi", label: "栃木県", shortLabel: "栃木", english: "TOCHIGI", expectedShops: 78 },
+  群馬県: { slug: "gunma", label: "群馬県", shortLabel: "群馬", english: "GUNMA", expectedShops: 83 },
+  茨城県: { slug: "ibaraki", label: "茨城県", shortLabel: "茨城", english: "IBARAKI", expectedShops: 118 },
+  埼玉県: { slug: "saitama", label: "埼玉県", shortLabel: "埼玉", english: "SAITAMA", expectedShops: 253 },
 };
 const prefecture = prefectures[prefectureName];
 if (!prefecture) throw new Error(`Unsupported prefecture: ${prefectureName}`);

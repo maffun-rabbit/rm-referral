@@ -12,6 +12,11 @@ const prefectures = {
   秋田県: { slug: "akita", region: "東北", auRegionPage: "tohoku" },
   山形県: { slug: "yamagata", region: "東北", auRegionPage: "tohoku" },
   福島県: { slug: "fukushima", region: "東北", auRegionPage: "tohoku" },
+  新潟県: { slug: "niigata", region: "北陸・甲信越", auRegionPage: "kanto" },
+  栃木県: { slug: "tochigi", region: "関東", auRegionPage: "kanto" },
+  群馬県: { slug: "gunma", region: "関東", auRegionPage: "kanto" },
+  茨城県: { slug: "ibaraki", region: "関東", auRegionPage: "kanto" },
+  埼玉県: { slug: "saitama", region: "関東", auRegionPage: "kanto" },
 };
 
 const prefectureArg = process.argv.find((arg) => arg.startsWith("--prefecture="));
