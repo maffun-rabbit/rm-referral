@@ -116,7 +116,7 @@ function shopPage(shop, related) {
   const canonical = `${siteUrl}${pathname}`;
   const note = carrierNotes[shop.carrier];
   const relatedLinks = related.map((item) => `
-          <li><a href="${pagePath(item)}">${escapeHtml(item.name)}</a><span>${escapeHtml(localityFrom(item.address))}</span></li>`).join("");
+          <li><a href="${pagePath(item)}"><span class="shop-link-name">${escapeHtml(item.name)}</span><span class="shop-link-meta">${escapeHtml(localityFrom(item.address))}</span><span class="shop-link-arrow" aria-hidden="true">→</span></a></li>`).join("");
 
   const body = `<main>
     <nav class="breadcrumb" aria-label="パンくずリスト">
@@ -263,7 +263,7 @@ function shopPage(shop, related) {
 function indexPage(shops) {
   const groups = Object.keys(carrierLabels).map((carrier) => {
     const carrierShops = shops.filter((shop) => shop.carrier === carrier);
-    const links = carrierShops.map((shop) => `<li><a href="${pagePath(shop)}">${escapeHtml(shop.name)}</a><span>${escapeHtml(localityFrom(shop.address))}</span></li>`).join("\n");
+    const links = carrierShops.map((shop) => `<li><a href="${pagePath(shop)}"><span class="shop-link-name">${escapeHtml(shop.name)}</span><span class="shop-link-meta">${escapeHtml(localityFrom(shop.address))}</span><span class="shop-link-arrow" aria-hidden="true">→</span></a></li>`).join("\n");
     return `<section class="shop-group" id="${carrier}">
       <div class="group-heading"><div><p class="section-label">${escapeHtml(carrierLabels[carrier])}</p><h2>${escapeHtml(carrierLabels[carrier])}の店舗</h2></div><strong>${carrierShops.length}<small>店舗</small></strong></div>
       <ul class="shop-grid">${links}</ul>
