@@ -1,4 +1,3 @@
-import { createHash } from "node:crypto";
 import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
@@ -60,10 +59,11 @@ if (!prefecture) throw new Error(`Unsupported prefecture: ${prefectureName}`);
 const dataPath = path.join(root, "data", `${prefecture.slug}-shops.csv`);
 const carrierCoordinatesPath = path.join(root, "data", prefecture.slug === "hokkaido" ? "carrier-shops-geocoded.csv" : `${prefecture.slug}-carrier-shops-geocoded.csv`);
 const rakutenShopsPath = path.join(root, "data", "rakuten-shops-geocoded.csv");
+const shopSlugsPath = path.join(root, "data", "shop-slugs.csv");
 const outputRoot = path.join(root, prefecture.slug);
 const siteUrl = "https://rm-referral.maffun.workers.dev";
 const referralUrl = "https://r10.to/hNearm";
-const updated = "2026-08-15";
+const updated = "2026-08-16";
 
 const carrierLabels = {
   au: "au",
@@ -164,21 +164,8 @@ function localityFrom(address) {
   return designatedCity?.[1] ?? tokyoWard?.[1] ?? city?.[1] ?? district?.[1] ?? townOrVillage?.[1] ?? prefecture.shortLabel;
 }
 
-function shopId(shop) {
-  try {
-    const url = new URL(shop.officialUrl);
-    const shopIdParam = url.searchParams.get("shopId");
-    if (shopIdParam) return shopIdParam.toLowerCase();
-    const detail = url.pathname.match(/shop_detail\/([^/]+)/);
-    if (detail) return detail[1].toLowerCase();
-    const segments = url.pathname.split("/").filter(Boolean);
-    if (segments.length) return segments.at(-1).replace(/\.html$/, "").toLowerCase();
-  } catch {}
-  return createHash("sha1").update(`${shop.name}|${shop.address}`).digest("hex").slice(0, 12);
-}
-
 function pagePath(shop) {
-  return `/${prefecture.slug}/${shop.carrier}/${shopId(shop)}/`;
+  return `/${prefecture.slug}/${shop.carrier}/${shop.slug}/`;
 }
 
 function layout({ title, description, canonical, body, jsonLd = [] }) {
@@ -470,13 +457,17 @@ async function collectPublishedUrls() {
 }
 
 async function main() {
-  const [csv, coordinateCsv, rakutenCsv] = await Promise.all([
+  const [csv, coordinateCsv, rakutenCsv, shopSlugsCsv] = await Promise.all([
     readFile(dataPath, "utf8"),
     readFile(carrierCoordinatesPath, "utf8"),
     readFile(rakutenShopsPath, "utf8"),
+    readFile(shopSlugsPath, "utf8"),
   ]);
-  const shops = parseCsv(csv);
+  const slugByUrl = new Map(parseCsvRows(shopSlugsCsv).map((row) => [row.URL, row.slug]));
+  const shops = parseCsv(csv).map((shop) => ({ ...shop, slug: slugByUrl.get(shop.officialUrl) }));
   if (shops.length !== prefecture.expectedShops) throw new Error(`Expected ${prefecture.expectedShops} shops, received ${shops.length}`);
+  const missingSlug = shops.find((shop) => !shop.slug);
+  if (missingSlug) throw new Error(`Readable URL slug missing for ${missingSlug.name}: ${missingSlug.officialUrl}`);
 
   const coordinatesByUrl = new Map(parseCsvRows(coordinateCsv).map((row) => [row.URL, {
     latitude: Number(row.緯度),

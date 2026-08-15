@@ -2,6 +2,8 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
+const siteUrl = "https://rm-referral.maffun.workers.dev";
+const areaSlugs = ["hokkaido", "aomori", "iwate", "miyagi", "akita", "yamagata", "fukushima", "niigata", "tochigi", "gunma", "ibaraki", "saitama", "chiba", "tokyo", "kanagawa", "nagano", "yamanashi", "toyama", "ishikawa", "fukui", "shizuoka", "aichi", "gifu", "mie", "shiga", "kyoto", "osaka", "hyogo", "nara", "wakayama", "tottori", "shimane", "okayama", "hiroshima", "yamaguchi", "tokushima", "kagawa", "ehime", "kochi", "fukuoka", "saga", "nagasaki", "kumamoto", "oita", "miyazaki", "kagoshima", "okinawa"];
 
 async function walk(directory) {
   const entries = await readdir(directory);
@@ -32,10 +34,17 @@ const errors = [];
 
 for (const file of htmlFiles) {
   const html = await readFile(file, "utf8");
+  const relativePath = path.relative(root, file).split(path.sep).join("/");
+  const publishedPath = relativePath === "index.html" ? "/" : `/${relativePath.replace(/index\.html$/, "")}`;
+  const pathParts = relativePath.split("/");
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
   const canonical = html.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
   if (!title) errors.push(`${file}: title is missing`);
-  if (["hokkaido", "aomori", "iwate", "miyagi", "akita", "yamagata", "fukushima", "niigata", "tochigi", "gunma", "ibaraki", "saitama", "chiba", "tokyo", "kanagawa", "nagano", "yamanashi", "toyama", "ishikawa", "fukui", "shizuoka", "aichi", "gifu", "mie", "shiga", "kyoto", "osaka", "hyogo", "nara", "wakayama", "tottori", "shimane", "okayama", "hiroshima", "yamaguchi", "tokushima", "kagawa", "ehime", "kochi", "fukuoka", "saga", "nagasaki", "kumamoto", "oita", "miyazaki", "kagoshima", "okinawa"].some((area) => file.includes(`${path.sep}${area}${path.sep}`)) && !canonical) errors.push(`${file}: canonical is missing`);
+  if (areaSlugs.includes(pathParts[0]) && !canonical) errors.push(`${file}: canonical is missing`);
+  if (canonical && canonical !== `${siteUrl}${publishedPath}`) errors.push(`${file}: canonical does not match its published path`);
+  if (areaSlugs.includes(pathParts[0]) && pathParts.length === 4 && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(pathParts[2])) {
+    errors.push(`${file}: shop URL slug must contain ASCII lowercase letters, numbers, and hyphens only`);
+  }
   if (title) {
     if (titles.has(title)) errors.push(`${file}: duplicate title with ${titles.get(title)}`);
     titles.set(title, file);
@@ -55,6 +64,15 @@ for (const file of htmlFiles) {
     }
   }
 }
+
+const sitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");
+const sitemapUrls = new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]));
+for (const file of htmlFiles) {
+  const relativePath = path.relative(root, file).split(path.sep).join("/");
+  const publishedPath = relativePath === "index.html" ? "/" : `/${relativePath.replace(/index\.html$/, "")}`;
+  if (!sitemapUrls.has(`${siteUrl}${publishedPath}`)) errors.push(`${file}: published URL is missing from sitemap.xml`);
+}
+if (sitemapUrls.size !== htmlFiles.length) errors.push(`Expected ${htmlFiles.length} unique sitemap URLs, received ${sitemapUrls.size}`);
 
 const expectedByArea = { hokkaido: 309, aomori: 57, iwate: 62, miyagi: 123, akita: 46, yamagata: 59, fukushima: 98, niigata: 94, tochigi: 78, gunma: 83, ibaraki: 118, saitama: 253, chiba: 227, tokyo: 539, kanagawa: 296, nagano: 89, yamanashi: 42, toyama: 56, ishikawa: 68, fukui: 41, shizuoka: 177, aichi: 428, gifu: 115, mie: 104, shiga: 69, kyoto: 127, osaka: 421, hyogo: 265, nara: 67, wakayama: 54, tottori: 31, shimane: 43, okayama: 110, hiroshima: 163, yamaguchi: 78, tokushima: 48, kagawa: 65, ehime: 86, kochi: 49, fukuoka: 304, saga: 45, nagasaki: 83, kumamoto: 94, oita: 67, miyazaki: 63, kagoshima: 91, okinawa: 123 };
 const shopPages = [];
