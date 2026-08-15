@@ -7,6 +7,7 @@ const nationwideCoordinatesPath = path.join(root, "data", "carrier-shops-geocode
 
 const prefectures = {
   青森県: { slug: "aomori", region: "東北", auRegionPage: "tohoku" },
+  岩手県: { slug: "iwate", region: "東北", auRegionPage: "tohoku" },
 };
 
 const prefectureArg = process.argv.find((arg) => arg.startsWith("--prefecture="));

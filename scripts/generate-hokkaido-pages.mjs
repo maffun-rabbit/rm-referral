@@ -8,6 +8,7 @@ const prefectureName = prefectureArg?.slice("--prefecture=".length) ?? "北海�
 const prefectures = {
   北海道: { slug: "hokkaido", label: "北海道", shortLabel: "北海道", english: "HOKKAIDO", expectedShops: 309 },
   青森県: { slug: "aomori", label: "青森県", shortLabel: "青森", english: "AOMORI", expectedShops: 57 },
+  岩手県: { slug: "iwate", label: "岩手県", shortLabel: "岩手", english: "IWATE", expectedShops: 62 },
 };
 const prefecture = prefectures[prefectureName];
 if (!prefecture) throw new Error(`Unsupported prefecture: ${prefectureName}`);
