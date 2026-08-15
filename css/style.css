@@ -264,8 +264,7 @@ a { color: inherit; }
 
 .content-section,
 .related-section,
-.shop-group,
-.index-note {
+.shop-group {
   max-width: 1116px;
   margin: auto;
   padding: 92px 32px;
@@ -280,8 +279,7 @@ a { color: inherit; }
 
 .content-section > h2,
 .related-section > h2,
-.shop-group h2,
-.index-note h2 {
+.shop-group h2 {
   margin: 0 0 38px;
   color: var(--ink);
   font-size: clamp(28px, 4vw, 42px);
@@ -418,9 +416,6 @@ a { color: inherit; }
 .count-row strong { margin-right: 7px; color: var(--primary); font-size: 24px; }
 .count-row span { color: var(--muted); font-size: 11px; }
 .count-row a { color: var(--primary); font-size: 13px; font-weight: 800; }
-.index-note { padding-top: 35px; padding-bottom: 35px; border-radius: 18px; background: var(--surface); }
-.index-note h2 { margin-bottom: 12px; font-size: 27px; }
-.index-note p { margin: 0; color: var(--muted); }
 .group-heading { margin-bottom: 28px; display: flex; align-items: end; justify-content: space-between; }
 .group-heading h2 { margin-bottom: 0; }
 .group-heading strong { color: var(--primary); font-size: 34px; }
@@ -479,8 +474,7 @@ a { color: inherit; }
   .content-section.tinted,
   .nearby-shop-section,
   .related-section,
-  .shop-group,
-  .index-note { padding: 70px 20px; }
+  .shop-group { padding: 70px 20px; }
   .two-columns,
   .comparison,
   .cards-three,
@@ -491,7 +485,6 @@ a { color: inherit; }
   .shop-map { min-height: 320px; }
   .count-row { flex-wrap: wrap; }
   .count-row div { width: 100%; }
-  .index-note { margin: 0 20px; padding: 25px; }
   .group-heading { align-items: start; }
   .shop-finder { padding: 70px 20px; }
   .shop-finder-heading { align-items: start; flex-direction: column; gap: 8px; }
