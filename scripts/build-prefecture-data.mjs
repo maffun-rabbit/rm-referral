@@ -20,6 +20,11 @@ const prefectures = {
   千葉県: { slug: "chiba", region: "関東", auRegionPage: "kanto" },
   東京都: { slug: "tokyo", region: "関東", auRegionPage: "kanto" },
   神奈川県: { slug: "kanagawa", region: "関東", auRegionPage: "kanto" },
+  長野県: { slug: "nagano", region: "北陸・甲信越", auRegionPage: "tokai" },
+  山梨県: { slug: "yamanashi", region: "北陸・甲信越", auRegionPage: "kanto" },
+  富山県: { slug: "toyama", region: "北陸・甲信越", auRegionPage: "hokuriku" },
+  石川県: { slug: "ishikawa", region: "北陸・甲信越", auRegionPage: "hokuriku" },
+  福井県: { slug: "fukui", region: "北陸・甲信越", auRegionPage: "hokuriku" },
 };
 
 const prefectureArg = process.argv.find((arg) => arg.startsWith("--prefecture="));
