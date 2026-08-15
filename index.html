@@ -14,6 +14,7 @@
   <meta property="og:url" content="https://rm-referral.maffun.workers.dev/">
   <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="/css/style.css">
+  <script defer src="/js/home.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-86FFC09LTE"></script>
   <script src="/js/analytics.js"></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"楽天モバイル乗り換えガイド","url":"https://rm-referral.maffun.workers.dev/","description":"au・ドコモ・ソフトバンクから楽天モバイルへ乗り換えるための準備と手順を案内します。","inLanguage":"ja-JP"}</script>
@@ -22,9 +23,9 @@
   <header class="site-header home-header">
     <a class="site-name" href="/">楽天モバイル乗り換えガイド</a>
     <nav class="home-nav" aria-label="メインナビゲーション">
-      <a href="#area">地域から探す</a>
-      <a href="#area">店舗から探す</a>
-      <a href="#campaign">キャンペーン</a>
+      <a href="#area">都道府県から探す</a>
+      <a href="#switching-guide">乗り換え手順</a>
+      <a href="#campaign">紹介キャンペーン</a>
     </nav>
   </header>
 
@@ -36,7 +37,7 @@
         <p class="home-hero-message">迷わず乗り換えるための、地域・店舗別ガイド。</p>
         <p class="lead">au・ドコモ・ソフトバンクから電話番号を引き継ぐ準備と手順を、現在の携帯会社や普段利用する店舗から確認できます。</p>
         <div class="home-hero-actions">
-          <a class="button" href="#area">地域・店舗から探す <span aria-hidden="true">↓</span></a>
+          <a class="button" href="#area">都道府県から探す <span aria-hidden="true">↓</span></a>
           <a class="home-text-link" href="https://r10.to/hNearm" rel="sponsored nofollow noopener">紹介キャンペーンを確認 <span aria-hidden="true">→</span></a>
         </div>
       </div>
@@ -53,61 +54,51 @@
 
     <section class="home-section carrier-section" id="area">
       <div class="home-section-heading">
-        <div><p class="section-label">AREA &amp; SHOP GUIDE</p><h2>地域・店舗から探す</h2></div>
-        <p>地域を選び、現在利用しているau・ドコモ・ソフトバンクの店舗から乗り換え準備を確認できます。</p>
+        <div><p class="section-label">AREA &amp; SHOP GUIDE</p><h2>都道府県から探す</h2></div>
+        <p>都道府県を選ぶか、地方別の一覧からお近くの店舗ガイドへ進めます。</p>
       </div>
-      <div class="carrier-grid">
-        <a href="/hokkaido/"><span class="carrier-number">01 / HOKKAIDO</span><div><p>309店舗を掲載</p><h3>北海道から探す</h3><small>au 92・ドコモ 111・ソフトバンク 106</small></div><b aria-hidden="true">→</b></a>
-        <a href="/aomori/"><span class="carrier-number">02 / AOMORI</span><div><p>57店舗を掲載</p><h3>青森県から探す</h3><small>au 16・ドコモ 24・ソフトバンク 17</small></div><b aria-hidden="true">→</b></a>
-        <a href="/iwate/"><span class="carrier-number">03 / IWATE</span><div><p>62店舗を掲載</p><h3>岩手県から探す</h3><small>au 16・ドコモ 27・ソフトバンク 19</small></div><b aria-hidden="true">→</b></a>
-        <a href="/miyagi/"><span class="carrier-number">04 / MIYAGI</span><div><p>123店舗を掲載</p><h3>宮城県から探す</h3><small>au 36・ドコモ 38・ソフトバンク 49</small></div><b aria-hidden="true">→</b></a>
-        <a href="/akita/"><span class="carrier-number">05 / AKITA</span><div><p>46店舗を掲載</p><h3>秋田県から探す</h3><small>au 13・ドコモ 18・ソフトバンク 15</small></div><b aria-hidden="true">→</b></a>
-        <a href="/yamagata/"><span class="carrier-number">06 / YAMAGATA</span><div><p>59店舗を掲載</p><h3>山形県から探す</h3><small>au 14・ドコモ 24・ソフトバンク 21</small></div><b aria-hidden="true">→</b></a>
-        <a href="/fukushima/"><span class="carrier-number">07 / FUKUSHIMA</span><div><p>98店舗を掲載</p><h3>福島県から探す</h3><small>au 32・ドコモ 35・ソフトバンク 31</small></div><b aria-hidden="true">→</b></a>
-        <a href="/niigata/"><span class="carrier-number">08 / NIIGATA</span><div><p>94店舗を掲載</p><h3>新潟県から探す</h3><small>au 27・ドコモ 36・ソフトバンク 31</small></div><b aria-hidden="true">→</b></a>
-        <a href="/tochigi/"><span class="carrier-number">09 / TOCHIGI</span><div><p>78店舗を掲載</p><h3>栃木県から探す</h3><small>au 22・ドコモ 32・ソフトバンク 24</small></div><b aria-hidden="true">→</b></a>
-        <a href="/gunma/"><span class="carrier-number">10 / GUNMA</span><div><p>83店舗を掲載</p><h3>群馬県から探す</h3><small>au 24・ドコモ 33・ソフトバンク 26</small></div><b aria-hidden="true">→</b></a>
-        <a href="/ibaraki/"><span class="carrier-number">11 / IBARAKI</span><div><p>118店舗を掲載</p><h3>茨城県から探す</h3><small>au 36・ドコモ 47・ソフトバンク 35</small></div><b aria-hidden="true">→</b></a>
-        <a href="/saitama/"><span class="carrier-number">12 / SAITAMA</span><div><p>253店舗を掲載</p><h3>埼玉県から探す</h3><small>au 81・ドコモ 77・ソフトバンク 95</small></div><b aria-hidden="true">→</b></a>
-        <a href="/chiba/"><span class="carrier-number">13 / CHIBA</span><div><p>227店舗を掲載</p><h3>千葉県から探す</h3><small>au 85・ドコモ 64・ソフトバンク 78</small></div><b aria-hidden="true">→</b></a>
-        <a href="/tokyo/"><span class="carrier-number">14 / TOKYO</span><div><p>539店舗を掲載</p><h3>東京都から探す</h3><small>au 148・ドコモ 189・ソフトバンク 202</small></div><b aria-hidden="true">→</b></a>
-        <a href="/kanagawa/"><span class="carrier-number">15 / KANAGAWA</span><div><p>296店舗を掲載</p><h3>神奈川県から探す</h3><small>au 97・ドコモ 83・ソフトバンク 116</small></div><b aria-hidden="true">→</b></a>
-        <a href="/nagano/"><span class="carrier-number">16 / NAGANO</span><div><p>89店舗を掲載</p><h3>長野県から探す</h3><small>au 30・ドコモ 36・ソフトバンク 23</small></div><b aria-hidden="true">→</b></a>
-        <a href="/yamanashi/"><span class="carrier-number">17 / YAMANASHI</span><div><p>42店舗を掲載</p><h3>山梨県から探す</h3><small>au 14・ドコモ 17・ソフトバンク 11</small></div><b aria-hidden="true">→</b></a>
-        <a href="/toyama/"><span class="carrier-number">18 / TOYAMA</span><div><p>56店舗を掲載</p><h3>富山県から探す</h3><small>au 14・ドコモ 21・ソフトバンク 21</small></div><b aria-hidden="true">→</b></a>
-        <a href="/ishikawa/"><span class="carrier-number">19 / ISHIKAWA</span><div><p>68店舗を掲載</p><h3>石川県から探す</h3><small>au 16・ドコモ 26・ソフトバンク 26</small></div><b aria-hidden="true">→</b></a>
-        <a href="/fukui/"><span class="carrier-number">20 / FUKUI</span><div><p>41店舗を掲載</p><h3>福井県から探す</h3><small>au 12・ドコモ 16・ソフトバンク 13</small></div><b aria-hidden="true">→</b></a>
-        <a href="/shizuoka/"><span class="carrier-number">21 / SHIZUOKA</span><div><p>177店舗を掲載</p><h3>静岡県から探す</h3><small>au 53・ドコモ 58・ソフトバンク 66</small></div><b aria-hidden="true">→</b></a>
-        <a href="/aichi/"><span class="carrier-number">22 / AICHI</span><div><p>428店舗を掲載</p><h3>愛知県から探す</h3><small>au 126・ドコモ 114・ソフトバンク 188</small></div><b aria-hidden="true">→</b></a>
-        <a href="/gifu/"><span class="carrier-number">23 / GIFU</span><div><p>115店舗を掲載</p><h3>岐阜県から探す</h3><small>au 29・ドコモ 36・ソフトバンク 50</small></div><b aria-hidden="true">→</b></a>
-        <a href="/mie/"><span class="carrier-number">24 / MIE</span><div><p>104店舗を掲載</p><h3>三重県から探す</h3><small>au 26・ドコモ 34・ソフトバンク 44</small></div><b aria-hidden="true">→</b></a>
-        <a href="/shiga/"><span class="carrier-number">25 / SHIGA</span><div><p>69店舗を掲載</p><h3>滋賀県から探す</h3><small>au 25・ドコモ 24・ソフトバンク 20</small></div><b aria-hidden="true">→</b></a>
-        <a href="/kyoto/"><span class="carrier-number">26 / KYOTO</span><div><p>127店舗を掲載</p><h3>京都府から探す</h3><small>au 48・ドコモ 36・ソフトバンク 43</small></div><b aria-hidden="true">→</b></a>
-        <a href="/osaka/"><span class="carrier-number">27 / OSAKA</span><div><p>421店舗を掲載</p><h3>大阪府から探す</h3><small>au 143・ドコモ 114・ソフトバンク 164</small></div><b aria-hidden="true">→</b></a>
-        <a href="/hyogo/"><span class="carrier-number">28 / HYOGO</span><div><p>265店舗を掲載</p><h3>兵庫県から探す</h3><small>au 87・ドコモ 82・ソフトバンク 96</small></div><b aria-hidden="true">→</b></a>
-        <a href="/nara/"><span class="carrier-number">29 / NARA</span><div><p>67店舗を掲載</p><h3>奈良県から探す</h3><small>au 23・ドコモ 20・ソフトバンク 24</small></div><b aria-hidden="true">→</b></a>
-        <a href="/wakayama/"><span class="carrier-number">30 / WAKAYAMA</span><div><p>54店舗を掲載</p><h3>和歌山県から探す</h3><small>au 16・ドコモ 22・ソフトバンク 16</small></div><b aria-hidden="true">→</b></a>
-        <a href="/tottori/"><span class="carrier-number">31 / TOTTORI</span><div><p>31店舗を掲載</p><h3>鳥取県から探す</h3><small>au 10・ドコモ 10・ソフトバンク 11</small></div><b aria-hidden="true">→</b></a>
-        <a href="/shimane/"><span class="carrier-number">32 / SHIMANE</span><div><p>43店舗を掲載</p><h3>島根県から探す</h3><small>au 14・ドコモ 19・ソフトバンク 10</small></div><b aria-hidden="true">→</b></a>
-        <a href="/okayama/"><span class="carrier-number">33 / OKAYAMA</span><div><p>110店舗を掲載</p><h3>岡山県から探す</h3><small>au 30・ドコモ 38・ソフトバンク 42</small></div><b aria-hidden="true">→</b></a>
-        <a href="/hiroshima/"><span class="carrier-number">34 / HIROSHIMA</span><div><p>163店舗を掲載</p><h3>広島県から探す</h3><small>au 45・ドコモ 56・ソフトバンク 62</small></div><b aria-hidden="true">→</b></a>
-        <a href="/yamaguchi/"><span class="carrier-number">35 / YAMAGUCHI</span><div><p>78店舗を掲載</p><h3>山口県から探す</h3><small>au 24・ドコモ 31・ソフトバンク 23</small></div><b aria-hidden="true">→</b></a>
-        <a href="/tokushima/"><span class="carrier-number">36 / TOKUSHIMA</span><div><p>48店舗を掲載</p><h3>徳島県から探す</h3><small>au 12・ドコモ 21・ソフトバンク 15</small></div><b aria-hidden="true">→</b></a>
-        <a href="/kagawa/"><span class="carrier-number">37 / KAGAWA</span><div><p>65店舗を掲載</p><h3>香川県から探す</h3><small>au 17・ドコモ 27・ソフトバンク 21</small></div><b aria-hidden="true">→</b></a>
-        <a href="/ehime/"><span class="carrier-number">38 / EHIME</span><div><p>86店舗を掲載</p><h3>愛媛県から探す</h3><small>au 27・ドコモ 35・ソフトバンク 24</small></div><b aria-hidden="true">→</b></a>
-        <a href="/kochi/"><span class="carrier-number">39 / KOCHI</span><div><p>49店舗を掲載</p><h3>高知県から探す</h3><small>au 17・ドコモ 22・ソフトバンク 10</small></div><b aria-hidden="true">→</b></a>
-        <a href="/fukuoka/"><span class="carrier-number">40 / FUKUOKA</span><div><p>304店舗を掲載</p><h3>福岡県から探す</h3><small>au 85・ドコモ 103・ソフトバンク 116</small></div><b aria-hidden="true">→</b></a>
-        <a href="/saga/"><span class="carrier-number">41 / SAGA</span><div><p>45店舗を掲載</p><h3>佐賀県から探す</h3><small>au 13・ドコモ 17・ソフトバンク 15</small></div><b aria-hidden="true">→</b></a>
-        <a href="/nagasaki/"><span class="carrier-number">42 / NAGASAKI</span><div><p>83店舗を掲載</p><h3>長崎県から探す</h3><small>au 26・ドコモ 38・ソフトバンク 19</small></div><b aria-hidden="true">→</b></a>
-        <a href="/kumamoto/"><span class="carrier-number">43 / KUMAMOTO</span><div><p>94店舗を掲載</p><h3>熊本県から探す</h3><small>au 29・ドコモ 35・ソフトバンク 30</small></div><b aria-hidden="true">→</b></a>
-        <a href="/oita/"><span class="carrier-number">44 / OITA</span><div><p>67店舗を掲載</p><h3>大分県から探す</h3><small>au 20・ドコモ 26・ソフトバンク 21</small></div><b aria-hidden="true">→</b></a>
-        <a href="/miyazaki/"><span class="carrier-number">45 / MIYAZAKI</span><div><p>63店舗を掲載</p><h3>宮崎県から探す</h3><small>au 21・ドコモ 25・ソフトバンク 17</small></div><b aria-hidden="true">→</b></a>
-        <a href="/kagoshima/"><span class="carrier-number">46 / KAGOSHIMA</span><div><p>91店舗を掲載</p><h3>鹿児島県から探す</h3><small>au 30・ドコモ 38・ソフトバンク 23</small></div><b aria-hidden="true">→</b></a>
-        <a href="/okinawa/"><span class="carrier-number">47 / OKINAWA</span><div><p>123店舗を掲載</p><h3>沖縄県から探す</h3><small>au 66・ドコモ 29・ソフトバンク 28</small></div><b aria-hidden="true">→</b></a>
+      <div class="prefecture-finder">
+        <label for="prefecture-select">都道府県を選択</label>
+        <div class="prefecture-select-wrap">
+          <select id="prefecture-select" data-prefecture-select>
+            <option value="">都道府県を選択してください</option>
+          </select>
+          <span aria-hidden="true">↓</span>
+        </div>
+        <p>選択すると、その都道府県の店舗一覧へ移動します。</p>
+      </div>
+      <nav class="region-shortcuts" aria-label="地方を選択">
+        <a href="#region-hokkaido-tohoku">北海道・東北</a><a href="#region-kanto">関東</a><a href="#region-hokuriku">北陸・甲信越</a><a href="#region-tokai">東海</a><a href="#region-kinki">近畿</a><a href="#region-chugoku">中国</a><a href="#region-shikoku">四国</a><a href="#region-kyushu">九州・沖縄</a>
+      </nav>
+      <div class="region-list">
+        <details id="region-hokkaido-tohoku" open><summary><span><b>北海道・東北</b><small>7道県</small></span><i aria-hidden="true">＋</i></summary><div class="prefecture-grid">
+          <a class="prefecture-link" href="/hokkaido/"><span><b>北海道</b><small>309店舗</small></span><i>→</i></a><a class="prefecture-link" href="/aomori/"><span><b>青森県</b><small>57店舗</small></span><i>→</i></a><a class="prefecture-link" href="/iwate/"><span><b>岩手県</b><small>62店舗</small></span><i>→</i></a><a class="prefecture-link" href="/miyagi/"><span><b>宮城県</b><small>123店舗</small></span><i>→</i></a><a class="prefecture-link" href="/akita/"><span><b>秋田県</b><small>46店舗</small></span><i>→</i></a><a class="prefecture-link" href="/yamagata/"><span><b>山形県</b><small>59店舗</small></span><i>→</i></a><a class="prefecture-link" href="/fukushima/"><span><b>福島県</b><small>98店舗</small></span><i>→</i></a>
+        </div></details>
+        <details id="region-kanto"><summary><span><b>関東</b><small>7都県</small></span><i aria-hidden="true">＋</i></summary><div class="prefecture-grid">
+          <a class="prefecture-link" href="/ibaraki/"><span><b>茨城県</b><small>118店舗</small></span><i>→</i></a><a class="prefecture-link" href="/tochigi/"><span><b>栃木県</b><small>78店舗</small></span><i>→</i></a><a class="prefecture-link" href="/gunma/"><span><b>群馬県</b><small>83店舗</small></span><i>→</i></a><a class="prefecture-link" href="/saitama/"><span><b>埼玉県</b><small>253店舗</small></span><i>→</i></a><a class="prefecture-link" href="/chiba/"><span><b>千葉県</b><small>227店舗</small></span><i>→</i></a><a class="prefecture-link" href="/tokyo/"><span><b>東京都</b><small>539店舗</small></span><i>→</i></a><a class="prefecture-link" href="/kanagawa/"><span><b>神奈川県</b><small>296店舗</small></span><i>→</i></a>
+        </div></details>
+        <details id="region-hokuriku"><summary><span><b>北陸・甲信越</b><small>6県</small></span><i aria-hidden="true">＋</i></summary><div class="prefecture-grid">
+          <a class="prefecture-link" href="/niigata/"><span><b>新潟県</b><small>94店舗</small></span><i>→</i></a><a class="prefecture-link" href="/toyama/"><span><b>富山県</b><small>56店舗</small></span><i>→</i></a><a class="prefecture-link" href="/ishikawa/"><span><b>石川県</b><small>68店舗</small></span><i>→</i></a><a class="prefecture-link" href="/fukui/"><span><b>福井県</b><small>41店舗</small></span><i>→</i></a><a class="prefecture-link" href="/yamanashi/"><span><b>山梨県</b><small>42店舗</small></span><i>→</i></a><a class="prefecture-link" href="/nagano/"><span><b>長野県</b><small>89店舗</small></span><i>→</i></a>
+        </div></details>
+        <details id="region-tokai"><summary><span><b>東海</b><small>4県</small></span><i aria-hidden="true">＋</i></summary><div class="prefecture-grid">
+          <a class="prefecture-link" href="/gifu/"><span><b>岐阜県</b><small>115店舗</small></span><i>→</i></a><a class="prefecture-link" href="/shizuoka/"><span><b>静岡県</b><small>177店舗</small></span><i>→</i></a><a class="prefecture-link" href="/aichi/"><span><b>愛知県</b><small>428店舗</small></span><i>→</i></a><a class="prefecture-link" href="/mie/"><span><b>三重県</b><small>104店舗</small></span><i>→</i></a>
+        </div></details>
+        <details id="region-kinki"><summary><span><b>近畿</b><small>6府県</small></span><i aria-hidden="true">＋</i></summary><div class="prefecture-grid">
+          <a class="prefecture-link" href="/shiga/"><span><b>滋賀県</b><small>69店舗</small></span><i>→</i></a><a class="prefecture-link" href="/kyoto/"><span><b>京都府</b><small>127店舗</small></span><i>→</i></a><a class="prefecture-link" href="/osaka/"><span><b>大阪府</b><small>421店舗</small></span><i>→</i></a><a class="prefecture-link" href="/hyogo/"><span><b>兵庫県</b><small>265店舗</small></span><i>→</i></a><a class="prefecture-link" href="/nara/"><span><b>奈良県</b><small>67店舗</small></span><i>→</i></a><a class="prefecture-link" href="/wakayama/"><span><b>和歌山県</b><small>54店舗</small></span><i>→</i></a>
+        </div></details>
+        <details id="region-chugoku"><summary><span><b>中国</b><small>5県</small></span><i aria-hidden="true">＋</i></summary><div class="prefecture-grid">
+          <a class="prefecture-link" href="/tottori/"><span><b>鳥取県</b><small>31店舗</small></span><i>→</i></a><a class="prefecture-link" href="/shimane/"><span><b>島根県</b><small>43店舗</small></span><i>→</i></a><a class="prefecture-link" href="/okayama/"><span><b>岡山県</b><small>110店舗</small></span><i>→</i></a><a class="prefecture-link" href="/hiroshima/"><span><b>広島県</b><small>163店舗</small></span><i>→</i></a><a class="prefecture-link" href="/yamaguchi/"><span><b>山口県</b><small>78店舗</small></span><i>→</i></a>
+        </div></details>
+        <details id="region-shikoku"><summary><span><b>四国</b><small>4県</small></span><i aria-hidden="true">＋</i></summary><div class="prefecture-grid">
+          <a class="prefecture-link" href="/tokushima/"><span><b>徳島県</b><small>48店舗</small></span><i>→</i></a><a class="prefecture-link" href="/kagawa/"><span><b>香川県</b><small>65店舗</small></span><i>→</i></a><a class="prefecture-link" href="/ehime/"><span><b>愛媛県</b><small>86店舗</small></span><i>→</i></a><a class="prefecture-link" href="/kochi/"><span><b>高知県</b><small>49店舗</small></span><i>→</i></a>
+        </div></details>
+        <details id="region-kyushu"><summary><span><b>九州・沖縄</b><small>8県</small></span><i aria-hidden="true">＋</i></summary><div class="prefecture-grid">
+          <a class="prefecture-link" href="/fukuoka/"><span><b>福岡県</b><small>304店舗</small></span><i>→</i></a><a class="prefecture-link" href="/saga/"><span><b>佐賀県</b><small>45店舗</small></span><i>→</i></a><a class="prefecture-link" href="/nagasaki/"><span><b>長崎県</b><small>83店舗</small></span><i>→</i></a><a class="prefecture-link" href="/kumamoto/"><span><b>熊本県</b><small>94店舗</small></span><i>→</i></a><a class="prefecture-link" href="/oita/"><span><b>大分県</b><small>67店舗</small></span><i>→</i></a><a class="prefecture-link" href="/miyazaki/"><span><b>宮崎県</b><small>63店舗</small></span><i>→</i></a><a class="prefecture-link" href="/kagoshima/"><span><b>鹿児島県</b><small>91店舗</small></span><i>→</i></a><a class="prefecture-link" href="/okinawa/"><span><b>沖縄県</b><small>123店舗</small></span><i>→</i></a>
+        </div></details>
       </div>
     </section>
 
-    <section class="home-section essentials-section">
+    <section class="home-section essentials-section" id="switching-guide">
       <div class="home-section-heading">
         <div><p class="section-label">BEFORE SWITCHING</p><h2>乗り換え前に知っておきたいこと</h2></div>
         <p>申し込みを始める前に、まずこの3点を確認しておくと安心です。</p>

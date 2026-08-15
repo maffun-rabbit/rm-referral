@@ -501,16 +501,32 @@ a { color: inherit; }
 .trust-copy h2 { margin: 0; color: var(--ink); font-size: clamp(32px, 4vw, 48px); letter-spacing: -.04em; }
 .home-section-heading > p { max-width: 430px; margin: 0; color: var(--muted); font-size: 14px; }
 
-.carrier-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-.carrier-grid > a { min-height: 260px; padding: 28px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; border: 1px solid var(--line); border-radius: 20px; background: var(--white); text-decoration: none; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
-.carrier-grid > a:hover { border-color: rgba(191,0,0,.36); box-shadow: 0 16px 38px rgba(35,43,66,.1); transform: translateY(-3px); }
-.carrier-grid > a:focus-visible { outline: 3px solid rgba(191,0,0,.25); outline-offset: 2px; }
-.carrier-number { color: var(--primary); font-size: 12px; font-weight: 850; }
-.carrier-grid div { grid-column: 1; align-self: end; }
-.carrier-grid div p { margin: 0 0 6px; color: var(--muted); font-size: 11px; }
-.carrier-grid h3 { margin: 0 0 12px; color: var(--ink); font-size: 23px; }
-.carrier-grid small { color: var(--muted); }
-.carrier-grid > a > b { grid-column: 2; grid-row: 1 / 3; align-self: center; color: var(--primary); font-size: 24px; }
+.prefecture-finder { padding: 28px; border-radius: 22px; background: linear-gradient(125deg, #8f0018, #bf0000 54%, #e13b55); color: var(--white); }
+.prefecture-finder label { display: block; margin-bottom: 12px; font-size: 20px; font-weight: 850; }
+.prefecture-select-wrap { position: relative; }
+.prefecture-select-wrap select { width: 100%; min-height: 62px; padding: 0 54px 0 20px; border: 0; border-radius: 13px; background: var(--white); color: var(--ink); font: inherit; font-weight: 750; appearance: none; cursor: pointer; }
+.prefecture-select-wrap span { position: absolute; top: 50%; right: 21px; color: var(--primary); font-weight: 900; pointer-events: none; transform: translateY(-50%); }
+.prefecture-finder > p { margin: 11px 2px 0; color: #ffe7eb; font-size: 11px; }
+.region-shortcuts { margin: 22px 0 32px; display: flex; flex-wrap: wrap; gap: 8px; }
+.region-shortcuts a { padding: 10px 15px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); color: var(--ink); font-size: 12px; font-weight: 800; text-decoration: none; }
+.region-shortcuts a:hover { border-color: rgba(191,0,0,.35); color: var(--primary); }
+.region-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.region-list details { border: 1px solid var(--line); border-radius: 18px; background: var(--white); overflow: hidden; }
+.region-list summary { min-height: 82px; padding: 20px 22px; display: flex; align-items: center; justify-content: space-between; gap: 18px; cursor: pointer; list-style: none; }
+.region-list summary::-webkit-details-marker { display: none; }
+.region-list summary span { display: flex; align-items: baseline; gap: 12px; }
+.region-list summary b { color: var(--ink); font-size: 19px; }
+.region-list summary small { color: var(--muted); font-size: 11px; }
+.region-list summary > i { color: var(--primary); font-size: 20px; font-style: normal; transition: transform .18s ease; }
+.region-list details[open] summary > i { transform: rotate(45deg); }
+.prefecture-grid { padding: 0 14px 14px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.prefecture-link { min-height: 82px; padding: 15px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); text-decoration: none; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+.prefecture-link:hover { border-color: rgba(191,0,0,.36); box-shadow: 0 8px 24px rgba(35,43,66,.08); transform: translateY(-2px); }
+.prefecture-link:focus-visible { outline: 3px solid rgba(191,0,0,.25); outline-offset: 2px; }
+.prefecture-link span { display: grid; gap: 4px; }
+.prefecture-link b { font-size: 15px; }
+.prefecture-link small { color: var(--muted); font-size: 11px; }
+.prefecture-link i { color: var(--primary); font-size: 18px; font-style: normal; }
 
 .area-feature { padding: 82px max(32px, calc((100vw - 1052px) / 2)); display: grid; grid-template-columns: 1.25fr .75fr; gap: 78px; align-items: center; background: linear-gradient(125deg, #8f0018, #bf0000 54%, #e13b55); color: var(--white); }
 .area-feature .section-label { color: #ffdce2; }
@@ -566,10 +582,15 @@ a { color: inherit; }
   .home-text-link { text-align: center; }
   .home-section { padding: 78px 20px; }
   .home-section-heading { align-items: start; flex-direction: column; gap: 15px; }
-  .carrier-grid,
   .essential-grid,
   .campaign-steps { grid-template-columns: 1fr; }
-  .carrier-grid > a { min-height: 205px; }
+  .prefecture-finder { padding: 22px 18px; }
+  .region-shortcuts { gap: 7px; }
+  .region-shortcuts a { flex: 1 0 calc(50% - 7px); text-align: center; }
+  .region-list { grid-template-columns: 1fr; }
+  .region-list summary { min-height: 72px; padding: 17px 18px; }
+  .prefecture-grid { grid-template-columns: 1fr; }
+  .prefecture-link { min-height: 68px; }
   .area-feature { padding: 70px 20px; grid-template-columns: 1fr; gap: 45px; }
   .campaign-section { padding: 78px 20px; }
   .campaign-steps li { min-height: auto; }
