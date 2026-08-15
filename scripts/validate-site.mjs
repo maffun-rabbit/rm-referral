@@ -35,7 +35,7 @@ for (const file of htmlFiles) {
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
   const canonical = html.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
   if (!title) errors.push(`${file}: title is missing`);
-  if (file.includes(`${path.sep}hokkaido${path.sep}`) && !canonical) errors.push(`${file}: canonical is missing`);
+  if (["hokkaido", "aomori"].some((area) => file.includes(`${path.sep}${area}${path.sep}`)) && !canonical) errors.push(`${file}: canonical is missing`);
   if (title) {
     if (titles.has(title)) errors.push(`${file}: duplicate title with ${titles.get(title)}`);
     titles.set(title, file);
@@ -56,8 +56,13 @@ for (const file of htmlFiles) {
   }
 }
 
-const shopPages = htmlFiles.filter((file) => file.includes(`${path.sep}hokkaido${path.sep}`) && !file.endsWith(`${path.sep}hokkaido${path.sep}index.html`));
-if (shopPages.length !== 309) errors.push(`Expected 309 shop pages, received ${shopPages.length}`);
+const expectedByArea = { hokkaido: 309, aomori: 57 };
+const shopPages = [];
+for (const [area, expected] of Object.entries(expectedByArea)) {
+  const areaPages = htmlFiles.filter((file) => file.includes(`${path.sep}${area}${path.sep}`) && !file.endsWith(`${path.sep}${area}${path.sep}index.html`));
+  shopPages.push(...areaPages);
+  if (areaPages.length !== expected) errors.push(`Expected ${expected} ${area} shop pages, received ${areaPages.length}`);
+}
 if (errors.length) {
   console.error(errors.join("\n"));
   process.exitCode = 1;

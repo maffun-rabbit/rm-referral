@@ -1,12 +1,21 @@
 import { createHash } from "node:crypto";
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
-const dataPath = path.join(root, "data", "hokkaido-shops.csv");
-const carrierCoordinatesPath = path.join(root, "data", "carrier-shops-geocoded.csv");
+const prefectureArg = process.argv.find((arg) => arg.startsWith("--prefecture="));
+const prefectureName = prefectureArg?.slice("--prefecture=".length) ?? "北海道";
+const prefectures = {
+  北海道: { slug: "hokkaido", label: "北海道", shortLabel: "北海道", english: "HOKKAIDO", expectedShops: 309 },
+  青森県: { slug: "aomori", label: "青森県", shortLabel: "青森", english: "AOMORI", expectedShops: 57 },
+};
+const prefecture = prefectures[prefectureName];
+if (!prefecture) throw new Error(`Unsupported prefecture: ${prefectureName}`);
+
+const dataPath = path.join(root, "data", `${prefecture.slug}-shops.csv`);
+const carrierCoordinatesPath = path.join(root, "data", prefecture.slug === "hokkaido" ? "carrier-shops-geocoded.csv" : `${prefecture.slug}-carrier-shops-geocoded.csv`);
 const rakutenShopsPath = path.join(root, "data", "rakuten-shops-geocoded.csv");
-const outputRoot = path.join(root, "hokkaido");
+const outputRoot = path.join(root, prefecture.slug);
 const siteUrl = "https://rm-referral.maffun.workers.dev";
 const referralUrl = "https://r10.to/hNearm";
 const updated = "2026-08-15";
@@ -99,8 +108,11 @@ function distanceKm(from, to) {
 
 function localityFrom(address) {
   const normalized = address.replace(/^\d{3}-\d{4}\s*/, "");
-  const match = normalized.match(/^北海道(札幌市.+?区|.+?市|.+?郡.+?[町村]|.+?[町村])/);
-  return match?.[1] ?? "北海道";
+  const withoutPrefecture = normalized.startsWith(prefecture.label)
+    ? normalized.slice(prefecture.label.length)
+    : normalized;
+  const match = withoutPrefecture.match(/^(.*?市.*?区|.*?市|.*?郡.*?[町村]|.*?[町村])/);
+  return match?.[1] ?? prefecture.shortLabel;
 }
 
 function shopId(shop) {
@@ -117,7 +129,7 @@ function shopId(shop) {
 }
 
 function pagePath(shop) {
-  return `/hokkaido/${shop.carrier}/${shopId(shop)}/`;
+  return `/${prefecture.slug}/${shop.carrier}/${shopId(shop)}/`;
 }
 
 function layout({ title, description, canonical, body, jsonLd = [] }) {
@@ -140,12 +152,14 @@ function layout({ title, description, canonical, body, jsonLd = [] }) {
   <meta property="og:url" content="${canonical}">
   <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-86FFC09LTE"></script>
+  <script src="/js/analytics.js"></script>
   ${schemas}
 </head>
 <body>
   <header class="site-header">
     <a class="site-name" href="/">楽天モバイル乗り換えガイド</a>
-    <a class="header-link" href="/hokkaido/">北海道の店舗一覧</a>
+    <a class="header-link" href="/${prefecture.slug}/">${prefecture.shortLabel}の店舗一覧</a>
   </header>
   ${body}
   <footer class="site-footer">
@@ -171,7 +185,7 @@ function shopPage(shop, nearbyRakutenShops) {
 
   const body = `<main>
     <nav class="breadcrumb" aria-label="パンくずリスト">
-      <a href="/">トップ</a><span>›</span><a href="/hokkaido/">北海道</a><span>›</span><span>${escapeHtml(shop.name)}</span>
+      <a href="/">トップ</a><span>›</span><a href="/${prefecture.slug}/">${prefecture.shortLabel}</a><span>›</span><span>${escapeHtml(shop.name)}</span>
     </nav>
 
     <section class="shop-hero">
@@ -321,7 +335,7 @@ function shopPage(shop, nearbyRakutenShops) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "トップ", item: `${siteUrl}/` },
-          { "@type": "ListItem", position: 2, name: "北海道", item: `${siteUrl}/hokkaido/` },
+          { "@type": "ListItem", position: 2, name: prefecture.shortLabel, item: `${siteUrl}/${prefecture.slug}/` },
           { "@type": "ListItem", position: 3, name: shop.name, item: canonical },
         ],
       },
@@ -339,14 +353,14 @@ function indexPage(shops) {
     </section>`;
   }).join("\n");
 
-  const title = "北海道のキャリアショップから楽天モバイルへ乗り換える方法 | 店舗別ガイド";
-  const description = "北海道のau・ドコモ・ソフトバンク店舗を地域別に掲載。楽天モバイルへ乗り換える前の準備やMNP手続きを店舗ごとに確認できます。";
-  const canonical = `${siteUrl}/hokkaido/`;
+  const title = `${prefecture.label}のキャリアショップから楽天モバイルへ乗り換える方法 | 店舗別ガイド`;
+  const description = `${prefecture.label}のau・ドコモ・ソフトバンク店舗を地域別に掲載。楽天モバイルへ乗り換える前の準備やMNP手続きを店舗ごとに確認できます。`;
+  const canonical = `${siteUrl}/${prefecture.slug}/`;
   const body = `<main>
-    <nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">トップ</a><span>›</span><span>北海道</span></nav>
+    <nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">トップ</a><span>›</span><span>${prefecture.shortLabel}</span></nav>
     <section class="area-hero">
-      <p class="eyebrow">HOKKAIDO SHOP GUIDE</p>
-      <h1>北海道のキャリアショップから<br><span>楽天モバイルへ乗り換える前に</span></h1>
+      <p class="eyebrow">${prefecture.english} SHOP GUIDE</p>
+      <h1>${prefecture.label}のキャリアショップから<br><span>楽天モバイルへ乗り換える前に</span></h1>
       <p class="lead">au・ドコモ・ソフトバンクを利用中の方向けに、店舗へ行く前に確認したい乗り換え準備をまとめました。現在利用している店舗から選んでください。</p>
       <div class="count-row"><div><strong>${shops.length}</strong><span>掲載店舗</span></div><a href="#au">au</a><a href="#docomo">ドコモ</a><a href="#softbank">ソフトバンク</a></div>
     </section>
@@ -372,6 +386,23 @@ function indexPage(shops) {
   });
 }
 
+async function collectPublishedUrls() {
+  const urls = [];
+  async function walk(directory) {
+    for (const entry of await readdir(directory, { withFileTypes: true })) {
+      if (entry.name === ".git" || entry.name === "node_modules") continue;
+      const fullPath = path.join(directory, entry.name);
+      if (entry.isDirectory()) await walk(fullPath);
+      else if (entry.name === "index.html" && fullPath !== path.join(root, "index.html")) {
+        const relativeDirectory = path.relative(root, path.dirname(fullPath)).split(path.sep).join("/");
+        urls.push(`/${relativeDirectory}/`);
+      }
+    }
+  }
+  await walk(root);
+  return urls.sort();
+}
+
 async function main() {
   const [csv, coordinateCsv, rakutenCsv] = await Promise.all([
     readFile(dataPath, "utf8"),
@@ -379,14 +410,14 @@ async function main() {
     readFile(rakutenShopsPath, "utf8"),
   ]);
   const shops = parseCsv(csv);
-  if (shops.length !== 309) throw new Error(`Expected 309 shops, received ${shops.length}`);
+  if (shops.length !== prefecture.expectedShops) throw new Error(`Expected ${prefecture.expectedShops} shops, received ${shops.length}`);
 
   const coordinatesByUrl = new Map(parseCsvRows(coordinateCsv).map((row) => [row.URL, {
     latitude: Number(row.緯度),
     longitude: Number(row.経度),
   }]));
   const rakutenShops = parseCsvRows(rakutenCsv)
-    .filter((row) => row.都道府県 === "北海道")
+    .filter((row) => row.都道府県 === prefecture.label)
     .map((row) => ({
       name: row.店名,
       address: row.住所,
@@ -394,7 +425,7 @@ async function main() {
       latitude: Number(row.緯度),
       longitude: Number(row.経度),
     }));
-  if (!rakutenShops.length) throw new Error("No Hokkaido Rakuten Mobile shops found");
+  if (!rakutenShops.length) throw new Error(`No ${prefecture.label} Rakuten Mobile shops found`);
 
   const paths = shops.map(pagePath);
   if (new Set(paths).size !== shops.length) throw new Error("Duplicate shop paths detected");
@@ -421,12 +452,12 @@ async function main() {
     await writeFile(path.join(directory, "index.html"), shopPage(shop, nearbyRakutenShops));
   }
 
-  const urls = ["/", "/hokkaido/", ...paths];
+  const urls = ["/", ...await collectPublishedUrls()];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${siteUrl}${url}</loc><lastmod>${updated}</lastmod></url>`).join("\n")}\n</urlset>\n`;
   await writeFile(path.join(root, "sitemap.xml"), sitemap);
   await writeFile(path.join(root, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n`);
 
-  console.log(`Generated ${shops.length} shop pages plus the Hokkaido index.`);
+  console.log(`Generated ${shops.length} shop pages plus the ${prefecture.label} index.`);
 }
 
 await main();
