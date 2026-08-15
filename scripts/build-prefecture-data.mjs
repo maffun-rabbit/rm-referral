@@ -44,6 +44,14 @@ const prefectures = {
   香川県: { slug: "kagawa", region: "四国", auRegionPage: "shikoku" },
   愛媛県: { slug: "ehime", region: "四国", auRegionPage: "shikoku" },
   高知県: { slug: "kochi", region: "四国", auRegionPage: "shikoku" },
+  福岡県: { slug: "fukuoka", region: "九州・沖縄", auRegionPage: "kyushu" },
+  佐賀県: { slug: "saga", region: "九州・沖縄", auRegionPage: "kyushu" },
+  長崎県: { slug: "nagasaki", region: "九州・沖縄", auRegionPage: "kyushu" },
+  熊本県: { slug: "kumamoto", region: "九州・沖縄", auRegionPage: "kyushu" },
+  大分県: { slug: "oita", region: "九州・沖縄", auRegionPage: "kyushu" },
+  宮崎県: { slug: "miyazaki", region: "九州・沖縄", auRegionPage: "kyushu" },
+  鹿児島県: { slug: "kagoshima", region: "九州・沖縄", auRegionPage: "kyushu" },
+  沖縄県: { slug: "okinawa", region: "九州・沖縄", auRegionPage: "okinawa" },
 };
 
 const prefectureArg = process.argv.find((arg) => arg.startsWith("--prefecture="));
