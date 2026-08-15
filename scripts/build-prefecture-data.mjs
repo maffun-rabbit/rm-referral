@@ -9,6 +9,9 @@ const prefectures = {
   青森県: { slug: "aomori", region: "東北", auRegionPage: "tohoku" },
   岩手県: { slug: "iwate", region: "東北", auRegionPage: "tohoku" },
   宮城県: { slug: "miyagi", region: "東北", auRegionPage: "tohoku" },
+  秋田県: { slug: "akita", region: "東北", auRegionPage: "tohoku" },
+  山形県: { slug: "yamagata", region: "東北", auRegionPage: "tohoku" },
+  福島県: { slug: "fukushima", region: "東北", auRegionPage: "tohoku" },
 };
 
 const prefectureArg = process.argv.find((arg) => arg.startsWith("--prefecture="));

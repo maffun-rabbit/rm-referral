@@ -1,0 +1,47 @@
+﻿キャリア,地域,都道府県,店名,住所,URL,緯度,経度,取得結果
+au,東北,秋田県,au Style 横手,013-0063 秋田県横手市婦気大堤字婦気前２５３－１,https://www.au.com/storelocator/detail/?shopId=T-00078,39.301427,140.550325,ok
+au,東北,秋田県,au Style 秋田東,010-0041 秋田県秋田市広面字小沼古川端34-1,https://www.au.com/storelocator/detail/?shopId=T-00331,39.712905,140.145218,ok
+au,東北,秋田県,au Style 大館,017-0872 秋田県大館市片山町３丁目３－６,https://www.au.com/storelocator/detail/?shopId=T-00075,40.274274,140.533609,ok
+au,東北,秋田県,au Style 大曲,014-0033 秋田県大仙市和合字坪立１３７－２,https://www.au.com/storelocator/detail/?shopId=T-00076,39.441169,140.506074,ok
+au,東北,秋田県,au Style 天王,010-0201 秋田県潟上市天王字蒲沼６３－２７,https://www.au.com/storelocator/detail/?shopId=T-00219,39.865792,140.005329,ok
+au,東北,秋田県,au Style 能代,016-0878 秋田県能代市字臥竜山３１－１１,https://www.au.com/storelocator/detail/?shopId=T-00079,40.189885,140.014512,ok
+au,東北,秋田県,au Style 本荘,015-0843 秋田県由利本荘市東梵天２５７,https://www.au.com/storelocator/detail/?shopId=T-00080,39.387061,140.062994,ok
+au,東北,秋田県,ａｕショップ イオンモール秋田,010-1413 秋田県秋田市御所野地蔵田1-1-1　イオンモール秋田２F,https://www.au.com/storelocator/detail/?shopId=T-00294,39.663223,140.161196,ok
+au,東北,秋田県,ａｕショップ 横手中央,013-0060 秋田県横手市条里3丁目12番20号,https://www.au.com/storelocator/detail/?shopId=T-00315,39.314292,140.555837,ok
+au,東北,秋田県,ａｕショップ 秋田新国道,010-0962 秋田県秋田市八橋大畑1丁目6-37,https://www.au.com/storelocator/detail/?shopId=T-00227,39.734912,140.099162,ok
+au,東北,秋田県,ａｕショップ 秋田土崎,011-0951 秋田県秋田市土崎港相染町字沼端77-11,https://www.au.com/storelocator/detail/?shopId=T-00308,39.767506,140.068290,ok
+au,東北,秋田県,ａｕショップ 仁井田,010-1427 秋田県秋田市仁井田新田1丁目5-14,https://www.au.com/storelocator/detail/?shopId=T-00362,39.682110,140.125713,ok
+au,東北,秋田県,ａｕショップ 湯沢,012-0811 秋田県湯沢市桜通り２－７７,https://www.au.com/storelocator/detail/?shopId=T-00117,39.174788,140.491648,ok
+docomo,東北,秋田県,ドコモショップイオンタウン能代店,016-0121 秋田県能代市鰄渕字古屋布1 イオンタウン能代,https://shop.smt.docomo.ne.jp/shop_detail/0200201225500/index.html,40.188067777778,140.08257,ok
+docomo,東北,秋田県,ドコモショップイオンモール秋田店,010-1413 秋田県秋田市御所野地蔵田1-1 イオンモール秋田,https://shop.smt.docomo.ne.jp/shop_detail/0200201075400/index.html,39.663061666667,140.16058,ok
+docomo,東北,秋田県,ドコモショップイオンモール大曲店,014-0033 秋田県大仙市和合字坪立177 イオンモール大曲,https://shop.smt.docomo.ne.jp/shop_detail/0295150119300/index.html,39.43786,140.50927277778,ok
+docomo,東北,秋田県,ドコモショップにかほ店,018-0402 秋田県にかほ市平沢字町田135-1,https://shop.smt.docomo.ne.jp/shop_detail/0200200554600/index.html,39.290712222222,139.97293472222,ok
+docomo,東北,秋田県,ドコモショップ横手店,013-0043 秋田県横手市安田字向田203,https://shop.smt.docomo.ne.jp/shop_detail/0295150152900/index.html,39.2983025,140.55147527778,ok
+docomo,東北,秋田県,ドコモショップ角館店,014-0369 秋田県仙北市角館町上菅沢177-4,https://shop.smt.docomo.ne.jp/shop_detail/0200200553900/index.html,39.594566111111,140.57632611111,ok
+docomo,東北,秋田県,ドコモショップ潟上店,018-1504 秋田県潟上市飯田川飯塚字岡谷地1-10,https://shop.smt.docomo.ne.jp/shop_detail/0200201098800/index.html,39.902981111111,140.085455,ok
+docomo,東北,秋田県,ドコモショップ鹿角店,018-5201 秋田県鹿角市花輪字上中島2-63,https://shop.smt.docomo.ne.jp/shop_detail/0295150117900/index.html,40.187727777778,140.78715888889,ok
+docomo,東北,秋田県,ドコモショップ秋田旭南店,010-0925 秋田県秋田市旭南１丁目13-36,https://shop.smt.docomo.ne.jp/shop_detail/0295150112400/index.html,39.710127222222,140.10758444444,ok
+docomo,東北,秋田県,ドコモショップ秋田新国道店,011-0901 秋田県秋田市寺内字三千刈351,https://shop.smt.docomo.ne.jp/shop_detail/0295150118100/index.html,39.73972,140.09499805556,ok
+docomo,東北,秋田県,ドコモショップ秋田東店,010-0003 秋田県秋田市東通1-7,https://shop.smt.docomo.ne.jp/shop_detail/0295150111000/index.html,39.717024166667,140.13874555556,ok
+docomo,東北,秋田県,ドコモショップ秋田南店,010-1434 秋田県秋田市仁井田蕗見町10-13,https://shop.smt.docomo.ne.jp/shop_detail/0200200409200/index.html,39.684606388889,140.12525083333,ok
+docomo,東北,秋田県,ドコモショップ大館店,017-0872 秋田県大館市片山町３丁目10-53,https://shop.smt.docomo.ne.jp/shop_detail/0295150152300/index.html,40.275366944444,140.52838,ok
+docomo,東北,秋田県,ドコモショップ大館南店,017-0837 秋田県大館市餌釣字前田232-1 アクロス大館南ショッピングタウン内,https://shop.smt.docomo.ne.jp/shop_detail/0200201260400/index.html,40.247948611111,140.57550027778,ok
+docomo,東北,秋田県,ドコモショップ男鹿店,010-0341 秋田県男鹿市船越字内子294-2039,https://shop.smt.docomo.ne.jp/shop_detail/0200200455100/index.html,39.903564722222,139.93303638889,ok
+docomo,東北,秋田県,ドコモショップ湯沢店,012-0845 秋田県湯沢市材木町1-15,https://shop.smt.docomo.ne.jp/shop_detail/0200200538400/index.html,39.162032222222,140.4887625,ok
+docomo,東北,秋田県,ドコモショップ能代店,016-0182 秋田県能代市上柳8-4,https://shop.smt.docomo.ne.jp/shop_detail/0295150119200/index.html,40.188300833333,140.04178777778,ok
+docomo,東北,秋田県,ドコモショップ本荘店,015-0834 秋田県由利本荘市岩渕下121-1,https://shop.smt.docomo.ne.jp/shop_detail/0200200538500/index.html,39.390138055556,140.05109888889,ok
+softbank,東北,秋田県,ソフトバンク イオンタウン大曲福田,秋田県大仙市福田町２１‐２３‐４,https://www.softbank.jp/shop/search/detail/H201/,39.470173,140.48294,ok
+softbank,東北,秋田県,ソフトバンク イオンタウン能代,秋田県能代市鰄渕字古屋布１番イオンタウン内,https://www.softbank.jp/shop/search/detail/HA31/,40.188717,140.08356,ok
+softbank,東北,秋田県,ソフトバンク イオンモール秋田,秋田県秋田市御所野地蔵田１丁目１‐１　イオンモール秋田２Ｆ,https://www.softbank.jp/shop/search/detail/H221/,39.66338,140.16133,ok
+softbank,東北,秋田県,ソフトバンク イオンモール大曲,秋田県大仙市和合字坪立１７７番地,https://www.softbank.jp/shop/search/detail/HA22/,39.4379,140.50923,ok
+softbank,東北,秋田県,ソフトバンク 横手,秋田県横手市条里１丁目６番２３号,https://www.softbank.jp/shop/search/detail/H209/,39.30929,140.55695,ok
+softbank,東北,秋田県,ソフトバンク 角館,秋田県仙北市角館町上菅沢４８７‐３,https://www.softbank.jp/shop/search/detail/H206/,39.590668,140.57428,ok
+softbank,東北,秋田県,ソフトバンク 広面,秋田県秋田市広面字樋ノ沖１０２‐２,https://www.softbank.jp/shop/search/detail/H213/,39.715168,140.14925,ok
+softbank,東北,秋田県,ソフトバンク 秋田山王,秋田県秋田市旭北錦町２‐４６,https://www.softbank.jp/shop/search/detail/HA13/,39.717094,140.10953,ok
+softbank,東北,秋田県,ソフトバンク 秋田仁井田,秋田県秋田市仁井田新田２丁目３４７‐１,https://www.softbank.jp/shop/search/detail/H200/,39.679,140.12567,ok
+softbank,東北,秋田県,ソフトバンク 新国道,秋田県秋田市八橋大畑１丁目４‐１８,https://www.softbank.jp/shop/search/detail/H218/,39.734592,140.09874,ok
+softbank,東北,秋田県,ソフトバンク 大館,秋田県大館市清水１丁目３‐３２,https://www.softbank.jp/shop/search/detail/HA07/,40.28397,140.55217,ok
+softbank,東北,秋田県,ソフトバンク 天王,秋田県潟上市天王字棒沼台２７２‐１６,https://www.softbank.jp/shop/search/detail/H215/,39.860252,140.00958,ok
+softbank,東北,秋田県,ソフトバンク 土崎港,秋田県秋田市土崎港相染町字家ノ下３７番地１,https://www.softbank.jp/shop/search/detail/H217/,39.76599,140.06752,ok
+softbank,東北,秋田県,ソフトバンク 湯沢,秋田県湯沢市材木町１丁目２‐２８,https://www.softbank.jp/shop/search/detail/H211/,39.161415,140.4894,ok
+softbank,東北,秋田県,ソフトバンク 本荘,秋田県由利本荘市石脇字田頭１５２,https://www.softbank.jp/shop/search/detail/H205/,39.38993,140.02838,ok
