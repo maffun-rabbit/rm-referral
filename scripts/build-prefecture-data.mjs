@@ -29,6 +29,12 @@ const prefectures = {
   愛知県: { slug: "aichi", region: "東海", auRegionPage: "tokai" },
   岐阜県: { slug: "gifu", region: "東海", auRegionPage: "tokai" },
   三重県: { slug: "mie", region: "東海", auRegionPage: "tokai" },
+  滋賀県: { slug: "shiga", region: "近畿", auRegionPage: "kinki" },
+  京都府: { slug: "kyoto", region: "近畿", auRegionPage: "kinki" },
+  大阪府: { slug: "osaka", region: "近畿", auRegionPage: "kinki" },
+  兵庫県: { slug: "hyogo", region: "近畿", auRegionPage: "kinki" },
+  奈良県: { slug: "nara", region: "近畿", auRegionPage: "kinki" },
+  和歌山県: { slug: "wakayama", region: "近畿", auRegionPage: "kinki" },
 };
 
 const prefectureArg = process.argv.find((arg) => arg.startsWith("--prefecture="));

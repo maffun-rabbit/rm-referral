@@ -30,6 +30,12 @@ const prefectures = {
   愛知県: { slug: "aichi", label: "愛知県", shortLabel: "愛知", english: "AICHI", expectedShops: 428 },
   岐阜県: { slug: "gifu", label: "岐阜県", shortLabel: "岐阜", english: "GIFU", expectedShops: 115 },
   三重県: { slug: "mie", label: "三重県", shortLabel: "三重", english: "MIE", expectedShops: 104 },
+  滋賀県: { slug: "shiga", label: "滋賀県", shortLabel: "滋賀", english: "SHIGA", expectedShops: 69 },
+  京都府: { slug: "kyoto", label: "京都府", shortLabel: "京都", english: "KYOTO", expectedShops: 127 },
+  大阪府: { slug: "osaka", label: "大阪府", shortLabel: "大阪", english: "OSAKA", expectedShops: 421 },
+  兵庫県: { slug: "hyogo", label: "兵庫県", shortLabel: "兵庫", english: "HYOGO", expectedShops: 265 },
+  奈良県: { slug: "nara", label: "奈良県", shortLabel: "奈良", english: "NARA", expectedShops: 67 },
+  和歌山県: { slug: "wakayama", label: "和歌山県", shortLabel: "和歌山", english: "WAKAYAMA", expectedShops: 54 },
 };
 const prefecture = prefectures[prefectureName];
 if (!prefecture) throw new Error(`Unsupported prefecture: ${prefectureName}`);
@@ -196,7 +202,7 @@ function layout({ title, description, canonical, body, jsonLd = [] }) {
 function shopPage(shop, nearbyRakutenShops) {
   const carrier = carrierLabels[shop.carrier];
   const locality = localityFrom(shop.address);
-  const title = `${shop.name}から楽天モバイルへ乗り換える前に確認すること | 楽天モバイル乗り換えガイド`;
+  const title = `${shop.name}（${locality}）から楽天モバイルへ乗り換える前に確認すること | 楽天モバイル乗り換えガイド`;
   const description = `${locality}の${shop.name}を利用している方向けに、${carrier}から楽天モバイルへ電話番号を引き継いで乗り換える準備と手順を整理します。`;
   const pathname = pagePath(shop);
   const canonical = `${siteUrl}${pathname}`;
