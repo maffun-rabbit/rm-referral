@@ -25,6 +25,10 @@ const prefectures = {
   富山県: { slug: "toyama", region: "北陸・甲信越", auRegionPage: "hokuriku" },
   石川県: { slug: "ishikawa", region: "北陸・甲信越", auRegionPage: "hokuriku" },
   福井県: { slug: "fukui", region: "北陸・甲信越", auRegionPage: "hokuriku" },
+  静岡県: { slug: "shizuoka", region: "東海", auRegionPage: "tokai" },
+  愛知県: { slug: "aichi", region: "東海", auRegionPage: "tokai" },
+  岐阜県: { slug: "gifu", region: "東海", auRegionPage: "tokai" },
+  三重県: { slug: "mie", region: "東海", auRegionPage: "tokai" },
 };
 
 const prefectureArg = process.argv.find((arg) => arg.startsWith("--prefecture="));

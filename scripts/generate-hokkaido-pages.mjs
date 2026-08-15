@@ -26,6 +26,10 @@ const prefectures = {
   富山県: { slug: "toyama", label: "富山県", shortLabel: "富山", english: "TOYAMA", expectedShops: 56 },
   石川県: { slug: "ishikawa", label: "石川県", shortLabel: "石川", english: "ISHIKAWA", expectedShops: 68 },
   福井県: { slug: "fukui", label: "福井県", shortLabel: "福井", english: "FUKUI", expectedShops: 41 },
+  静岡県: { slug: "shizuoka", label: "静岡県", shortLabel: "静岡", english: "SHIZUOKA", expectedShops: 177 },
+  愛知県: { slug: "aichi", label: "愛知県", shortLabel: "愛知", english: "AICHI", expectedShops: 428 },
+  岐阜県: { slug: "gifu", label: "岐阜県", shortLabel: "岐阜", english: "GIFU", expectedShops: 115 },
+  三重県: { slug: "mie", label: "三重県", shortLabel: "三重", english: "MIE", expectedShops: 104 },
 };
 const prefecture = prefectures[prefectureName];
 if (!prefecture) throw new Error(`Unsupported prefecture: ${prefectureName}`);
