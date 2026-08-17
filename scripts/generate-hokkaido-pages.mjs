@@ -63,7 +63,9 @@ const shopSlugsPath = path.join(root, "data", "shop-slugs.csv");
 const outputRoot = path.join(root, prefecture.slug);
 const siteUrl = "https://rm-referral.maffun.workers.dev";
 const referralUrl = "https://r10.to/hNearm";
-const updated = "2026-08-16";
+const updated = "2026-08-17";
+const localTopicOpeningCutoff = "2026-02-17";
+const localTopicRadiusKm = 20;
 
 const carrierLabels = {
   au: "au",
@@ -164,6 +166,11 @@ function localityFrom(address) {
   return designatedCity?.[1] ?? tokyoWard?.[1] ?? city?.[1] ?? district?.[1] ?? townOrVillage?.[1] ?? prefecture.shortLabel;
 }
 
+function formatJapaneseDate(value) {
+  const [year, month, day] = value.split("-").map(Number);
+  return `${year}年${month}月${day}日`;
+}
+
 function pagePath(shop) {
   return `/${prefecture.slug}/${shop.carrier}/${shop.slug}/`;
 }
@@ -207,7 +214,7 @@ function layout({ title, description, canonical, body, jsonLd = [] }) {
 </html>`;
 }
 
-function shopPage(shop, nearbyRakutenShops) {
+function shopPage(shop, nearbyRakutenShops, localTopics) {
   const carrier = carrierLabels[shop.carrier];
   const locality = localityFrom(shop.address);
   const title = `${shop.name}（${locality}）から楽天モバイルへ乗り換える前に確認すること | 楽天モバイル乗り換えガイド`;
@@ -218,6 +225,20 @@ function shopPage(shop, nearbyRakutenShops) {
   const nearestRakuten = nearbyRakutenShops[0];
   const relatedLinks = nearbyRakutenShops.map((item) => `
           <li><a href="${escapeHtml(item.officialUrl)}" rel="noopener"><span class="shop-link-name">${escapeHtml(item.name)}</span><span class="shop-link-meta">${escapeHtml(localityFrom(item.address))}・直線距離 約${item.distanceKm.toFixed(1)}km</span><span class="shop-link-arrow" aria-hidden="true">↗</span></a></li>`).join("");
+  const localTopicsSection = localTopics.length ? `
+    <section class="local-topics-section" aria-labelledby="local-topics-heading">
+      <p class="section-label">LOCAL TOPICS</p>
+      <h2 id="local-topics-heading">${escapeHtml(locality)}周辺の楽天モバイル最新トピック</h2>
+      <div class="local-topic-list">
+        ${localTopics.map((item) => `<article class="local-topic-card">
+          <div><p class="local-topic-meta"><span>NEW SHOP</span><time datetime="${escapeHtml(item.openDate)}">${formatJapaneseDate(item.openDate)}</time></p>
+          <h3>${escapeHtml(item.name)}がオープン</h3>
+          <p>${escapeHtml(shop.name)}から直線距離約${item.distanceKm.toFixed(1)}km。近隣で楽天モバイルを対面相談できる店舗の選択肢が増えました。</p></div>
+          <a href="${escapeHtml(item.officialUrl)}" rel="noopener">楽天モバイル公式店舗ページを見る <span aria-hidden="true">↗</span></a>
+        </article>`).join("")}
+      </div>
+      <p class="topic-source">出典：楽天モバイル公式店舗情報（開店日・店舗情報は閲覧時点で変更される場合があります）</p>
+    </section>` : "";
 
   const body = `<main>
     <nav class="breadcrumb" aria-label="パンくずリスト">
@@ -229,8 +250,9 @@ function shopPage(shop, nearbyRakutenShops) {
         <p class="eyebrow">${escapeHtml(locality)}・${escapeHtml(carrier)}をご利用の方へ</p>
         <h1><span>${escapeHtml(shop.name)}</span>から<br>楽天モバイルへ乗り換える前に</h1>
         <p class="lead">店舗へ行く前に、オンラインでできる手続きと準備するものを確認。電話番号を引き継ぐMNPの流れを、順番に整理します。</p>
-        <a class="button" href="${referralUrl}" rel="sponsored nofollow noopener">紹介キャンペーンを確認する <span aria-hidden="true">→</span></a>
-        <p class="small">楽天モバイルのキャンペーンページへ移動します</p>
+        <div class="cta-benefit"><span>他社から乗り換えなら</span><strong>14,000<small>ポイント</small></strong></div>
+        <a class="button" data-primary-cta href="${referralUrl}" rel="sponsored nofollow noopener">14,000ポイント特典を確認する <span aria-hidden="true">→</span></a>
+        <p class="small">楽天従業員紹介キャンペーン。適用には申し込み・利用開始・Rakuten Link通話などの条件があります。</p>
       </div>
       <aside class="shop-card">
         <p class="pill">掲載店舗情報</p>
@@ -318,6 +340,8 @@ function shopPage(shop, nearbyRakutenShops) {
       </div>
     </section>
 
+    ${localTopicsSection}
+
     <section class="nearby-shop-section" id="nearby-rakuten">
       <p class="section-label">NEARBY RAKUTEN MOBILE</p>
       <h2>${escapeHtml(shop.name)}から近い楽天モバイルショップ</h2>
@@ -342,13 +366,18 @@ function shopPage(shop, nearbyRakutenShops) {
       <a class="text-link" href="https://network.mobile.rakuten.co.jp/shop/" rel="noopener">楽天モバイルの全店舗を公式サイトで見る ↗</a>
     </section>
 
-    <section class="final-cta">
-      <p class="eyebrow">条件を確認してから進めよう</p>
-      <h2>紹介キャンペーンを確認する</h2>
-      <p>特典内容や対象条件は変更されることがあります。申し込み前にリンク先の最新情報を確認してください。</p>
-      <a class="button light" href="${referralUrl}" rel="sponsored nofollow noopener">キャンペーンページへ <span aria-hidden="true">→</span></a>
+    <section class="final-cta" data-final-cta>
+      <p class="eyebrow">楽天従業員紹介キャンペーン</p>
+      <h2>他社から乗り換えで<br>14,000ポイント</h2>
+      <p>適用条件やポイント進呈時期を確認し、紹介リンクから楽天IDでログインして申し込みへ進んでください。</p>
+      <a class="button light" href="${referralUrl}" rel="sponsored nofollow noopener">14,000ポイント特典を確認する <span aria-hidden="true">→</span></a>
       <p class="updated">情報確認日：${updated}</p>
     </section>
+    <aside class="floating-cta" data-floating-cta aria-hidden="true">
+      <p><span>他社から乗り換えで</span><strong>14,000ポイント</strong></p>
+      <a href="${referralUrl}" rel="sponsored nofollow noopener">特典を確認する <span aria-hidden="true">→</span></a>
+    </aside>
+    <script src="/js/shop-cta.js" defer></script>
   </main>`;
 
   return layout({
@@ -478,6 +507,7 @@ async function main() {
       name: row.店名,
       address: row.住所,
       officialUrl: row.URL,
+      openDate: row.開店日,
       latitude: Number(row.緯度),
       longitude: Number(row.経度),
     }));
@@ -495,17 +525,22 @@ async function main() {
     if (!coordinates || !Number.isFinite(coordinates.latitude) || !Number.isFinite(coordinates.longitude)) {
       throw new Error(`Coordinates missing for ${shop.name}`);
     }
-    const nearbyRakutenShops = rakutenShops
+    const rakutenShopsByDistance = rakutenShops
       .map((rakutenShop) => ({ ...rakutenShop, distanceKm: distanceKm(coordinates, rakutenShop) }))
-      .sort((a, b) => a.distanceKm - b.distanceKm)
-      .slice(0, 5);
+      .sort((a, b) => a.distanceKm - b.distanceKm);
+    const nearbyRakutenShops = rakutenShopsByDistance.slice(0, 5);
+    const localTopics = rakutenShopsByDistance
+      .filter((item) => item.distanceKm <= localTopicRadiusKm
+        && item.openDate >= localTopicOpeningCutoff
+        && item.openDate <= updated)
+      .slice(0, 2);
     const nearest = nearbyRakutenShops[0];
     const destination = `${nearest.latitude},${nearest.longitude}`;
     nearest.directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(shop.address)}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
     nearest.embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(destination)}&z=15&output=embed`;
     const directory = path.join(root, pagePath(shop));
     await mkdir(directory, { recursive: true });
-    await writeFile(path.join(directory, "index.html"), shopPage(shop, nearbyRakutenShops));
+    await writeFile(path.join(directory, "index.html"), shopPage(shop, nearbyRakutenShops, localTopics));
   }
 
   const urls = ["/", ...await collectPublishedUrls()];
