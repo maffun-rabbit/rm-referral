@@ -78,11 +78,12 @@ const compatibleRows = shops.map((shop) => [
   `${SHOP_DETAIL_BASE}/${shop.code}/`,
 ]);
 
-const geocodedHeaders = [...compatibleHeaders, "店舗コード", "緯度", "経度", "取得元", "取得日"];
+const geocodedHeaders = [...compatibleHeaders, "店舗コード", "開店日", "緯度", "経度", "取得元", "取得日"];
 const fetchedOn = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date());
 const geocodedRows = shops.map((shop, index) => [
   ...compatibleRows[index],
   shop.code,
+  shop.start_date ?? "",
   shop.location.latitude,
   shop.location.longitude,
   API_URL,
