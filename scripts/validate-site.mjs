@@ -27,7 +27,8 @@ function pageTarget(href) {
 }
 
 const files = await walk(root);
-const htmlFiles = files.filter((file) => file.endsWith(".html"));
+const htmlFiles = files.filter((file) => file.endsWith(".html")
+  && !/^google[\w-]+\.html$/.test(path.relative(root, file)));
 const titles = new Map();
 const canonicals = new Map();
 const errors = [];
@@ -75,6 +76,16 @@ for (const file of htmlFiles) {
 if (sitemapUrls.size !== htmlFiles.length) errors.push(`Expected ${htmlFiles.length} unique sitemap URLs, received ${sitemapUrls.size}`);
 
 const expectedByArea = { hokkaido: 309, aomori: 57, iwate: 62, miyagi: 123, akita: 46, yamagata: 59, fukushima: 98, niigata: 94, tochigi: 78, gunma: 83, ibaraki: 118, saitama: 253, chiba: 227, tokyo: 539, kanagawa: 296, nagano: 89, yamanashi: 42, toyama: 56, ishikawa: 68, fukui: 41, shizuoka: 177, aichi: 428, gifu: 115, mie: 104, shiga: 69, kyoto: 127, osaka: 421, hyogo: 265, nara: 67, wakayama: 54, tottori: 31, shimane: 43, okayama: 110, hiroshima: 163, yamaguchi: 78, tokushima: 48, kagawa: 65, ehime: 86, kochi: 49, fukuoka: 304, saga: 45, nagasaki: 83, kumamoto: 94, oita: 67, miyazaki: 63, kagoshima: 91, okinawa: 123 };
+const areaByPrefecture = new Map([
+  ["北海道", "hokkaido"], ["青森県", "aomori"], ["岩手県", "iwate"], ["宮城県", "miyagi"], ["秋田県", "akita"], ["山形県", "yamagata"], ["福島県", "fukushima"], ["茨城県", "ibaraki"], ["栃木県", "tochigi"], ["群馬県", "gunma"], ["埼玉県", "saitama"], ["千葉県", "chiba"], ["東京都", "tokyo"], ["神奈川県", "kanagawa"], ["新潟県", "niigata"], ["富山県", "toyama"], ["石川県", "ishikawa"], ["福井県", "fukui"], ["山梨県", "yamanashi"], ["長野県", "nagano"], ["岐阜県", "gifu"], ["静岡県", "shizuoka"], ["愛知県", "aichi"], ["三重県", "mie"], ["滋賀県", "shiga"], ["京都府", "kyoto"], ["大阪府", "osaka"], ["兵庫県", "hyogo"], ["奈良県", "nara"], ["和歌山県", "wakayama"], ["鳥取県", "tottori"], ["島根県", "shimane"], ["岡山県", "okayama"], ["広島県", "hiroshima"], ["山口県", "yamaguchi"], ["徳島県", "tokushima"], ["香川県", "kagawa"], ["愛媛県", "ehime"], ["高知県", "kochi"], ["福岡県", "fukuoka"], ["佐賀県", "saga"], ["長崎県", "nagasaki"], ["熊本県", "kumamoto"], ["大分県", "oita"], ["宮崎県", "miyazaki"], ["鹿児島県", "kagoshima"], ["沖縄県", "okinawa"],
+]);
+const valueCarrierCsv = await readFile(path.join(root, "data", "value-carrier-shops-geocoded.csv"), "utf8");
+for (const line of valueCarrierCsv.split(/\r?\n/).slice(1)) {
+  const match = line.match(/^(?:uqmobile|ymobile|aeonmobile),[^,]*,([^,]+),/);
+  if (!match) continue;
+  const area = areaByPrefecture.get(match[1]);
+  expectedByArea[area] += 1;
+}
 const shopPages = [];
 for (const [area, expected] of Object.entries(expectedByArea)) {
   const areaPages = htmlFiles.filter((file) => file.includes(`${path.sep}${area}${path.sep}`) && !file.endsWith(`${path.sep}${area}${path.sep}index.html`));

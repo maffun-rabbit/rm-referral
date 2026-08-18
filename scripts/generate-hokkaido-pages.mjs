@@ -59,11 +59,12 @@ if (!prefecture) throw new Error(`Unsupported prefecture: ${prefectureName}`);
 const dataPath = path.join(root, "data", `${prefecture.slug}-shops.csv`);
 const carrierCoordinatesPath = path.join(root, "data", prefecture.slug === "hokkaido" ? "carrier-shops-geocoded.csv" : `${prefecture.slug}-carrier-shops-geocoded.csv`);
 const rakutenShopsPath = path.join(root, "data", "rakuten-shops-geocoded.csv");
+const valueCarrierShopsPath = path.join(root, "data", "value-carrier-shops-geocoded.csv");
 const shopSlugsPath = path.join(root, "data", "shop-slugs.csv");
 const outputRoot = path.join(root, prefecture.slug);
 const siteUrl = "https://rm-referral.maffun.workers.dev";
 const referralUrl = "https://r10.to/hNearm";
-const updated = "2026-08-17";
+const updated = "2026-08-19";
 const localTopicOpeningCutoff = "2026-02-17";
 const localTopicRadiusKm = 20;
 
@@ -71,6 +72,9 @@ const carrierLabels = {
   au: "au",
   docomo: "ドコモ",
   softbank: "ソフトバンク",
+  uqmobile: "UQ mobile",
+  ymobile: "Y!mobile",
+  aeonmobile: "イオンモバイル",
 };
 
 const carrierNotes = {
@@ -85,6 +89,18 @@ const carrierNotes = {
   softbank: {
     account: "My SoftBankの契約情報と、SoftBank ID・暗証番号を確認しておくと手続きが進めやすくなります。",
     mail: "ソフトバンクのメールを残したい場合は、持ち運びサービスの条件と申込期限をソフトバンク公式サイトで確認してください。",
+  },
+  uqmobile: {
+    account: "My UQ mobileの契約情報と、au ID・暗証番号を確認しておくと手続きが進めやすくなります。",
+    mail: "UQ mobileのメールサービスを利用している場合は、乗り換え後の継続可否や代替メールを事前に確認してください。",
+  },
+  ymobile: {
+    account: "My Y!mobileの契約情報と、SoftBank ID・暗証番号を確認しておくと手続きが進めやすくなります。",
+    mail: "Y!mobileのメールアドレスを利用している場合は、メールアドレス持ち運びの条件と申込期限を公式サイトで確認してください。",
+  },
+  aeonmobile: {
+    account: "イオンモバイルのマイページにログインできることと、契約名義・電話番号を確認しておくと手続きが進めやすくなります。",
+    mail: "連絡先にキャリアメールを登録している場合は、乗り換え前に受信可能なメールアドレスへ変更しておくと安心です。",
   },
 };
 
@@ -155,9 +171,9 @@ function distanceKm(from, to) {
 
 function localityFrom(address) {
   const normalized = address.replace(/^\d{3}-\d{4}\s*/, "");
-  const withoutPrefecture = normalized.startsWith(prefecture.label)
+  const withoutPrefecture = (normalized.startsWith(prefecture.label)
     ? normalized.slice(prefecture.label.length)
-    : normalized;
+    : normalized).trimStart();
   const designatedCity = withoutPrefecture.match(/^(.+?市[一-龯々ぁ-んァ-ヶー]{1,8}区)/);
   const city = withoutPrefecture.match(/^(.+?市)/);
   const tokyoWard = prefecture.label === "東京都" ? withoutPrefecture.match(/^([^0-9０-９\s]+?区)/) : null;
@@ -234,10 +250,10 @@ function shopPage(shop, nearbyRakutenShops, localTopics) {
           <div><p class="local-topic-meta"><span>NEW SHOP</span><time datetime="${escapeHtml(item.openDate)}">${formatJapaneseDate(item.openDate)}</time></p>
           <h3>${escapeHtml(item.name)}がオープン</h3>
           <p>${escapeHtml(shop.name)}から直線距離約${item.distanceKm.toFixed(1)}km。近隣で楽天モバイルを対面相談できる店舗の選択肢が増えました。</p></div>
-          <a href="${escapeHtml(item.officialUrl)}" rel="noopener">楽天モバイル公式店舗ページを見る <span aria-hidden="true">↗</span></a>
+          <p class="local-topic-source">元情報：楽天モバイル公式「${escapeHtml(item.name)} 店舗情報」<br>公開日：${formatJapaneseDate(item.openDate)}</p>
         </article>`).join("")}
       </div>
-      <p class="topic-source">出典：楽天モバイル公式店舗情報（開店日・店舗情報は閲覧時点で変更される場合があります）</p>
+      <p class="topic-source">店舗情報は閲覧時点で変更される場合があります。地域トピックから外部サイトへのリンクは設置していません。</p>
     </section>` : "";
 
   const body = `<main>
@@ -424,16 +440,16 @@ function indexPage(shops) {
     })
     .join("\n");
 
-  const title = `${prefecture.label}のキャリアショップから楽天モバイルへ乗り換える方法 | 店舗別ガイド`;
-  const description = `${prefecture.label}のau・ドコモ・ソフトバンク店舗を地域別に掲載。楽天モバイルへ乗り換える前の準備やMNP手続きを店舗ごとに確認できます。`;
+  const title = `${prefecture.label}の携帯ショップから楽天モバイルへ乗り換える方法 | 店舗別ガイド`;
+  const description = `${prefecture.label}のau・ドコモ・ソフトバンク・UQ mobile・Y!mobile・イオンモバイル店舗を地域別に掲載。楽天モバイルへ乗り換える前の準備やMNP手続きを店舗ごとに確認できます。`;
   const canonical = `${siteUrl}/${prefecture.slug}/`;
   const body = `<main>
     <nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">トップ</a><span>›</span><span>${prefecture.shortLabel}</span></nav>
     <section class="area-hero">
       <p class="eyebrow">${prefecture.english} SHOP GUIDE</p>
       <h1>${prefecture.label}のキャリアショップから<br><span>楽天モバイルへ乗り換える前に</span></h1>
-      <p class="lead">au・ドコモ・ソフトバンクを利用中の方向けに、店舗へ行く前に確認したい乗り換え準備をまとめました。現在利用している店舗から選んでください。</p>
-      <div class="count-row"><div><strong>${shops.length}</strong><span>掲載店舗</span></div><a href="#shop-finder" data-carrier-jump="au">au</a><a href="#shop-finder" data-carrier-jump="docomo">ドコモ</a><a href="#shop-finder" data-carrier-jump="softbank">ソフトバンク</a></div>
+      <p class="lead">au・ドコモ・ソフトバンク・UQ mobile・Y!mobile・イオンモバイルを利用中の方向けに、店舗へ行く前に確認したい乗り換え準備をまとめました。現在利用している店舗から選んでください。</p>
+      <div class="count-row"><div><strong>${shops.length}</strong><span>掲載店舗</span></div><a href="#shop-finder" data-carrier-jump="au">au</a><a href="#shop-finder" data-carrier-jump="docomo">ドコモ</a><a href="#shop-finder" data-carrier-jump="softbank">ソフトバンク</a><a href="#shop-finder" data-carrier-jump="uqmobile">UQ mobile</a><a href="#shop-finder" data-carrier-jump="ymobile">Y!mobile</a><a href="#shop-finder" data-carrier-jump="aeonmobile">イオンモバイル</a></div>
     </section>
     <section class="shop-finder" id="shop-finder">
       <div class="shop-finder-heading"><div><p class="section-label">SHOP FINDER</p><h2>店舗を絞り込む</h2></div><p><strong data-result-count>${shops.length}</strong>店舗を表示</p></div>
@@ -485,15 +501,22 @@ async function collectPublishedUrls() {
 }
 
 async function main() {
-  const [csv, coordinateCsv, rakutenCsv, shopSlugsCsv] = await Promise.all([
+  const [csv, coordinateCsv, rakutenCsv, shopSlugsCsv, valueCarrierCsv] = await Promise.all([
     readFile(dataPath, "utf8"),
     readFile(carrierCoordinatesPath, "utf8"),
     readFile(rakutenShopsPath, "utf8"),
     readFile(shopSlugsPath, "utf8"),
+    readFile(valueCarrierShopsPath, "utf8"),
   ]);
   const slugByUrl = new Map(parseCsvRows(shopSlugsCsv).map((row) => [row.URL, row.slug]));
-  const shops = parseCsv(csv).map((shop) => ({ ...shop, slug: slugByUrl.get(shop.officialUrl) }));
-  if (shops.length !== prefecture.expectedShops) throw new Error(`Expected ${prefecture.expectedShops} shops, received ${shops.length}`);
+  const baseShops = parseCsv(csv).map((shop) => ({ ...shop, slug: slugByUrl.get(shop.officialUrl) }));
+  if (baseShops.length !== prefecture.expectedShops) throw new Error(`Expected ${prefecture.expectedShops} base shops, received ${baseShops.length}`);
+  const valueCarrierRows = parseCsvRows(valueCarrierCsv).filter((row) => row.都道府県 === prefecture.label);
+  const valueCarrierShops = valueCarrierRows.map((row) => ({
+    carrier: row.キャリア, region: row.地域, prefecture: row.都道府県, name: row.店名,
+    address: row.住所, officialUrl: row.URL, slug: row.スラッグ,
+  }));
+  const shops = [...baseShops, ...valueCarrierShops];
   const missingSlug = shops.find((shop) => !shop.slug);
   if (missingSlug) throw new Error(`Readable URL slug missing for ${missingSlug.name}: ${missingSlug.officialUrl}`);
 
@@ -501,6 +524,9 @@ async function main() {
     latitude: Number(row.緯度),
     longitude: Number(row.経度),
   }]));
+  for (const row of valueCarrierRows) coordinatesByUrl.set(row.URL, {
+    latitude: Number(row.緯度), longitude: Number(row.経度),
+  });
   const rakutenShops = parseCsvRows(rakutenCsv)
     .filter((row) => row.都道府県 === prefecture.label)
     .map((row) => ({

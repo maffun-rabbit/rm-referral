@@ -411,7 +411,7 @@ a { color: inherit; }
 .local-topic-meta span { padding: 4px 9px; border-radius: 999px; background: var(--primary); color: var(--white); font-weight: 850; letter-spacing: .08em; }
 .local-topic-card h3 { margin: 0; color: var(--ink); font-size: 22px; }
 .local-topic-card p:not(.local-topic-meta) { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
-.local-topic-card a { color: var(--primary); font-size: 13px; font-weight: 850; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.local-topic-source { padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px !important; line-height: 1.75; }
 .topic-source { margin: 18px 0 0; color: var(--muted); font-size: 11px; }
 
 .final-cta {
@@ -508,6 +508,9 @@ a { color: inherit; }
 .carrier-au { background: #fff2e8; color: #a54200; }
 .carrier-docomo { background: #fff0f3; color: #aa1532; }
 .carrier-softbank { background: #f0f2f6; color: #3e485c; }
+.carrier-uqmobile { background: #fff0f8; color: #b00062; }
+.carrier-ymobile { background: #fff0f3; color: #b00024; }
+.carrier-aeonmobile { background: #f5efff; color: #6d2688; }
 .no-shop-results { margin: 22px 0 0; padding: 24px; border-radius: 14px; background: var(--surface); color: var(--muted); text-align: center; }
 [hidden] { display: none !important; }
 
