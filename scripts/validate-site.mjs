@@ -88,7 +88,9 @@ for (const line of valueCarrierCsv.split(/\r?\n/).slice(1)) {
 }
 const shopPages = [];
 for (const [area, expected] of Object.entries(expectedByArea)) {
-  const areaPages = htmlFiles.filter((file) => file.includes(`${path.sep}${area}${path.sep}`) && !file.endsWith(`${path.sep}${area}${path.sep}index.html`));
+  const areaPages = htmlFiles.filter((file) => file.includes(`${path.sep}${area}${path.sep}`)
+    && !file.includes(`${path.sep}${area}${path.sep}coverage${path.sep}`)
+    && !file.endsWith(`${path.sep}${area}${path.sep}index.html`));
   shopPages.push(...areaPages);
   if (areaPages.length !== expected) errors.push(`Expected ${expected} ${area} shop pages, received ${areaPages.length}`);
 }

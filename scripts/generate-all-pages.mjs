@@ -19,4 +19,10 @@ for (const prefecture of prefectures) {
   });
 }
 
+await new Promise((resolve, reject) => {
+  const child = spawn(process.execPath, [path.join(import.meta.dirname, "generate-municipality-coverage-pages.mjs")], { stdio: "inherit" });
+  child.once("error", reject);
+  child.once("exit", (code) => code === 0 ? resolve() : reject(new Error(`Municipality coverage generation failed with exit code ${code}`)));
+});
+
 console.log(`Generated all ${prefectures.length} prefectures.`);

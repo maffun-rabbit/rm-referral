@@ -1,0 +1,80 @@
+import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import path from "node:path";
+
+const root = path.resolve(import.meta.dirname, "..");
+const siteUrl = "https://rm-referral.maffun.workers.dev";
+const referralUrl = "https://r10.to/hNearm";
+const updated = "2026-08-19";
+const toolsRoot = process.env.RM_SLUG_TOOLS ?? "/private/tmp/rm-slug-tools/node_modules";
+const { default: kuroshiroModule } = await import(path.join(toolsRoot, "kuroshiro/lib/index.js"));
+const { default: KuromojiAnalyzer } = await import(path.join(toolsRoot, "kuroshiro-analyzer-kuromoji/lib/index.js"));
+const Kuroshiro = kuroshiroModule.default ?? kuroshiroModule;
+const converter = new Kuroshiro();
+await converter.init(new KuromojiAnalyzer({ dictPath: path.join(toolsRoot, "kuromoji/dict") }));
+
+const prefectures = [
+  ["北海道","hokkaido"],["青森県","aomori"],["岩手県","iwate"],["宮城県","miyagi"],["秋田県","akita"],["山形県","yamagata"],["福島県","fukushima"],
+  ["茨城県","ibaraki"],["栃木県","tochigi"],["群馬県","gunma"],["埼玉県","saitama"],["千葉県","chiba"],["東京都","tokyo"],["神奈川県","kanagawa"],
+  ["新潟県","niigata"],["富山県","toyama"],["石川県","ishikawa"],["福井県","fukui"],["山梨県","yamanashi"],["長野県","nagano"],["岐阜県","gifu"],
+  ["静岡県","shizuoka"],["愛知県","aichi"],["三重県","mie"],["滋賀県","shiga"],["京都府","kyoto"],["大阪府","osaka"],["兵庫県","hyogo"],
+  ["奈良県","nara"],["和歌山県","wakayama"],["鳥取県","tottori"],["島根県","shimane"],["岡山県","okayama"],["広島県","hiroshima"],["山口県","yamaguchi"],
+  ["徳島県","tokushima"],["香川県","kagawa"],["愛媛県","ehime"],["高知県","kochi"],["福岡県","fukuoka"],["佐賀県","saga"],["長崎県","nagasaki"],
+  ["熊本県","kumamoto"],["大分県","oita"],["宮崎県","miyazaki"],["鹿児島県","kagoshima"],["沖縄県","okinawa"],
+].map(([label, slug]) => ({ label, slug }));
+
+function escapeHtml(value) { return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;"); }
+function parseCsvRows(text) {
+  const rows=[]; let row=[]; let cell=""; let quoted=false;
+  for(let i=0;i<text.length;i+=1){const char=text[i];if(char==='"'&&quoted&&text[i+1]==='"'){cell+='"';i+=1;}else if(char==='"')quoted=!quoted;else if(char===","&&!quoted){row.push(cell);cell="";}else if((char==="\n"||char==="\r")&&!quoted){if(char==="\r"&&text[i+1]==="\n")i+=1;row.push(cell);if(row.some(Boolean))rows.push(row);row=[];cell="";}else cell+=char;}
+  if(cell||row.length){row.push(cell);rows.push(row);} const headers=rows.shift().map((v)=>v.replace(/^\uFEFF/,"")); return rows.map((values)=>Object.fromEntries(headers.map((header,index)=>[header,values[index]??""])));
+}
+function localityFrom(address, prefecture) {
+  const value=address.replace(/^\d{3}-\d{4}\s*/,"").replace(prefecture,"").trim();
+  const designatedCities="札幌市|仙台市|さいたま市|千葉市|横浜市|川崎市|相模原市|新潟市|静岡市|浜松市|名古屋市|京都市|大阪市|堺市|神戸市|岡山市|広島市|北九州市|福岡市|熊本市";
+  const designated=value.match(new RegExp(`^((?:${designatedCities}).+?区)`,"u"))?.[1];
+  const tokyoWard=prefecture==="東京都"?value.match(/^([^0-9０-９\s]+?区)/)?.[1]:null;
+  const city=value.match(/^(.+?市)/)?.[1];
+  const district=value.match(/^(.+?郡.+?[町村])/)?.[1];
+  const cityNamedDistrict=/^(?:余市郡|高市郡)/.test(value);
+  return designated ?? tokyoWard ?? (cityNamedDistrict?district:null) ?? city ?? district ?? value.match(/^(.+?[町村])/)?.[1] ?? "";
+}
+function asciiSlug(value){return value.normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").replace(/-+/g,"-");}
+async function romanize(value){return asciiSlug(await converter.convert(value,{to:"romaji",mode:"spaced",romajiSystem:"hepburn"}));}
+function formatDate(value){return value.replace(/(\d{4})年(\d{1,2})月(\d{1,2})日/,"$1年$2月$3日");}
+
+const stationData=JSON.parse(await readFile(path.join(root,"data","rakuten-base-stations.json"),"utf8"));
+const stationRows=stationData.periods.flatMap((period)=>period.rows);
+const stationByArea=new Map();
+for(const row of stationRows){const key=`${row.Prefecture}|${row.City}`;if(!stationByArea.has(key))stationByArea.set(key,[]);stationByArea.get(key).push(row);}
+
+const baseShopFiles=(await readdir(path.join(root,"data"))).filter((name)=>/^[a-z]+-shops\.csv$/.test(name)&&!name.startsWith("rakuten"));
+const shops=[];
+for(const file of baseShopFiles){for(const row of parseCsvRows(await readFile(path.join(root,"data",file),"utf8"))){if(row.都道府県&&row.住所)shops.push(row);}}
+for(const row of parseCsvRows(await readFile(path.join(root,"data","value-carrier-shops-geocoded.csv"),"utf8"))){if(row.都道府県&&row.住所)shops.push(row);}
+const rakutenShops=parseCsvRows(await readFile(path.join(root,"data","rakuten-shops-geocoded.csv"),"utf8"));
+
+const municipalities=new Map();
+for(const shop of shops){const locality=localityFrom(shop.住所,shop.都道府県);if(!locality)continue;const key=`${shop.都道府県}|${locality}`;const current=municipalities.get(key)??{prefecture:shop.都道府県,locality,carrierShopCount:0,rakutenShops:[]};current.carrierShopCount+=1;municipalities.set(key,current);}
+for(const shop of rakutenShops){const locality=localityFrom(shop.住所,shop.都道府県);const key=`${shop.都道府県}|${locality}`;if(!locality||!municipalities.has(key))continue;municipalities.get(key).rakutenShops.push(shop);}
+for(const [key, rows] of stationByArea){if(!municipalities.has(key)){const [prefecture,locality]=key.split("|");municipalities.set(key,{prefecture,locality,carrierShopCount:0,rakutenShops:[]});}municipalities.get(key).stations=rows;}
+
+function assessment(item){const rows=item.stations??[];const types=new Set(rows.map((row)=>row.Type));if(types.has("4G")&&types.has("5G"))return{level:"strong",label:"4G・5Gの改善情報あり",summary:"直近の公式発表で4Gと5Gの基地局新設が確認でき、通信環境の改善が進められています。"};if(rows.length>=2)return{level:"good",label:"複数の基地局新設情報あり",summary:`直近の公式発表で${rows.length}局の基地局新設が確認でき、エリア改善の動きが見られます。`};if(rows.length===1)return{level:"good",label:"基地局の新設情報あり",summary:"直近の公式発表で基地局の新設が確認でき、エリア改善が進められています。"};return{level:"check",label:"生活圏ごとの確認がおすすめ",summary:"市区町村全体を一律に良い・悪いとは判定できないため、自宅・学校・勤務先など実際に使う地点を公式エリアマップで確認してください。"};}
+
+function page(item,prefecture,slug){const status=assessment(item);const stations=item.stations??[];const typeCounts=Map.groupBy(stations,(row)=>row.Type);const latest=[...stations].sort((a,b)=>b.Date.localeCompare(a.Date,"ja"))[0];const canonical=`${siteUrl}/${prefecture.slug}/coverage/${slug}/`;const title=`${item.prefecture}${item.locality}の楽天モバイル電波状況｜エリア・基地局の最新情報`;const description=`${item.prefecture}${item.locality}の楽天モバイル電波状況を、公式エリア情報と直近の基地局設置発表から確認。家族・こども・青春・シニア向け特典と紹介キャンペーンも解説します。`;
+const stationBlock=stations.length?`<div class="coverage-evidence"><h3>直近の基地局設置実績</h3><div class="coverage-numbers"><p><strong>${stations.length}</strong><span>新設基地局</span></p><p><strong>${typeCounts.get("4G")?.length??0}</strong><span>4G</span></p><p><strong>${typeCounts.get("5G")?.length??0}</strong><span>5G</span></p></div><p>${escapeHtml(item.locality)}では、最新で${formatDate(latest.Date)}に基地局設置が完了したと楽天モバイルが発表しています。</p><ul>${[...new Map(stations.map((row)=>[row.ID,row])).values()].slice(0,6).map((row)=>`<li><b>${escapeHtml(row.Type)}</b> ${formatDate(row.Date)}設置完了</li>`).join("")}</ul><p class="coverage-source">出典：${escapeHtml(stationData.sourceName)}／${escapeHtml(stationData.latestUpdate)}更新（外部リンクなし）</p></div>`:`<div class="coverage-evidence"><h3>直近2回の公式発表について</h3><p>${escapeHtml(item.locality)}は直近2回の基地局新設一覧には掲載されていません。これは圏外を意味するものではありません。現在の提供状況は公式エリアマップで地点ごとに確認してください。</p><p class="coverage-source">確認対象：${escapeHtml(stationData.sourceName)}／${escapeHtml(stationData.latestUpdate)}更新（外部リンクなし）</p></div>`;
+const shopBlock=item.rakutenShops.length?`<p>${escapeHtml(item.locality)}には掲載データ上、楽天モバイルショップが${item.rakutenShops.length}店舗あります。対面で相談したい場合の選択肢になります。</p><ul class="coverage-shop-list">${item.rakutenShops.slice(0,3).map((shop)=>`<li><strong>${escapeHtml(shop.店名)}</strong><span>${escapeHtml(shop.住所)}</span></li>`).join("")}</ul>`:`<p>${escapeHtml(item.locality)}内に楽天モバイルショップが見つからない場合も、申し込みやMNPはオンラインで進められます。</p>`;
+return `<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(title)} | 楽天モバイル乗り換えガイド</title><meta name="description" content="${escapeHtml(description)}"><meta name="robots" content="index, follow"><link rel="canonical" href="${canonical}"><meta property="og:type" content="article"><meta property="og:locale" content="ja_JP"><meta property="og:title" content="${escapeHtml(title)}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:url" content="${canonical}"><link rel="stylesheet" href="/css/style.css"><script async src="https://www.googletagmanager.com/gtag/js?id=G-86FFC09LTE"></script><script src="/js/analytics.js"></script><script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"WebPage",name:title,description,url:canonical,dateModified:updated,inLanguage:"ja-JP"})}</script></head><body><header class="site-header"><a class="site-name" href="/">楽天モバイル乗り換えガイド</a><a class="header-link" href="/${prefecture.slug}/">${escapeHtml(prefecture.label)}の店舗一覧</a></header><main><nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">トップ</a><span>›</span><a href="/${prefecture.slug}/">${escapeHtml(prefecture.label)}</a><span>›</span><span>${escapeHtml(item.locality)}の電波状況</span></nav>
+<section class="coverage-hero"><p class="eyebrow">${escapeHtml(item.prefecture)}・${escapeHtml(item.locality)}</p><h1>${escapeHtml(item.locality)}の<br><span>楽天モバイル電波状況</span></h1><p class="lead">公式の基地局設置発表をもとに、現在確認できる改善情報を整理しました。生活圏での最終確認方法と、家族で使える割引もまとめています。</p><div class="coverage-status coverage-status-${status.level}"><span>現在の確認目安</span><strong>${status.label}</strong><p>${status.summary}</p></div><div class="coverage-hero-actions"><a class="button" href="https://network.mobile.rakuten.co.jp/area/" rel="noopener">公式エリアマップで地点を確認する <span>↗</span></a><a class="coverage-referral-link" data-primary-cta href="${referralUrl}" rel="sponsored nofollow noopener">他社から乗り換えで14,000ポイントを確認する →</a></div></section>
+<section class="content-section"><p class="section-label">COVERAGE UPDATE</p><h2>${escapeHtml(item.locality)}のエリア改善情報</h2>${stationBlock}<p class="caution">※ 基地局の新設は改善を示す情報ですが、特定地点の電波強度や通信速度を保証するものではありません。屋内・地下・地形・混雑状況・対応端末によって利用状況は変わります。</p></section>
+<section class="content-section tinted"><p class="section-label">HOW TO CHECK</p><h2>契約前に確認したい3つの場所</h2><div class="cards-three"><article><h3>自宅</h3><p>部屋の位置や建物の構造でも変わるため、住所付近を公式エリアマップで拡大して確認します。</p></article><article><h3>学校・勤務先</h3><p>毎日長く滞在する場所と、その周辺の通学・通勤経路も合わせて確認します。</p></article><article><h3>よく行く施設</h3><p>地下、駅、大型商業施設など、通信をよく使う場所は個別に確認しておくと安心です。</p></article></div></section>
+<section class="content-section"><p class="section-label">FAMILY BENEFITS</p><h2>家族の年代に合わせて使える割引</h2><div class="benefit-grid"><article><p class="benefit-age">家族みんな</p><h3>最強家族割</h3><strong>毎月110円引き</strong><p>離れて暮らす家族も対象。対象の家族グループに参加すると、1人あたり月額110円（税込）が割り引かれます。</p></article><article><p class="benefit-age">12歳まで</p><h3>最強こども割</h3><strong>3GBまで毎月440円引き</strong><p>データ利用量が3GB以下の場合は毎月440円（税込）、それ以外の場合は毎月110円（税込）が割り引かれます。</p></article><article><p class="benefit-age">13〜22歳</p><h3>最強青春割</h3><strong>毎月110円引き</strong><p>13歳から22歳までを対象に、毎月110円（税込）が割り引かれます。適用手続きが必要です。</p></article><article><p class="benefit-age">65歳以上</p><h3>最強シニアプログラム</h3><strong>毎月110ポイント還元</strong><p>条件を満たすと毎月110ポイントを還元。通話や店頭サポートなどをまとめた対象オプションの還元もあります。</p></article></div><p class="caution">※ 年齢、対象プラン、エントリーなどの条件があります。割引額・名称・条件は変更される場合があるため、申し込み時に楽天モバイル公式情報をご確認ください。</p><div class="coverage-campaign"><p>電波状況と家族向け割引を確認できた方へ</p><strong>他社から乗り換えで14,000ポイント</strong><a class="button" href="${referralUrl}" rel="sponsored nofollow noopener">紹介キャンペーンの条件を確認する <span>→</span></a></div></section>
+<section class="content-section tinted"><p class="section-label">LOCAL SUPPORT</p><h2>${escapeHtml(item.locality)}で相談したい場合</h2>${shopBlock}</section>
+<section class="final-cta" data-final-cta><p class="eyebrow">楽天従業員紹介キャンペーン</p><h2>他社から乗り換えで<br>14,000ポイント</h2><p>エリアと割引を確認できたら、紹介キャンペーンの条件を確認して申し込みへ進めます。</p><a class="button light" href="${referralUrl}" rel="sponsored nofollow noopener">14,000ポイント特典を確認する <span>→</span></a><p class="updated">情報確認日：${updated}</p></section><aside class="floating-cta" data-floating-cta aria-hidden="true"><p><span>他社から乗り換えで</span><strong>14,000ポイント</strong></p><a href="${referralUrl}" rel="sponsored nofollow noopener">特典を確認する <span>→</span></a></aside><script src="/js/shop-cta.js" defer></script></main><footer class="site-footer"><p><strong>楽天モバイル乗り換えガイド</strong></p><p>当サイトは個人が運営しており、楽天モバイル公式サイトではありません。</p><p>掲載情報は公式発表をもとに整理しています。実際の通信状況と最新条件は公式サイトでご確認ください。</p></footer></body></html>`;}
+
+let generated=0;
+for(const prefecture of prefectures){const items=[...municipalities.values()].filter((item)=>item.prefecture===prefecture.label).sort((a,b)=>a.locality.localeCompare(b.locality,"ja"));const coverageRoot=path.join(root,prefecture.slug,"coverage");await rm(coverageRoot,{recursive:true,force:true});await mkdir(coverageRoot,{recursive:true});const links=[];const used=new Set();for(const item of items){let slug=(await romanize(item.locality)).replace(/-(shi|ku|gun|cho|machi|mura)(?=-|$)/g,"");if(used.has(slug))slug=`${slug}-${used.size+1}`;used.add(slug);await mkdir(path.join(coverageRoot,slug),{recursive:true});await writeFile(path.join(coverageRoot,slug,"index.html"),page(item,prefecture,slug));links.push(`<li><a href="/${prefecture.slug}/coverage/${slug}/"><strong>${escapeHtml(item.locality)}</strong><span>${assessment(item).label}</span></a></li>`);generated+=1;}const index=`<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${prefecture.label}の楽天モバイル電波状況｜市区町村一覧</title><meta name="description" content="${prefecture.label}の楽天モバイル電波状況と基地局設置情報を市区町村別に確認できます。"><link rel="canonical" href="${siteUrl}/${prefecture.slug}/coverage/"><link rel="stylesheet" href="/css/style.css"></head><body><header class="site-header"><a class="site-name" href="/">楽天モバイル乗り換えガイド</a><a class="header-link" href="/${prefecture.slug}/">${prefecture.label}の店舗一覧</a></header><main><nav class="breadcrumb"><a href="/">トップ</a><span>›</span><a href="/${prefecture.slug}/">${prefecture.label}</a><span>›</span><span>電波状況</span></nav><section class="area-hero"><p class="eyebrow">MUNICIPALITY COVERAGE</p><h1>${prefecture.label}の楽天モバイル<br><span>電波状況を市区町村から探す</span></h1><p class="lead">楽天モバイル公式の基地局新設情報と、契約前に確認したいポイントを地域別に整理しています。</p></section><section class="content-section"><ul class="coverage-index-list">${links.join("")}</ul></section></main><footer class="site-footer"><p><strong>楽天モバイル乗り換えガイド</strong></p><p>実際の通信状況は公式エリアマップでご確認ください。</p></footer></body></html>`;await writeFile(path.join(coverageRoot,"index.html"),index);}
+
+async function collectUrls(directory){const urls=[];for(const entry of await readdir(directory,{withFileTypes:true})){if([".git","node_modules"].includes(entry.name))continue;const full=path.join(directory,entry.name);if(entry.isDirectory())urls.push(...await collectUrls(full));else if(entry.name==="index.html"&&full!==path.join(root,"index.html")){urls.push(`/${path.relative(root,path.dirname(full)).split(path.sep).join("/")}/`);}}return urls;}
+const urls=["/",...await collectUrls(root)].sort();
+await writeFile(path.join(root,"sitemap.xml"),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url)=>`  <url><loc>${siteUrl}${url}</loc><lastmod>${updated}</lastmod></url>`).join("\n")}\n</urlset>\n`);
+console.log(`Generated ${generated} municipality coverage pages plus 47 prefecture coverage indexes.`);
