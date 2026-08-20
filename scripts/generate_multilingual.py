@@ -3,6 +3,65 @@ import re
 
 BASE_DIR = "/Users/masayuki/Library/CloudStorage/GoogleDrive-maffun@gmail.com/マイドライブ/AI自動整理メモ/10_Projects/RMリファラル/cloudflare-site"
 
+PREFECTURES_MAP = {
+    "北海道": {"en": "Hokkaido", "zh": "北海道", "ko": "홋카이도", "vi": "Hokkaido", "pt": "Hokkaido"},
+    "青森県": {"en": "Aomori", "zh": "青森县", "ko": "아오모리현", "vi": "Tỉnh Aomori", "pt": "Aomori"},
+    "岩手県": {"en": "Iwate", "zh": "岩手县", "ko": "이와테현", "vi": "Tỉnh Iwate", "pt": "Iwate"},
+    "宮城県": {"en": "Miyagi", "zh": "宫城县", "ko": "미야기현", "vi": "Tỉnh Miyagi", "pt": "Miyagi"},
+    "秋田県": {"en": "Akita", "zh": "秋田县", "ko": "아키타현", "vi": "Tỉnh Akita", "pt": "Akita"},
+    "山形県": {"en": "Yamagata", "zh": "山形县", "ko": "야마가타현", "vi": "Tỉnh Yamagata", "pt": "Yamagata"},
+    "福島県": {"en": "Fukushima", "zh": "福岛县", "ko": "후쿠시마현", "vi": "Tỉnh Fukushima", "pt": "Fukushima"},
+    "茨城県": {"en": "Ibaraki", "zh": "茨城县", "ko": "이바라키현", "vi": "Tỉnh Ibaraki", "pt": "Ibaraki"},
+    "栃木県": {"en": "Tochigi", "zh": "栃木县", "ko": "토치기현", "vi": "Tỉnh Tochigi", "pt": "Tochigi"},
+    "群馬県": {"en": "Gunma", "zh": "群马县", "ko": "군마현", "vi": "Tỉnh Gunma", "pt": "Gunma"},
+    "埼玉県": {"en": "Saitama", "zh": "埼玉县", "ko": "사이타마현", "vi": "Tỉnh Saitama", "pt": "Saitama"},
+    "千葉県": {"en": "Chiba", "zh": "千叶县", "ko": "치바현", "vi": "Tỉnh Chiba", "pt": "Chiba"},
+    "東京都": {"en": "Tokyo", "zh": "东京都", "ko": "도쿄도", "vi": "TP. Tokyo", "pt": "Tóquio"},
+    "神奈川県": {"en": "Kanagawa", "zh": "神奈川县", "ko": "가나가와현", "vi": "Tỉnh Kanagawa", "pt": "Kanagawa"},
+    "新潟県": {"en": "Niigata", "zh": "新潟县", "ko": "니가타현", "vi": "Tỉnh Niigata", "pt": "Niigata"},
+    "富山県": {"en": "Toyama", "zh": "富山县", "ko": "도야마현", "vi": "Tỉnh Toyama", "pt": "Toyama"},
+    "石川県": {"en": "Ishikawa", "zh": "石川县", "ko": "이시카와현", "vi": "Tỉnh Ishikawa", "pt": "Ishikawa"},
+    "福井県": {"en": "Fukui", "zh": "福井县", "ko": "후쿠이현", "vi": "Tỉnh Fukui", "pt": "Fukui"},
+    "山梨県": {"en": "Yamanashi", "zh": "山梨县", "ko": "야마나시현", "vi": "Tỉnh Yamanashi", "pt": "Yamanashi"},
+    "長野県": {"en": "Nagano", "zh": "长野县", "ko": "나가노현", "vi": "Tỉnh Nagano", "pt": "Nagano"},
+    "岐阜県": {"en": "Gifu", "zh": "岐阜县", "ko": "기후현", "vi": "Tỉnh Gifu", "pt": "Gifu"},
+    "静岡県": {"en": "Shizuoka", "zh": "静冈县", "ko": "시즈오카현", "vi": "Tỉnh Shizuoka", "pt": "Shizuoka"},
+    "愛知県": {"en": "Aichi", "zh": "爱知县", "ko": "아이치현", "vi": "Tỉnh Aichi", "pt": "Aichi"},
+    "三重県": {"en": "Mie", "zh": "三重县", "ko": "미에현", "vi": "Tỉnh Mie", "pt": "Mie"},
+    "滋賀県": {"en": "Shiga", "zh": "滋贺县", "ko": "시가현", "vi": "Tỉnh Shiga", "pt": "Shiga"},
+    "京都府": {"en": "Kyoto", "zh": "京都府", "ko": "교토부", "vi": "TP. Kyoto", "pt": "Quioto"},
+    "大阪府": {"en": "Osaka", "zh": "大阪府", "ko": "오사카부", "vi": "TP. Osaka", "pt": "Osaka"},
+    "兵庫県": {"en": "Hyogo", "zh": "兵库县", "ko": "효고현", "vi": "Tỉnh Hyogo", "pt": "Hyogo"},
+    "奈良県": {"en": "Nara", "zh": "奈良县", "ko": "나라현", "vi": "Tỉnh Nara", "pt": "Nara"},
+    "和歌山県": {"en": "Wakayama", "zh": "和歌山县", "ko": "와카야마현", "vi": "Tỉnh Wakayama", "pt": "Wakayama"},
+    "鳥取県": {"en": "Tottori", "zh": "鸟取县", "ko": "돗토리현", "vi": "Tỉnh Tottori", "pt": "Tottori"},
+    "島根県": {"en": "Shimane", "zh": "岛根县", "ko": "시마네현", "vi": "Tỉnh Shimane", "pt": "Shimane"},
+    "岡山県": {"en": "Okayama", "zh": "冈山县", "ko": "오카야마현", "vi": "Tỉnh Okayama", "pt": "Okayama"},
+    "広島県": {"en": "Hiroshima", "zh": "广岛县", "ko": "히로시마현", "vi": "Tỉnh Hiroshima", "pt": "Hiroshima"},
+    "山口県": {"en": "Yamaguchi", "zh": "山口县", "ko": "야마구치县", "vi": "Tỉnh Yamaguchi", "pt": "Yamaguchi"},
+    "徳島県": {"en": "Tokushima", "zh": "德岛县", "ko": "도쿠시마현", "vi": "Tỉnh Tokushima", "pt": "Tokushima"},
+    "香川県": {"en": "Kagawa", "zh": "香川县", "ko": "카가와현", "vi": "Tỉnh Kagawa", "pt": "Kagawa"},
+    "愛媛県": {"en": "Ehime", "zh": "爱媛县", "ko": "에히메현", "vi": "Tỉnh Ehime", "pt": "Ehime"},
+    "高知県": {"en": "Kochi", "zh": "高知县", "ko": "고치현", "vi": "Tỉnh Kochi", "pt": "Kochi"},
+    "福岡県": {"en": "Fukuoka", "zh": "福冈县", "ko": "후쿠오카현", "vi": "Tỉnh Fukuoka", "pt": "Fukuoka"},
+    "佐賀県": {"en": "Saga", "zh": "佐贺县", "ko": "사가현", "vi": "Tỉnh Saga", "pt": "Saga"},
+    "長崎県": {"en": "Nagasaki", "zh": "长崎县", "ko": "나가사키현", "vi": "Tỉnh Nagasaki", "pt": "Nagasaki"},
+    "熊本県": {"en": "Kumamoto", "zh": "熊本县", "ko": "쿠마모토현", "vi": "Tỉnh Kumamoto", "pt": "Kumamoto"},
+    "大分県": {"en": "Oita", "zh": "大分县", "ko": "오이타현", "vi": "Tỉnh Oita", "pt": "Oita"},
+    "宮崎県": {"en": "Miyazaki", "zh": "宫崎县", "ko": "미야자키현", "vi": "Tỉnh Miyazaki", "pt": "Miyazaki"},
+    "鹿児島県": {"en": "Kagoshima", "zh": "鹿儿岛县", "ko": "카고시마현", "vi": "Tỉnh Kagoshima", "pt": "Kagoshima"},
+    "沖縄県": {"en": "Okinawa", "zh": "冲绳县", "ko": "오키나와현", "vi": "Tỉnh Okinawa", "pt": "Okinawa"},
+}
+
+CARRIERS_MAP = {
+    "ドコモ": {"en": "docomo", "zh": "docomo", "ko": "docomo", "vi": "docomo", "pt": "docomo"},
+    "ソフトバンク": {"en": "SoftBank", "zh": "SoftBank", "ko": "SoftBank", "vi": "SoftBank", "pt": "SoftBank"},
+    "イオンモバイル": {"en": "Aeon Mobile", "zh": "永旺移动", "ko": "이온 모바일", "vi": "Aeon Mobile", "pt": "Aeon Mobile"},
+    "au": {"en": "au", "zh": "au", "ko": "au", "vi": "au", "pt": "au"},
+    "UQ mobile": {"en": "UQ mobile", "zh": "UQ mobile", "ko": "UQ mobile", "vi": "UQ mobile", "pt": "UQ mobile"},
+    "Y!mobile": {"en": "Y!mobile", "zh": "Y!mobile", "ko": "Y!mobile", "vi": "Y!mobile", "pt": "Y!mobile"},
+}
+
 LANGUAGES = {
     "en": {
         "lang_code": "en",
@@ -94,8 +153,10 @@ LANGUAGES = {
         "updated": "Information checked date: 2026-08-19",
         "footer_disclaimer_1": "This site is independently operated and is not an official site of any carrier or store.",
         "footer_disclaimer_2": "Contains referral links. Please verify latest conditions on official sites at time of application.",
-        
-        # Tokyo Specific
+        "store_unit": "stores",
+        "filter_all": "All",
+        "search_label": "Search by store or district",
+        "search_placeholder": "e.g., Shinjuku, Shibuya, Store Name",
         "tokyo_title": "How to Switch to Rakuten Mobile from Mobile Shops in Tokyo | Store Guide",
         "tokyo_desc": "Tokyo au, docomo, SoftBank, UQ mobile, Y!mobile, and Aeon Mobile stores listed by region. Check MNP preparation for each store.",
         "tokyo_breadcrumb": "Tokyo",
@@ -106,9 +167,7 @@ LANGUAGES = {
         "tokyo_coverage_link": "Check Rakuten Mobile signal status by municipality in Tokyo ↗",
         "tokyo_finder_label": "SHOP FINDER",
         "tokyo_finder_h2": "Filter Stores",
-        "tokyo_search_placeholder": "e.g. Shinjuku, Shibuya, Store Name",
-        "tokyo_filter_all": "All",
-        "tokyo_stores_suffix": "Stores"
+        "tokyo_stores_suffix": "stores displayed"
     },
     "zh": {
         "lang_code": "zh",
@@ -200,8 +259,10 @@ LANGUAGES = {
         "updated": "信息确认日期：2026-08-19",
         "footer_disclaimer_1": "本网站由个人运营，非各通信公司及展示门店的官方网站。",
         "footer_disclaimer_2": "本网站包含推荐链接。优惠条件与门店信息请以办理时的官网为准。",
-        
-        # Tokyo Specific
+        "store_unit": "家门店",
+        "filter_all": "全部",
+        "search_label": "按门店或市区町村搜索",
+        "search_placeholder": "例：新宿、涩谷、门店名称",
         "tokyo_title": "在东京手机门店办理转网至乐天移动的方法 | 门店指南",
         "tokyo_desc": "按地区汇总东京都内的au、docomo、SoftBank、UQ mobile、Y!mobile、永旺移动门店。按门店确认转网准备与MNP手续。",
         "tokyo_breadcrumb": "东京",
@@ -212,9 +273,7 @@ LANGUAGES = {
         "tokyo_coverage_link": "按市区町村确认东京都的乐天移动信号覆盖情况 ↗",
         "tokyo_finder_label": "SHOP FINDER",
         "tokyo_finder_h2": "筛选门店",
-        "tokyo_search_placeholder": "例：新宿、涩谷、门店名称",
-        "tokyo_filter_all": "全部",
-        "tokyo_stores_suffix": "家门店"
+        "tokyo_stores_suffix": "家门店显示"
     },
     "ko": {
         "lang_code": "ko",
@@ -306,8 +365,10 @@ LANGUAGES = {
         "updated": "정보 확인일: 2026-08-19",
         "footer_disclaimer_1": "본 사이트는 개인이 운영하며, 각 통신사 및 매장의 공식 사이트가 아닙니다.",
         "footer_disclaimer_2": "본 사이트에는 추천 링크가 포함되어 있습니다. 조건 및 매장 정보는 신청 시점의 공식 사이트에서 확인해 주세요.",
-        
-        # Tokyo Specific
+        "store_unit": "개 매장",
+        "filter_all": "전체",
+        "search_label": "매장명·지역으로 검색",
+        "search_placeholder": "예: 신주쿠, 시부야, 매장명",
         "tokyo_title": "도쿄 대리점에서 라쿠텐 모바일로 번호이동하는 방법 | 매장별 가이드",
         "tokyo_desc": "도쿄 내 au, docomo, SoftBank, UQ mobile, Y!mobile, 이온 모바일 매장을 지역별로 안내합니다. 매장별 사전 준비 및 MNP 절차를 확인하세요.",
         "tokyo_breadcrumb": "도쿄",
@@ -318,9 +379,7 @@ LANGUAGES = {
         "tokyo_coverage_link": "도쿄 각 지역(시·구·정·촌)별 라쿠텐 모바일 수신 상태 확인 ↗",
         "tokyo_finder_label": "SHOP FINDER",
         "tokyo_finder_h2": "매장 검색 및 필터",
-        "tokyo_search_placeholder": "예: 신주쿠, 시부야, 매장명",
-        "tokyo_filter_all": "전체",
-        "tokyo_stores_suffix": "개 매장"
+        "tokyo_stores_suffix": "개 매장 표시"
     },
     "vi": {
         "lang_code": "vi",
@@ -412,8 +471,10 @@ LANGUAGES = {
         "updated": "Ngày cập nhật thông tin: 19/08/2026",
         "footer_disclaimer_1": "Trang web này do cá nhân vận hành, không phải trang chính thức của nhà mạng hay cửa hàng.",
         "footer_disclaimer_2": "Trang web có chứa link giới thiệu. Vui lòng kiểm tra lại điều kiện chính xác tại thời điểm đăng ký trên trang chính thức.",
-        
-        # Tokyo Specific
+        "store_unit": "cửa hàng",
+        "filter_all": "Tất cả",
+        "search_label": "Tìm theo tên cửa hàng hoặc khu vực",
+        "search_placeholder": "Ví dụ: Shinjuku, Shibuya, tên cửa hàng",
         "tokyo_title": "Cách chuyển sang Rakuten Mobile từ các cửa hàng tại Tokyo | Hướng dẫn",
         "tokyo_desc": "Danh sách cửa hàng au, docomo, SoftBank, UQ mobile, Y!mobile, Aeon Mobile tại Tokyo. Xem hướng dẫn chuẩn bị MNP cho từng cửa hàng.",
         "tokyo_breadcrumb": "Tokyo",
@@ -424,9 +485,7 @@ LANGUAGES = {
         "tokyo_coverage_link": "Kiểm tra sóng Rakuten Mobile tại các quận/huyện Tokyo ↗",
         "tokyo_finder_label": "SHOP FINDER",
         "tokyo_finder_h2": "Tìm kiếm cửa hàng",
-        "tokyo_search_placeholder": "Ví dụ: Shinjuku, Shibuya, tên cửa hàng",
-        "tokyo_filter_all": "Tất cả",
-        "tokyo_stores_suffix": "cửa hàng"
+        "tokyo_stores_suffix": "cửa hàng hiển thị"
     },
     "pt": {
         "lang_code": "pt",
@@ -518,8 +577,10 @@ LANGUAGES = {
         "updated": "Data de verificação: 19/08/2026",
         "footer_disclaimer_1": "Este site é gerido de forma independente e não é um site oficial das operadoras ou lojas.",
         "footer_disclaimer_2": "Contém links de indicação. Verifique os termos atualizados nos sites oficiais ao solicitar.",
-        
-        # Tokyo Specific
+        "store_unit": "lojas",
+        "filter_all": "Todas",
+        "search_label": "Pesquisar por loja ou distrito",
+        "search_placeholder": "Ex: Shinjuku, Shibuya, nome da loja",
         "tokyo_title": "Como Mudar para a Rakuten Mobile em Lojas de Tóquio | Guia de Lojas",
         "tokyo_desc": "Lista de lojas au, docomo, SoftBank, UQ mobile, Y!mobile e Aeon Mobile em Tóquio. Confira os passos da migração MNP.",
         "tokyo_breadcrumb": "Tóquio",
@@ -530,15 +591,12 @@ LANGUAGES = {
         "tokyo_coverage_link": "Verifique o sinal da Rakuten Mobile nos bairros e cidades de Tóquio ↗",
         "tokyo_finder_label": "SHOP FINDER",
         "tokyo_finder_h2": "Filtrar Lojas",
-        "tokyo_search_placeholder": "Ex: Shinjuku, Shibuya, nome da loja",
-        "tokyo_filter_all": "Todas",
-        "tokyo_stores_suffix": "lojas"
+        "tokyo_stores_suffix": "lojas exibidas"
     }
 }
 
 def generate_lang_select_html(current_page_type, target_lang):
     path_suffix = "" if current_page_type == "home" else "tokyo/"
-    
     options = [
         f'<option value="/{path_suffix}"{" selected" if target_lang == "ja" else ""}>🇯🇵 日本語</option>',
         f'<option value="/en/{path_suffix}"{" selected" if target_lang == "en" else ""}>🇺🇸 English</option>',
@@ -549,14 +607,50 @@ def generate_lang_select_html(current_page_type, target_lang):
     ]
     return '\n        '.join(options)
 
+def translate_prefectures_in_html(content, lang_code, t):
+    for jp_name, trans_dict in PREFECTURES_MAP.items():
+        trans_name = trans_dict.get(lang_code, jp_name)
+        content = content.replace(f'<b>{jp_name}</b>', f'<b>{trans_name}</b>')
+        content = content.replace(f'>{jp_name}<', f'>{trans_name}<')
+
+    unit = t["store_unit"]
+    content = re.sub(r'<small>(\d+)店舗</small>', fr'<small>\1 {unit}</small>', content)
+    content = re.sub(r'<b data-locality-count>(\d+)</b><small>店舗</small>', fr'<b data-locality-count>\1</b><small> {unit}</small>', content)
+
+    return content
+
+def translate_shop_names_and_districts(content, lang_code, t):
+    content = content.replace('data-carrier-filter="all" aria-pressed="true">すべて <small>', f'data-carrier-filter="all" aria-pressed="true">{t["filter_all"]} <small>')
+    content = content.replace('>すべて <small>', f'>{t["filter_all"]} <small>')
+    content = content.replace('>ドコモ <small>', f'>{CARRIERS_MAP["ドコモ"][lang_code]} <small>')
+    content = content.replace('>ソフトバンク <small>', f'>{CARRIERS_MAP["ソフトバンク"][lang_code]} <small>')
+    content = content.replace('>イオンモバイル <small>', f'>{CARRIERS_MAP["イオンモバイル"][lang_code]} <small>')
+
+    content = content.replace('<em class="carrier-badge carrier-docomo">ドコモ</em>', f'<em class="carrier-badge carrier-docomo">{CARRIERS_MAP["ドコモ"][lang_code]}</em>')
+    content = content.replace('<em class="carrier-badge carrier-softbank">ソフトバンク</em>', f'<em class="carrier-badge carrier-softbank">{CARRIERS_MAP["ソフトバンク"][lang_code]}</em>')
+    content = content.replace('<em class="carrier-badge carrier-aeonmobile">イオンモバイル</em>', f'<em class="carrier-badge carrier-aeonmobile">{CARRIERS_MAP["イオンモバイル"][lang_code]}</em>')
+
+    store_shop_word = {
+        "en": "Shop",
+        "zh": "门店",
+        "ko": "매장",
+        "vi": "Shop",
+        "pt": "Loja"
+    }.get(lang_code, "Shop")
+
+    content = content.replace("ａｕショップ", f"au {store_shop_word}")
+    content = content.replace("ドコモショップ", f"docomo {store_shop_word}")
+    content = content.replace("ソフトバンク", "SoftBank")
+    content = content.replace("UQスポット", "UQ Spot")
+    content = content.replace("イオンモバイル", "Aeon Mobile")
+
+    return content
+
 def process_home_page(lang_code, t):
     with open(os.path.join(BASE_DIR, "index.html"), "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Replace html lang tag
     content = re.sub(r'<html lang="ja">', f'<html lang="{t["lang_code"]}">', content)
-    
-    # Replace title and description
     content = re.sub(r'<title>.*?</title>', f'<title>{t["title_home"]}</title>', content)
     content = re.sub(r'<meta name="description" content=".*?">', f'<meta name="description" content="{t["desc_home"]}">', content)
     content = re.sub(r'<link rel="canonical" href=".*?">', f'<link rel="canonical" href="https://rm-referral.maffun.workers.dev/{lang_code}/">', content)
@@ -565,17 +659,14 @@ def process_home_page(lang_code, t):
     content = re.sub(r'<meta property="og:description" content=".*?">', f'<meta property="og:description" content="{t["desc_home"]}">', content)
     content = re.sub(r'<meta property="og:url" content=".*?">', f'<meta property="og:url" content="https://rm-referral.maffun.workers.dev/{lang_code}/">', content)
     
-    # Site Name
     content = content.replace('<a class="site-name" href="/">楽天モバイル乗り換えガイド</a>', f'<a class="site-name" href="/{lang_code}/">{t["site_name"]}</a>')
     content = content.replace('<strong>楽天モバイル乗り換えガイド</strong>', f'<strong>{t["site_name"]}</strong>')
 
-    # Nav
     content = content.replace('<a href="#area">都道府県から探す</a>', f'<a href="#area">{t["nav_area"]}</a>')
     content = content.replace('<a href="#switching-guide">乗り換え手順</a>', f'<a href="#switching-guide">{t["nav_guide"]}</a>')
     content = content.replace('<a href="/guide/replacement-program/">買い替え超トク</a>', f'<a href="/guide/replacement-program/">{t["nav_program"]}</a>')
     content = content.replace('<a href="#campaign">紹介キャンペーン</a>', f'<a href="#campaign">{t["nav_campaign"]}</a>')
 
-    # Hero
     content = content.replace('<p class="eyebrow">RAKUTEN MOBILE SWITCHING GUIDE</p>', f'<p class="eyebrow">{t["hero_eyebrow"]}</p>')
     content = content.replace('<h1>今の携帯会社から<br><span>楽天モバイルへ。</span></h1>', f'<h1>{t["hero_h1"]}</h1>')
     content = content.replace('<p class="home-hero-message">迷わず乗り換えるための、地域・店舗別ガイド。</p>', f'<p class="home-hero-message">{t["hero_msg"]}</p>')
@@ -583,20 +674,17 @@ def process_home_page(lang_code, t):
     content = content.replace('都道府県から探す <span aria-hidden="true">↓</span>', f'{t["btn_find_pref"]} <span aria-hidden="true">↓</span>')
     content = content.replace('紹介キャンペーンを確認 <span aria-hidden="true">→</span>', f'{t["btn_campaign"]} <span aria-hidden="true">→</span>')
     
-    # Start Card
     content = content.replace('<p class="pill">はじめに確認</p>', f'<p class="pill">{t["start_pill"]}</p>')
     content = content.replace('<h2>乗り換え前の3つのポイント</h2>', f'<h2>{t["start_h2"]}</h2>')
     content = content.replace('<span>今の契約内容と名義を確認</span>', f'<span>{t["start_1"]}</span>')
     content = content.replace('<span>端末・メール・残債を確認</span>', f'<span>{t["start_2"]}</span>')
     content = content.replace('<span>申し込み前に紹介条件を確認</span>', f'<span>{t["start_3"]}</span>')
 
-    # Program promo
     content = content.replace('<p class="section-label">DEVICE REPLACEMENT PROGRAM</p>', f'<p class="section-label">{t["prog_label"]}</p>')
     content = content.replace('<h2>スマホ代、最大24回分の<br>支払いが不要になる仕組み。</h2>', f'<h2>{t["prog_h2"]}</h2>')
     content = content.replace('<p>48回払い、25カ月目、製品の返却。少し難しく見える「楽天モバイル買い替え超トクプログラム」を、注意点も含めてやさしく整理しました。</p>', f'<p>{t["prog_p"]}</p>')
     content = content.replace('やさしい解説を読む <span aria-hidden="true">→</span>', f'{t["prog_btn"]}')
 
-    # Area Section
     content = content.replace('<p class="section-label">AREA &amp; SHOP GUIDE</p><h2>都道府県から探す</h2>', f'<p class="section-label">{t["area_label"]}</p><h2>{t["area_h2"]}</h2>')
     content = content.replace('<p>都道府県を選ぶか、地方別の一覧からお近くの店舗ガイドへ進めます。</p>', f'<p>{t["area_p"]}</p>')
     content = content.replace('<label for="prefecture-select">都道府県を選択</label>', f'<label for="prefecture-select">{t["pref_label"]}</label>')
@@ -604,7 +692,6 @@ def process_home_page(lang_code, t):
     content = content.replace('<p>選択すると、その都道府県の店舗一覧へ移動します。</p>', f'<p>{t["pref_note"]}</p>')
     content = content.replace('aria-label="地方を選択"', f'aria-label="{t["region_shortcuts"]}"')
     
-    # Regions
     content = content.replace('<b>北海道・東北</b>', f'<b>{t["region_hokkaido_tohoku"]}</b>')
     content = content.replace('<b>関東</b>', f'<b>{t["region_kanto"]}</b>')
     content = content.replace('<b>北陸・甲信越</b>', f'<b>{t["region_hokuriku"]}</b>')
@@ -614,10 +701,8 @@ def process_home_page(lang_code, t):
     content = content.replace('<b>四国</b>', f'<b>{t["region_shikoku"]}</b>')
     content = content.replace('<b>九州・沖縄</b>', f'<b>{t["region_kyushu"]}</b>')
 
-    # Pref links prefix path update
     content = content.replace('href="/tokyo/"', f'href="/{lang_code}/tokyo/"')
 
-    # Essentials
     content = content.replace('<p class="section-label">BEFORE SWITCHING</p><h2>乗り換え前に知っておきたいこと</h2>', f'<p class="section-label">{t["essential_label"]}</p><h2>{t["essential_h2"]}</h2>')
     content = content.replace('<p>申し込みを始める前に、まずこの3点を確認しておくと安心です。</p>', f'<p>{t["essential_p"]}</p>')
     content = content.replace('<h3>MNPワンストップ</h3>', f'<h3>{t["essential_1_h3"]}</h3>')
@@ -628,7 +713,6 @@ def process_home_page(lang_code, t):
     content = content.replace('<h3>今の契約への影響</h3>', f'<h3>{t["essential_3_h3"]}</h3>')
     content = content.replace('<p>端末の分割残債、キャリアメール、家族割、固定回線とのセット割などへの影響を確認します。</p>', f'<p>{t["essential_3_p"]}</p>')
 
-    # Campaign
     content = content.replace('<p class="section-label">REFERRAL CAMPAIGN</p>', f'<p class="section-label">{t["camp_label"]}</p>')
     content = content.replace('<h2>紹介キャンペーンを利用する流れ</h2>', f'<h2>{t["camp_h2"]}</h2>')
     content = content.replace('<p>特典内容は変わることがあるため、金額だけでなく申し込み順と最新条件を確認することが大切です。</p>', f'<p>{t["camp_p"]}</p>')
@@ -643,7 +727,6 @@ def process_home_page(lang_code, t):
     content = content.replace('最新のキャンペーン条件を確認 <span aria-hidden="true">→</span>', f'{t["camp_btn"]}')
     content = content.replace('<p>楽天モバイルのキャンペーンページへ移動します</p>', f'<p>{t["camp_sub"]}</p>')
 
-    # Trust
     content = content.replace('<p class="section-label">ABOUT THIS SITE</p>', f'<p class="section-label">{t["trust_label"]}</p>')
     content = content.replace('<h2>迷いやすいポイントを、順番に整理するサイトです。</h2>', f'<h2>{t["trust_h2"]}</h2>')
     content = content.replace('<p>乗り換えでは、現在の携帯会社、申込方法、契約状況によって必要な確認が変わります。このサイトでは、地域と店舗を入口にして、申し込み前に確認したい内容をできるだけ分かりやすく整理しています。</p>', f'<p>{t["trust_p"]}</p>')
@@ -652,7 +735,6 @@ def process_home_page(lang_code, t):
     content = content.replace('<li><span>✓</span>キャンペーン条件の最終確認を案内</li>', f'<li><span>✓</span>{t["trust_3"]}</li>')
     content = content.replace('<li><span>✓</span>各通信会社・掲載店舗とは無関係の個人運営</li>', f'<li><span>✓</span>{t["trust_4"]}</li>')
 
-    # FAQ
     content = content.replace('<p class="section-label">FAQ</p><h2>よくある質問</h2>', f'<p class="section-label">{t["faq_label"]}</p><h2>{t["faq_h2"]}</h2>')
     content = content.replace('店舗へ行かずに乗り換えられる？', t["faq_1_q"])
     content = content.replace('オンラインで申し込みから開通まで進められます。対面で相談したい場合は楽天モバイルショップでの申し込みも選べます。', t["faq_1_a"])
@@ -665,18 +747,17 @@ def process_home_page(lang_code, t):
     content = content.replace('紹介リンクはいつ開く？', t["faq_5_q"])
     content = content.replace('楽天モバイルを申し込む前に紹介リンクを開き、楽天IDでログインして最新の条件を確認してください。', t["faq_5_a"])
 
-    # Final CTA
     content = content.replace('<p class="eyebrow">READY WHEN YOU ARE</p>', f'<p class="eyebrow">{t["final_eyebrow"]}</p>')
     content = content.replace('<h2>まずは、地域と店舗から探してみよう。</h2>', f'<h2>{t["final_h2"]}</h2>')
     content = content.replace('<p>利用中の店舗を選び、乗り換え前に準備するものと手順を確認できます。</p>', f'<p>{t["final_p"]}</p>')
     content = content.replace('地域を選ぶ <span aria-hidden="true">↑</span>', f'{t["final_btn"]}')
     content = content.replace('<p class="updated">情報確認日：2026-08-19</p>', f'<p class="updated">{t["updated"]}</p>')
 
-    # Footer
     content = content.replace('<p>当サイトは個人が運営しており、各通信会社および掲載店舗の公式サイトではありません。</p>', f'<p>{t["footer_disclaimer_1"]}</p>')
     content = content.replace('<p>当サイトには紹介リンクが含まれます。条件や店舗情報は、申し込み時点の各公式サイトでご確認ください。</p>', f'<p>{t["footer_disclaimer_2"]}</p>')
 
-    # Language Selector dropdown replacement
+    content = translate_prefectures_in_html(content, lang_code, t)
+
     old_lang_selector = '''    <div class="lang-selector-wrap">
       <select class="lang-selector" onchange="if(this.value) location.href=this.value;" aria-label="Language / 言語">
         <option value="/" selected>🇯🇵 日本語</option>
@@ -696,7 +777,6 @@ def process_home_page(lang_code, t):
     
     content = content.replace(old_lang_selector, new_lang_selector)
 
-    # Save file
     out_path = os.path.join(BASE_DIR, lang_code, "index.html")
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(content)
@@ -706,10 +786,7 @@ def process_tokyo_page(lang_code, t):
     with open(os.path.join(BASE_DIR, "tokyo", "index.html"), "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Replace html lang tag
     content = re.sub(r'<html lang="ja">', f'<html lang="{t["lang_code"]}">', content)
-    
-    # Replace title and description
     content = re.sub(r'<title>.*?</title>', f'<title>{t["tokyo_title"]}</title>', content)
     content = re.sub(r'<meta name="description" content=".*?">', f'<meta name="description" content="{t["tokyo_desc"]}">', content)
     content = re.sub(r'<link rel="canonical" href=".*?">', f'<link rel="canonical" href="https://rm-referral.maffun.workers.dev/{lang_code}/tokyo/">', content)
@@ -718,26 +795,24 @@ def process_tokyo_page(lang_code, t):
     content = re.sub(r'<meta property="og:description" content=".*?">', f'<meta property="og:description" content="{t["tokyo_desc"]}">', content)
     content = re.sub(r'<meta property="og:url" content=".*?">', f'<meta property="og:url" content="https://rm-referral.maffun.workers.dev/{lang_code}/tokyo/">', content)
 
-    # Site Name & Header Link
     content = content.replace('<a class="site-name" href="/">楽天モバイル乗り換えガイド</a>', f'<a class="site-name" href="/{lang_code}/">{t["site_name"]}</a>')
     content = content.replace('<a class="header-link" href="/tokyo/">東京の店舗一覧</a>', f'<a class="header-link" href="/{lang_code}/tokyo/">{t["tokyo_breadcrumb"]}</a>')
     content = content.replace('<nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">トップ</a><span>›</span><span>東京</span></nav>', f'<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/{lang_code}/">Home</a><span>›</span><span>{t["tokyo_breadcrumb"]}</span></nav>')
 
-    # Hero
     content = content.replace('<p class="eyebrow">TOKYO SHOP GUIDE</p>', f'<p class="eyebrow">{t["tokyo_hero_eyebrow"]}</p>')
     content = content.replace('<h1>東京都のキャリアショップから<br><span>楽天モバイルへ乗り換える前に</span></h1>', f'<h1>{t["tokyo_hero_h1"]}</h1>')
     content = content.replace('<p class="lead">au・ドコモ・ソフトバンク・UQ mobile・Y!mobile・イオンモバイルを利用中の方向けに、店舗へ行く前に確認したい乗り換え準備をまとめました。現在利用している店舗から選んでください。</p>', f'<p class="lead">{t["tokyo_hero_lead"]}</p>')
     content = content.replace('<span>掲載店舗</span>', f'<span>{t["tokyo_count"]}</span>')
     content = content.replace('東京都の楽天モバイル電波状況を市区町村から確認する <span aria-hidden="true">↗</span>', f'{t["tokyo_coverage_link"]}')
 
-    # Shop Finder
     content = content.replace('<p class="section-label">SHOP FINDER</p><h2>店舗を絞り込む</h2>', f'<p class="section-label">{t["tokyo_finder_label"]}</p><h2>{t["tokyo_finder_h2"]}</h2>')
-    content = content.replace('placeholder="例：新宿、渋谷、店舗名"', f'placeholder="{t["tokyo_search_placeholder"]}"')
-    content = content.replace('店舗名・市区町村から検索', f'Search by store or district')
-    content = content.replace('すべて <small>', f'{t["tokyo_filter_all"]} <small>')
+    content = content.replace('placeholder="例：新宿、渋谷、店舗名"', f'placeholder="{t["search_placeholder"]}"')
+    content = content.replace('店舗名・市区町村から検索', f'{t["search_label"]}')
     content = content.replace('店舗を表示</p>', f'{t["tokyo_stores_suffix"]}</p>')
 
-    # Language Selector dropdown replacement
+    content = translate_prefectures_in_html(content, lang_code, t)
+    content = translate_shop_names_and_districts(content, lang_code, t)
+
     old_lang_selector = '''      <div class="lang-selector-wrap">
         <select class="lang-selector" onchange="if(this.value) location.href=this.value;" aria-label="Language / 言語">
           <option value="/tokyo/" selected>🇯🇵 日本語</option>
@@ -757,7 +832,6 @@ def process_tokyo_page(lang_code, t):
     
     content = content.replace(old_lang_selector, new_lang_selector)
 
-    # Save file
     out_path = os.path.join(BASE_DIR, lang_code, "tokyo", "index.html")
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(content)
