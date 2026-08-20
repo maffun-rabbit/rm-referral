@@ -3,6 +3,7 @@ import re
 
 BASE_DIR = "/Users/masayuki/Library/CloudStorage/GoogleDrive-maffun@gmail.com/マイドライブ/AI自動整理メモ/10_Projects/RMリファラル/cloudflare-site"
 
+# 47 Prefectures Translation Map
 PREFECTURES_MAP = {
     "北海道": {"en": "Hokkaido", "zh": "北海道", "ko": "홋카이도", "vi": "Hokkaido", "pt": "Hokkaido"},
     "青森県": {"en": "Aomori", "zh": "青森县", "ko": "아오모리현", "vi": "Tỉnh Aomori", "pt": "Aomori"},
@@ -53,6 +54,63 @@ PREFECTURES_MAP = {
     "沖縄県": {"en": "Okinawa", "zh": "冲绳县", "ko": "오키나와현", "vi": "Tỉnh Okinawa", "pt": "Okinawa"},
 }
 
+# 53 Tokyo Districts Map
+TOKYO_DISTRICTS_MAP = {
+    "あきる野市": {"en": "Akiruno", "zh": "秋留野市", "ko": "아키루노시", "vi": "Akiruno", "pt": "Akiruno"},
+    "三鷹市": {"en": "Mitaka", "zh": "三鹰市", "ko": "미타카시", "vi": "Mitaka", "pt": "Mitaka"},
+    "世田谷区": {"en": "Setagaya", "zh": "世田谷区", "ko": "세타가야구", "vi": "Setagaya", "pt": "Setagaya"},
+    "中央区": {"en": "Chuo", "zh": "中央区", "ko": "주오구", "vi": "Chuo", "pt": "Chuo"},
+    "中野区": {"en": "Nakano", "zh": "中野区", "ko": "나카노구", "vi": "Nakano", "pt": "Nakano"},
+    "八丈島八丈町": {"en": "Hachijo", "zh": "八丈町", "ko": "하치조마치", "vi": "Hachijo", "pt": "Hachijo"},
+    "八王子市": {"en": "Hachioji", "zh": "八王子市", "ko": "하치오지시", "vi": "Hachioji", "pt": "Hachioji"},
+    "北区": {"en": "Kita", "zh": "北区", "ko": "기타구", "vi": "Kita", "pt": "Kita"},
+    "千代田区": {"en": "Chiyoda", "zh": "千代田区", "ko": "치요다구", "vi": "Chiyoda", "pt": "Chiyoda"},
+    "台東区": {"en": "Taito", "zh": "台东区", "ko": "다이토구", "vi": "Taito", "pt": "Taito"},
+    "品川区": {"en": "Shinagawa", "zh": "品川区", "ko": "시나가와구", "vi": "Shinagawa", "pt": "Shinagawa"},
+    "国分寺市": {"en": "Kokubunji", "zh": "国分寺市", "ko": "고쿠분지시", "vi": "Kokubunji", "pt": "Kokubunji"},
+    "国立市": {"en": "Kunitachi", "zh": "国立市", "ko": "쿠니타치시", "vi": "Kunitachi", "pt": "Kunitachi"},
+    "墨田区": {"en": "Sumida", "zh": "墨田区", "ko": "스미다구", "vi": "Sumida", "pt": "Sumida"},
+    "多摩市": {"en": "Tama", "zh": "多摩市", "ko": "타마시", "vi": "Tama", "pt": "Tama"},
+    "大島町": {"en": "Oshima", "zh": "大岛町", "ko": "오시마마치", "vi": "Oshima", "pt": "Oshima"},
+    "大田区": {"en": "Ota", "zh": "大田区", "ko": "오타구", "vi": "Ota", "pt": "Ota"},
+    "小平市": {"en": "Kodaira", "zh": "小平市", "ko": "코다이라시", "vi": "Kodaira", "pt": "Kodaira"},
+    "小金井市": {"en": "Koganei", "zh": "小金井市", "ko": "코가네이시", "vi": "Koganei", "pt": "Koganei"},
+    "府中市": {"en": "Fuchu", "zh": "府中市", "ko": "후추시", "vi": "Fuchu", "pt": "Fuchu"},
+    "文京区": {"en": "Bunkyo", "zh": "文京区", "ko": "분쿄구", "vi": "Bunkyo", "pt": "Bunkyo"},
+    "新宿区": {"en": "Shinjuku", "zh": "新宿区", "ko": "신주쿠구", "vi": "Shinjuku", "pt": "Shinjuku"},
+    "日野市": {"en": "Hino", "zh": "日野市", "ko": "히노시", "vi": "Hino", "pt": "Hino"},
+    "昭島市": {"en": "Akishima", "zh": "昭岛市", "ko": "아키시마시", "vi": "Akishima", "pt": "Akishima"},
+    "杉並区": {"en": "Suginami", "zh": "杉并区", "ko": "스기나미구", "vi": "Suginami", "pt": "Suginami"},
+    "東久留米市": {"en": "Higashikurume", "zh": "东久留米市", "ko": "히가시쿠루메시", "vi": "Higashikurume", "pt": "Higashikurume"},
+    "東大和市": {"en": "Higashiyamato", "zh": "东大和市", "ko": "히가시야마토시", "vi": "Higashiyamato", "pt": "Higashiyamato"},
+    "東村山市": {"en": "Higashimurayama", "zh": "东村山市", "ko": "히가시무라야마시", "vi": "Higashimurayama", "pt": "Higashimurayama"},
+    "板橋区": {"en": "Itabashi", "zh": "板桥区", "ko": "이타바시구", "vi": "Itabashi", "pt": "Itabashi"},
+    "武蔵村山市": {"en": "Musashimurayama", "zh": "武藏村山市", "ko": "무사시무라야마시", "vi": "Musashimurayama", "pt": "Musashimurayama"},
+    "武蔵野市": {"en": "Musashino", "zh": "武藏野市", "ko": "무사시노시", "vi": "Musashino", "pt": "Musashino"},
+    "江戸川区": {"en": "Edogawa", "zh": "江户川区", "ko": "에도가와구", "vi": "Edogawa", "pt": "Edogawa"},
+    "江東区": {"en": "Koto", "zh": "江东区", "ko": "코토구", "vi": "Koto", "pt": "Koto"},
+    "清瀬市": {"en": "Kiyose", "zh": "清濑市", "ko": "키요세시", "vi": "Kiyose", "pt": "Kiyose"},
+    "渋谷区": {"en": "Shibuya", "zh": "涩谷区", "ko": "시부야구", "vi": "Shibuya", "pt": "Shibuya"},
+    "港区": {"en": "Minato", "zh": "港区", "ko": "미나토구", "vi": "Minato", "pt": "Minato"},
+    "狛江市": {"en": "Komae", "zh": "狛江市", "ko": "코마에시", "vi": "Komae", "pt": "Komae"},
+    "町田市": {"en": "Machida", "zh": "町田市", "ko": "마치다시", "vi": "Machida", "pt": "Machida"},
+    "目黒区": {"en": "Meguro", "zh": "目黑区", "ko": "메구로구", "vi": "Meguro", "pt": "Meguro"},
+    "福生市": {"en": "Fussa", "zh": "福生市", "ko": "후사시", "vi": "Fussa", "pt": "Fussa"},
+    "稲城市": {"en": "Inagi", "zh": "稻城市", "ko": "이나기시", "vi": "Inagi", "pt": "Inagi"},
+    "立川市": {"en": "Tachikawa", "zh": "立川市", "ko": "타치카와시", "vi": "Tachikawa", "pt": "Tachikawa"},
+    "練馬区": {"en": "Nerima", "zh": "练马区", "ko": "네리마구", "vi": "Nerima", "pt": "Nerima"},
+    "羽村市": {"en": "Hamura", "zh": "羽村市", "ko": "하무라시", "vi": "Hamura", "pt": "Hamura"},
+    "荒川区": {"en": "Arakawa", "zh": "荒川区", "ko": "아라카와구", "vi": "Arakawa", "pt": "Arakawa"},
+    "葛飾区": {"en": "Katsushika", "zh": "葛饰区", "ko": "카츠시카구", "vi": "Katsushika", "pt": "Katsushika"},
+    "西多摩郡日の出町": {"en": "Hinode", "zh": "日出町", "ko": "히노데마치", "vi": "Hinode", "pt": "Hinode"},
+    "西多摩郡瑞穂町": {"en": "Mizuho", "zh": "瑞穗町", "ko": "미즈호마치", "vi": "Mizuho", "pt": "Mizuho"},
+    "西東京市": {"en": "Nishitokyo", "zh": "西东京市", "ko": "니시도쿄시", "vi": "Nishitokyo", "pt": "Nishitokyo"},
+    "調布市": {"en": "Chofu", "zh": "调布市", "ko": "조후시", "vi": "Chofu", "pt": "Chofu"},
+    "豊島区": {"en": "Toshima", "zh": "丰岛区", "ko": "토시마구", "vi": "Toshima", "pt": "Toshima"},
+    "足立区": {"en": "Adachi", "zh": "足立区", "ko": "아다치구", "vi": "Adachi", "pt": "Adachi"},
+    "青梅市": {"en": "Ome", "zh": "青梅市", "ko": "오메시", "vi": "Ome", "pt": "Ome"},
+}
+
 CARRIERS_MAP = {
     "ドコモ": {"en": "docomo", "zh": "docomo", "ko": "docomo", "vi": "docomo", "pt": "docomo"},
     "ソフトバンク": {"en": "SoftBank", "zh": "SoftBank", "ko": "SoftBank", "vi": "SoftBank", "pt": "SoftBank"},
@@ -60,6 +118,23 @@ CARRIERS_MAP = {
     "au": {"en": "au", "zh": "au", "ko": "au", "vi": "au", "pt": "au"},
     "UQ mobile": {"en": "UQ mobile", "zh": "UQ mobile", "ko": "UQ mobile", "vi": "UQ mobile", "pt": "UQ mobile"},
     "Y!mobile": {"en": "Y!mobile", "zh": "Y!mobile", "ko": "Y!mobile", "vi": "Y!mobile", "pt": "Y!mobile"},
+}
+
+KANJI_LOCATION_REPLACEMENTS = {
+    'あきる野': 'Akiruno', '稲城矢野口': 'Inagi Yanokuchi', '若葉台': 'Wakabadai', '矢野口': 'Yanokuchi',
+    '稲城': 'Inagi', '羽村': 'Hamura', '羽村栄町': 'Hamura Sakaemachi', '葛飾かなまち': 'Katsushika Kanamachi',
+    'MARK IS 葛飾かなまち': 'MARK IS Katsushika Kanamachi', '亀有': 'Kameari', '新小岩': 'Shinkoiwa',
+    '青砥': 'Aoto', '立石': 'Tateishi', 'アリオ亀有': 'Ario Kameari', '柴又街道': 'Shibamata Kaido',
+    '金町駅前': 'Kanamachi Ekimae', 'アリオ葛西': 'Ario Kasai', '小岩駅前': 'Koiwa Ekimae',
+    '瑞江': 'Mizue', '西葛西': 'Nishikasai', '船堀': 'Funabori', '平井': 'Hirai', '葛西': 'Kasai',
+    '小岩昭和通り': 'Koiwa Showa-dori', '新宿': 'Shinjuku', '渋谷': 'Shibuya', '池袋': 'Ikebukuro',
+    '銀座': 'Ginza', '丸の内': 'Marunouchi', '品川': 'Shinagawa', '上野': 'Ueno', '秋葉原': 'Akihabara',
+    '吉祥寺': 'Kichijoji', '八王子': 'Hachioji', '町田': 'Machida', '立川': 'Tachikawa', '恵比寿': 'Ebisu',
+    '六本木': 'Roppongi', '赤坂': 'Akasaka', '表参道': 'Omotesando', '原宿': 'Harajuku', '有楽町': 'Yurakucho',
+    '新橋': 'Shimbashi', '目黒': 'Meguro', '中目黒': 'Nakameguro', '自由が丘': 'Jiyugaoka', '三軒茶屋': 'Sangenjaya',
+    '下北沢': 'Shimokitazawa', '荻窪': 'Ogikubo', '阿佐ヶ谷': 'Asagaya', '高円寺': 'Koenji', '中野': 'Nakano',
+    '練馬': 'Nerima', '赤羽': 'Akabane', '錦糸町': 'Kinshicho', '押上': 'Oshiage', '浅草': 'Asakusa',
+    '蒲田': 'Kamata', '大森': 'Omori', '二子玉川': 'Futakotamagawa', '調布': 'Chofu', '府中': 'Fuchu'
 }
 
 LANGUAGES = {
@@ -619,17 +694,30 @@ def translate_prefectures_in_html(content, lang_code, t):
 
     return content
 
-def translate_shop_names_and_districts(content, lang_code, t):
+def translate_tokyo_districts_and_shops(content, lang_code, t):
+    # 1. Translate jump row button 'ドコモ'
+    content = content.replace('<a href="#shop-finder" data-carrier-jump="docomo">ドコモ</a>', '<a href="#shop-finder" data-carrier-jump="docomo">docomo</a>')
+
+    # 2. Translate Tokyo 53 Districts in summary and meta tags
+    for jp_dist, trans_dict in TOKYO_DISTRICTS_MAP.items():
+        trans_name = trans_dict.get(lang_code, jp_dist)
+        # Summary tags
+        content = content.replace(f'<summary><span>{jp_dist}</span>', f'<summary><span>{trans_name}</span>')
+        # Meta tags
+        content = content.replace(f'<span class="shop-link-meta">{jp_dist}</span>', f'<span class="shop-link-meta">{trans_name}</span>')
+
+    # 3. Translate Carrier filter buttons & badges
     content = content.replace('data-carrier-filter="all" aria-pressed="true">すべて <small>', f'data-carrier-filter="all" aria-pressed="true">{t["filter_all"]} <small>')
     content = content.replace('>すべて <small>', f'>{t["filter_all"]} <small>')
-    content = content.replace('>ドコモ <small>', f'>{CARRIERS_MAP["ドコモ"][lang_code]} <small>')
-    content = content.replace('>ソフトバンク <small>', f'>{CARRIERS_MAP["ソフトバンク"][lang_code]} <small>')
+    content = content.replace('>ドコモ <small>', f'>docomo <small>')
+    content = content.replace('>ソフトバンク <small>', f'>SoftBank <small>')
     content = content.replace('>イオンモバイル <small>', f'>{CARRIERS_MAP["イオンモバイル"][lang_code]} <small>')
 
-    content = content.replace('<em class="carrier-badge carrier-docomo">ドコモ</em>', f'<em class="carrier-badge carrier-docomo">{CARRIERS_MAP["ドコモ"][lang_code]}</em>')
-    content = content.replace('<em class="carrier-badge carrier-softbank">ソフトバンク</em>', f'<em class="carrier-badge carrier-softbank">{CARRIERS_MAP["ソフトバンク"][lang_code]}</em>')
+    content = content.replace('<em class="carrier-badge carrier-docomo">ドコモ</em>', '<em class="carrier-badge carrier-docomo">docomo</em>')
+    content = content.replace('<em class="carrier-badge carrier-softbank">ソフトバンク</em>', '<em class="carrier-badge carrier-softbank">SoftBank</em>')
     content = content.replace('<em class="carrier-badge carrier-aeonmobile">イオンモバイル</em>', f'<em class="carrier-badge carrier-aeonmobile">{CARRIERS_MAP["イオンモバイル"][lang_code]}</em>')
 
+    # 4. Shop Name Translations (Brand prefixes & Kanji Location Names)
     store_shop_word = {
         "en": "Shop",
         "zh": "门店",
@@ -643,6 +731,10 @@ def translate_shop_names_and_districts(content, lang_code, t):
     content = content.replace("ソフトバンク", "SoftBank")
     content = content.replace("UQスポット", "UQ Spot")
     content = content.replace("イオンモバイル", "Aeon Mobile")
+    content = content.replace("店<em", f" Store<em")
+
+    for k, v in KANJI_LOCATION_REPLACEMENTS.items():
+        content = content.replace(k, v)
 
     return content
 
@@ -811,7 +903,7 @@ def process_tokyo_page(lang_code, t):
     content = content.replace('店舗を表示</p>', f'{t["tokyo_stores_suffix"]}</p>')
 
     content = translate_prefectures_in_html(content, lang_code, t)
-    content = translate_shop_names_and_districts(content, lang_code, t)
+    content = translate_tokyo_districts_and_shops(content, lang_code, t)
 
     old_lang_selector = '''      <div class="lang-selector-wrap">
         <select class="lang-selector" onchange="if(this.value) location.href=this.value;" aria-label="Language / 言語">
