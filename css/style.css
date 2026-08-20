@@ -798,6 +798,26 @@ a { color: inherit; }
   .program-text-link { text-align: center; }
   .program-answer { padding: 45px 20px; }
   .program-section, .source-panel { padding: 70px 20px; }
+}
+
+/* Language Selector */
+.lang-selector-wrap {
+  display: inline-flex;
+  align-items: center;
+}
+.lang-selector {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+.lang-selector:focus {
+  outline: 2px solid var(--primary);
+}
   .payment-timeline li { grid-template-columns: 1fr; gap: 7px; }
   .payment-timeline .timeline-choice { padding: 22px; }
   .choice-grid, .fit-grid, .caution-grid, .program-steps { grid-template-columns: 1fr; }
