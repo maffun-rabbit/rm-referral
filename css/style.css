@@ -185,6 +185,18 @@ a { color: inherit; }
 .shop-hero h1 span,
 .area-hero h1 span { color: var(--primary); }
 
+.official-shop-name {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: .48em;
+  font-weight: 550;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+.shop-link-name .official-shop-name { margin-top: 3px; font-size: 10px; }
+.local-topic-card .official-shop-name { font-size: 12px; }
+
 .lead {
   max-width: 730px;
   margin: 26px 0 31px;
