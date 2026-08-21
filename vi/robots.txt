@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rm-referral-vi.maffun.workers.dev/sitemap.xml
