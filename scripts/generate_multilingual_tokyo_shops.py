@@ -5,17 +5,38 @@ import glob
 import json
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-KANTO_AREAS = ["ibaraki", "tochigi", "gunma", "saitama", "chiba", "tokyo", "kanagawa"]
+PREFECTURE_ROWS = [
+    ("hokkaido", "北海道", "Hokkaido", "北海道", "홋카이도"), ("aomori", "青森県", "Aomori", "青森县", "아오모리현"),
+    ("iwate", "岩手県", "Iwate", "岩手县", "이와테현"), ("miyagi", "宮城県", "Miyagi", "宫城县", "미야기현"),
+    ("akita", "秋田県", "Akita", "秋田县", "아키타현"), ("yamagata", "山形県", "Yamagata", "山形县", "야마가타현"),
+    ("fukushima", "福島県", "Fukushima", "福岛县", "후쿠시마현"), ("ibaraki", "茨城県", "Ibaraki", "茨城县", "이바라키현"),
+    ("tochigi", "栃木県", "Tochigi", "栃木县", "도치기현"), ("gunma", "群馬県", "Gunma", "群马县", "군마현"),
+    ("saitama", "埼玉県", "Saitama", "埼玉县", "사이타마현"), ("chiba", "千葉県", "Chiba", "千叶县", "치바현"),
+    ("tokyo", "東京都", "Tokyo", "东京都", "도쿄도"), ("kanagawa", "神奈川県", "Kanagawa", "神奈川县", "가나가와현"),
+    ("niigata", "新潟県", "Niigata", "新潟县", "니가타현"), ("toyama", "富山県", "Toyama", "富山县", "도야마현"),
+    ("ishikawa", "石川県", "Ishikawa", "石川县", "이시카와현"), ("fukui", "福井県", "Fukui", "福井县", "후쿠이현"),
+    ("yamanashi", "山梨県", "Yamanashi", "山梨县", "야마나시현"), ("nagano", "長野県", "Nagano", "长野县", "나가노현"),
+    ("gifu", "岐阜県", "Gifu", "岐阜县", "기후현"), ("shizuoka", "静岡県", "Shizuoka", "静冈县", "시즈오카현"),
+    ("aichi", "愛知県", "Aichi", "爱知县", "아이치현"), ("mie", "三重県", "Mie", "三重县", "미에현"),
+    ("shiga", "滋賀県", "Shiga", "滋贺县", "시가현"), ("kyoto", "京都府", "Kyoto", "京都府", "교토부"),
+    ("osaka", "大阪府", "Osaka", "大阪府", "오사카부"), ("hyogo", "兵庫県", "Hyogo", "兵库县", "효고현"),
+    ("nara", "奈良県", "Nara", "奈良县", "나라현"), ("wakayama", "和歌山県", "Wakayama", "和歌山县", "와카야마현"),
+    ("tottori", "鳥取県", "Tottori", "鸟取县", "돗토리현"), ("shimane", "島根県", "Shimane", "岛根县", "시마네현"),
+    ("okayama", "岡山県", "Okayama", "冈山县", "오카야마현"), ("hiroshima", "広島県", "Hiroshima", "广岛县", "히로시마현"),
+    ("yamaguchi", "山口県", "Yamaguchi", "山口县", "야마구치현"), ("tokushima", "徳島県", "Tokushima", "德岛县", "도쿠시마현"),
+    ("kagawa", "香川県", "Kagawa", "香川县", "가가와현"), ("ehime", "愛媛県", "Ehime", "爱媛县", "에히메현"),
+    ("kochi", "高知県", "Kochi", "高知县", "고치현"), ("fukuoka", "福岡県", "Fukuoka", "福冈县", "후쿠오카현"),
+    ("saga", "佐賀県", "Saga", "佐贺县", "사가현"), ("nagasaki", "長崎県", "Nagasaki", "长崎县", "나가사키현"),
+    ("kumamoto", "熊本県", "Kumamoto", "熊本县", "구마모토현"), ("oita", "大分県", "Oita", "大分县", "오이타현"),
+    ("miyazaki", "宮崎県", "Miyazaki", "宫崎县", "미야자키현"), ("kagoshima", "鹿児島県", "Kagoshima", "鹿儿岛县", "가고시마현"),
+    ("okinawa", "沖縄県", "Okinawa", "冲绳县", "오키나와현"),
+]
+ALL_AREAS = [row[0] for row in PREFECTURE_ROWS]
 PREFECTURES = {
-    "ibaraki": {"ja": "茨城県", "en": "Ibaraki", "zh": "茨城县", "ko": "이바라키현", "vi": "Tỉnh Ibaraki", "pt": "Ibaraki"},
-    "tochigi": {"ja": "栃木県", "en": "Tochigi", "zh": "栃木县", "ko": "도치기현", "vi": "Tỉnh Tochigi", "pt": "Tochigi"},
-    "gunma": {"ja": "群馬県", "en": "Gunma", "zh": "群马县", "ko": "군마현", "vi": "Tỉnh Gunma", "pt": "Gunma"},
-    "saitama": {"ja": "埼玉県", "en": "Saitama", "zh": "埼玉县", "ko": "사이타마현", "vi": "Tỉnh Saitama", "pt": "Saitama"},
-    "chiba": {"ja": "千葉県", "en": "Chiba", "zh": "千叶县", "ko": "치바현", "vi": "Tỉnh Chiba", "pt": "Chiba"},
-    "tokyo": {"ja": "東京", "en": "Tokyo", "zh": "东京都", "ko": "도쿄도", "vi": "Tokyo", "pt": "Tóquio"},
-    "kanagawa": {"ja": "神奈川県", "en": "Kanagawa", "zh": "神奈川县", "ko": "가나가와현", "vi": "Tỉnh Kanagawa", "pt": "Kanagawa"},
+    slug: {"ja": ja, "en": en, "zh": zh, "ko": ko, "vi": (en if slug == "tokyo" else f"Tỉnh {en}"), "pt": ("Tóquio" if slug == "tokyo" else en)}
+    for slug, ja, en, zh, ko in PREFECTURE_ROWS
 }
-with open(os.path.join(BASE_DIR, "data", "kanto-name-readings.json"), encoding="utf-8") as readings_file:
+with open(os.path.join(BASE_DIR, "data", "nationwide-name-readings.json"), encoding="utf-8") as readings_file:
     NAME_READINGS = json.load(readings_file)
 
 TOKYO_DISTRICTS_MAP = {
@@ -348,7 +369,7 @@ LANGUAGES = {
 # Japanese notation so visitors can copy them into maps and carrier websites.
 SHOP_PAGE_TEXT = {
     "en": {
-        "title": "For {shop} customers in {district} | Switching from {carrier} to Rakuten Mobile",
+        "title": "For {shop} customers in {district}, {area} | Switching from {carrier} to Rakuten Mobile",
         "description": "A guide for {shop} users in {district}: preparation and steps to switch from {carrier} to Rakuten Mobile while keeping your phone number.",
         "in_language": "en",
         "topic_label": "LOCAL TOPICS",
@@ -370,7 +391,7 @@ SHOP_PAGE_TEXT = {
         "floating_button": "View offer →",
     },
     "zh": {
-        "title": "致{district}{shop}用户｜从{carrier}转网至乐天移动指南",
+        "title": "致{area}{district}{shop}用户｜从{carrier}转网至乐天移动指南",
         "description": "面向{district}{shop}用户，介绍从{carrier}转网至乐天移动并保留原号码所需的准备与办理步骤。",
         "in_language": "zh-CN",
         "topic_label": "本地动态",
@@ -392,7 +413,7 @@ SHOP_PAGE_TEXT = {
         "floating_button": "查看优惠 →",
     },
     "ko": {
-        "title": "{district} {shop} 이용 고객님께｜{carrier}에서 라쿠텐 모바일로 번호이동 가이드",
+        "title": "{area} {district} {shop} 이용 고객님께｜{carrier}에서 라쿠텐 모바일로 번호이동 가이드",
         "description": "{district}의 {shop} 이용자를 위해 {carrier}에서 전화번호를 유지한 채 라쿠텐 모바일로 번호이동하는 준비와 절차를 안내합니다.",
         "in_language": "ko",
         "topic_label": "지역 소식",
@@ -414,7 +435,7 @@ SHOP_PAGE_TEXT = {
         "floating_button": "혜택 확인 →",
     },
     "vi": {
-        "title": "Dành cho khách hàng của {shop} tại {district} | Chuyển từ {carrier} sang Rakuten Mobile",
+        "title": "Dành cho khách hàng của {shop} tại {district}, {area} | Chuyển từ {carrier} sang Rakuten Mobile",
         "description": "Hướng dẫn dành cho người dùng {shop} tại {district}: chuẩn bị và các bước chuyển từ {carrier} sang Rakuten Mobile mà vẫn giữ số điện thoại.",
         "in_language": "vi",
         "topic_label": "TIN ĐỊA PHƯƠNG",
@@ -436,7 +457,7 @@ SHOP_PAGE_TEXT = {
         "floating_button": "Xem ưu đãi →",
     },
     "pt": {
-        "title": "Para clientes da {shop} em {district} | Migração da {carrier} para a Rakuten Mobile",
+        "title": "Para clientes da {shop} em {district}, {area} | Migração da {carrier} para a Rakuten Mobile",
         "description": "Guia para clientes da {shop} em {district}: preparação e etapas para mudar da {carrier} para a Rakuten Mobile mantendo o número.",
         "in_language": "pt-BR",
         "topic_label": "NOVIDADES LOCAIS",
@@ -481,6 +502,20 @@ def localized_locality(japanese_locality, lang_code):
     if japanese_locality in TOKYO_DISTRICTS_MAP:
         return TOKYO_DISTRICTS_MAP[japanese_locality].get(lang_code, japanese_locality)
     reading = NAME_READINGS["localities"].get(japanese_locality, japanese_locality)
+    city_ward = re.fullmatch(r"(.+) Shi (.+) Ku", reading)
+    if city_ward:
+        city, ward = city_ward.groups()
+        return {
+            "en": f"{ward} Ward, {city}", "zh": f"{city}市{ward}区", "ko": f"{city}시 {ward}구",
+            "vi": f"Quận {ward}, Thành phố {city}", "pt": f"Distrito de {ward}, {city}",
+        }[lang_code]
+    county_town = re.fullmatch(r"(.+) Gun (.+) (?:Machi|Cho)", reading)
+    if county_town:
+        county, town = county_town.groups()
+        return {
+            "en": f"{town} Town, {county} County", "zh": f"{county}郡{town}町", "ko": f"{county}군 {town}정",
+            "vi": f"Thị trấn {town}, huyện {county}", "pt": f"Vila de {town}, condado de {county}",
+        }[lang_code]
     suffixes = {
         "en": [(" Shi", " City"), (" Ku", " Ward"), (" Machi", " Town"), (" Cho", " Town"), (" Mura", " Village")],
         "zh": [(" Shi", "市"), (" Ku", "区"), (" Machi", "町"), (" Cho", "町"), (" Mura", "村")],
@@ -516,7 +551,9 @@ def translate_shop_content(ja_content, area, lang_code, t):
     carrier = localized_carrier(carrier_ja)
     district = localized_locality(district_ja, lang_code)
     shop_reading = localized_name(shop_name)
-    translated_title = page_text["title"].format(shop=shop_reading, district=district, carrier=carrier)
+    translated_title = page_text["title"].format(
+        shop=shop_reading, district=district, area=PREFECTURES[area][lang_code], carrier=carrier
+    )
     translated_description = page_text["description"].format(shop=shop_reading, district=district, carrier=carrier)
     ja_path_match = re.search(rf'<link rel="canonical" href="https://rm-referral\.maffun\.workers\.dev(/{area}/[^\"]+)">', content)
     if not ja_path_match:
@@ -824,9 +861,9 @@ def translate_area_index(area, lang_code, t):
     return content
 
 def run():
-    print("Translating full body text for all Kanto shop pages...")
+    print("Translating full body text for all nationwide shop pages...")
     ja_shop_files = []
-    for area in KANTO_AREAS:
+    for area in ALL_AREAS:
         ja_shop_files.extend(
             path for path in glob.glob(f"{BASE_DIR}/{area}/*/*/index.html")
             if f"{os.sep}coverage{os.sep}" not in path
@@ -900,7 +937,7 @@ def run():
                 f.write(translated_html)
             total_translated += 1
 
-    for area in KANTO_AREAS:
+    for area in ALL_AREAS:
         for lang_code, t in LANGUAGES.items():
             out_file = os.path.join(BASE_DIR, lang_code, area, "index.html")
             os.makedirs(os.path.dirname(out_file), exist_ok=True)

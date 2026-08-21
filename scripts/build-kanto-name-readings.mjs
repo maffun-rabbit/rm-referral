@@ -9,7 +9,15 @@ const Kuroshiro = kuroshiroModule.default ?? kuroshiroModule;
 const converter = new Kuroshiro();
 await converter.init(new KuromojiAnalyzer({ dictPath: path.join(toolsRoot, "kuromoji/dict") }));
 
-const areas = ["ibaraki", "tochigi", "gunma", "saitama", "chiba", "tokyo", "kanagawa"];
+const areas = [
+  "hokkaido", "aomori", "iwate", "miyagi", "akita", "yamagata", "fukushima",
+  "ibaraki", "tochigi", "gunma", "saitama", "chiba", "tokyo", "kanagawa",
+  "niigata", "toyama", "ishikawa", "fukui", "yamanashi", "nagano", "gifu",
+  "shizuoka", "aichi", "mie", "shiga", "kyoto", "osaka", "hyogo", "nara",
+  "wakayama", "tottori", "shimane", "okayama", "hiroshima", "yamaguchi",
+  "tokushima", "kagawa", "ehime", "kochi", "fukuoka", "saga", "nagasaki",
+  "kumamoto", "oita", "miyazaki", "kagoshima", "okinawa",
+];
 const readings = { names: {}, localities: {} };
 
 function decodeHtml(value) {
@@ -26,6 +34,8 @@ function tidyRoman(value) {
     .replace(/\bion mobairu\b/gi, "AEON Mobile")
     .replace(/\bwai mobairu\b/gi, "Y!mobile")
     .replace(/\byu kyu mobairu\b/gi, "UQ mobile")
+    .replace(/\bY\s*!\s*mobile\b/gi, "Y!mobile")
+    .replace(/\bU\s*Q\s+(?:mobile|Spot)\b/gi, (match) => match.toLowerCase().includes("spot") ? "UQ Spot" : "UQ mobile")
     .replace(/\bmark is\b/gi, "MARK IS")
     .replace(/\bbikku kamera\b/gi, "Bic Camera")
     .replace(/\byodobashi kamera\b/gi, "Yodobashi Camera")
@@ -54,6 +64,11 @@ function tidyRoman(value) {
 
 async function romanize(value) {
   const source = value.normalize("NFKC")
+    .replaceAll("auショップ", " au Shop ")
+    .replaceAll("ドコモショップ", " docomo Shop ")
+    .replaceAll("ソフトバンク", " SoftBank ")
+    .replaceAll("ワイモバイル", " Y!mobile ")
+    .replaceAll("UQスポット", " UQ Spot ")
     .replaceAll("楽天モバイル", " Rakuten Mobile ")
     .replaceAll("イオンモバイル", " AEON Mobile ")
     .replaceAll("イオンモール", " AEON Mall ")
@@ -62,7 +77,8 @@ async function romanize(value) {
     .replaceAll("テックランド", " Tecc Land ")
     .replaceAll("ビックカメラ", " Bic Camera ")
     .replaceAll("ヨドバシカメラ", " Yodobashi Camera ")
-    .replaceAll("コジマ", " Kojima ");
+    .replaceAll("コジマ", " Kojima ")
+    .replaceAll("エディオン", " EDION ");
   const converted = await converter.convert(source, {
     to: "romaji",
     mode: "spaced",
@@ -78,7 +94,7 @@ for (const area of areas) {
     for (const shop of shops.filter((entry) => entry.isDirectory())) {
       const file = path.join(root, area, carrier.name, shop.name, "index.html");
       const html = await readFile(file, "utf8");
-      const identity = html.match(/<p class="eyebrow">([^・<]+)・[^<]+をご利用の方へ<\/p>[\s\S]*?<h1><span>(.*?)<\/span>から<br>/);
+      const identity = html.match(/<p class="eyebrow">([^・<]+)・[^<]+をご利用の方へ<\/p>[\s\S]*?<h1><span>(.*?)<\/span>をご利用中の方へ<br>/);
       if (!identity) continue;
       const locality = decodeHtml(identity[1]);
       const name = decodeHtml(identity[2]);
@@ -98,7 +114,7 @@ for (const area of areas) {
 }
 
 await writeFile(
-  path.join(root, "data", "kanto-name-readings.json"),
+  path.join(root, "data", "nationwide-name-readings.json"),
   `${JSON.stringify(readings, null, 2)}\n`,
   "utf8",
 );
