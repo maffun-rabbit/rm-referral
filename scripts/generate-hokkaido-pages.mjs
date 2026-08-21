@@ -64,7 +64,7 @@ const shopSlugsPath = path.join(root, "data", "shop-slugs.csv");
 const outputRoot = path.join(root, prefecture.slug);
 const siteUrl = "https://rm-referral.maffun.workers.dev";
 const referralUrl = "https://r10.to/hNearm";
-const updated = "2026-08-19";
+const updated = "2026-08-21";
 const localTopicOpeningCutoff = "2026-02-17";
 const localTopicRadiusKm = 20;
 
@@ -233,7 +233,7 @@ function layout({ title, description, canonical, body, jsonLd = [] }) {
 function shopPage(shop, nearbyRakutenShops, localTopics) {
   const carrier = carrierLabels[shop.carrier];
   const locality = localityFrom(shop.address);
-  const title = `${shop.name}（${locality}）から楽天モバイルへ乗り換える前に確認すること | 楽天モバイル乗り換えガイド`;
+  const title = `${shop.name}（${locality}）を利用中の方へ｜${carrier}から楽天モバイルへの乗り換えガイド`;
   const description = `${locality}の${shop.name}を利用している方向けに、${carrier}から楽天モバイルへ電話番号を引き継いで乗り換える準備と手順を整理します。`;
   const pathname = pagePath(shop);
   const canonical = `${siteUrl}${pathname}`;
@@ -264,8 +264,8 @@ function shopPage(shop, nearbyRakutenShops, localTopics) {
     <section class="shop-hero">
       <div>
         <p class="eyebrow">${escapeHtml(locality)}・${escapeHtml(carrier)}をご利用の方へ</p>
-        <h1><span>${escapeHtml(shop.name)}</span>から<br>楽天モバイルへ乗り換える前に</h1>
-        <p class="lead">店舗へ行く前に、オンラインでできる手続きと準備するものを確認。電話番号を引き継ぐMNPの流れを、順番に整理します。</p>
+        <h1><span>${escapeHtml(shop.name)}</span>をご利用中の方へ<br>${escapeHtml(carrier)}から楽天モバイルへ乗り換える前に</h1>
+        <p class="lead">料金プランの見直しや機種変更で店舗を訪れる前に、現在の契約内容、端末の残債、メールアドレスの扱いを確認しておきましょう。楽天モバイルと比較する場合に必要な準備や、電話番号を引き継ぐMNPの手順を整理します。</p>
         <div class="cta-benefit"><span>他社から乗り換えなら</span><strong>14,000<small>ポイント</small></strong></div>
         <a class="button" data-primary-cta href="${referralUrl}" rel="sponsored nofollow noopener">14,000ポイント特典を確認する <span aria-hidden="true">→</span></a>
         <p class="small">楽天従業員紹介キャンペーン。適用には申し込み・利用開始・Rakuten Link通話などの条件があります。</p>
@@ -440,14 +440,14 @@ function indexPage(shops) {
     })
     .join("\n");
 
-  const title = `${prefecture.label}の携帯ショップから楽天モバイルへ乗り換える方法 | 店舗別ガイド`;
+  const title = `${prefecture.label}の携帯ショップ利用者向け｜楽天モバイル乗り換えガイド`;
   const description = `${prefecture.label}のau・ドコモ・ソフトバンク・UQ mobile・Y!mobile・イオンモバイル店舗を地域別に掲載。楽天モバイルへ乗り換える前の準備やMNP手続きを店舗ごとに確認できます。`;
   const canonical = `${siteUrl}/${prefecture.slug}/`;
   const body = `<main>
     <nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">トップ</a><span>›</span><span>${prefecture.shortLabel}</span></nav>
     <section class="area-hero">
       <p class="eyebrow">${prefecture.english} SHOP GUIDE</p>
-      <h1>${prefecture.label}のキャリアショップから<br><span>楽天モバイルへ乗り換える前に</span></h1>
+      <h1>${prefecture.label}のキャリアショップをご利用中の方へ<br><span>楽天モバイルへ乗り換える前に</span></h1>
       <p class="lead">au・ドコモ・ソフトバンク・UQ mobile・Y!mobile・イオンモバイルを利用中の方向けに、店舗へ行く前に確認したい乗り換え準備をまとめました。現在利用している店舗から選んでください。</p>
       <div class="count-row"><div><strong>${shops.length}</strong><span>掲載店舗</span></div><a href="#shop-finder" data-carrier-jump="au">au</a><a href="#shop-finder" data-carrier-jump="docomo">ドコモ</a><a href="#shop-finder" data-carrier-jump="softbank">ソフトバンク</a><a href="#shop-finder" data-carrier-jump="uqmobile">UQ mobile</a><a href="#shop-finder" data-carrier-jump="ymobile">Y!mobile</a><a href="#shop-finder" data-carrier-jump="aeonmobile">イオンモバイル</a></div>
       <p class="coverage-index-link-wrap"><a class="coverage-index-link" href="/${prefecture.slug}/coverage/" target="_blank" rel="noopener">${prefecture.label}の楽天モバイル電波状況を市区町村から確認する <span aria-hidden="true">↗</span></a></p>

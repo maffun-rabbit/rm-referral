@@ -348,12 +348,12 @@ LANGUAGES = {
 # Japanese notation so visitors can copy them into maps and carrier websites.
 SHOP_PAGE_TEXT = {
     "en": {
-        "title": "What to check before switching from {shop} ({district}) to Rakuten Mobile | Rakuten Mobile Switching Guide",
+        "title": "For {shop} customers in {district} | Switching from {carrier} to Rakuten Mobile",
         "description": "A guide for {shop} users in {district}: preparation and steps to switch from {carrier} to Rakuten Mobile while keeping your phone number.",
         "in_language": "en",
         "topic_label": "LOCAL TOPICS",
-        "hero_heading": "Before switching from<br><span>{shop}</span> to Rakuten Mobile",
-        "steps_heading": "How to switch from {shop}",
+        "hero_heading": "For customers of <span>{shop}</span><br>Before switching from {carrier} to Rakuten Mobile",
+        "steps_heading": "How to switch from {carrier} to Rakuten Mobile",
         "topic_heading": "Latest Rakuten Mobile updates near {district}",
         "opened": "{name} is now open",
         "topic_body": "About {distance} km in a straight line from {shop}. You now have another nearby store where you can ask about Rakuten Mobile in person.",
@@ -370,12 +370,12 @@ SHOP_PAGE_TEXT = {
         "floating_button": "View offer →",
     },
     "zh": {
-        "title": "从{shop}（{district}）转网至乐天移动前的确认事项 | 乐天移动换网指南",
+        "title": "致{district}{shop}用户｜从{carrier}转网至乐天移动指南",
         "description": "面向{district}{shop}用户，介绍从{carrier}转网至乐天移动并保留原号码所需的准备与办理步骤。",
         "in_language": "zh-CN",
         "topic_label": "本地动态",
-        "hero_heading": "从<span>{shop}</span><br>转网至乐天移动前的确认事项",
-        "steps_heading": "从{shop}转网的办理步骤",
+        "hero_heading": "致<span>{shop}</span>用户<br>从{carrier}转网至乐天移动前的确认事项",
+        "steps_heading": "从{carrier}转网至乐天移动的步骤",
         "topic_heading": "{district}附近的乐天移动最新动态",
         "opened": "{name}现已开业",
         "topic_body": "距{shop}直线距离约{distance}公里。附近又多了一家可当面咨询乐天移动业务的门店。",
@@ -392,12 +392,12 @@ SHOP_PAGE_TEXT = {
         "floating_button": "查看优惠 →",
     },
     "ko": {
-        "title": "{shop}({district})에서 라쿠텐 모바일로 번호이동 전 확인사항 | 라쿠텐 모바일 번호이동 가이드",
+        "title": "{district} {shop} 이용 고객님께｜{carrier}에서 라쿠텐 모바일로 번호이동 가이드",
         "description": "{district}의 {shop} 이용자를 위해 {carrier}에서 전화번호를 유지한 채 라쿠텐 모바일로 번호이동하는 준비와 절차를 안내합니다.",
         "in_language": "ko",
         "topic_label": "지역 소식",
-        "hero_heading": "<span>{shop}</span>에서<br>라쿠텐 모바일로 번호이동 전 확인사항",
-        "steps_heading": "{shop} 이용자를 위한 번호이동 절차",
+        "hero_heading": "<span>{shop}</span> 이용 고객님께<br>{carrier}에서 라쿠텐 모바일로 번호이동하기 전에",
+        "steps_heading": "{carrier}에서 라쿠텐 모바일로 번호이동하는 절차",
         "topic_heading": "{district} 주변 라쿠텐 모바일 최신 소식",
         "opened": "{name} 오픈",
         "topic_body": "{shop}에서 직선거리 약 {distance}km입니다. 가까운 곳에서 라쿠텐 모바일을 대면 상담할 수 있는 매장이 하나 더 늘었습니다.",
@@ -414,12 +414,12 @@ SHOP_PAGE_TEXT = {
         "floating_button": "혜택 확인 →",
     },
     "vi": {
-        "title": "Điều cần kiểm tra trước khi chuyển từ {shop} ({district}) sang Rakuten Mobile | Hướng dẫn chuyển mạng",
+        "title": "Dành cho khách hàng của {shop} tại {district} | Chuyển từ {carrier} sang Rakuten Mobile",
         "description": "Hướng dẫn dành cho người dùng {shop} tại {district}: chuẩn bị và các bước chuyển từ {carrier} sang Rakuten Mobile mà vẫn giữ số điện thoại.",
         "in_language": "vi",
         "topic_label": "TIN ĐỊA PHƯƠNG",
-        "hero_heading": "Trước khi chuyển từ<br><span>{shop}</span> sang Rakuten Mobile",
-        "steps_heading": "Các bước chuyển mạng từ {shop}",
+        "hero_heading": "Dành cho khách hàng của <span>{shop}</span><br>Trước khi chuyển từ {carrier} sang Rakuten Mobile",
+        "steps_heading": "Các bước chuyển từ {carrier} sang Rakuten Mobile",
         "topic_heading": "Tin mới nhất về Rakuten Mobile gần {district}",
         "opened": "{name} đã khai trương",
         "topic_body": "Cách {shop} khoảng {distance} km theo đường chim bay. Bạn có thêm một cửa hàng gần đó để được tư vấn trực tiếp về Rakuten Mobile.",
@@ -436,12 +436,12 @@ SHOP_PAGE_TEXT = {
         "floating_button": "Xem ưu đãi →",
     },
     "pt": {
-        "title": "O que verificar antes de mudar da {shop} ({district}) para a Rakuten Mobile | Guia de Migração",
+        "title": "Para clientes da {shop} em {district} | Migração da {carrier} para a Rakuten Mobile",
         "description": "Guia para clientes da {shop} em {district}: preparação e etapas para mudar da {carrier} para a Rakuten Mobile mantendo o número.",
         "in_language": "pt-BR",
         "topic_label": "NOVIDADES LOCAIS",
-        "hero_heading": "Antes de mudar da<br><span>{shop}</span> para a Rakuten Mobile",
-        "steps_heading": "Como mudar da {shop}",
+        "hero_heading": "Para clientes da <span>{shop}</span><br>Antes de migrar da {carrier} para a Rakuten Mobile",
+        "steps_heading": "Como migrar da {carrier} para a Rakuten Mobile",
         "topic_heading": "Novidades da Rakuten Mobile perto de {district}",
         "opened": "{name} foi inaugurada",
         "topic_body": "A cerca de {distance} km em linha reta da {shop}. Agora há mais uma loja próxima para consultar pessoalmente sobre a Rakuten Mobile.",
@@ -460,11 +460,11 @@ SHOP_PAGE_TEXT = {
 }
 
 AREA_INDEX_TEXT = {
-    "en": {"title": "Mobile shops in {area}: switching to Rakuten Mobile | Store Guide", "desc": "Find carrier shops in {area} and check what to prepare before switching to Rakuten Mobile.", "hero": "Before switching to Rakuten Mobile<br><span>from a carrier shop in {area}</span>", "lead": "Choose your current carrier shop to review MNP preparation and switching steps.", "listed": "Listed stores", "filter": "Filter stores", "shown": "stores shown", "search": "Search by store or city", "placeholder": "e.g. city or store name", "all": "All", "unit": "stores", "coverage": "Check Rakuten Mobile coverage by municipality in {area} ↗"},
-    "zh": {"title": "{area}手机门店转网至乐天移动 | 门店指南", "desc": "查找{area}的通信运营商门店，并确认转网至乐天移动前需要准备的事项。", "hero": "从{area}的通信运营商门店<br><span>转网至乐天移动前的确认事项</span>", "lead": "请选择目前使用的门店，确认携号转网准备事项与办理步骤。", "listed": "收录门店", "filter": "筛选门店", "shown": "家门店", "search": "按门店或城市搜索", "placeholder": "例如：城市或门店名称", "all": "全部", "unit": "家", "coverage": "按市区町村查看{area}的乐天移动信号覆盖 ↗"},
-    "ko": {"title": "{area} 휴대폰 매장에서 라쿠텐 모바일로 번호이동 | 매장 가이드", "desc": "{area}의 통신사 매장을 찾아 라쿠텐 모바일 번호이동 전 준비사항을 확인하세요.", "hero": "{area} 통신사 매장에서<br><span>라쿠텐 모바일로 번호이동하기 전에</span>", "lead": "현재 이용 중인 매장을 선택하여 MNP 준비사항과 번호이동 절차를 확인하세요.", "listed": "등록 매장", "filter": "매장 검색", "shown": "개 매장 표시", "search": "매장명 또는 도시로 검색", "placeholder": "예: 도시 또는 매장명", "all": "전체", "unit": "개", "coverage": "{area}의 라쿠텐 모바일 통신 상태를 지역별로 확인 ↗"},
-    "vi": {"title": "Cửa hàng di động tại {area}: chuyển sang Rakuten Mobile | Hướng dẫn", "desc": "Tìm cửa hàng nhà mạng tại {area} và kiểm tra những điều cần chuẩn bị trước khi chuyển sang Rakuten Mobile.", "hero": "Trước khi chuyển sang Rakuten Mobile<br><span>từ cửa hàng nhà mạng tại {area}</span>", "lead": "Chọn cửa hàng hiện tại để xem các bước chuẩn bị và chuyển mạng giữ số MNP.", "listed": "Cửa hàng", "filter": "Lọc cửa hàng", "shown": "cửa hàng hiển thị", "search": "Tìm theo cửa hàng hoặc thành phố", "placeholder": "Ví dụ: thành phố hoặc tên cửa hàng", "all": "Tất cả", "unit": "cửa hàng", "coverage": "Kiểm tra vùng phủ sóng Rakuten Mobile theo địa phương tại {area} ↗"},
-    "pt": {"title": "Lojas de celular em {area}: migração para Rakuten Mobile | Guia", "desc": "Encontre lojas de operadoras em {area} e veja o que preparar antes de mudar para a Rakuten Mobile.", "hero": "Antes de mudar para a Rakuten Mobile<br><span>em uma loja de operadora de {area}</span>", "lead": "Escolha a loja da sua operadora atual para conferir a preparação e os passos da portabilidade MNP.", "listed": "Lojas listadas", "filter": "Filtrar lojas", "shown": "lojas exibidas", "search": "Buscar por loja ou cidade", "placeholder": "Ex.: cidade ou nome da loja", "all": "Todas", "unit": "lojas", "coverage": "Verifique o sinal da Rakuten Mobile por município em {area} ↗"},
+    "en": {"title": "For mobile carrier shop customers in {area} | Rakuten Mobile Switching Guide", "desc": "Find carrier shops in {area} and check what to prepare before switching to Rakuten Mobile.", "hero": "For carrier shop customers in {area}<br><span>Before switching to Rakuten Mobile</span>", "lead": "Choose the shop you currently use to review MNP preparation and switching steps.", "listed": "Listed stores", "filter": "Filter stores", "shown": "stores shown", "search": "Search by store or city", "placeholder": "e.g. city or store name", "all": "All", "unit": "stores", "coverage": "Check Rakuten Mobile coverage by municipality in {area} ↗"},
+    "zh": {"title": "致{area}手机运营商门店用户｜乐天移动转网指南", "desc": "查找{area}的通信运营商门店，并确认转网至乐天移动前需要准备的事项。", "hero": "致{area}通信运营商门店用户<br><span>转网至乐天移动前的确认事项</span>", "lead": "请选择目前使用的门店，确认携号转网准备事项与办理步骤。", "listed": "收录门店", "filter": "筛选门店", "shown": "家门店", "search": "按门店或城市搜索", "placeholder": "例如：城市或门店名称", "all": "全部", "unit": "家", "coverage": "按市区町村查看{area}的乐天移动信号覆盖 ↗"},
+    "ko": {"title": "{area} 통신사 매장 이용 고객님께｜라쿠텐 모바일 번호이동 가이드", "desc": "{area}의 통신사 매장을 찾아 라쿠텐 모바일 번호이동 전 준비사항을 확인하세요.", "hero": "{area} 통신사 매장 이용 고객님께<br><span>라쿠텐 모바일로 번호이동하기 전에</span>", "lead": "현재 이용 중인 매장을 선택하여 MNP 준비사항과 번호이동 절차를 확인하세요.", "listed": "등록 매장", "filter": "매장 검색", "shown": "개 매장 표시", "search": "매장명 또는 도시로 검색", "placeholder": "예: 도시 또는 매장명", "all": "전체", "unit": "개", "coverage": "{area}의 라쿠텐 모바일 통신 상태를 지역별로 확인 ↗"},
+    "vi": {"title": "Dành cho khách hàng cửa hàng nhà mạng tại {area} | Hướng dẫn Rakuten Mobile", "desc": "Tìm cửa hàng nhà mạng tại {area} và kiểm tra những điều cần chuẩn bị trước khi chuyển sang Rakuten Mobile.", "hero": "Dành cho khách hàng cửa hàng nhà mạng tại {area}<br><span>Trước khi chuyển sang Rakuten Mobile</span>", "lead": "Chọn cửa hàng hiện tại để xem các bước chuẩn bị và chuyển mạng giữ số MNP.", "listed": "Cửa hàng", "filter": "Lọc cửa hàng", "shown": "cửa hàng hiển thị", "search": "Tìm theo cửa hàng hoặc thành phố", "placeholder": "Ví dụ: thành phố hoặc tên cửa hàng", "all": "Tất cả", "unit": "cửa hàng", "coverage": "Kiểm tra vùng phủ sóng Rakuten Mobile theo địa phương tại {area} ↗"},
+    "pt": {"title": "Para clientes de lojas de operadoras em {area} | Guia Rakuten Mobile", "desc": "Encontre lojas de operadoras em {area} e veja o que preparar antes de mudar para a Rakuten Mobile.", "hero": "Para clientes de lojas de operadoras em {area}<br><span>Antes de migrar para a Rakuten Mobile</span>", "lead": "Escolha a loja da sua operadora atual para conferir a preparação e os passos da portabilidade MNP.", "listed": "Lojas listadas", "filter": "Filtrar lojas", "shown": "lojas exibidas", "search": "Buscar por loja ou cidade", "placeholder": "Ex.: cidade ou nome da loja", "all": "Todas", "unit": "lojas", "coverage": "Verifique o sinal da Rakuten Mobile por município em {area} ↗"},
 }
 
 def normalized_date(value):
@@ -497,19 +497,23 @@ def bilingual_markup(japanese_name):
     reading = localized_name(japanese_name)
     return f'<span class="localized-shop-name">{reading}</span><small class="official-shop-name" lang="ja">{japanese_name}</small>'
 
+def localized_carrier(carrier):
+    return {"ドコモ": "docomo", "ソフトバンク": "SoftBank", "イオンモバイル": "AEON Mobile"}.get(carrier, carrier)
+
 def translate_shop_content(ja_content, area, lang_code, t):
     content = ja_content
     page_text = SHOP_PAGE_TEXT[lang_code]
     identity_match = re.search(
         r'<p class="eyebrow">([^・<]+)・([^<]+)をご利用の方へ</p>.*?'
-        r'<h1><span>(.*?)</span>から<br>楽天モバイルへ乗り換える前に</h1>',
+        r'<h1><span>(.*?)</span>をご利用中の方へ<br>.*?から楽天モバイルへ乗り換える前に</h1>',
         content,
         flags=re.DOTALL,
     )
     if not identity_match:
         raise ValueError("Could not identify shop page content")
 
-    district_ja, carrier, shop_name = identity_match.groups()
+    district_ja, carrier_ja, shop_name = identity_match.groups()
+    carrier = localized_carrier(carrier_ja)
     district = localized_locality(district_ja, lang_code)
     shop_reading = localized_name(shop_name)
     translated_title = page_text["title"].format(shop=shop_reading, district=district, carrier=carrier)
@@ -554,8 +558,8 @@ def translate_shop_content(ja_content, area, lang_code, t):
     content = content.replace('をご利用の方へ</p>', f' {t["eyebrow_suffix"]}</p>')
     
     content = re.sub(
-        r'<h1><span>.*?</span>から<br>楽天モバイルへ乗り換える前に</h1>',
-        f'<h1>{page_text["hero_heading"].format(shop=shop_reading)}<small class="official-shop-name" lang="ja">{shop_name}</small></h1>',
+        r'<h1><span>.*?</span>をご利用中の方へ<br>.*?から楽天モバイルへ乗り換える前に</h1>',
+        f'<h1>{page_text["hero_heading"].format(shop=shop_reading, carrier=carrier)}<small class="official-shop-name" lang="ja">{shop_name}</small></h1>',
         content,
         count=1,
     )
@@ -572,7 +576,7 @@ def translate_shop_content(ja_content, area, lang_code, t):
     content = content.replace(f'<span>{shop_name}</span>', f'<span>{shop_reading} ({shop_name})</span>', 1)
 
     # Hero Lead & Buttons
-    content = content.replace('<p class="lead">店舗へ行く前に、オンラインでできる手続きと準備するものを確認。電話番号を引き継ぐMNPの流れを、順番に整理します。</p>', f'<p class="lead">{t["lead"]}</p>')
+    content = re.sub(r'<p class="lead">料金プランの見直しや機種変更で店舗を訪れる前に、.*?</p>', f'<p class="lead">{t["lead"]}</p>', content, count=1)
     content = content.replace('<div class="cta-benefit"><span>他社から乗り換えなら</span><strong>14,000<small>ポイント</small></strong></div>', f'<div class="cta-benefit"><span>{t["cta_benefit_label"]}</span><strong>{t["cta_benefit_pts"]}</strong></div>')
     content = content.replace('14,000ポイント特典を確認する <span aria-hidden="true">→</span>', f'{t["cta_btn"]}')
     content = content.replace('<p class="small">楽天従業員紹介キャンペーン。適用には申し込み・利用開始・Rakuten Link通話などの条件があります。</p>', f'<p class="small">{t["cta_sub"]}</p>')
@@ -632,7 +636,7 @@ def translate_shop_content(ja_content, area, lang_code, t):
     content = content.replace('<p class="section-label">03 / STEPS</p>', f'<p class="section-label">{t["sec3_label"]}</p>')
     content = re.sub(
         r'<h2>.*?を利用中の方の乗り換え手順</h2>',
-        f'<h2>{page_text["steps_heading"].format(shop=shop_reading)}<small class="official-shop-name" lang="ja">{shop_name}</small></h2>',
+        f'<h2>{page_text["steps_heading"].format(shop=shop_reading, carrier=carrier)}</h2>',
         content,
         count=1,
     )
