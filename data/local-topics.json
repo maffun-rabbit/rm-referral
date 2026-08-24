@@ -1,0 +1,36 @@
+{
+  "reviewedAt": "2026-08-24",
+  "retentionDays": 90,
+  "topics": [
+    {
+      "id": "2026-08-04-saga-autonomous-bus",
+      "category": "REGIONAL PROJECT",
+      "title": "佐賀市で自動運転バスを支える通信を検証",
+      "summary": "佐賀市の自動運転バス実証で、混雑時の遠隔監視と山間部のトンネル内通信を検証。レピーターを使い、電波が届きにくかった区間で安定した通信環境を確保しました。",
+      "publishedAt": "2026-08-04",
+      "expiresAt": "2026-11-02",
+      "mediaName": "楽天モバイル公式ブログ",
+      "sourceTitle": "自動運転レベル4の社会実装へ。佐賀市で行う「通信×モビリティ」の挑戦",
+      "sourceUrl": "https://corp.mobile.rakuten.co.jp/blog/2026/0804_01/",
+      "targets": [
+        {
+          "prefecture": "佐賀県",
+          "municipalities": ["佐賀市"]
+        }
+      ],
+      "evidence": "楽天モバイル公式記事が実証内容と結果を公表。佐賀市の会議録と総務省事業資料で、佐賀市・佐賀市交通局・楽天モバイルを含む実施体制と通信検証内容を確認した。",
+      "corroboration": [
+        {
+          "mediaName": "佐賀市",
+          "sourceTitle": "令和7年度 第2回佐賀市地域公共交通協議会議事録",
+          "sourceUrl": "https://www.city.saga.lg.jp/site_files/file/2025/202507/p1iv1tkd4e9f89be1giu18bs1gdaf.pdf"
+        },
+        {
+          "mediaName": "総務省事業資料（三菱総合研究所公開）",
+          "sourceTitle": "安全かつ効率的なレベル4自動運転に資する通信システム等の検証に係る令和7年度実証事業の予定",
+          "sourceUrl": "https://pubpjt.mri.co.jp/pjt_related/rcsad-info/eqghpc000000030i-att/20250714rcsad-info_scheduled3.pdf"
+        }
+      ]
+    }
+  ]
+}

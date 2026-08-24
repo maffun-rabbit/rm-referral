@@ -4,7 +4,8 @@ import path from "node:path";
 const root = path.resolve(import.meta.dirname, "..");
 const siteUrl = "https://rm-referral.maffun.workers.dev";
 const referralUrl = "https://r10.to/hNearm";
-const updated = "2026-08-19";
+const updated = process.env.RM_CONTENT_DATE
+  ?? new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date());
 const toolsRoot = process.env.RM_SLUG_TOOLS ?? "/private/tmp/rm-slug-tools/node_modules";
 const { default: kuroshiroModule } = await import(path.join(toolsRoot, "kuroshiro/lib/index.js"));
 const { default: KuromojiAnalyzer } = await import(path.join(toolsRoot, "kuroshiro-analyzer-kuromoji/lib/index.js"));

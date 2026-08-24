@@ -61,11 +61,17 @@ const carrierCoordinatesPath = path.join(root, "data", prefecture.slug === "hokk
 const rakutenShopsPath = path.join(root, "data", "rakuten-shops-geocoded.csv");
 const valueCarrierShopsPath = path.join(root, "data", "value-carrier-shops-geocoded.csv");
 const shopSlugsPath = path.join(root, "data", "shop-slugs.csv");
+const localTopicsPath = path.join(root, "data", "local-topics.json");
+const baseStationsPath = path.join(root, "data", "rakuten-base-stations.json");
 const outputRoot = path.join(root, prefecture.slug);
 const siteUrl = "https://rm-referral.maffun.workers.dev";
 const referralUrl = "https://r10.to/hNearm";
-const updated = "2026-08-19";
-const localTopicOpeningCutoff = "2026-02-17";
+const updated = process.env.RM_CONTENT_DATE
+  ?? new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date());
+const updatedDate = new Date(`${updated}T00:00:00+09:00`);
+const openingCutoffDate = new Date(updatedDate);
+openingCutoffDate.setMonth(openingCutoffDate.getMonth() - 6);
+const localTopicOpeningCutoff = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(openingCutoffDate);
 const localTopicRadiusKm = 20;
 
 const carrierLabels = {
@@ -183,8 +189,13 @@ function localityFrom(address) {
 }
 
 function formatJapaneseDate(value) {
-  const [year, month, day] = value.split("-").map(Number);
+  const normalized = value.replace(/(\d{4})年(\d{1,2})月(\d{1,2})日/, "$1-$2-$3");
+  const [year, month, day] = normalized.split("-").map(Number);
   return `${year}年${month}月${day}日`;
+}
+
+function isoDate(value) {
+  return value.replace(/(\d{4})年(\d{1,2})月(\d{1,2})日/, (_, year, month, day) => `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`);
 }
 
 function pagePath(shop) {
@@ -247,13 +258,13 @@ function shopPage(shop, nearbyRakutenShops, localTopics) {
       <h2 id="local-topics-heading">${escapeHtml(locality)}周辺の楽天モバイル最新トピック</h2>
       <div class="local-topic-list">
         ${localTopics.map((item) => `<article class="local-topic-card">
-          <div><p class="local-topic-meta"><span>NEW SHOP</span><time datetime="${escapeHtml(item.openDate)}">${formatJapaneseDate(item.openDate)}</time></p>
-          <h3>${escapeHtml(item.name)}がオープン</h3>
-          <p>${escapeHtml(shop.name)}から直線距離約${item.distanceKm.toFixed(1)}km。近隣で楽天モバイルを対面相談できる店舗の選択肢が増えました。</p></div>
-          <p class="local-topic-source">元情報：楽天モバイル公式「${escapeHtml(item.name)} 店舗情報」<br>公開日：${formatJapaneseDate(item.openDate)}</p>
+          <div><p class="local-topic-meta"><span>${escapeHtml(item.category)}</span><time datetime="${escapeHtml(item.publishedAt)}">${formatJapaneseDate(item.publishedAt)}</time></p>
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.summary)}</p></div>
+          <p class="local-topic-source">元記事：${escapeHtml(item.sourceTitle)}<br>媒体：${escapeHtml(item.mediaName)}<br>公開日：${formatJapaneseDate(item.publishedAt)}</p>
         </article>`).join("")}
       </div>
-      <p class="topic-source">店舗情報は閲覧時点で変更される場合があります。地域トピックから外部サイトへのリンクは設置していません。</p>
+      <p class="topic-source">掲載情報は公式発表などをもとに独自に要約しています。地域トピックから外部サイトへのリンクは設置していません。</p>
     </section>` : "";
 
   const body = `<main>
@@ -502,13 +513,17 @@ async function collectPublishedUrls() {
 }
 
 async function main() {
-  const [csv, coordinateCsv, rakutenCsv, shopSlugsCsv, valueCarrierCsv] = await Promise.all([
+  const [csv, coordinateCsv, rakutenCsv, shopSlugsCsv, valueCarrierCsv, localTopicsJson, baseStationsJson] = await Promise.all([
     readFile(dataPath, "utf8"),
     readFile(carrierCoordinatesPath, "utf8"),
     readFile(rakutenShopsPath, "utf8"),
     readFile(shopSlugsPath, "utf8"),
     readFile(valueCarrierShopsPath, "utf8"),
+    readFile(localTopicsPath, "utf8"),
+    readFile(baseStationsPath, "utf8"),
   ]);
+  const managedTopics = JSON.parse(localTopicsJson).topics;
+  const baseStationData = JSON.parse(baseStationsJson);
   const slugByUrl = new Map(parseCsvRows(shopSlugsCsv).map((row) => [row.URL, row.slug]));
   const baseShops = parseCsv(csv).map((shop) => ({ ...shop, slug: slugByUrl.get(shop.officialUrl) }));
   if (baseShops.length !== prefecture.expectedShops) throw new Error(`Expected ${prefecture.expectedShops} base shops, received ${baseShops.length}`);
@@ -556,11 +571,44 @@ async function main() {
       .map((rakutenShop) => ({ ...rakutenShop, distanceKm: distanceKm(coordinates, rakutenShop) }))
       .sort((a, b) => a.distanceKm - b.distanceKm);
     const nearbyRakutenShops = rakutenShopsByDistance.slice(0, 5);
-    const localTopics = rakutenShopsByDistance
+    const newShopTopics = rakutenShopsByDistance
       .filter((item) => item.distanceKm <= localTopicRadiusKm
         && item.openDate >= localTopicOpeningCutoff
         && item.openDate <= updated)
-      .slice(0, 2);
+      .map((item) => ({
+        category: "NEW SHOP",
+        publishedAt: item.openDate,
+        title: `${item.name}がオープン`,
+        summary: `${shop.name}から直線距離約${item.distanceKm.toFixed(1)}km。近隣で楽天モバイルを対面相談できる店舗の選択肢が増えました。`,
+        sourceTitle: `${item.name} 店舗情報`,
+        mediaName: "楽天モバイル公式",
+      }));
+    const editorialTopics = managedTopics
+      .filter((item) => item.publishedAt <= updated
+        && item.expiresAt >= updated
+        && item.targets.some((target) => target.prefecture === prefecture.label
+          && target.municipalities.includes(localityFrom(shop.address))))
+      .map((item) => ({
+        category: item.category,
+        publishedAt: item.publishedAt,
+        title: item.title,
+        summary: item.summary,
+        sourceTitle: item.sourceTitle,
+        mediaName: item.mediaName,
+      }));
+    const locality = localityFrom(shop.address);
+    const stationRows = baseStationData.periods[0]?.rows.filter((row) => row.Prefecture === prefecture.label && row.City === locality) ?? [];
+    const stationTopics = stationRows.length ? [{
+      category: "AREA UPDATE",
+      publishedAt: isoDate(baseStationData.latestUpdate),
+      title: `${locality}で楽天モバイル基地局の新設・増設を確認`,
+      summary: `楽天モバイル公式発表で、${locality}に${stationRows.length}局（${[...new Set(stationRows.map((row) => row.Type))].join("・")}）の基地局設置が確認されました。基地局の新設は改善情報ですが、個別地点の電波強度や速度を保証するものではありません。`,
+      sourceTitle: "Rakuten最強プランプロジェクト進行中！",
+      mediaName: "楽天モバイル公式",
+    }] : [];
+    const localTopics = [...editorialTopics, ...stationTopics, ...newShopTopics]
+      .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+      .slice(0, 3);
     const nearest = nearbyRakutenShops[0];
     const destination = `${nearest.latitude},${nearest.longitude}`;
     nearest.directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(shop.address)}&destination=${encodeURIComponent(destination)}&travelmode=driving`;

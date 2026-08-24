@@ -4,6 +4,7 @@ import path from "node:path";
 const root = path.resolve(import.meta.dirname, "..");
 const siteUrl = "https://rm-referral.maffun.workers.dev";
 const areaSlugs = ["hokkaido", "aomori", "iwate", "miyagi", "akita", "yamagata", "fukushima", "niigata", "tochigi", "gunma", "ibaraki", "saitama", "chiba", "tokyo", "kanagawa", "nagano", "yamanashi", "toyama", "ishikawa", "fukui", "shizuoka", "aichi", "gifu", "mie", "shiga", "kyoto", "osaka", "hyogo", "nara", "wakayama", "tottori", "shimane", "okayama", "hiroshima", "yamaguchi", "tokushima", "kagawa", "ehime", "kochi", "fukuoka", "saga", "nagasaki", "kumamoto", "oita", "miyazaki", "kagoshima", "okinawa"];
+const languageSlugs = new Set(["en", "zh", "ko", "vi", "pt"]);
 
 async function walk(directory) {
   const entries = await readdir(directory);
@@ -32,27 +33,46 @@ const htmlFiles = files.filter((file) => file.endsWith(".html")
 const titles = new Map();
 const canonicals = new Map();
 const errors = [];
+const localTopicsData = JSON.parse(await readFile(path.join(root, "data", "local-topics.json"), "utf8"));
+
+for (const topic of localTopicsData.topics ?? []) {
+  for (const field of ["id", "category", "title", "summary", "publishedAt", "expiresAt", "mediaName", "sourceTitle", "sourceUrl"]) {
+    if (!topic[field]) errors.push(`data/local-topics.json: ${topic.id ?? "unnamed topic"} is missing ${field}`);
+  }
+  if (!Array.isArray(topic.targets) || !topic.targets.length) errors.push(`data/local-topics.json: ${topic.id ?? "unnamed topic"} has no targets`);
+}
 
 for (const file of htmlFiles) {
   const html = await readFile(file, "utf8");
   const relativePath = path.relative(root, file).split(path.sep).join("/");
   const publishedPath = relativePath === "index.html" ? "/" : `/${relativePath.replace(/index\.html$/, "")}`;
   const pathParts = relativePath.split("/");
+  const isJapaneseAreaPage = areaSlugs.includes(pathParts[0]);
+  const isMultilingualPage = languageSlugs.has(pathParts[0]);
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
   const canonical = html.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
   if (!title) errors.push(`${file}: title is missing`);
-  if (areaSlugs.includes(pathParts[0]) && !canonical) errors.push(`${file}: canonical is missing`);
-  if (canonical && canonical !== `${siteUrl}${publishedPath}`) errors.push(`${file}: canonical does not match its published path`);
-  if (areaSlugs.includes(pathParts[0]) && pathParts.length === 4 && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(pathParts[2])) {
+  if (isJapaneseAreaPage && !canonical) errors.push(`${file}: canonical is missing`);
+  if (canonical && !isMultilingualPage && canonical !== `${siteUrl}${publishedPath}`) errors.push(`${file}: canonical does not match its published path`);
+  if (isJapaneseAreaPage && pathParts.length === 4 && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(pathParts[2])) {
     errors.push(`${file}: shop URL slug must contain ASCII lowercase letters, numbers, and hyphens only`);
   }
-  if (title) {
+  if (isJapaneseAreaPage && pathParts.length === 4 && pathParts[1] !== "coverage") {
+    if (!html.includes("他社から乗り換えなら</span><strong>14,000")) errors.push(`${file}: primary 14,000-point CTA is missing`);
+    if (!html.includes('data-floating-cta')) errors.push(`${file}: floating CTA is missing`);
+  }
+  if (title && !isMultilingualPage) {
     if (titles.has(title)) errors.push(`${file}: duplicate title with ${titles.get(title)}`);
     titles.set(title, file);
   }
-  if (canonical) {
+  if (canonical && !isMultilingualPage) {
     if (canonicals.has(canonical)) errors.push(`${file}: duplicate canonical with ${canonicals.get(canonical)}`);
     canonicals.set(canonical, file);
+  }
+
+  for (const section of isJapaneseAreaPage ? html.matchAll(/<section class="local-topics-section"[\s\S]*?<\/section>/g) : []) {
+    if (/\bhref\s*=/.test(section[0])) errors.push(`${file}: local topics section must not contain external or internal links`);
+    if (!/元記事：[^<]+<br>媒体：[^<]+<br>公開日：/.test(section[0])) errors.push(`${file}: local topics source metadata is incomplete`);
   }
 
   for (const match of html.matchAll(/href="([^"]+)"/g)) {
@@ -88,9 +108,12 @@ for (const line of valueCarrierCsv.split(/\r?\n/).slice(1)) {
 }
 const shopPages = [];
 for (const [area, expected] of Object.entries(expectedByArea)) {
-  const areaPages = htmlFiles.filter((file) => file.includes(`${path.sep}${area}${path.sep}`)
-    && !file.includes(`${path.sep}${area}${path.sep}coverage${path.sep}`)
-    && !file.endsWith(`${path.sep}${area}${path.sep}index.html`));
+  const areaPages = htmlFiles.filter((file) => {
+    const relativeParts = path.relative(root, file).split(path.sep);
+    return relativeParts[0] === area
+      && relativeParts[1] !== "coverage"
+      && !(relativeParts.length === 2 && relativeParts[1] === "index.html");
+  });
   shopPages.push(...areaPages);
   if (areaPages.length !== expected) errors.push(`Expected ${expected} ${area} shop pages, received ${areaPages.length}`);
 }
