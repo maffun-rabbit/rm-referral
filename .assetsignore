@@ -1,0 +1,11 @@
+.git
+.gitignore
+scripts
+data
+DESIGN_GUIDELINES.md
+en/**
+zh/**
+ko/**
+vi/**
+pt/**
+wrangler.*.jsonc

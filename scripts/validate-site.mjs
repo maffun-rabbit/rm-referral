@@ -29,7 +29,7 @@ function pageTarget(href) {
 
 const files = await walk(root);
 const htmlFiles = files.filter((file) => file.endsWith(".html")
-  && !/^google[\w-]+\.html$/.test(path.relative(root, file)));
+  && !/^google[\w-]+\.html$/.test(path.basename(file)));
 const titles = new Map();
 const canonicals = new Map();
 const errors = [];
@@ -49,7 +49,7 @@ for (const file of htmlFiles) {
   const pathParts = relativePath.split("/");
   const isJapaneseAreaPage = areaSlugs.includes(pathParts[0]);
   const isMultilingualPage = languageSlugs.has(pathParts[0]);
-  const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
+  const title = html.match(/<title>([\s\S]*?)<\/title>/)?.[1];
   const canonical = html.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
   if (!title) errors.push(`${file}: title is missing`);
   if (isJapaneseAreaPage && !canonical) errors.push(`${file}: canonical is missing`);

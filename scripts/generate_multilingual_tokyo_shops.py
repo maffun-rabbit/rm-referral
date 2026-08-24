@@ -2,8 +2,42 @@
 import os
 import re
 import glob
+import json
 
-BASE_DIR = "/Users/masayuki/Library/CloudStorage/GoogleDrive-maffun@gmail.com/マイドライブ/AI自動整理メモ/10_Projects/RMリファラル/cloudflare-site"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PREFECTURE_ROWS = [
+    ("hokkaido", "北海道", "Hokkaido", "北海道", "홋카이도"), ("aomori", "青森県", "Aomori", "青森县", "아오모리현"),
+    ("iwate", "岩手県", "Iwate", "岩手县", "이와테현"), ("miyagi", "宮城県", "Miyagi", "宫城县", "미야기현"),
+    ("akita", "秋田県", "Akita", "秋田县", "아키타현"), ("yamagata", "山形県", "Yamagata", "山形县", "야마가타현"),
+    ("fukushima", "福島県", "Fukushima", "福岛县", "후쿠시마현"), ("ibaraki", "茨城県", "Ibaraki", "茨城县", "이바라키현"),
+    ("tochigi", "栃木県", "Tochigi", "栃木县", "도치기현"), ("gunma", "群馬県", "Gunma", "群马县", "군마현"),
+    ("saitama", "埼玉県", "Saitama", "埼玉县", "사이타마현"), ("chiba", "千葉県", "Chiba", "千叶县", "치바현"),
+    ("tokyo", "東京都", "Tokyo", "东京都", "도쿄도"), ("kanagawa", "神奈川県", "Kanagawa", "神奈川县", "가나가와현"),
+    ("niigata", "新潟県", "Niigata", "新潟县", "니가타현"), ("toyama", "富山県", "Toyama", "富山县", "도야마현"),
+    ("ishikawa", "石川県", "Ishikawa", "石川县", "이시카와현"), ("fukui", "福井県", "Fukui", "福井县", "후쿠이현"),
+    ("yamanashi", "山梨県", "Yamanashi", "山梨县", "야마나시현"), ("nagano", "長野県", "Nagano", "长野县", "나가노현"),
+    ("gifu", "岐阜県", "Gifu", "岐阜县", "기후현"), ("shizuoka", "静岡県", "Shizuoka", "静冈县", "시즈오카현"),
+    ("aichi", "愛知県", "Aichi", "爱知县", "아이치현"), ("mie", "三重県", "Mie", "三重县", "미에현"),
+    ("shiga", "滋賀県", "Shiga", "滋贺县", "시가현"), ("kyoto", "京都府", "Kyoto", "京都府", "교토부"),
+    ("osaka", "大阪府", "Osaka", "大阪府", "오사카부"), ("hyogo", "兵庫県", "Hyogo", "兵库县", "효고현"),
+    ("nara", "奈良県", "Nara", "奈良县", "나라현"), ("wakayama", "和歌山県", "Wakayama", "和歌山县", "와카야마현"),
+    ("tottori", "鳥取県", "Tottori", "鸟取县", "돗토리현"), ("shimane", "島根県", "Shimane", "岛根县", "시마네현"),
+    ("okayama", "岡山県", "Okayama", "冈山县", "오카야마현"), ("hiroshima", "広島県", "Hiroshima", "广岛县", "히로시마현"),
+    ("yamaguchi", "山口県", "Yamaguchi", "山口县", "야마구치현"), ("tokushima", "徳島県", "Tokushima", "德岛县", "도쿠시마현"),
+    ("kagawa", "香川県", "Kagawa", "香川县", "가가와현"), ("ehime", "愛媛県", "Ehime", "爱媛县", "에히메현"),
+    ("kochi", "高知県", "Kochi", "高知县", "고치현"), ("fukuoka", "福岡県", "Fukuoka", "福冈县", "후쿠오카현"),
+    ("saga", "佐賀県", "Saga", "佐贺县", "사가현"), ("nagasaki", "長崎県", "Nagasaki", "长崎县", "나가사키현"),
+    ("kumamoto", "熊本県", "Kumamoto", "熊本县", "구마모토현"), ("oita", "大分県", "Oita", "大分县", "오이타현"),
+    ("miyazaki", "宮崎県", "Miyazaki", "宫崎县", "미야자키현"), ("kagoshima", "鹿児島県", "Kagoshima", "鹿儿岛县", "가고시마현"),
+    ("okinawa", "沖縄県", "Okinawa", "冲绳县", "오키나와현"),
+]
+ALL_AREAS = [row[0] for row in PREFECTURE_ROWS]
+PREFECTURES = {
+    slug: {"ja": ja, "en": en, "zh": zh, "ko": ko, "vi": (en if slug == "tokyo" else f"Tỉnh {en}"), "pt": ("Tóquio" if slug == "tokyo" else en)}
+    for slug, ja, en, zh, ko in PREFECTURE_ROWS
+}
+with open(os.path.join(BASE_DIR, "data", "nationwide-name-readings.json"), encoding="utf-8") as readings_file:
+    NAME_READINGS = json.load(readings_file)
 
 TOKYO_DISTRICTS_MAP = {
     "あきる野市": {"en": "Akiruno City", "zh": "秋留野市", "ko": "아키루노시", "vi": "Thành phố Akiruno", "pt": "Cidade de Akiruno"},
@@ -157,7 +191,7 @@ LANGUAGES = {
         "sec4_card1_h3": "信号覆盖区域", "sec4_card1_p": "在官网确认住宅、公司、学校等常用场所的乐天移动信号覆盖情况。",
         "sec4_card2_h3": "机型与数据备份", "sec4_card2_p": "确认手机适配情况，提前备份照片、联系人及身份验证 App 数据。",
         "sec4_card3_h3": "剩余未付账款", "sec4_card3_p": "确认手机分期余款、运营商代扣及家庭优惠等相关影响。",
-        "nearby_label": "NEARBY RAKUTEN MOBILE", "nearby_h2": "距离附近的乐天移动门店",
+        "nearby_label": "附近的乐天移动门店", "nearby_h2": "距离附近的乐天移动门店",
         "nearby_btn_map": "在 Google 地图上查看路线 ↗", "nearby_btn_official": "乐天移动官方门店页面 ↗",
         "nearby_disclaimer": "距离为根据两店官方坐标计算的直线距离。实际路线与时间请以 Google 地图为准。",
         "related_h2": "周边乐天移动门店", "related_official": "在官网查看乐天移动所有门店 ↗",
@@ -210,7 +244,7 @@ LANGUAGES = {
         "sec4_card1_h3": "통신 커버리지 영역", "sec4_card1_p": "자택, 회사, 학교 등 자주 방문하는 장소의 라쿠텐 모바일 전파 상태를 공식 사이트에서 확인합니다.",
         "sec4_card2_h3": "기기 호환 & 데이터 백업", "sec4_card2_p": "이용 예정 기기의 지원 여부를 확인하고 사진, 연락처, 인증 앱 등을 백업합니다.",
         "sec4_card3_h3": "잔여 할부금 & 결제", "sec4_card3_p": "단말기 잔여 할부금, 통신사 결제, 가족 할인 등의 영향 요소를 확인합니다.",
-        "nearby_label": "NEARBY RAKUTEN MOBILE", "nearby_h2": "가까운 라쿠텐 모바일 매장",
+        "nearby_label": "가까운 라쿠텐 모바일 매장", "nearby_h2": "가까운 라쿠텐 모바일 매장",
         "nearby_btn_map": "Google 지도로 경로 보기 ↗", "nearby_btn_official": "라쿠텐 모바일 공식 매장 페이지 ↗",
         "nearby_disclaimer": "거리 계산은 매장 좌표 기준 직선거리입니다. 실제 이동 시간은 Google 지도를 확인하세요.",
         "related_h2": "인근 라쿠텐 모바일 매장 목록", "related_official": "공식 사이트에서 라쿠텐 모바일 전체 매장 보기 ↗",
@@ -263,7 +297,7 @@ LANGUAGES = {
         "sec4_card1_h3": "Vùng phủ sóng", "sec4_card1_p": "Kiểm tra sóng Rakuten Mobile tại nhà, công ty, trường học trên bản đồ phủ sóng chính thức.",
         "sec4_card2_h3": "Thiết bị & Thẻ nhớ/Data", "sec4_card2_p": "Xác nhận điện thoại có tương thích và sao lưu hình ảnh, danh bạ, ứng dụng xác thực.",
         "sec4_card3_h3": "Trả góp còn lại", "sec4_card3_p": "Kiểm tra tiền trả góp máy còn lại, dịch vụ thanh toán qua sim và giảm giá gia đình.",
-        "nearby_label": "NEARBY RAKUTEN MOBILE", "nearby_h2": "Cửa hàng Rakuten Mobile gần",
+        "nearby_label": "CỬA HÀNG RAKUTEN MOBILE GẦN ĐÂY", "nearby_h2": "Cửa hàng Rakuten Mobile gần",
         "nearby_btn_map": "Xem đường đi trên Google Maps ↗", "nearby_btn_official": "Trang cửa hàng Rakuten Mobile chính thức ↗",
         "nearby_disclaimer": "Khoảng cách được tính theo đường chim bay. Xem thời gian di chuyển thực tế trên Google Maps.",
         "related_h2": "Các cửa hàng Rakuten Mobile lân cận", "related_official": "Xem tất cả cửa hàng Rakuten Mobile trên trang chính thức ↗",
@@ -316,7 +350,7 @@ LANGUAGES = {
         "sec4_card1_h3": "Área de Cobertura", "sec4_card1_p": "Confira a cobertura do sinal da Rakuten Mobile na sua casa, trabalho e escola no site oficial.",
         "sec4_card2_h3": "Aparelho & Backup", "sec4_card2_p": "Confira se o celular é compatível e faça backup de fotos, contatos e aplicativos de autenticação.",
         "sec4_card3_h3": "Cobranças Restantes", "sec4_card3_p": "Confira valores restantes do aparelho parcelado, serviços da operadora e descontos de família.",
-        "nearby_label": "NEARBY RAKUTEN MOBILE", "nearby_h2": "Lojas Rakuten Mobile próximas da",
+        "nearby_label": "LOJAS RAKUTEN MOBILE PRÓXIMAS", "nearby_h2": "Lojas Rakuten Mobile próximas da",
         "nearby_dist_prefix": "Distância em linha reta aprox.", "nearby_btn_map": "Ver rota no Google Maps ↗",
         "nearby_btn_official": "Página Oficial da Loja Rakuten Mobile ↗",
         "nearby_disclaimer": "Distância calculada em linha reta a partir das coordenadas. Confira o tempo real de trajeto no Google Maps.",
@@ -330,36 +364,263 @@ LANGUAGES = {
     }
 }
 
-def translate_shop_content(ja_content, lang_code, t):
+# Text used by the shop-specific sections that were added after the first
+# multilingual pass. Store names and postal addresses remain in their official
+# Japanese notation so visitors can copy them into maps and carrier websites.
+SHOP_PAGE_TEXT = {
+    "en": {
+        "title": "For {shop} customers in {district}, {area} | Switching from {carrier} to Rakuten Mobile",
+        "description": "A guide for {shop} users in {district}: preparation and steps to switch from {carrier} to Rakuten Mobile while keeping your phone number.",
+        "in_language": "en",
+        "topic_label": "LOCAL TOPICS",
+        "hero_heading": "For customers of <span>{shop}</span><br>Before switching from {carrier} to Rakuten Mobile",
+        "steps_heading": "How to switch from {carrier} to Rakuten Mobile",
+        "topic_heading": "Latest Rakuten Mobile updates near {district}",
+        "opened": "{name} is now open",
+        "topic_body": "About {distance} km in a straight line from {shop}. You now have another nearby store where you can ask about Rakuten Mobile in person.",
+        "topic_source": "Source: Rakuten Mobile official store information for “{name}”<br>Published: {date}",
+        "topic_note": "Store information may change. This local update section does not contain links to external websites.",
+        "distance": "Approx. {distance} km in a straight line",
+        "nearby_heading": "Rakuten Mobile shops near {shop}",
+        "map_title": "Map of {name}",
+        "related_heading": "Rakuten Mobile shops near {district}",
+        "related_meta": "{district} · approx. {distance} km in a straight line",
+        "updated": "Information checked: {date}",
+        "floating_label": "Switch from another carrier",
+        "floating_points": "14,000 points",
+        "floating_button": "View offer →",
+    },
+    "zh": {
+        "title": "致{area}{district}{shop}用户｜从{carrier}转网至乐天移动指南",
+        "description": "面向{district}{shop}用户，介绍从{carrier}转网至乐天移动并保留原号码所需的准备与办理步骤。",
+        "in_language": "zh-CN",
+        "topic_label": "本地动态",
+        "hero_heading": "致<span>{shop}</span>用户<br>从{carrier}转网至乐天移动前的确认事项",
+        "steps_heading": "从{carrier}转网至乐天移动的步骤",
+        "topic_heading": "{district}附近的乐天移动最新动态",
+        "opened": "{name}现已开业",
+        "topic_body": "距{shop}直线距离约{distance}公里。附近又多了一家可当面咨询乐天移动业务的门店。",
+        "topic_source": "来源：乐天移动官网“{name} 门店信息”<br>发布日期：{date}",
+        "topic_note": "门店信息可能随时变更。本地动态栏目不设置外部网站链接。",
+        "distance": "直线距离约{distance}公里",
+        "nearby_heading": "{shop}附近的乐天移动门店",
+        "map_title": "{name}地图",
+        "related_heading": "{district}附近的乐天移动门店",
+        "related_meta": "{district} · 直线距离约{distance}公里",
+        "updated": "信息确认日期：{date}",
+        "floating_label": "从其他运营商转网",
+        "floating_points": "14,000 积分",
+        "floating_button": "查看优惠 →",
+    },
+    "ko": {
+        "title": "{area} {district} {shop} 이용 고객님께｜{carrier}에서 라쿠텐 모바일로 번호이동 가이드",
+        "description": "{district}의 {shop} 이용자를 위해 {carrier}에서 전화번호를 유지한 채 라쿠텐 모바일로 번호이동하는 준비와 절차를 안내합니다.",
+        "in_language": "ko",
+        "topic_label": "지역 소식",
+        "hero_heading": "<span>{shop}</span> 이용 고객님께<br>{carrier}에서 라쿠텐 모바일로 번호이동하기 전에",
+        "steps_heading": "{carrier}에서 라쿠텐 모바일로 번호이동하는 절차",
+        "topic_heading": "{district} 주변 라쿠텐 모바일 최신 소식",
+        "opened": "{name} 오픈",
+        "topic_body": "{shop}에서 직선거리 약 {distance}km입니다. 가까운 곳에서 라쿠텐 모바일을 대면 상담할 수 있는 매장이 하나 더 늘었습니다.",
+        "topic_source": "출처: 라쿠텐 모바일 공식 ‘{name} 매장 정보’<br>게시일: {date}",
+        "topic_note": "매장 정보는 변경될 수 있습니다. 지역 소식에는 외부 사이트 링크를 제공하지 않습니다.",
+        "distance": "직선거리 약 {distance}km",
+        "nearby_heading": "{shop} 근처 라쿠텐 모바일 매장",
+        "map_title": "{name} 지도",
+        "related_heading": "{district} 주변 라쿠텐 모바일 매장",
+        "related_meta": "{district} · 직선거리 약 {distance}km",
+        "updated": "정보 확인일: {date}",
+        "floating_label": "타사에서 번호이동 시",
+        "floating_points": "14,000 포인트",
+        "floating_button": "혜택 확인 →",
+    },
+    "vi": {
+        "title": "Dành cho khách hàng của {shop} tại {district}, {area} | Chuyển từ {carrier} sang Rakuten Mobile",
+        "description": "Hướng dẫn dành cho người dùng {shop} tại {district}: chuẩn bị và các bước chuyển từ {carrier} sang Rakuten Mobile mà vẫn giữ số điện thoại.",
+        "in_language": "vi",
+        "topic_label": "TIN ĐỊA PHƯƠNG",
+        "hero_heading": "Dành cho khách hàng của <span>{shop}</span><br>Trước khi chuyển từ {carrier} sang Rakuten Mobile",
+        "steps_heading": "Các bước chuyển từ {carrier} sang Rakuten Mobile",
+        "topic_heading": "Tin mới nhất về Rakuten Mobile gần {district}",
+        "opened": "{name} đã khai trương",
+        "topic_body": "Cách {shop} khoảng {distance} km theo đường chim bay. Bạn có thêm một cửa hàng gần đó để được tư vấn trực tiếp về Rakuten Mobile.",
+        "topic_source": "Nguồn: Thông tin cửa hàng chính thức của Rakuten Mobile “{name}”<br>Ngày đăng: {date}",
+        "topic_note": "Thông tin cửa hàng có thể thay đổi. Mục tin địa phương này không đặt liên kết đến trang bên ngoài.",
+        "distance": "Khoảng {distance} km theo đường chim bay",
+        "nearby_heading": "Cửa hàng Rakuten Mobile gần {shop}",
+        "map_title": "Bản đồ {name}",
+        "related_heading": "Cửa hàng Rakuten Mobile gần {district}",
+        "related_meta": "{district} · khoảng {distance} km theo đường chim bay",
+        "updated": "Ngày kiểm tra thông tin: {date}",
+        "floating_label": "Chuyển mạng giữ số",
+        "floating_points": "14.000 điểm",
+        "floating_button": "Xem ưu đãi →",
+    },
+    "pt": {
+        "title": "Para clientes da {shop} em {district}, {area} | Migração da {carrier} para a Rakuten Mobile",
+        "description": "Guia para clientes da {shop} em {district}: preparação e etapas para mudar da {carrier} para a Rakuten Mobile mantendo o número.",
+        "in_language": "pt-BR",
+        "topic_label": "NOVIDADES LOCAIS",
+        "hero_heading": "Para clientes da <span>{shop}</span><br>Antes de migrar da {carrier} para a Rakuten Mobile",
+        "steps_heading": "Como migrar da {carrier} para a Rakuten Mobile",
+        "topic_heading": "Novidades da Rakuten Mobile perto de {district}",
+        "opened": "{name} foi inaugurada",
+        "topic_body": "A cerca de {distance} km em linha reta da {shop}. Agora há mais uma loja próxima para consultar pessoalmente sobre a Rakuten Mobile.",
+        "topic_source": "Fonte: Informações oficiais da loja “{name}” da Rakuten Mobile<br>Publicado em: {date}",
+        "topic_note": "As informações da loja podem mudar. Esta seção de novidades locais não contém links para sites externos.",
+        "distance": "Distância em linha reta de aprox. {distance} km",
+        "nearby_heading": "Lojas Rakuten Mobile perto da {shop}",
+        "map_title": "Mapa da {name}",
+        "related_heading": "Lojas Rakuten Mobile perto de {district}",
+        "related_meta": "{district} · aprox. {distance} km em linha reta",
+        "updated": "Informações verificadas em: {date}",
+        "floating_label": "Portabilidade de outra operadora",
+        "floating_points": "14.000 pontos",
+        "floating_button": "Ver oferta →",
+    },
+}
+
+AREA_INDEX_TEXT = {
+    "en": {"title": "For mobile carrier shop customers in {area} | Rakuten Mobile Switching Guide", "desc": "Find carrier shops in {area} and check what to prepare before switching to Rakuten Mobile.", "hero": "For carrier shop customers in {area}<br><span>Before switching to Rakuten Mobile</span>", "lead": "Choose the shop you currently use to review MNP preparation and switching steps.", "listed": "Listed stores", "filter": "Filter stores", "shown": "stores shown", "search": "Search by store or city", "placeholder": "e.g. city or store name", "all": "All", "unit": "stores", "coverage": "Check Rakuten Mobile coverage by municipality in {area} ↗"},
+    "zh": {"title": "致{area}手机运营商门店用户｜乐天移动转网指南", "desc": "查找{area}的通信运营商门店，并确认转网至乐天移动前需要准备的事项。", "hero": "致{area}通信运营商门店用户<br><span>转网至乐天移动前的确认事项</span>", "lead": "请选择目前使用的门店，确认携号转网准备事项与办理步骤。", "listed": "收录门店", "filter": "筛选门店", "shown": "家门店", "search": "按门店或城市搜索", "placeholder": "例如：城市或门店名称", "all": "全部", "unit": "家", "coverage": "按市区町村查看{area}的乐天移动信号覆盖 ↗"},
+    "ko": {"title": "{area} 통신사 매장 이용 고객님께｜라쿠텐 모바일 번호이동 가이드", "desc": "{area}의 통신사 매장을 찾아 라쿠텐 모바일 번호이동 전 준비사항을 확인하세요.", "hero": "{area} 통신사 매장 이용 고객님께<br><span>라쿠텐 모바일로 번호이동하기 전에</span>", "lead": "현재 이용 중인 매장을 선택하여 MNP 준비사항과 번호이동 절차를 확인하세요.", "listed": "등록 매장", "filter": "매장 검색", "shown": "개 매장 표시", "search": "매장명 또는 도시로 검색", "placeholder": "예: 도시 또는 매장명", "all": "전체", "unit": "개", "coverage": "{area}의 라쿠텐 모바일 통신 상태를 지역별로 확인 ↗"},
+    "vi": {"title": "Dành cho khách hàng cửa hàng nhà mạng tại {area} | Hướng dẫn Rakuten Mobile", "desc": "Tìm cửa hàng nhà mạng tại {area} và kiểm tra những điều cần chuẩn bị trước khi chuyển sang Rakuten Mobile.", "hero": "Dành cho khách hàng cửa hàng nhà mạng tại {area}<br><span>Trước khi chuyển sang Rakuten Mobile</span>", "lead": "Chọn cửa hàng hiện tại để xem các bước chuẩn bị và chuyển mạng giữ số MNP.", "listed": "Cửa hàng", "filter": "Lọc cửa hàng", "shown": "cửa hàng hiển thị", "search": "Tìm theo cửa hàng hoặc thành phố", "placeholder": "Ví dụ: thành phố hoặc tên cửa hàng", "all": "Tất cả", "unit": "cửa hàng", "coverage": "Kiểm tra vùng phủ sóng Rakuten Mobile theo địa phương tại {area} ↗"},
+    "pt": {"title": "Para clientes de lojas de operadoras em {area} | Guia Rakuten Mobile", "desc": "Encontre lojas de operadoras em {area} e veja o que preparar antes de mudar para a Rakuten Mobile.", "hero": "Para clientes de lojas de operadoras em {area}<br><span>Antes de migrar para a Rakuten Mobile</span>", "lead": "Escolha a loja da sua operadora atual para conferir a preparação e os passos da portabilidade MNP.", "listed": "Lojas listadas", "filter": "Filtrar lojas", "shown": "lojas exibidas", "search": "Buscar por loja ou cidade", "placeholder": "Ex.: cidade ou nome da loja", "all": "Todas", "unit": "lojas", "coverage": "Verifique o sinal da Rakuten Mobile por município em {area} ↗"},
+}
+
+def normalized_date(value):
+    match = re.fullmatch(r'(\d{4})年(\d{1,2})月(\d{1,2})日', value.strip())
+    if match:
+        year, month, day = match.groups()
+        return f'{year}-{int(month):02d}-{int(day):02d}'
+    return value
+
+def localized_name(japanese_name):
+    return NAME_READINGS["names"].get(japanese_name, japanese_name)
+
+def localized_locality(japanese_locality, lang_code):
+    if japanese_locality in TOKYO_DISTRICTS_MAP:
+        return TOKYO_DISTRICTS_MAP[japanese_locality].get(lang_code, japanese_locality)
+    reading = NAME_READINGS["localities"].get(japanese_locality, japanese_locality)
+    city_ward = re.fullmatch(r"(.+) Shi (.+) Ku", reading)
+    if city_ward:
+        city, ward = city_ward.groups()
+        return {
+            "en": f"{ward} Ward, {city}", "zh": f"{city}市{ward}区", "ko": f"{city}시 {ward}구",
+            "vi": f"Quận {ward}, Thành phố {city}", "pt": f"Distrito de {ward}, {city}",
+        }[lang_code]
+    county_town = re.fullmatch(r"(.+) Gun (.+) (?:Machi|Cho)", reading)
+    if county_town:
+        county, town = county_town.groups()
+        return {
+            "en": f"{town} Town, {county} County", "zh": f"{county}郡{town}町", "ko": f"{county}군 {town}정",
+            "vi": f"Thị trấn {town}, huyện {county}", "pt": f"Vila de {town}, condado de {county}",
+        }[lang_code]
+    suffixes = {
+        "en": [(" Shi", " City"), (" Ku", " Ward"), (" Machi", " Town"), (" Cho", " Town"), (" Mura", " Village")],
+        "zh": [(" Shi", "市"), (" Ku", "区"), (" Machi", "町"), (" Cho", "町"), (" Mura", "村")],
+        "ko": [(" Shi", "시"), (" Ku", "구"), (" Machi", "정"), (" Cho", "정"), (" Mura", "촌")],
+        "vi": [(" Shi", " City"), (" Ku", " Ward"), (" Machi", " Town"), (" Cho", " Town"), (" Mura", " Village")],
+        "pt": [(" Shi", ""), (" Ku", ""), (" Machi", ""), (" Cho", ""), (" Mura", "")],
+    }
+    for source, target in suffixes[lang_code]:
+        if reading.endswith(source):
+            return reading[:-len(source)] + target
+    return reading
+
+def bilingual_markup(japanese_name):
+    reading = localized_name(japanese_name)
+    return f'<span class="localized-shop-name">{reading}</span><small class="official-shop-name" lang="ja">{japanese_name}</small>'
+
+def localized_carrier(carrier):
+    return {"ドコモ": "docomo", "ソフトバンク": "SoftBank", "イオンモバイル": "AEON Mobile"}.get(carrier, carrier)
+
+def translate_shop_content(ja_content, area, lang_code, t):
     content = ja_content
+    page_text = SHOP_PAGE_TEXT[lang_code]
+    identity_match = re.search(
+        r'<p class="eyebrow">([^・<]+)・([^<]+)をご利用の方へ</p>.*?'
+        r'<h1><span>(.*?)</span>をご利用中の方へ<br>.*?から楽天モバイルへ乗り換える前に</h1>',
+        content,
+        flags=re.DOTALL,
+    )
+    if not identity_match:
+        raise ValueError("Could not identify shop page content")
+
+    district_ja, carrier_ja, shop_name = identity_match.groups()
+    carrier = localized_carrier(carrier_ja)
+    district = localized_locality(district_ja, lang_code)
+    shop_reading = localized_name(shop_name)
+    translated_title = page_text["title"].format(
+        shop=shop_reading, district=district, area=PREFECTURES[area][lang_code], carrier=carrier
+    )
+    translated_description = page_text["description"].format(shop=shop_reading, district=district, carrier=carrier)
+    ja_path_match = re.search(rf'<link rel="canonical" href="https://rm-referral\.maffun\.workers\.dev(/{area}/[^\"]+)">', content)
+    if not ja_path_match:
+        raise ValueError("Could not identify canonical shop path")
+    localized_url = f'https://rm-referral.maffun.workers.dev/{lang_code}{ja_path_match.group(1)}'
+
     content = re.sub(r'<html lang="ja">', f'<html lang="{lang_code}">', content)
     content = re.sub(r'<meta property="og:locale" content=".*?">', f'<meta property="og:locale" content="{t["locale"]}">', content)
+    content = re.sub(r'<title>.*?</title>', f'<title>{translated_title}</title>', content, count=1)
+    content = re.sub(r'<meta name="description" content=".*?">', f'<meta name="description" content="{translated_description}">', content, count=1)
+    content = re.sub(r'<link rel="canonical" href=".*?">', f'<link rel="canonical" href="{localized_url}">', content, count=1)
+    content = re.sub(r'<meta property="og:title" content=".*?">', f'<meta property="og:title" content="{translated_title}">', content, count=1)
+    content = re.sub(r'<meta property="og:description" content=".*?">', f'<meta property="og:description" content="{translated_description}">', content, count=1)
+    content = re.sub(r'<meta property="og:url" content=".*?">', f'<meta property="og:url" content="{localized_url}">', content, count=1)
+
+    def translate_schema(match):
+        data = json.loads(match.group(1))
+        if data.get("@type") == "WebPage":
+            data.update({
+                "name": translated_title,
+                "description": translated_description,
+                "url": localized_url,
+                "inLanguage": page_text["in_language"],
+            })
+        elif data.get("@type") == "BreadcrumbList":
+            items = data.get("itemListElement", [])
+            if len(items) >= 3:
+                items[0].update({"name": t["bread_home"], "item": f"https://rm-referral.maffun.workers.dev/{lang_code}/"})
+                items[1].update({"name": PREFECTURES[area][lang_code], "item": f"https://rm-referral.maffun.workers.dev/{lang_code}/{area}/"})
+                items[2]["name"] = f'{shop_reading} ({shop_name})'
+                items[2]["item"] = localized_url
+        return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + '</script>'
+
+    content = re.sub(r'<script type="application/ld\+json">(.*?)</script>', translate_schema, content)
 
     # Eyebrow & Headline District replacement
-    for ja_dist, dist_map in TOKYO_DISTRICTS_MAP.items():
-        lang_dist = dist_map.get(lang_code, ja_dist)
-        content = content.replace(f'<p class="eyebrow">{ja_dist}・', f'<p class="eyebrow">{lang_dist} · ')
+    content = content.replace(f'<p class="eyebrow">{district_ja}・', f'<p class="eyebrow">{district} · ')
 
     content = content.replace('をご利用の方へ</p>', f' {t["eyebrow_suffix"]}</p>')
     
-    if lang_code == "en":
-        content = content.replace('から<br>楽天モバイルへ乗り換える前に</h1>', '<br>Before switching to Rakuten Mobile from</h1>')
-    else:
-        content = content.replace('から<br>楽天モバイルへ乗り換える前に</h1>', f'{t["h1_suffix"]}')
+    content = re.sub(
+        r'<h1><span>.*?</span>をご利用中の方へ<br>.*?から楽天モバイルへ乗り換える前に</h1>',
+        f'<h1>{page_text["hero_heading"].format(shop=shop_reading, carrier=carrier)}<small class="official-shop-name" lang="ja">{shop_name}</small></h1>',
+        content,
+        count=1,
+    )
 
     # Breadcrumbs
     content = content.replace('aria-label="パンくずリスト"', f'aria-label="Breadcrumb"')
     content = content.replace('<a href="/">トップ</a>', f'<a href="/{lang_code}/">{t["bread_home"]}</a>')
-    content = content.replace('<a href="/tokyo/">東京</a>', f'<a href="/{lang_code}/tokyo/">{t["tokyo_name"]}</a>')
+    content = re.sub(
+        rf'<a href="/{area}/">.*?</a>',
+        f'<a href="/{lang_code}/{area}/">{PREFECTURES[area][lang_code]}</a>',
+        content,
+        count=1,
+    )
+    content = content.replace(f'<span>{shop_name}</span>', f'<span>{shop_reading} ({shop_name})</span>', 1)
 
     # Hero Lead & Buttons
-    content = content.replace('<p class="lead">店舗へ行く前に、オンラインでできる手続きと準備するものを確認。電話番号を引き継ぐMNPの流れを、順番に整理します。</p>', f'<p class="lead">{t["lead"]}</p>')
+    content = re.sub(r'<p class="lead">料金プランの見直しや機種変更で店舗を訪れる前に、.*?</p>', f'<p class="lead">{t["lead"]}</p>', content, count=1)
     content = content.replace('<div class="cta-benefit"><span>他社から乗り換えなら</span><strong>14,000<small>ポイント</small></strong></div>', f'<div class="cta-benefit"><span>{t["cta_benefit_label"]}</span><strong>{t["cta_benefit_pts"]}</strong></div>')
     content = content.replace('14,000ポイント特典を確認する <span aria-hidden="true">→</span>', f'{t["cta_btn"]}')
     content = content.replace('<p class="small">楽天従業員紹介キャンペーン。適用には申し込み・利用開始・Rakuten Link通話などの条件があります。</p>', f'<p class="small">{t["cta_sub"]}</p>')
 
     # Card Table
     content = content.replace('<p class="pill">掲載店舗情報</p>', f'<p class="pill">{t["card_pill"]}</p>')
+    content = content.replace(f'<aside class="shop-card">\n        <p class="pill">{t["card_pill"]}</p>\n        <h2>{shop_name}</h2>', f'<aside class="shop-card">\n        <p class="pill">{t["card_pill"]}</p>\n        <h2>{bilingual_markup(shop_name)}</h2>')
     content = content.replace('<dt>所在地</dt>', f'<dt>{t["dt_address"]}</dt>')
     content = content.replace('<dt>現在の通信会社</dt>', f'<dt>{t["dt_carrier"]}</dt>')
     content = content.replace('店舗公式ページで最新情報を確認 <span>↗</span>', f'{t["official_link"]}')
@@ -386,9 +647,16 @@ def translate_shop_content(ja_content, lang_code, t):
     content = content.replace('<li>現在利用中の電話番号と契約名義</li>', f'<li>{t["sec1_item4"]}</li>')
     content = content.replace('<li>対応端末・SIMロック状態の確認</li>', f'<li>{t["sec1_item5"]}</li>')
 
-    content = re.sub(r'<h3>(au|ドコモ|ソフトバンク|UQ mobile|Y!mobile|イオンモバイル)側で確認しておくこと</h3>', f'<h3>{t["sec1_aside_h3"]}</h3>', content)
-    content = re.sub(r'<p>My (au|docomo|SoftBank)の契約情報と.*?</p>', f'<p>{t["sec1_aside_p1"]}</p>', content)
-    content = re.sub(r'<p>(au|ドコモ|ソフトバンク|UQ mobile|Y!mobile)メールを残したい場合は.*?</p>', f'<p>{t["sec1_aside_p2"]}</p>', content)
+    content = re.sub(
+        r'<aside class="note-card">\s*<h3>.*?側で確認しておくこと</h3>\s*<p>.*?</p>\s*<p>.*?</p>\s*</aside>',
+        '<aside class="note-card">\n'
+        f'          <h3>{t["sec1_aside_h3"]}</h3>\n'
+        f'          <p>{t["sec1_aside_p1"]}</p>\n'
+        f'          <p>{t["sec1_aside_p2"]}</p>\n'
+        '        </aside>',
+        content,
+        flags=re.DOTALL,
+    )
 
     # Section 2: MNP
     content = content.replace('<p class="section-label">02 / MNP</p>', f'<p class="section-label">{t["sec2_label"]}</p>')
@@ -403,7 +671,12 @@ def translate_shop_content(ja_content, lang_code, t):
 
     # Section 3: Steps
     content = content.replace('<p class="section-label">03 / STEPS</p>', f'<p class="section-label">{t["sec3_label"]}</p>')
-    content = content.replace('を利用中の方の乗り換え手順</h2>', f' {t["sec3_h2"]}</h2>')
+    content = re.sub(
+        r'<h2>.*?を利用中の方の乗り換え手順</h2>',
+        f'<h2>{page_text["steps_heading"].format(shop=shop_reading, carrier=carrier)}</h2>',
+        content,
+        count=1,
+    )
     content = content.replace('<h3>紹介キャンペーンへログイン</h3>', f'<h3>{t["sec3_step1_h3"]}</h3>')
     content = content.replace('<p>紹介リンクを開き、申し込み前に楽天IDでログインします。最新の対象条件と期限を確認してください。</p>', f'<p>{t["sec3_step1_p"]}</p>')
     content = content.replace('<h3>楽天モバイルを申し込む</h3>', f'<h3>{t["sec3_step2_h3"]}</h3>')
@@ -427,11 +700,78 @@ def translate_shop_content(ja_content, lang_code, t):
 
     # Nearby Shop & Buttons
     content = content.replace('<p class="section-label">NEARBY RAKUTEN MOBILE</p>', f'<p class="section-label">{t["nearby_label"]}</p>')
-    content = content.replace('から近い楽天モバイルショップ</h2>', f' {t["nearby_h2"]}</h2>')
     content = content.replace('Googleマップで経路を見る <span aria-hidden="true">↗</span>', f'{t["nearby_btn_map"]}')
     content = content.replace('楽天モバイル公式店舗ページ <span>↗</span>', f'{t["nearby_btn_official"]}')
     content = content.replace('<p class="small">距離は両店舗の公式座標から算出した直線距離です。実際の移動距離・時間はGoogleマップで確認してください。</p>', f'<p class="small">{t["nearby_disclaimer"]}</p>')
     content = content.replace('楽天モバイルの全店舗を公式サイトで見る ↗', f'{t["related_official"]}')
+
+    # Local updates and shop-specific nearby information.
+    content = content.replace('<p class="section-label">LOCAL TOPICS</p>', f'<p class="section-label">{page_text["topic_label"]}</p>')
+    content = re.sub(
+        r'<h2 id="local-topics-heading">.*?周辺の楽天モバイル最新トピック</h2>',
+        f'<h2 id="local-topics-heading">{page_text["topic_heading"].format(district=district)}</h2>',
+        content,
+    )
+    content = re.sub(
+        r'<time datetime="([^"]+)">.*?</time>',
+        lambda m: f'<time datetime="{m.group(1)}">{m.group(1)}</time>',
+        content,
+    )
+    content = re.sub(
+        r'<h3>(.*?)がオープン</h3>',
+        lambda m: f'<h3>{page_text["opened"].format(name=localized_name(m.group(1)))}<small class="official-shop-name" lang="ja">{m.group(1)}</small></h3>',
+        content,
+    )
+    content = re.sub(
+        r'<p>(.*?)から直線距離約([0-9.]+)km。近隣で楽天モバイルを対面相談できる店舗の選択肢が増えました。</p>',
+        lambda m: f'<p>{page_text["topic_body"].format(shop=localized_name(m.group(1)), distance=m.group(2))}</p>',
+        content,
+    )
+    content = re.sub(
+        r'<p class="local-topic-source">元情報：楽天モバイル公式「(.*?) 店舗情報」<br>公開日：([^<]+)</p>',
+        lambda m: f'<p class="local-topic-source">{page_text["topic_source"].format(name=f"{localized_name(m.group(1))} ({m.group(1)})", date=normalized_date(m.group(2)))}</p>',
+        content,
+    )
+    content = content.replace(
+        '<p class="topic-source">店舗情報は閲覧時点で変更される場合があります。地域トピックから外部サイトへのリンクは設置していません。</p>',
+        f'<p class="topic-source">{page_text["topic_note"]}</p>',
+    )
+    content = re.sub(
+        r'<p class="pill">直線距離 約([0-9.]+)km</p>',
+        lambda m: f'<p class="pill">{page_text["distance"].format(distance=m.group(1))}</p>',
+        content,
+    )
+    content = re.sub(
+        r'<h2>.*?から近い楽天モバイルショップ</h2>',
+        f'<h2>{page_text["nearby_heading"].format(shop=shop_reading)}<small class="official-shop-name" lang="ja">{shop_name}</small></h2>',
+        content,
+    )
+    content = re.sub(
+        r'<iframe class="shop-map" title="(.*?)の地図"',
+        lambda m: f'<iframe class="shop-map" title="{page_text["map_title"].format(name=localized_name(m.group(1)))}"',
+        content,
+    )
+    content = re.sub(
+        r'<section class="related-section">\s*<h2>.*?周辺の楽天モバイルショップ</h2>',
+        f'<section class="related-section">\n      <h2>{page_text["related_heading"].format(district=district)}</h2>',
+        content,
+    )
+    content = re.sub(
+        r'<span class="shop-link-meta">([^<・]+)・直線距離 約([0-9.]+)km</span>',
+        lambda m: f'<span class="shop-link-meta">{page_text["related_meta"].format(district=localized_locality(m.group(1), lang_code), distance=m.group(2))}</span>',
+        content,
+    )
+    content = re.sub(
+        r'<div class="nearby-shop-card">([\s\S]*?)<h3>(.*?)</h3>',
+        lambda m: f'<div class="nearby-shop-card">{m.group(1)}<h3>{bilingual_markup(m.group(2))}</h3>',
+        content,
+        count=1,
+    )
+    content = re.sub(
+        r'<span class="shop-link-name">(.*?)</span>',
+        lambda m: f'<span class="shop-link-name">{bilingual_markup(m.group(1))}</span>',
+        content,
+    )
 
     # Final CTA & Footer
     content = content.replace('<p class="eyebrow">楽天従業員紹介キャンペーン</p>', f'<p class="eyebrow">{t["final_eyebrow"]}</p>')
@@ -439,27 +779,139 @@ def translate_shop_content(ja_content, lang_code, t):
     content = content.replace('<p>適用条件やポイント進呈時期を確認し、紹介リンクから楽天IDでログインして申し込みへ進んでください。</p>', f'<p>{t["final_p"]}</p>')
     content = content.replace('<p>当サイトは個人が運営しており、各通信会社および掲載店舗の公式サイトではありません。</p>', f'<p>{t["footer_disclaimer_1"]}</p>')
     content = content.replace('<p>当サイトには紹介リンクが含まれます。条件や店舗情報は、申し込み時点の各公式サイトでご確認ください。</p>', f'<p>{t["footer_disclaimer_2"]}</p>')
+    content = content.replace('<p><strong>楽天モバイル乗り換えガイド</strong></p>', f'<p><strong>{t["home_title"]}</strong></p>')
+    content = re.sub(
+        r'<p class="updated">情報確認日：([^<]+)</p>',
+        lambda m: f'<p class="updated">{page_text["updated"].format(date=m.group(1))}</p>',
+        content,
+    )
+    content = re.sub(
+        r'<aside class="floating-cta" data-floating-cta aria-hidden="true">\s*'
+        r'<p><span>他社から乗り換えで</span><strong>14,000ポイント</strong></p>\s*'
+        r'<a ([^>]+)>特典を確認する <span aria-hidden="true">→</span></a>',
+        lambda m: '<aside class="floating-cta" data-floating-cta aria-hidden="true">\n'
+        f'      <p><span>{page_text["floating_label"]}</span><strong>{page_text["floating_points"]}</strong></p>\n'
+        f'      <a {m.group(1)}>{page_text["floating_button"]}</a>',
+        content,
+    )
 
     return content
 
+def translate_area_index(area, lang_code, t):
+    source_file = os.path.join(BASE_DIR, area, "index.html")
+    with open(source_file, encoding="utf-8") as file:
+        content = file.read()
+    text = AREA_INDEX_TEXT[lang_code]
+    area_name = PREFECTURES[area][lang_code]
+    title = text["title"].format(area=area_name)
+    description = text["desc"].format(area=area_name)
+    url = f'https://rm-referral.maffun.workers.dev/{lang_code}/{area}/'
+    count = len([p for p in glob.glob(f'{BASE_DIR}/{area}/*/*/index.html') if f'{os.sep}coverage{os.sep}' not in p])
+
+    content = content.replace('<html lang="ja">', f'<html lang="{lang_code}">')
+    content = re.sub(r'<title>.*?</title>', f'<title>{title}</title>', content, count=1)
+    content = re.sub(r'<meta name="description" content=".*?">', f'<meta name="description" content="{description}">', content, count=1)
+    content = re.sub(r'<link rel="canonical" href=".*?">', f'<link rel="canonical" href="{url}">', content, count=1)
+    content = re.sub(r'<meta property="og:locale" content=".*?">', f'<meta property="og:locale" content="{t["locale"]}">', content, count=1)
+    content = re.sub(r'<meta property="og:title" content=".*?">', f'<meta property="og:title" content="{title}">', content, count=1)
+    content = re.sub(r'<meta property="og:description" content=".*?">', f'<meta property="og:description" content="{description}">', content, count=1)
+    content = re.sub(r'<meta property="og:url" content=".*?">', f'<meta property="og:url" content="{url}">', content, count=1)
+    alternates = "\n".join(
+        [f'  <link rel="alternate" hreflang="ja" href="https://rm-referral.maffun.workers.dev/{area}/">'] +
+        [f'  <link rel="alternate" hreflang="{code}" href="https://rm-referral.maffun.workers.dev/{code}/{area}/">' for code in LANGUAGES]
+    )
+    content = re.sub(r'\s*<link rel="alternate" hreflang="(?:ja|en|zh|ko|vi|pt)"[^>]*>', '', content)
+    content = re.sub(r'(<link rel="canonical"[^>]*>)', rf'\1\n{alternates}', content, count=1)
+
+    def update_schema(match):
+        data = json.loads(match.group(1))
+        data.update({"name": title, "description": description, "url": url, "inLanguage": SHOP_PAGE_TEXT[lang_code]["in_language"]})
+        return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + '</script>'
+    content = re.sub(r'<script type="application/ld\+json">(.*?)</script>', update_schema, content)
+
+    selector = f'''<div class="lang-selector-wrap"><select class="lang-selector" onchange="if(this.value) location.href=this.value;" aria-label="Language">
+      <option value="/{area}/">🇯🇵 日本語</option>
+      <option value="/en/{area}/" {"selected" if lang_code == "en" else ""}>🇺🇸 English</option>
+      <option value="/zh/{area}/" {"selected" if lang_code == "zh" else ""}>🇨🇳 中文</option>
+      <option value="/ko/{area}/" {"selected" if lang_code == "ko" else ""}>🇰🇷 한국어</option>
+      <option value="/vi/{area}/" {"selected" if lang_code == "vi" else ""}>🇻🇳 Tiếng Việt</option>
+      <option value="/pt/{area}/" {"selected" if lang_code == "pt" else ""}>🇧🇷 Português</option>
+    </select></div>'''
+    header = f'''<header class="site-header"><a class="site-name" href="/{lang_code}/">{t["home_title"]}</a><div style="display:flex;align-items:center;gap:16px;"><a class="header-link" href="/{lang_code}/guide/foreigners/">{t["guide_link_text"]}</a><a class="header-link" href="/{lang_code}/{area}/">{area_name}</a>{selector}</div></header>'''
+    content = re.sub(r'<header class="site-header">.*?</header>', header, content, flags=re.DOTALL)
+    content = re.sub(r'<nav class="breadcrumb".*?</nav>', f'<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/{lang_code}/">{t["bread_home"]}</a><span>›</span><span>{area_name}</span></nav>', content, count=1, flags=re.DOTALL)
+    content = re.sub(r'<h1>.*?</h1>', f'<h1>{text["hero"].format(area=area_name)}</h1>', content, count=1, flags=re.DOTALL)
+    content = re.sub(r'<p class="lead">.*?</p>', f'<p class="lead">{text["lead"]}</p>', content, count=1, flags=re.DOTALL)
+    content = re.sub(r'<div class="count-row"><div><strong>\d+</strong><span>.*?</span></div>', f'<div class="count-row"><div><strong>{count}</strong><span>{text["listed"]}</span></div>', content, count=1)
+    content = re.sub(r'<a class="coverage-index-link".*?</a>', f'<a class="coverage-index-link" href="/{area}/coverage/" target="_blank" rel="noopener">{text["coverage"].format(area=area_name)}</a>', content, count=1)
+    content = content.replace('<h2>店舗を絞り込む</h2>', f'<h2>{text["filter"]}</h2>')
+    content = re.sub(r'(<strong data-result-count>\d+</strong>)店舗を表示', rf'\1{text["shown"]}', content)
+    content = content.replace('<span>店舗名・市区町村から検索</span>', f'<span>{text["search"]}</span>')
+    content = re.sub(r'placeholder="[^"]+"', f'placeholder="{text["placeholder"]}"', content, count=1)
+    content = re.sub(r'(<button type="button" data-carrier-filter="all"[^>]*>).*?(<small>)', rf'\1{text["all"]} \2', content, count=1)
+    content = content.replace('<small>店舗</small>', f'<small>{text["unit"]}</small>')
+    content = re.sub(r'<summary><span>(.*?)</span>', lambda m: f'<summary><span>{localized_locality(m.group(1), lang_code)}</span>', content)
+    content = re.sub(r'<span class="shop-link-name">(.*?)<em ', lambda m: f'<span class="shop-link-name">{bilingual_markup(m.group(1))}<em ', content)
+    content = re.sub(r'<span class="shop-link-meta">(.*?)</span>', lambda m: f'<span class="shop-link-meta">{localized_locality(m.group(1), lang_code)}</span>', content)
+    content = re.sub(r'href="/' + area + r'/((?:au|docomo|softbank|uqmobile|ymobile|aeonmobile)/)', f'href="/{lang_code}/{area}/\\1', content)
+    content = content.replace('>ドコモ<', '>docomo<').replace('>ソフトバンク<', '>SoftBank<').replace('>イオンモバイル<', '>AEON Mobile<')
+    content = content.replace('<p><strong>楽天モバイル乗り換えガイド</strong></p>', f'<p><strong>{t["home_title"]}</strong></p>')
+    content = content.replace('<p>当サイトは個人が運営しており、各通信会社および掲載店舗の公式サイトではありません。</p>', f'<p>{t["footer_disclaimer_1"]}</p>')
+    content = content.replace('<p>当サイトには紹介リンクが含まれます。条件や店舗情報は、申し込み時点の各公式サイトでご確認ください。</p>', f'<p>{t["footer_disclaimer_2"]}</p>')
+    return content
+
 def run():
-    print("Translating full body text for all 3,200 Tokyo shop pages...")
-    ja_shop_files = glob.glob(f"{BASE_DIR}/tokyo/*/*/index.html")
+    print("Translating full body text for all nationwide shop pages...")
+    ja_shop_files = []
+    for area in ALL_AREAS:
+        ja_shop_files.extend(
+            path for path in glob.glob(f"{BASE_DIR}/{area}/*/*/index.html")
+            if f"{os.sep}coverage{os.sep}" not in path
+        )
 
     total_translated = 0
 
     for filepath in ja_shop_files:
-        rel_path = os.path.relpath(filepath, BASE_DIR) # tokyo/au/au-shop-akiruno/index.html
+        rel_path = os.path.relpath(filepath, BASE_DIR)
+        area = rel_path.split(os.sep)[0]
         with open(filepath, "r", encoding="utf-8") as f:
             ja_content = f.read()
 
+        page_path = "/" + rel_path.replace("index.html", "")
+        ja_alternates = "\n".join(
+            [f'  <link rel="alternate" hreflang="ja" href="https://rm-referral.maffun.workers.dev{page_path}">'] +
+            [f'  <link rel="alternate" hreflang="{code}" href="https://rm-referral.maffun.workers.dev/{code}{page_path}">' for code in LANGUAGES]
+        )
+        ja_content = re.sub(r'\s*<link rel="alternate" hreflang="(?:ja|en|zh|ko|vi|pt)"[^>]*>', '', ja_content)
+        ja_content = re.sub(r'(<link rel="canonical"[^>]*>)', rf'\1\n{ja_alternates}', ja_content, count=1)
+        ja_selector = f'''<div class="lang-selector-wrap">
+        <select class="lang-selector" onchange="if(this.value) location.href=this.value;" aria-label="Language">
+          <option value="{page_path}" selected>🇯🇵 日本語</option>
+          <option value="/en{page_path}">🇺🇸 English</option>
+          <option value="/zh{page_path}">🇨🇳 中文</option>
+          <option value="/ko{page_path}">🇰🇷 한국어</option>
+          <option value="/vi{page_path}">🇻🇳 Tiếng Việt</option>
+          <option value="/pt{page_path}">🇧🇷 Português</option>
+        </select>
+      </div>'''
+        ja_content = re.sub(r'<div class="lang-selector-wrap">.*?</div>', ja_selector, ja_content, count=1, flags=re.DOTALL)
+        with open(filepath, "w", encoding="utf-8") as f:
+            f.write(ja_content)
+
         for lang_code, t in LANGUAGES.items():
             out_file = os.path.join(BASE_DIR, lang_code, rel_path)
-            if os.path.exists(out_file):
-                translated_html = translate_shop_content(ja_content, lang_code, t)
+            os.makedirs(os.path.dirname(out_file), exist_ok=True)
+            translated_html = translate_shop_content(ja_content, area, lang_code, t)
+
+            alternates = "\n".join(
+                [f'  <link rel="alternate" hreflang="ja" href="https://rm-referral.maffun.workers.dev{page_path}">'] +
+                [f'  <link rel="alternate" hreflang="{code}" href="https://rm-referral.maffun.workers.dev/{code}{page_path}">' for code in LANGUAGES]
+            )
+            translated_html = re.sub(r'\s*<link rel="alternate" hreflang="(?:ja|en|zh|ko|vi|pt)"[^>]*>', '', translated_html)
+            translated_html = re.sub(r'(<link rel="canonical"[^>]*>)', rf'\1\n{alternates}', translated_html, count=1)
                 
-                # Header link & lang selector update
-                lang_selector_html = f'''      <div class="lang-selector-wrap">
+            # Header link & lang selector update
+            lang_selector_html = f'''      <div class="lang-selector-wrap">
         <select class="lang-selector" onchange="if(this.value) location.href=this.value;" aria-label="Language">
           <option value="/{rel_path.replace('index.html', '')}">🇯🇵 日本語</option>
           <option value="/en/{rel_path.replace('index.html', '')}" {"selected" if lang_code == "en" else ""}>🇺🇸 English</option>
@@ -470,20 +922,27 @@ def run():
         </select>
       </div>'''
 
-                header_lang = f'''  <header class="site-header">
+            header_lang = f'''  <header class="site-header">
     <a class="site-name" href="/{lang_code}/">{t["home_title"]}</a>
     <div style="display:flex;align-items:center;gap:16px;">
       <a class="header-link" href="/{lang_code}/guide/foreigners/">{t["guide_link_text"]}</a>
-      <a class="header-link" href="/{lang_code}/tokyo/">{t["tokyo_name"]}</a>
+      <a class="header-link" href="/{lang_code}/{area}/">{PREFECTURES[area][lang_code]}</a>
 {lang_selector_html}
     </div>
   </header>'''
 
-                translated_html = re.sub(r'<header class="site-header">.*?</header>', header_lang, translated_html, flags=re.DOTALL)
+            translated_html = re.sub(r'<header class="site-header">.*?</header>', header_lang, translated_html, flags=re.DOTALL)
 
-                with open(out_file, "w", encoding="utf-8") as f:
-                    f.write(translated_html)
-                total_translated += 1
+            with open(out_file, "w", encoding="utf-8") as f:
+                f.write(translated_html)
+            total_translated += 1
+
+    for area in ALL_AREAS:
+        for lang_code, t in LANGUAGES.items():
+            out_file = os.path.join(BASE_DIR, lang_code, area, "index.html")
+            os.makedirs(os.path.dirname(out_file), exist_ok=True)
+            with open(out_file, "w", encoding="utf-8") as file:
+                file.write(translate_area_index(area, lang_code, t))
 
     print(f"Successfully translated body content for {total_translated} shop pages!")
 
