@@ -1,0 +1,60 @@
+---
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import type { Locale } from "../config/site";
+import { getMessages } from "../i18n";
+
+type Props = {
+  title: string;
+  description: string;
+  canonical?: string;
+  locale?: Locale;
+  robots?: string;
+  headerLinkHref?: string;
+  headerLinkLabel?: string;
+  analytics?: boolean;
+};
+
+const {
+  title,
+  description,
+  canonical,
+  locale = "ja",
+  robots = "index, follow",
+  headerLinkHref,
+  headerLinkLabel,
+  analytics = true,
+} = Astro.props;
+const messages = getMessages(locale);
+---
+
+<!doctype html>
+<html lang={messages.htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content={messages.ogLocale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="twitter:card" content="summary" />
+    <link rel="stylesheet" href="/css/style.css" />
+    {analytics && <script async src="https://www.googletagmanager.com/gtag/js?id=G-86FFC09LTE" is:inline></script>}
+    {analytics && <script src="/js/analytics.js" is:inline></script>}
+    <slot name="head" />
+  </head>
+  <body>
+    <SiteHeader
+      locale={locale}
+      linkHref={headerLinkHref}
+      linkLabel={headerLinkLabel}
+    />
+    <slot />
+    <SiteFooter locale={locale} />
+  </body>
+</html>

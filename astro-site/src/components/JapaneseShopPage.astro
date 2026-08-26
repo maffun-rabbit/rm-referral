@@ -1,0 +1,31 @@
+---
+import type { LegacyShopPage } from "../data/load-tokyo-shop-pages";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PrimaryCta from "./PrimaryCta.astro";
+import FinalCta from "./FinalCta.astro";
+import FloatingCta from "./FloatingCta.astro";
+
+type Props = { page: LegacyShopPage };
+const { page } = Astro.props;
+---
+
+<BaseLayout title={page.title} description={page.description} canonical={page.canonical} robots={page.robots} headerLinkHref="/tokyo/" headerLinkLabel="東京の店舗一覧">
+  <Fragment slot="head">
+    {page.schemas.map((schema) => <script is:inline type="application/ld+json" set:html={schema}></script>)}
+  </Fragment>
+  <main>
+    <Fragment set:html={page.breadcrumbHtml} />
+    <section class="shop-hero">
+      <div>
+        <p class="eyebrow"><Fragment set:html={page.hero.eyebrowHtml} /></p>
+        <h1><Fragment set:html={page.hero.headingHtml} /></h1>
+        <p class="lead"><Fragment set:html={page.hero.leadHtml} /></p>
+        <PrimaryCta />
+      </div>
+      <aside class="shop-card"><Fragment set:html={page.hero.shopCardHtml} /></aside>
+    </section>
+    <Fragment set:html={page.middleHtml} />
+    <FinalCta updated={page.updated} />
+    <FloatingCta />
+  </main>
+</BaseLayout>

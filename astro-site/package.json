@@ -1,0 +1,22 @@
+{
+  "name": "rm-referral-astro",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "sync:assets": "node scripts/sync-static-assets.mjs",
+    "dev": "npm run sync:assets && ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "npm run sync:assets && ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "verify:parity": "node scripts/compare-shop-page.mjs",
+    "verify:tokyo": "node scripts/validate-tokyo-build.mjs",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "test": "npm run build && npm run verify:parity && npm run verify:tokyo && node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "astro": "7.2.7"
+  }
+}

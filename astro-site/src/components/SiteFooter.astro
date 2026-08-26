@@ -1,0 +1,17 @@
+---
+import type { Locale } from "../config/site";
+import { getMessages } from "../i18n";
+
+type Props = {
+  locale?: Locale;
+};
+
+const { locale = "ja" } = Astro.props;
+const messages = getMessages(locale);
+---
+
+<footer class="site-footer">
+  <p><strong>{messages.siteName}</strong></p>
+  <p>{messages.footer.operatorNotice}</p>
+  <p>{messages.footer.referralNotice}</p>
+</footer>

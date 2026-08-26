@@ -1,0 +1,23 @@
+---
+import { REFERRAL_URL, type Locale } from "../config/site";
+import { getMessages } from "../i18n";
+
+type Props = {
+  locale?: Locale;
+  referralUrl?: string;
+};
+
+const { locale = "ja", referralUrl = REFERRAL_URL } = Astro.props;
+const messages = getMessages(locale);
+---
+
+<aside class="floating-cta" data-floating-cta aria-hidden="true">
+  <p>
+    <span>{messages.campaign.finalAudience}</span>
+    <strong>{messages.campaign.points}{messages.campaign.pointsUnit}</strong>
+  </p>
+  <a href={referralUrl} rel="sponsored nofollow noopener">
+    {messages.campaign.floatingButton} <span aria-hidden="true">→</span>
+  </a>
+</aside>
+<script src="/js/shop-cta.js" defer is:inline></script>

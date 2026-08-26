@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-node scripts/prepare-language-workers.mjs
-node scripts/build-sitemap.mjs
+npm --prefix astro-site test
 node scripts/prepare-japanese-assets.mjs
+node scripts/validate-japanese-overlay.mjs
 npx wrangler deploy --config wrangler.jsonc

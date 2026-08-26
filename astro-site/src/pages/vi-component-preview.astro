@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PrimaryCta from "../components/PrimaryCta.astro";
+import FinalCta from "../components/FinalCta.astro";
+import FloatingCta from "../components/FloatingCta.astro";
+
+const title = "Kiểm tra thành phần dùng chung bằng tiếng Việt";
+const description = "Trang nội bộ dùng để kiểm tra từ điển tiếng Việt trong quá trình chuyển đổi sang Astro.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale="vi"
+  robots="noindex, nofollow"
+  analytics={false}
+  headerLinkHref="/guide/foreigners/"
+>
+  <main>
+    <section class="shop-hero">
+      <div>
+        <p class="eyebrow">ASTRO COMPONENT TEST</p>
+        <h1>Kiểm tra thành phần dùng chung</h1>
+        <p class="lead">Trang này chỉ dùng để kiểm tra nội bộ và không được xuất bản lên website chính thức.</p>
+        <PrimaryCta locale="vi" />
+      </div>
+    </section>
+    <section class="content-section">
+      <h2>Các thành phần đã dùng từ điển tiếng Việt</h2>
+      <ul class="check-list">
+        <li>Tiêu đề trang</li>
+        <li>Chân trang</li>
+        <li>Nút ưu đãi chính</li>
+        <li>Nút ưu đãi cuối trang</li>
+        <li>Nút ưu đãi nổi</li>
+      </ul>
+    </section>
+    <FinalCta locale="vi" updated="2026-08-26" />
+    <FloatingCta locale="vi" />
+  </main>
+</BaseLayout>
