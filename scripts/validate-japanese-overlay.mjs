@@ -21,7 +21,7 @@ const overlayFiles = await walk(overlay);
 const htmlFiles = overlayFiles.filter((file) => file.endsWith(".html"));
 if (htmlFiles.length !== 7955) errors.push(`expected 7955 production HTML files including one Google verification file, found ${htmlFiles.length}`);
 
-for (const forbidden of ["astro-site", "docs", "vi-component-preview"]) {
+for (const forbidden of [".wrangler", "astro-site", "docs", "vi-component-preview"]) {
   if (overlayFiles.some((file) => file.includes(`${path.sep}${forbidden}${path.sep}`) || file.endsWith(`${path.sep}${forbidden}`))) {
     errors.push(`forbidden migration artifact found: ${forbidden}`);
   }

@@ -4,7 +4,7 @@ import path from "node:path";
 const root = path.resolve(import.meta.dirname, "..");
 const output = path.join(root, ".deploy", "ja");
 const excluded = new Set([
-  ".git", ".deploy", "scripts", "data", "astro-site", "docs", "en", "zh", "ko", "vi", "pt",
+  ".git", ".deploy", ".wrangler", "scripts", "data", "astro-site", "docs", "en", "zh", "ko", "vi", "pt",
   "DESIGN_GUIDELINES.md", "wrangler.jsonc", "wrangler.en.jsonc", "wrangler.zh.jsonc",
   "wrangler.ko.jsonc", "wrangler.vi.jsonc", "wrangler.pt.jsonc",
 ]);

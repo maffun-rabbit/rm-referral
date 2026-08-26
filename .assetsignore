@@ -1,7 +1,10 @@
 .git
 .gitignore
+.wrangler
 scripts
 data
+astro-site
+docs
 DESIGN_GUIDELINES.md
 en/**
 zh/**
