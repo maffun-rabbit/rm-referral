@@ -49,12 +49,25 @@ export const kinkiPrefectures = {
   wakayama: "和歌山",
 } as const;
 
+export const chugokuShikokuPrefectures = {
+  tottori: "鳥取",
+  shimane: "島根",
+  okayama: "岡山",
+  hiroshima: "広島",
+  yamaguchi: "山口",
+  tokushima: "徳島",
+  kagawa: "香川",
+  ehime: "愛媛",
+  kochi: "高知",
+} as const;
+
 export const migratedPrefectures = {
   ...hokkaidoTohokuPrefectures,
   ...hokurikuKoshinetsuPrefectures,
   ...kantoPrefectures,
   ...tokaiPrefectures,
   ...kinkiPrefectures,
+  ...chugokuShikokuPrefectures,
 } as const;
 
 export type MigratedPrefectureSlug = keyof typeof migratedPrefectures;
@@ -162,6 +175,11 @@ export function loadTokaiShopPages(): LegacyShopPage[] {
 
 export function loadKinkiShopPages(): LegacyShopPage[] {
   return (Object.keys(kinkiPrefectures) as MigratedPrefectureSlug[])
+    .flatMap((prefectureSlug) => loadPrefectureShopPages(prefectureSlug));
+}
+
+export function loadChugokuShikokuShopPages(): LegacyShopPage[] {
+  return (Object.keys(chugokuShikokuPrefectures) as MigratedPrefectureSlug[])
     .flatMap((prefectureSlug) => loadPrefectureShopPages(prefectureSlug));
 }
 

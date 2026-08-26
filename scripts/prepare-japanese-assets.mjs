@@ -9,6 +9,8 @@ const migratedPrefectures = [
   "ibaraki", "tochigi", "gunma", "saitama", "chiba", "tokyo", "kanagawa",
   "gifu", "shizuoka", "aichi", "mie",
   "shiga", "kyoto", "osaka", "hyogo", "nara", "wakayama",
+  "tottori", "shimane", "okayama", "hiroshima", "yamaguchi",
+  "tokushima", "kagawa", "ehime", "kochi",
 ];
 const excluded = new Set([
   ".git", ".deploy", ".wrangler", "scripts", "data", "astro-site", "docs", "en", "zh", "ko", "vi", "pt",
