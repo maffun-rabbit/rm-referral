@@ -61,6 +61,17 @@ export const chugokuShikokuPrefectures = {
   kochi: "高知",
 } as const;
 
+export const kyushuOkinawaPrefectures = {
+  fukuoka: "福岡",
+  saga: "佐賀",
+  nagasaki: "長崎",
+  kumamoto: "熊本",
+  oita: "大分",
+  miyazaki: "宮崎",
+  kagoshima: "鹿児島",
+  okinawa: "沖縄",
+} as const;
+
 export const migratedPrefectures = {
   ...hokkaidoTohokuPrefectures,
   ...hokurikuKoshinetsuPrefectures,
@@ -68,6 +79,7 @@ export const migratedPrefectures = {
   ...tokaiPrefectures,
   ...kinkiPrefectures,
   ...chugokuShikokuPrefectures,
+  ...kyushuOkinawaPrefectures,
 } as const;
 
 export type MigratedPrefectureSlug = keyof typeof migratedPrefectures;
@@ -180,6 +192,11 @@ export function loadKinkiShopPages(): LegacyShopPage[] {
 
 export function loadChugokuShikokuShopPages(): LegacyShopPage[] {
   return (Object.keys(chugokuShikokuPrefectures) as MigratedPrefectureSlug[])
+    .flatMap((prefectureSlug) => loadPrefectureShopPages(prefectureSlug));
+}
+
+export function loadKyushuOkinawaShopPages(): LegacyShopPage[] {
+  return (Object.keys(kyushuOkinawaPrefectures) as MigratedPrefectureSlug[])
     .flatMap((prefectureSlug) => loadPrefectureShopPages(prefectureSlug));
 }
 
