@@ -3,7 +3,10 @@ import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
 const output = path.join(root, ".deploy", "ja");
-const kantoPrefectures = ["ibaraki", "tochigi", "gunma", "saitama", "chiba", "tokyo", "kanagawa"];
+const migratedPrefectures = [
+  "hokkaido", "aomori", "iwate", "miyagi", "akita", "yamagata", "fukushima",
+  "ibaraki", "tochigi", "gunma", "saitama", "chiba", "tokyo", "kanagawa",
+];
 const excluded = new Set([
   ".git", ".deploy", ".wrangler", "scripts", "data", "astro-site", "docs", "en", "zh", "ko", "vi", "pt",
   "DESIGN_GUIDELINES.md", "wrangler.jsonc", "wrangler.en.jsonc", "wrangler.zh.jsonc",
@@ -16,7 +19,7 @@ for (const entry of await readdir(root, { withFileTypes: true })) {
   await cp(path.join(root, entry.name), path.join(output, entry.name), { recursive: true });
 }
 
-for (const prefecture of kantoPrefectures) {
+for (const prefecture of migratedPrefectures) {
   const astroPrefecture = path.join(root, "astro-site", "dist", prefecture);
   const outputPrefecture = path.join(output, prefecture);
   for (const entry of await readdir(astroPrefecture, { withFileTypes: true })) {
@@ -27,4 +30,4 @@ for (const prefecture of kantoPrefectures) {
   }
 }
 
-console.log("Prepared the Japanese Worker asset directory with the Astro Kanto shop overlay.");
+console.log("Prepared the Japanese Worker asset directory with the Astro Hokkaido, Tohoku and Kanto shop overlay.");

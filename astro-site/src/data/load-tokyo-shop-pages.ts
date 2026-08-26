@@ -14,10 +14,25 @@ export const kantoPrefectures = {
   kanagawa: "神奈川",
 } as const;
 
-export type KantoPrefectureSlug = keyof typeof kantoPrefectures;
+export const hokkaidoTohokuPrefectures = {
+  hokkaido: "北海道",
+  aomori: "青森",
+  iwate: "岩手",
+  miyagi: "宮城",
+  akita: "秋田",
+  yamagata: "山形",
+  fukushima: "福島",
+} as const;
+
+export const migratedPrefectures = {
+  ...hokkaidoTohokuPrefectures,
+  ...kantoPrefectures,
+} as const;
+
+export type MigratedPrefectureSlug = keyof typeof migratedPrefectures;
 
 export type LegacyShopPage = {
-  prefectureSlug: KantoPrefectureSlug;
+  prefectureSlug: MigratedPrefectureSlug;
   prefectureLabel: string;
   carrier: string;
   slug: string;
@@ -47,7 +62,7 @@ function decodeAttribute(value: string): string {
   return value.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'");
 }
 
-function parseLegacyPage(sourcePath: string, prefectureSlug: KantoPrefectureSlug, carrier: string, slug: string): LegacyShopPage {
+function parseLegacyPage(sourcePath: string, prefectureSlug: MigratedPrefectureSlug, carrier: string, slug: string): LegacyShopPage {
   const html = readFileSync(sourcePath, "utf8");
   const mainHtml = capture(html, /<main\b[^>]*>([\s\S]*?)<\/main>/i, "main", sourcePath);
   const heroMatch = mainHtml.match(/<section class="shop-hero">([\s\S]*?)<\/section>/i);
@@ -59,7 +74,7 @@ function parseLegacyPage(sourcePath: string, prefectureSlug: KantoPrefectureSlug
 
   return {
     prefectureSlug,
-    prefectureLabel: kantoPrefectures[prefectureSlug],
+    prefectureLabel: migratedPrefectures[prefectureSlug],
     carrier,
     slug,
     title: decodeAttribute(capture(html, /<title>([\s\S]*?)<\/title>/i, "title", sourcePath)),
@@ -79,7 +94,7 @@ function parseLegacyPage(sourcePath: string, prefectureSlug: KantoPrefectureSlug
   };
 }
 
-export function loadPrefectureShopPages(prefectureSlug: KantoPrefectureSlug): LegacyShopPage[] {
+export function loadPrefectureShopPages(prefectureSlug: MigratedPrefectureSlug): LegacyShopPage[] {
   const prefectureRoot = path.join(legacyRoot, prefectureSlug);
   const carriers = readdirSync(prefectureRoot, { withFileTypes: true })
     .filter((entry) => entry.isDirectory() && !excludedDirectories.has(entry.name))
@@ -98,7 +113,17 @@ export function loadPrefectureShopPages(prefectureSlug: KantoPrefectureSlug): Le
 }
 
 export function loadKantoShopPages(): LegacyShopPage[] {
-  return (Object.keys(kantoPrefectures) as KantoPrefectureSlug[])
+  return (Object.keys(kantoPrefectures) as MigratedPrefectureSlug[])
+    .flatMap((prefectureSlug) => loadPrefectureShopPages(prefectureSlug));
+}
+
+export function loadHokkaidoTohokuShopPages(): LegacyShopPage[] {
+  return (Object.keys(hokkaidoTohokuPrefectures) as MigratedPrefectureSlug[])
+    .flatMap((prefectureSlug) => loadPrefectureShopPages(prefectureSlug));
+}
+
+export function loadMigratedShopPages(): LegacyShopPage[] {
+  return (Object.keys(migratedPrefectures) as MigratedPrefectureSlug[])
     .flatMap((prefectureSlug) => loadPrefectureShopPages(prefectureSlug));
 }
 

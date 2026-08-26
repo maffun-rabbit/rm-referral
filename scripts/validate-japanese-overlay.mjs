@@ -4,7 +4,10 @@ import path from "node:path";
 const root = path.resolve(import.meta.dirname, "..");
 const overlay = path.join(root, ".deploy", "ja");
 const astroDist = path.join(root, "astro-site", "dist");
-const kantoPrefectures = ["ibaraki", "tochigi", "gunma", "saitama", "chiba", "tokyo", "kanagawa"];
+const migratedPrefectures = [
+  "hokkaido", "aomori", "iwate", "miyagi", "akita", "yamagata", "fukushima",
+  "ibaraki", "tochigi", "gunma", "saitama", "chiba", "tokyo", "kanagawa",
+];
 
 async function walk(directory) {
   const files = [];
@@ -37,11 +40,11 @@ if (productionHome.includes("Astro共通パーツ検証")) errors.push("migratio
 if (!sitemap.includes("https://rm-referral.maffun.workers.dev/tokyo/au/au-shop-narimasu/")) errors.push("sitemap was not preserved");
 if (!robots.includes("Sitemap: https://rm-referral.maffun.workers.dev/sitemap.xml")) errors.push("robots.txt was not preserved");
 
-const astroKantoFiles = (await Promise.all(kantoPrefectures.map((prefecture) => walk(path.join(astroDist, prefecture)))))
+const astroMigratedFiles = (await Promise.all(migratedPrefectures.map((prefecture) => walk(path.join(astroDist, prefecture)))))
   .flat()
   .filter((file) => file.endsWith("index.html"));
-if (astroKantoFiles.length !== 1792) errors.push(`expected 1792 Astro Kanto pages, found ${astroKantoFiles.length}`);
-for (const astroFile of astroKantoFiles) {
+if (astroMigratedFiles.length !== 2624) errors.push(`expected 2624 migrated Astro pages, found ${astroMigratedFiles.length}`);
+for (const astroFile of astroMigratedFiles) {
   const relative = path.relative(astroDist, astroFile);
   const overlayFile = path.join(overlay, relative);
   const [astroHtml, overlayHtml] = await Promise.all([readFile(astroFile, "utf8"), readFile(overlayFile, "utf8")]);
@@ -49,7 +52,7 @@ for (const astroFile of astroKantoFiles) {
 }
 
 const preservedCoveragePages = {};
-for (const prefecture of kantoPrefectures) {
+for (const prefecture of migratedPrefectures) {
   const [legacyHub, overlayHub] = await Promise.all([
     readFile(path.join(root, prefecture, "index.html"), "utf8"),
     readFile(path.join(overlay, prefecture, "index.html"), "utf8"),
@@ -68,7 +71,7 @@ const summary = {
   passed: errors.length === 0,
   errors,
   htmlFiles: htmlFiles.length,
-  astroKantoShopPages: astroKantoFiles.length,
+  astroMigratedShopPages: astroMigratedFiles.length,
   preservedCoveragePages,
   productionHomePreserved: !productionHome.includes("Astro共通パーツ検証"),
   sitemapPreserved: sitemap.includes("https://rm-referral.maffun.workers.dev/tokyo/au/au-shop-narimasu/"),

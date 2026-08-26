@@ -1,9 +1,9 @@
 ---
 import JapaneseShopPage from "../../../../components/JapaneseShopPage.astro";
-import { loadKantoShopPages, type LegacyShopPage } from "../../../../data/load-tokyo-shop-pages";
+import { loadMigratedShopPages, type LegacyShopPage } from "../../../../data/load-tokyo-shop-pages";
 
 export function getStaticPaths() {
-  return loadKantoShopPages().map((page) => ({
+  return loadMigratedShopPages().map((page) => ({
     params: { prefecture: page.prefectureSlug, carrier: page.carrier, slug: page.slug },
     props: { page },
   }));

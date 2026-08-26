@@ -1,7 +1,7 @@
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { kantoPrefectures, loadKantoShopPages, loadTokyoShopPages } from "../src/data/load-tokyo-shop-pages.ts";
+import { kantoPrefectures, migratedPrefectures, loadKantoShopPages, loadMigratedShopPages, loadTokyoShopPages } from "../src/data/load-tokyo-shop-pages.ts";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const astroRoot = path.resolve(scriptDir, "..");
@@ -78,6 +78,10 @@ export async function validateTokyoBuild() {
 
 export async function validateKantoBuild() {
   return validateBuild(loadKantoShopPages(), Object.keys(kantoPrefectures));
+}
+
+export async function validateMigratedBuild() {
+  return validateBuild(loadMigratedShopPages(), Object.keys(migratedPrefectures));
 }
 
 async function validateBuild(pages, prefectureSlugs) {

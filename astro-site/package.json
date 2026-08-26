@@ -13,9 +13,10 @@
     "verify:parity": "node scripts/compare-shop-page.mjs",
     "verify:tokyo": "node scripts/validate-tokyo-build.mjs",
     "verify:kanto": "node -e \"import('./scripts/validate-tokyo-build.mjs').then(async ({validateKantoBuild}) => { const r = await validateKantoBuild(); console.log(JSON.stringify(r, null, 2)); if (!r.passed) process.exitCode = 1; })\"",
+    "verify:migrated": "node -e \"import('./scripts/validate-tokyo-build.mjs').then(async ({validateMigratedBuild}) => { const r = await validateMigratedBuild(); console.log(JSON.stringify(r, null, 2)); if (!r.passed) process.exitCode = 1; })\"",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
-    "test": "npm run build && npm run verify:parity && npm run verify:kanto && node --test tests/*.test.mjs"
+    "test": "npm run build && npm run verify:parity && npm run verify:migrated && node --test tests/*.test.mjs"
   },
   "dependencies": {
     "astro": "7.2.7"
