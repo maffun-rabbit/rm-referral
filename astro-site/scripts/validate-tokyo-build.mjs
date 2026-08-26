@@ -1,14 +1,13 @@
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { loadTokyoShopPages } from "../src/data/load-tokyo-shop-pages.ts";
+import { kantoPrefectures, loadKantoShopPages, loadTokyoShopPages } from "../src/data/load-tokyo-shop-pages.ts";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const astroRoot = path.resolve(scriptDir, "..");
 const legacyRoot = path.resolve(astroRoot, "..");
 const distRoot = path.join(astroRoot, "dist");
 const siteOrigin = "https://rm-referral.maffun.workers.dev";
-const sharedRoutesOutsideSlice = new Set(["/", "/tokyo/"]);
 
 async function walk(directory) {
   const files = [];
@@ -31,7 +30,8 @@ function capture(html, pattern, label, pagePath, errors) {
 }
 
 function validatePage(html, page, sitemapUrls, errors) {
-  const pagePath = `/tokyo/${page.carrier}/${page.slug}/`;
+  const pagePath = `/${page.prefectureSlug}/${page.carrier}/${page.slug}/`;
+  const sharedRoutesOutsideSlice = new Set(["/", `/${page.prefectureSlug}/`]);
   const expectedCanonical = `${siteOrigin}${pagePath}`;
   const title = capture(html, /<title>([\s\S]*?)<\/title>/i, "title", pagePath, errors);
   const description = capture(html, /<meta\s+name="description"\s+content="([^"]+)"/i, "description", pagePath, errors);
@@ -73,22 +73,31 @@ function validatePage(html, page, sitemapUrls, errors) {
 }
 
 export async function validateTokyoBuild() {
+  return validateBuild(loadTokyoShopPages(), ["tokyo"]);
+}
+
+export async function validateKantoBuild() {
+  return validateBuild(loadKantoShopPages(), Object.keys(kantoPrefectures));
+}
+
+async function validateBuild(pages, prefectureSlugs) {
   const errors = [];
-  const pages = loadTokyoShopPages();
   const sitemap = await readFile(path.join(legacyRoot, "sitemap.xml"), "utf8");
   const sitemapEntries = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1].replace(/&amp;/g, "&"));
   const sitemapUrls = new Set(sitemapEntries);
   if (sitemapUrls.size !== sitemapEntries.length) errors.push("sitemap.xml contains duplicate URLs");
 
-  const generatedTokyoFiles = (await walk(path.join(distRoot, "tokyo"))).filter((file) => file.endsWith("index.html"));
-  if (generatedTokyoFiles.length !== pages.length) errors.push(`expected ${pages.length} Tokyo outputs, found ${generatedTokyoFiles.length}`);
+  const generatedShopFiles = (await Promise.all(prefectureSlugs.map((prefectureSlug) => walk(path.join(distRoot, prefectureSlug)))))
+    .flat()
+    .filter((file) => file.endsWith("index.html"));
+  if (generatedShopFiles.length !== pages.length) errors.push(`expected ${pages.length} shop outputs, found ${generatedShopFiles.length}`);
 
   const canonicalSet = new Set();
   for (const page of pages) {
-    const outputPath = path.join(distRoot, "tokyo", page.carrier, page.slug, "index.html");
+    const outputPath = path.join(distRoot, page.prefectureSlug, page.carrier, page.slug, "index.html");
     const html = await readFile(outputPath, "utf8");
     validatePage(html, page, sitemapUrls, errors);
-    const canonical = `${siteOrigin}/tokyo/${page.carrier}/${page.slug}/`;
+    const canonical = `${siteOrigin}/${page.prefectureSlug}/${page.carrier}/${page.slug}/`;
     if (canonicalSet.has(canonical)) errors.push(`${canonical}: duplicate generated canonical`);
     canonicalSet.add(canonical);
   }
@@ -101,11 +110,11 @@ export async function validateTokyoBuild() {
     errors,
     summary: {
       shopPages: pages.length,
-      generatedTokyoFiles: generatedTokyoFiles.length,
+      generatedShopFiles: generatedShopFiles.length,
       uniqueCanonicals: canonicalSet.size,
       sitemapUrls: sitemapUrls.size,
-      sitemapCoveredShopPages: pages.filter((page) => sitemapUrls.has(`${siteOrigin}/tokyo/${page.carrier}/${page.slug}/`)).length,
-      sharedRoutesOutsideSlice: [...sharedRoutesOutsideSlice],
+      sitemapCoveredShopPages: pages.filter((page) => sitemapUrls.has(`${siteOrigin}/${page.prefectureSlug}/${page.carrier}/${page.slug}/`)).length,
+      prefectures: prefectureSlugs,
       previewUrlsInSitemap: previewUrls.length,
     },
   };

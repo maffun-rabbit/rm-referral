@@ -7,11 +7,11 @@ test("Tokyo build passes full-slice SEO, link and sitemap validation", async () 
   assert.equal(result.passed, true, result.errors.join("\n"));
   assert.deepEqual(result.summary, {
     shopPages: 587,
-    generatedTokyoFiles: 587,
+    generatedShopFiles: 587,
     uniqueCanonicals: 587,
     sitemapUrls: result.summary.sitemapUrls,
     sitemapCoveredShopPages: 587,
-    sharedRoutesOutsideSlice: ["/", "/tokyo/"],
+    prefectures: ["tokyo"],
     previewUrlsInSitemap: 0,
   });
 });

@@ -9,7 +9,7 @@ type Props = { page: LegacyShopPage };
 const { page } = Astro.props;
 ---
 
-<BaseLayout title={page.title} description={page.description} canonical={page.canonical} robots={page.robots} headerLinkHref="/tokyo/" headerLinkLabel="東京の店舗一覧">
+<BaseLayout title={page.title} description={page.description} canonical={page.canonical} robots={page.robots} headerLinkHref={`/${page.prefectureSlug}/`} headerLinkLabel={`${page.prefectureLabel}の店舗一覧`}>
   <Fragment slot="head">
     {page.schemas.map((schema) => <script is:inline type="application/ld+json" set:html={schema}></script>)}
   </Fragment>

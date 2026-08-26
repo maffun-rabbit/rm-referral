@@ -4,6 +4,7 @@ import path from "node:path";
 const root = path.resolve(import.meta.dirname, "..");
 const overlay = path.join(root, ".deploy", "ja");
 const astroDist = path.join(root, "astro-site", "dist");
+const kantoPrefectures = ["ibaraki", "tochigi", "gunma", "saitama", "chiba", "tokyo", "kanagawa"];
 
 async function walk(directory) {
   const files = [];
@@ -27,35 +28,48 @@ for (const forbidden of [".wrangler", "astro-site", "docs", "vi-component-previe
   }
 }
 
-const [productionHome, productionTokyo, sitemap, robots] = await Promise.all([
+const [productionHome, sitemap, robots] = await Promise.all([
   readFile(path.join(overlay, "index.html"), "utf8"),
-  readFile(path.join(overlay, "tokyo", "index.html"), "utf8"),
   readFile(path.join(overlay, "sitemap.xml"), "utf8"),
   readFile(path.join(overlay, "robots.txt"), "utf8"),
 ]);
 if (productionHome.includes("Astro共通パーツ検証")) errors.push("migration preview replaced the production home page");
-if (!productionTokyo.includes("東京")) errors.push("Tokyo prefecture hub was not preserved");
 if (!sitemap.includes("https://rm-referral.maffun.workers.dev/tokyo/au/au-shop-narimasu/")) errors.push("sitemap was not preserved");
 if (!robots.includes("Sitemap: https://rm-referral.maffun.workers.dev/sitemap.xml")) errors.push("robots.txt was not preserved");
 
-const astroTokyoFiles = (await walk(path.join(astroDist, "tokyo"))).filter((file) => file.endsWith("index.html"));
-if (astroTokyoFiles.length !== 587) errors.push(`expected 587 Astro Tokyo pages, found ${astroTokyoFiles.length}`);
-for (const astroFile of astroTokyoFiles) {
+const astroKantoFiles = (await Promise.all(kantoPrefectures.map((prefecture) => walk(path.join(astroDist, prefecture)))))
+  .flat()
+  .filter((file) => file.endsWith("index.html"));
+if (astroKantoFiles.length !== 1792) errors.push(`expected 1792 Astro Kanto pages, found ${astroKantoFiles.length}`);
+for (const astroFile of astroKantoFiles) {
   const relative = path.relative(astroDist, astroFile);
   const overlayFile = path.join(overlay, relative);
   const [astroHtml, overlayHtml] = await Promise.all([readFile(astroFile, "utf8"), readFile(overlayFile, "utf8")]);
   if (astroHtml !== overlayHtml) errors.push(`${relative}: overlay differs from Astro output`);
 }
 
-const coverageFiles = htmlFiles.filter((file) => file.includes(`${path.sep}tokyo${path.sep}coverage${path.sep}`));
-if (coverageFiles.length !== 54) errors.push(`expected 54 preserved Tokyo coverage pages including the coverage index, found ${coverageFiles.length}`);
+const preservedCoveragePages = {};
+for (const prefecture of kantoPrefectures) {
+  const [legacyHub, overlayHub] = await Promise.all([
+    readFile(path.join(root, prefecture, "index.html"), "utf8"),
+    readFile(path.join(overlay, prefecture, "index.html"), "utf8"),
+  ]);
+  if (legacyHub !== overlayHub) errors.push(`${prefecture}: prefecture hub was not preserved`);
+
+  const legacyCoverage = (await walk(path.join(root, prefecture, "coverage"))).filter((file) => file.endsWith("index.html"));
+  const overlayCoverage = htmlFiles.filter((file) => file.includes(`${path.sep}${prefecture}${path.sep}coverage${path.sep}`));
+  preservedCoveragePages[prefecture] = overlayCoverage.length;
+  if (overlayCoverage.length !== legacyCoverage.length) {
+    errors.push(`${prefecture}: expected ${legacyCoverage.length} preserved coverage pages, found ${overlayCoverage.length}`);
+  }
+}
 
 const summary = {
   passed: errors.length === 0,
   errors,
   htmlFiles: htmlFiles.length,
-  astroTokyoShopPages: astroTokyoFiles.length,
-  preservedTokyoCoveragePages: coverageFiles.length,
+  astroKantoShopPages: astroKantoFiles.length,
+  preservedCoveragePages,
   productionHomePreserved: !productionHome.includes("Astro共通パーツ検証"),
   sitemapPreserved: sitemap.includes("https://rm-referral.maffun.workers.dev/tokyo/au/au-shop-narimasu/"),
 };

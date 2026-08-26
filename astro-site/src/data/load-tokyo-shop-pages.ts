@@ -2,10 +2,23 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 const legacyRoot = path.resolve(process.cwd(), "..");
-const tokyoRoot = path.join(legacyRoot, "tokyo");
 const excludedDirectories = new Set(["coverage"]);
 
+export const kantoPrefectures = {
+  ibaraki: "茨城",
+  tochigi: "栃木",
+  gunma: "群馬",
+  saitama: "埼玉",
+  chiba: "千葉",
+  tokyo: "東京",
+  kanagawa: "神奈川",
+} as const;
+
+export type KantoPrefectureSlug = keyof typeof kantoPrefectures;
+
 export type LegacyShopPage = {
+  prefectureSlug: KantoPrefectureSlug;
+  prefectureLabel: string;
   carrier: string;
   slug: string;
   title: string;
@@ -34,7 +47,7 @@ function decodeAttribute(value: string): string {
   return value.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'");
 }
 
-function parseLegacyPage(sourcePath: string, carrier: string, slug: string): LegacyShopPage {
+function parseLegacyPage(sourcePath: string, prefectureSlug: KantoPrefectureSlug, carrier: string, slug: string): LegacyShopPage {
   const html = readFileSync(sourcePath, "utf8");
   const mainHtml = capture(html, /<main\b[^>]*>([\s\S]*?)<\/main>/i, "main", sourcePath);
   const heroMatch = mainHtml.match(/<section class="shop-hero">([\s\S]*?)<\/section>/i);
@@ -45,6 +58,8 @@ function parseLegacyPage(sourcePath: string, carrier: string, slug: string): Leg
   const middleStart = heroMatch.index + heroMatch[0].length;
 
   return {
+    prefectureSlug,
+    prefectureLabel: kantoPrefectures[prefectureSlug],
     carrier,
     slug,
     title: decodeAttribute(capture(html, /<title>([\s\S]*?)<\/title>/i, "title", sourcePath)),
@@ -64,19 +79,29 @@ function parseLegacyPage(sourcePath: string, carrier: string, slug: string): Leg
   };
 }
 
-export function loadTokyoShopPages(): LegacyShopPage[] {
-  const carriers = readdirSync(tokyoRoot, { withFileTypes: true })
+export function loadPrefectureShopPages(prefectureSlug: KantoPrefectureSlug): LegacyShopPage[] {
+  const prefectureRoot = path.join(legacyRoot, prefectureSlug);
+  const carriers = readdirSync(prefectureRoot, { withFileTypes: true })
     .filter((entry) => entry.isDirectory() && !excludedDirectories.has(entry.name))
     .map((entry) => entry.name)
     .sort();
 
   return carriers.flatMap((carrier) => {
-    const carrierRoot = path.join(tokyoRoot, carrier);
+    const carrierRoot = path.join(prefectureRoot, carrier);
     return readdirSync(carrierRoot, { withFileTypes: true })
       .filter((entry) => entry.isDirectory())
       .map((entry) => entry.name)
       .sort()
       .filter((slug) => existsSync(path.join(carrierRoot, slug, "index.html")))
-      .map((slug) => parseLegacyPage(path.join(carrierRoot, slug, "index.html"), carrier, slug));
+      .map((slug) => parseLegacyPage(path.join(carrierRoot, slug, "index.html"), prefectureSlug, carrier, slug));
   });
+}
+
+export function loadKantoShopPages(): LegacyShopPage[] {
+  return (Object.keys(kantoPrefectures) as KantoPrefectureSlug[])
+    .flatMap((prefectureSlug) => loadPrefectureShopPages(prefectureSlug));
+}
+
+export function loadTokyoShopPages(): LegacyShopPage[] {
+  return loadPrefectureShopPages("tokyo");
 }
