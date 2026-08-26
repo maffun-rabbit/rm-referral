@@ -33,10 +33,18 @@ export const hokurikuKoshinetsuPrefectures = {
   nagano: "長野",
 } as const;
 
+export const tokaiPrefectures = {
+  gifu: "岐阜",
+  shizuoka: "静岡",
+  aichi: "愛知",
+  mie: "三重",
+} as const;
+
 export const migratedPrefectures = {
   ...hokkaidoTohokuPrefectures,
   ...hokurikuKoshinetsuPrefectures,
   ...kantoPrefectures,
+  ...tokaiPrefectures,
 } as const;
 
 export type MigratedPrefectureSlug = keyof typeof migratedPrefectures;
@@ -134,6 +142,11 @@ export function loadHokkaidoTohokuShopPages(): LegacyShopPage[] {
 
 export function loadHokurikuKoshinetsuShopPages(): LegacyShopPage[] {
   return (Object.keys(hokurikuKoshinetsuPrefectures) as MigratedPrefectureSlug[])
+    .flatMap((prefectureSlug) => loadPrefectureShopPages(prefectureSlug));
+}
+
+export function loadTokaiShopPages(): LegacyShopPage[] {
+  return (Object.keys(tokaiPrefectures) as MigratedPrefectureSlug[])
     .flatMap((prefectureSlug) => loadPrefectureShopPages(prefectureSlug));
 }
 
