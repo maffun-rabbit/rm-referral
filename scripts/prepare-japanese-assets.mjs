@@ -5,6 +5,7 @@ const root = path.resolve(import.meta.dirname, "..");
 const output = path.join(root, ".deploy", "ja");
 const migratedPrefectures = [
   "hokkaido", "aomori", "iwate", "miyagi", "akita", "yamagata", "fukushima",
+  "niigata", "toyama", "ishikawa", "fukui", "yamanashi", "nagano",
   "ibaraki", "tochigi", "gunma", "saitama", "chiba", "tokyo", "kanagawa",
 ];
 const excluded = new Set([
@@ -30,4 +31,4 @@ for (const prefecture of migratedPrefectures) {
   }
 }
 
-console.log("Prepared the Japanese Worker asset directory with the Astro Hokkaido, Tohoku and Kanto shop overlay.");
+console.log("Prepared the Japanese Worker asset directory with the migrated Astro shop overlay.");

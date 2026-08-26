@@ -6,6 +6,7 @@ const overlay = path.join(root, ".deploy", "ja");
 const astroDist = path.join(root, "astro-site", "dist");
 const migratedPrefectures = [
   "hokkaido", "aomori", "iwate", "miyagi", "akita", "yamagata", "fukushima",
+  "niigata", "toyama", "ishikawa", "fukui", "yamanashi", "nagano",
   "ibaraki", "tochigi", "gunma", "saitama", "chiba", "tokyo", "kanagawa",
 ];
 
@@ -43,7 +44,7 @@ if (!robots.includes("Sitemap: https://rm-referral.maffun.workers.dev/sitemap.xm
 const astroMigratedFiles = (await Promise.all(migratedPrefectures.map((prefecture) => walk(path.join(astroDist, prefecture)))))
   .flat()
   .filter((file) => file.endsWith("index.html"));
-if (astroMigratedFiles.length !== 2624) errors.push(`expected 2624 migrated Astro pages, found ${astroMigratedFiles.length}`);
+if (astroMigratedFiles.length !== 3051) errors.push(`expected 3051 migrated Astro pages, found ${astroMigratedFiles.length}`);
 for (const astroFile of astroMigratedFiles) {
   const relative = path.relative(astroDist, astroFile);
   const overlayFile = path.join(overlay, relative);

@@ -24,8 +24,18 @@ export const hokkaidoTohokuPrefectures = {
   fukushima: "福島",
 } as const;
 
+export const hokurikuKoshinetsuPrefectures = {
+  niigata: "新潟",
+  toyama: "富山",
+  ishikawa: "石川",
+  fukui: "福井",
+  yamanashi: "山梨",
+  nagano: "長野",
+} as const;
+
 export const migratedPrefectures = {
   ...hokkaidoTohokuPrefectures,
+  ...hokurikuKoshinetsuPrefectures,
   ...kantoPrefectures,
 } as const;
 
@@ -119,6 +129,11 @@ export function loadKantoShopPages(): LegacyShopPage[] {
 
 export function loadHokkaidoTohokuShopPages(): LegacyShopPage[] {
   return (Object.keys(hokkaidoTohokuPrefectures) as MigratedPrefectureSlug[])
+    .flatMap((prefectureSlug) => loadPrefectureShopPages(prefectureSlug));
+}
+
+export function loadHokurikuKoshinetsuShopPages(): LegacyShopPage[] {
+  return (Object.keys(hokurikuKoshinetsuPrefectures) as MigratedPrefectureSlug[])
     .flatMap((prefectureSlug) => loadPrefectureShopPages(prefectureSlug));
 }
 
