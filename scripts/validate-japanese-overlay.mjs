@@ -9,6 +9,7 @@ const migratedPrefectures = [
   "niigata", "toyama", "ishikawa", "fukui", "yamanashi", "nagano",
   "ibaraki", "tochigi", "gunma", "saitama", "chiba", "tokyo", "kanagawa",
   "gifu", "shizuoka", "aichi", "mie",
+  "shiga", "kyoto", "osaka", "hyogo", "nara", "wakayama",
 ];
 
 async function walk(directory) {
@@ -45,7 +46,7 @@ if (!robots.includes("Sitemap: https://rm-referral.maffun.workers.dev/sitemap.xm
 const astroMigratedFiles = (await Promise.all(migratedPrefectures.map((prefecture) => walk(path.join(astroDist, prefecture)))))
   .flat()
   .filter((file) => file.endsWith("index.html"));
-if (astroMigratedFiles.length !== 3969) errors.push(`expected 3969 migrated Astro pages, found ${astroMigratedFiles.length}`);
+if (astroMigratedFiles.length !== 5079) errors.push(`expected 5079 migrated Astro pages, found ${astroMigratedFiles.length}`);
 for (const astroFile of astroMigratedFiles) {
   const relative = path.relative(astroDist, astroFile);
   const overlayFile = path.join(overlay, relative);
