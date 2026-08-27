@@ -1,0 +1,6 @@
+---
+import VietnameseLegacyPage from "../../../components/VietnameseLegacyPage.astro";
+import { loadVietnameseLegacyPage } from "../../../data/load-vietnamese-pages";
+const page = loadVietnameseLegacyPage("tokyo");
+---
+<VietnameseLegacyPage page={page} canonicalPath="/tokyo/" headerLinkHref="/" />

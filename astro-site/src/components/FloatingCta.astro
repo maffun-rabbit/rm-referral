@@ -1,5 +1,5 @@
 ---
-import { REFERRAL_URL, type Locale } from "../config/site";
+import { getLocaleAssetPath, REFERRAL_URL, type Locale } from "../config/site";
 import { getMessages } from "../i18n";
 
 type Props = {
@@ -20,4 +20,4 @@ const messages = getMessages(locale);
     {messages.campaign.floatingButton} <span aria-hidden="true">→</span>
   </a>
 </aside>
-<script src="/js/shop-cta.js" defer is:inline></script>
+<script src={getLocaleAssetPath(locale, "/js/shop-cta.js")} defer is:inline></script>

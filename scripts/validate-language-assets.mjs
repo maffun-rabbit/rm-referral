@@ -23,6 +23,7 @@ async function walk(directory) {
 await access(path.join(publicRoot, "index.html"));
 const files = await walk(output);
 const htmlFiles = files.filter((file) => file.endsWith(".html"));
+let astroOverlayFiles = 0;
 if (!htmlFiles.length) errors.push("no HTML files were packaged");
 
 if (locale !== "ja") {
@@ -34,6 +35,24 @@ if (locale !== "ja") {
     .filter((relative) => !packagedRelativeFiles.has(relative));
   if (missingSourceFiles.length) {
     errors.push(`artifact is missing ${missingSourceFiles.length} source file(s), including: ${missingSourceFiles.slice(0, 3).join(", ")}`);
+  }
+  const astroRoot = path.join(root, "astro-site", "dist", pathPrefix);
+  try {
+    const astroFiles = await walk(astroRoot);
+    astroOverlayFiles = astroFiles.length;
+    for (const astroFile of astroFiles) {
+      const relative = path.relative(astroRoot, astroFile);
+      const packagedFile = path.join(publicRoot, relative);
+      try {
+        const [astroContent, packagedContent] = await Promise.all([readFile(astroFile), readFile(packagedFile)]);
+        if (!astroContent.equals(packagedContent)) errors.push(`${relative}: packaged file differs from Astro output`);
+      } catch (error) {
+        if (error.code === "ENOENT") errors.push(`${relative}: Astro overlay file is missing from the artifact`);
+        else throw error;
+      }
+    }
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
   }
   const topLevel = await readdir(output);
   if (topLevel.length !== 1 || topLevel[0] !== pathPrefix) {
@@ -58,6 +77,7 @@ const result = {
   publicPath: locale === "ja" ? "/" : `/${pathPrefix}/`,
   files: files.length,
   htmlFiles: htmlFiles.length,
+  astroOverlayFiles,
   errors,
 };
 console.log(JSON.stringify(result, null, 2));

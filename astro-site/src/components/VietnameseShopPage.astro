@@ -1,0 +1,32 @@
+---
+import type { VietnameseShopPage } from "../data/load-vietnamese-pages";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PrimaryCta from "./PrimaryCta.astro";
+import FinalCta from "./FinalCta.astro";
+import FloatingCta from "./FloatingCta.astro";
+
+type Props = { page: VietnameseShopPage };
+const { page } = Astro.props;
+const canonicalPath = "/tokyo/au/au-shop-narimasu/";
+---
+
+<BaseLayout title={page.title} description={page.description} robots={page.robots} locale="vi" canonicalPath={canonicalPath} availableLocales={["ja", "vi", "en", "zh", "ko", "pt"]} headerLinkHref="/vi/tokyo/" headerLinkLabel="Danh sách cửa hàng tại Tokyo">
+  <Fragment slot="head">
+    {page.schemas.map((schema) => <script is:inline type="application/ld+json" set:html={schema}></script>)}
+  </Fragment>
+  <main>
+    <Fragment set:html={page.breadcrumbHtml} />
+    <section class="shop-hero">
+      <div>
+        <p class="eyebrow"><Fragment set:html={page.hero.eyebrowHtml} /></p>
+        <h1><Fragment set:html={page.hero.headingHtml} /></h1>
+        <p class="lead"><Fragment set:html={page.hero.leadHtml} /></p>
+        <PrimaryCta locale="vi" />
+      </div>
+      <aside class="shop-card"><Fragment set:html={page.hero.shopCardHtml} /></aside>
+    </section>
+    <Fragment set:html={page.middleHtml} />
+    <FinalCta locale="vi" updated={page.updated} />
+    <FloatingCta locale="vi" />
+  </main>
+</BaseLayout>

@@ -29,6 +29,11 @@ export function getAbsoluteLocaleUrl(locale: Locale, pathname = "/"): string {
   return `${SITE_ORIGIN}${getLocalePath(locale, pathname)}`;
 }
 
+export function getLocaleAssetPath(locale: Locale, pathname: string): string {
+  const assetPath = `/${pathname}`.replace(/\/{2,}/g, "/");
+  return `${LOCALE_CONFIG[locale].pathPrefix}${assetPath}` || "/";
+}
+
 export type AlternateLink = { hreflang: string; href: string };
 
 export function getAlternateLinks(pathname: string, locales: readonly Locale[]): AlternateLink[] {

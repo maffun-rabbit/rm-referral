@@ -1,0 +1,6 @@
+---
+import VietnameseShopPage from "../../../../../components/VietnameseShopPage.astro";
+import { loadVietnameseRepresentativeShop } from "../../../../../data/load-vietnamese-pages";
+const page = loadVietnameseRepresentativeShop();
+---
+<VietnameseShopPage page={page} />

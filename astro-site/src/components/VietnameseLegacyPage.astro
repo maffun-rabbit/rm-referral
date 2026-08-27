@@ -1,0 +1,24 @@
+---
+import type { VietnameseLegacyPage } from "../data/load-vietnamese-pages";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+type Props = { page: VietnameseLegacyPage; canonicalPath: string; ogType?: "website" | "article"; headerLinkHref?: string };
+const { page, canonicalPath, ogType = "article", headerLinkHref = "/guide/foreigners/" } = Astro.props;
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  robots={page.robots}
+  locale="vi"
+  canonicalPath={canonicalPath}
+  availableLocales={["ja", "vi", "en", "zh", "ko", "pt"]}
+  headerLinkHref={`/vi${headerLinkHref}`}
+  ogType={ogType}
+>
+  <Fragment slot="head">
+    {page.schemas.map((schema) => <script is:inline type="application/ld+json" set:html={schema}></script>)}
+    {page.localScripts.map((src) => <script src={src} defer is:inline></script>)}
+  </Fragment>
+  <Fragment set:html={page.mainHtml} />
+</BaseLayout>
