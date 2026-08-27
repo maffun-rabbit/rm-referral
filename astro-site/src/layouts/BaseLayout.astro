@@ -1,13 +1,15 @@
 ---
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import type { Locale } from "../config/site";
+import { getAbsoluteLocaleUrl, getAlternateLinks, type Locale } from "../config/site";
 import { getMessages } from "../i18n";
 
 type Props = {
   title: string;
   description: string;
   canonical?: string;
+  canonicalPath?: string;
+  availableLocales?: readonly Locale[];
   locale?: Locale;
   robots?: string;
   headerLinkHref?: string;
@@ -19,6 +21,8 @@ const {
   title,
   description,
   canonical,
+  canonicalPath,
+  availableLocales = [],
   locale = "ja",
   robots = "index, follow",
   headerLinkHref,
@@ -26,6 +30,10 @@ const {
   analytics = true,
 } = Astro.props;
 const messages = getMessages(locale);
+const resolvedCanonical = canonical ?? (canonicalPath ? getAbsoluteLocaleUrl(locale, canonicalPath) : undefined);
+const alternateLinks = canonicalPath && availableLocales.length
+  ? getAlternateLinks(canonicalPath, availableLocales)
+  : [];
 ---
 
 <!doctype html>
@@ -36,12 +44,13 @@ const messages = getMessages(locale);
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
-    {canonical && <link rel="canonical" href={canonical} />}
+    {resolvedCanonical && <link rel="canonical" href={resolvedCanonical} />}
+    {alternateLinks.map((link) => <link rel="alternate" hreflang={link.hreflang} href={link.href} />)}
     <meta property="og:type" content="article" />
     <meta property="og:locale" content={messages.ogLocale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    {canonical && <meta property="og:url" content={canonical} />}
+    {resolvedCanonical && <meta property="og:url" content={resolvedCanonical} />}
     <meta name="twitter:card" content="summary" />
     <link rel="stylesheet" href="/css/style.css" />
     {analytics && <script async src="https://www.googletagmanager.com/gtag/js?id=G-86FFC09LTE" is:inline></script>}
