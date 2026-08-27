@@ -1,7 +1,5 @@
 #!/bin/sh
 set -eu
 
-npm --prefix astro-site test
-node scripts/prepare-japanese-assets.mjs
-node scripts/validate-japanese-overlay.mjs
-npx wrangler deploy --config wrangler.jsonc
+script_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+exec "$script_dir/deploy-language.sh" ja

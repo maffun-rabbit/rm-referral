@@ -1,1 +1,6 @@
-{"name":"rm-referral-pt","compatibility_date":"2026-08-21","assets":{"directory":"pt"}}
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rm-referral-pt",
+  "compatibility_date": "2026-08-21",
+  "assets": { "directory": ".deploy/pt" }
+}

@@ -1,1 +1,6 @@
-{"name":"rm-referral-ko","compatibility_date":"2026-08-21","assets":{"directory":"ko"}}
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rm-referral-ko",
+  "compatibility_date": "2026-08-21",
+  "assets": { "directory": ".deploy/ko" }
+}

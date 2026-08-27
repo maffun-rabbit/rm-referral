@@ -1,1 +1,6 @@
-{"name":"rm-referral-vi","compatibility_date":"2026-08-21","assets":{"directory":"vi"}}
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rm-referral-vi",
+  "compatibility_date": "2026-08-21",
+  "assets": { "directory": ".deploy/vi" }
+}
