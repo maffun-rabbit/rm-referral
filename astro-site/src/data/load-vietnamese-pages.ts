@@ -32,6 +32,10 @@ export type VietnameseShopPage = VietnameseLegacyPage & {
   updated: string;
 };
 
+export type VietnameseGuidePage = VietnameseLegacyPage & {
+  route: string;
+};
+
 export const vietnamesePrefectureSlugs = Object.keys(migratedPrefectures) as MigratedPrefectureSlug[];
 
 function capture(html: string, pattern: RegExp, label: string, sourcePath: string): string {
@@ -140,4 +144,20 @@ export function loadVietnameseShopPages(): VietnameseShopPage[] {
 
 export function loadVietnameseRepresentativeShop(): VietnameseShopPage {
   return parseVietnameseShop("tokyo", "au", "au-shop-narimasu");
+}
+
+export function loadVietnameseGuidePages(): VietnameseGuidePage[] {
+  const guideRoot = path.join(legacyRoot, "guide");
+  const routes: string[] = [];
+  const visit = (directory: string, segments: string[]) => {
+    if (existsSync(path.join(directory, "index.html"))) routes.push(segments.join("/"));
+    for (const entry of readdirSync(directory, { withFileTypes: true })) {
+      if (entry.isDirectory()) visit(path.join(directory, entry.name), [...segments, entry.name]);
+    }
+  };
+  visit(guideRoot, []);
+  return routes
+    .filter(Boolean)
+    .sort()
+    .map((route) => ({ route, ...loadVietnameseLegacyPage(`guide/${route}`) }));
 }

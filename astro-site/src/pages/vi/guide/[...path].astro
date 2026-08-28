@@ -1,0 +1,20 @@
+---
+import VietnameseLegacyPage from "../../../components/VietnameseLegacyPage.astro";
+import { loadVietnameseGuidePages, type VietnameseGuidePage } from "../../../data/load-vietnamese-pages.ts";
+
+export function getStaticPaths() {
+  return loadVietnameseGuidePages().map((page) => ({
+    params: { path: page.route },
+    props: { page },
+  }));
+}
+
+type Props = { page: VietnameseGuidePage };
+const { page } = Astro.props;
+---
+
+<VietnameseLegacyPage
+  page={page}
+  canonicalPath={`/guide/${page.route}/`}
+  headerLinkHref="/"
+/>
