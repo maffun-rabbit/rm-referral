@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
+import { migratedPrefectures, type MigratedPrefectureSlug } from "./load-tokyo-shop-pages.ts";
 
 const legacyRoot = path.resolve(process.cwd(), "..", "vi");
 const workerOrigins = {
@@ -26,6 +27,8 @@ export type VietnameseShopPage = VietnameseLegacyPage & {
   middleHtml: string;
   updated: string;
 };
+
+export const vietnamesePrefectureSlugs = Object.keys(migratedPrefectures) as MigratedPrefectureSlug[];
 
 function capture(html: string, pattern: RegExp, label: string, sourcePath: string): string {
   const match = html.match(pattern);
@@ -70,6 +73,16 @@ export function loadVietnameseLegacyPage(relativePath: string): VietnameseLegacy
       .map((match) => `/vi${match[1]}`)
       .filter((script) => !script.endsWith("analytics.js")),
   };
+}
+
+export function loadVietnameseSitemap(): string {
+  return readFileSync(path.join(legacyRoot, "sitemap.xml"), "utf8")
+    .replaceAll("https://rm-referral-vi.maffun.workers.dev", "https://mnp-navi.jp/vi");
+}
+
+export function loadVietnameseRobots(): string {
+  return readFileSync(path.join(legacyRoot, "robots.txt"), "utf8")
+    .replaceAll("https://rm-referral-vi.maffun.workers.dev", "https://mnp-navi.jp/vi");
 }
 
 export function loadVietnameseRepresentativeShop(): VietnameseShopPage {

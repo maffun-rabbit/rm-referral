@@ -1,0 +1,19 @@
+---
+import VietnameseLegacyPage from "../../../components/VietnameseLegacyPage.astro";
+import { loadVietnameseLegacyPage, vietnamesePrefectureSlugs, type VietnameseLegacyPage as VietnamesePageData } from "../../../data/load-vietnamese-pages.ts";
+import type { MigratedPrefectureSlug } from "../../../data/load-tokyo-shop-pages.ts";
+
+export function getStaticPaths() {
+  return vietnamesePrefectureSlugs
+    .filter((prefecture) => prefecture !== "tokyo")
+    .map((prefecture) => ({
+      params: { prefecture },
+      props: { prefecture, page: loadVietnameseLegacyPage(prefecture) },
+    }));
+}
+
+type Props = { prefecture: MigratedPrefectureSlug; page: VietnamesePageData };
+const { prefecture, page } = Astro.props;
+---
+
+<VietnameseLegacyPage page={page} canonicalPath={`/${prefecture}/`} headerLinkHref="/" />
