@@ -1,0 +1,16 @@
+---
+import VietnameseShopPage from "../../../../../components/VietnameseShopPage.astro";
+import { loadVietnameseShopPages, type VietnameseShopPage as VietnameseShopPageData } from "../../../../../data/load-vietnamese-pages.ts";
+
+export function getStaticPaths() {
+  return loadVietnameseShopPages().map((page) => ({
+    params: { prefecture: page.prefecture, carrier: page.carrier, slug: page.slug },
+    props: { page },
+  }));
+}
+
+type Props = { page: VietnameseShopPageData };
+const { page } = Astro.props;
+---
+
+<VietnameseShopPage page={page} />

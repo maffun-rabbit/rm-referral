@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { migratedPrefectures, type MigratedPrefectureSlug } from "./load-tokyo-shop-pages.ts";
 
@@ -22,6 +22,10 @@ export type VietnameseLegacyPage = {
 };
 
 export type VietnameseShopPage = VietnameseLegacyPage & {
+  prefecture: MigratedPrefectureSlug;
+  prefectureLabel: string;
+  carrier: string;
+  slug: string;
   breadcrumbHtml: string;
   hero: { eyebrowHtml: string; headingHtml: string; leadHtml: string; shopCardHtml: string };
   middleHtml: string;
@@ -85,24 +89,55 @@ export function loadVietnameseRobots(): string {
     .replaceAll("https://rm-referral-vi.maffun.workers.dev", "https://mnp-navi.jp/vi");
 }
 
-export function loadVietnameseRepresentativeShop(): VietnameseShopPage {
-  const page = loadVietnameseLegacyPage("tokyo/au/au-shop-narimasu");
+function parseVietnameseShop(prefecture: MigratedPrefectureSlug, carrier: string, slug: string): VietnameseShopPage {
+  const relativePath = `${prefecture}/${carrier}/${slug}`;
+  const page = loadVietnameseLegacyPage(relativePath);
   const mainHtml = page.mainHtml;
   const heroMatch = mainHtml.match(/<section class="shop-hero">([\s\S]*?)<\/section>/i);
-  if (!heroMatch || heroMatch.index === undefined) throw new Error("Vietnamese representative shop hero was not found");
+  if (!heroMatch || heroMatch.index === undefined) throw new Error(`${relativePath}: shop hero was not found`);
   const finalIndex = mainHtml.indexOf('<section class="final-cta"');
-  if (finalIndex < 0) throw new Error("Vietnamese representative shop final CTA was not found");
+  if (finalIndex < 0) throw new Error(`${relativePath}: final CTA was not found`);
   const heroHtml = heroMatch[1];
+  const breadcrumbHtml = capture(mainHtml, /(<nav class="breadcrumb"[\s\S]*?<\/nav>)/i, "breadcrumb", relativePath);
+  const breadcrumbLinks = [...breadcrumbHtml.matchAll(/<a\b[^>]*>([^<]+)<\/a>/gi)];
+  const prefectureLabel = decodeAttribute(breadcrumbLinks.at(-1)?.[1]?.trim() ?? prefecture);
   return {
     ...page,
-    breadcrumbHtml: capture(mainHtml, /(<nav class="breadcrumb"[\s\S]*?<\/nav>)/i, "breadcrumb", "Vietnamese representative shop"),
+    prefecture,
+    prefectureLabel,
+    carrier,
+    slug,
+    breadcrumbHtml,
     hero: {
-      eyebrowHtml: capture(heroHtml, /<p class="eyebrow">([\s\S]*?)<\/p>/i, "hero eyebrow", "Vietnamese representative shop"),
-      headingHtml: capture(heroHtml, /<h1>([\s\S]*?)<\/h1>/i, "hero heading", "Vietnamese representative shop"),
-      leadHtml: capture(heroHtml, /<p class="lead">([\s\S]*?)<\/p>/i, "hero lead", "Vietnamese representative shop"),
-      shopCardHtml: capture(heroHtml, /<aside class="shop-card">([\s\S]*?)<\/aside>/i, "shop card", "Vietnamese representative shop"),
+      eyebrowHtml: capture(heroHtml, /<p class="eyebrow">([\s\S]*?)<\/p>/i, "hero eyebrow", relativePath),
+      headingHtml: capture(heroHtml, /<h1>([\s\S]*?)<\/h1>/i, "hero heading", relativePath),
+      leadHtml: capture(heroHtml, /<p class="lead">([\s\S]*?)<\/p>/i, "hero lead", relativePath),
+      shopCardHtml: capture(heroHtml, /<aside class="shop-card">([\s\S]*?)<\/aside>/i, "shop card", relativePath),
     },
     middleHtml: mainHtml.slice(heroMatch.index + heroMatch[0].length, finalIndex).trim(),
-    updated: capture(mainHtml, /<p class="updated">Ngày kiểm tra thông tin:\s*([^<]+)<\/p>/i, "updated date", "Vietnamese representative shop"),
+    updated: capture(mainHtml, /<p class="updated">Ngày kiểm tra thông tin:\s*([^<]+)<\/p>/i, "updated date", relativePath),
   };
+}
+
+export function loadVietnameseShopPages(): VietnameseShopPage[] {
+  return vietnamesePrefectureSlugs.flatMap((prefecture) => {
+    const prefectureRoot = path.join(legacyRoot, prefecture);
+    return readdirSync(prefectureRoot, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory() && entry.name !== "coverage")
+      .map((entry) => entry.name)
+      .sort()
+      .flatMap((carrier) => {
+        const carrierRoot = path.join(prefectureRoot, carrier);
+        return readdirSync(carrierRoot, { withFileTypes: true })
+          .filter((entry) => entry.isDirectory())
+          .map((entry) => entry.name)
+          .sort()
+          .filter((slug) => existsSync(path.join(carrierRoot, slug, "index.html")))
+          .map((slug) => parseVietnameseShop(prefecture, carrier, slug));
+      });
+  });
+}
+
+export function loadVietnameseRepresentativeShop(): VietnameseShopPage {
+  return parseVietnameseShop("tokyo", "au", "au-shop-narimasu");
 }

@@ -7,10 +7,10 @@ import FloatingCta from "./FloatingCta.astro";
 
 type Props = { page: VietnameseShopPage };
 const { page } = Astro.props;
-const canonicalPath = "/tokyo/au/au-shop-narimasu/";
+const canonicalPath = `/${page.prefecture}/${page.carrier}/${page.slug}/`;
 ---
 
-<BaseLayout title={page.title} description={page.description} robots={page.robots} locale="vi" canonicalPath={canonicalPath} availableLocales={["ja", "vi", "en", "zh", "ko", "pt"]} headerLinkHref="/vi/tokyo/" headerLinkLabel="Danh sách cửa hàng tại Tokyo">
+<BaseLayout title={page.title} description={page.description} robots={page.robots} locale="vi" canonicalPath={canonicalPath} availableLocales={["ja", "vi", "en", "zh", "ko", "pt"]} headerLinkHref={`/vi/${page.prefecture}/`} headerLinkLabel={`Danh sách cửa hàng tại ${page.prefectureLabel}`}>
   <Fragment slot="head">
     {page.schemas.map((schema) => <script is:inline type="application/ld+json" set:html={schema}></script>)}
   </Fragment>
