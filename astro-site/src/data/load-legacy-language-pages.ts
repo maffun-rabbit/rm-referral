@@ -101,6 +101,101 @@ function localizeChineseCoverage(value: string, relativePath: string): string {
   return localized;
 }
 
+const koreanTokyoMunicipalities: Record<string, readonly [string, string]> = {
+  adachi: ["足立区", "아다치구"], akiruno: ["あきる野市", "아키루노시"], akishima: ["昭島市", "아키시마시"],
+  arakawa: ["荒川区", "아라카와구"], bunkyo: ["文京区", "분쿄구"], chiyoda: ["千代田区", "지요다구"],
+  chofu: ["調布市", "조후시"], chuo: ["中央区", "주오구"], edogawa: ["江戸川区", "에도가와구"],
+  fuchu: ["府中市", "후추시"], fussa: ["福生市", "훗사시"], hachijojimahachijo: ["八丈島八丈町", "하치조마치"],
+  hachioji: ["八王子市", "하치오지시"], hamura: ["羽村市", "하무라시"], higashikurume: ["東久留米市", "히가시쿠루메시"],
+  higashimurayama: ["東村山市", "히가시무라야마시"], higashiyamato: ["東大和市", "히가시야마토시"], hino: ["日野市", "히노시"],
+  inagi: ["稲城市", "이나기시"], itabashi: ["板橋区", "이타바시구"], katsushika: ["葛飾区", "가쓰시카구"],
+  kita: ["北区", "기타구"], kiyose: ["清瀬市", "기요세시"], kodaira: ["小平市", "고다이라시"],
+  koganei: ["小金井市", "고가네이시"], kokubunji: ["国分寺市", "고쿠분지시"], kokuritsu: ["国立市", "구니타치시"],
+  komae: ["狛江市", "고마에시"], koto: ["江東区", "고토구"], machida: ["町田市", "마치다시"],
+  meguro: ["目黒区", "메구로구"], minato: ["港区", "미나토구"], mitaka: ["三鷹市", "미타카시"],
+  musashimurayama: ["武蔵村山市", "무사시무라야마시"], musashino: ["武蔵野市", "무사시노시"], nakano: ["中野区", "나카노구"],
+  nerima: ["練馬区", "네리마구"], "nishitama-hinode": ["西多摩郡日の出町", "니시타마군 히노데마치"],
+  "nishitama-mizuho": ["西多摩郡瑞穂町", "니시타마군 미즈호마치"], nishitokyo: ["西東京市", "니시토쿄시"],
+  oshima: ["大島町", "오시마마치"], ota: ["大田区", "오타구"], oume: ["青梅市", "오메시"],
+  setagaya: ["世田谷区", "세타가야구"], shibuya: ["渋谷区", "시부야구"], shinagawa: ["品川区", "시나가와구"],
+  shinjuku: ["新宿区", "신주쿠구"], suginami: ["杉並区", "스기나미구"], sumida: ["墨田区", "스미다구"],
+  taito: ["台東区", "다이토구"], tama: ["多摩市", "다마시"], tatsukawa: ["立川市", "다치카와시"],
+  toshima: ["豊島区", "도시마구"],
+};
+
+const koreanCoverageReplacements: readonly (readonly [string, string])[] = [
+  ["東京都", "도쿄도"], ["楽天モバイル電波状況", "라쿠텐 모바일 전파 상황"],
+  ["エリア・基地局の最新情報", "서비스 지역·기지국 최신 정보"], ["楽天モバイル乗り換えガイド", "라쿠텐 모바일 번호이동 가이드"],
+  ["公式の基地局設置発表をもとに、現在確認できる改善情報を整理しました。生活圏での最終確認方法と、家族で使える割引もまとめています。", "공식 기지국 설치 발표를 바탕으로 현재 확인 가능한 개선 정보를 정리했습니다. 생활권에서 최종 확인하는 방법과 가족 할인도 함께 안내합니다."],
+  ["現在の確認目安", "현재 확인 기준"], ["生活圏ごとの確認がおすすめ", "생활권별 확인을 권장합니다"],
+  ["市区町村全体を一律に良い・悪いとは判定できないため、自宅・学校・勤務先など実際に使う地点を公式エリアマップで確認してください。", "지역 전체의 통신 품질을 일률적으로 판단할 수 없으므로 집, 학교, 직장 등 실제 이용 장소를 공식 서비스 지역 지도에서 확인해 주세요."],
+  ["公式エリアマップで地点を確認する", "공식 서비스 지역 지도에서 확인하기"], ["他社から乗り換えで14,000ポイントを確認する", "타사 번호이동 14,000포인트 혜택 확인"],
+  ["今いる場所に近い情報も確認できます", "현재 위치 주변 정보도 확인할 수 있습니다"], ["位置情報はブラウザ内の判定だけに使用します", "위치 정보는 브라우저 내 주변 지역 판정에만 사용됩니다"],
+  ["現在地周辺を見る", "현재 위치 주변 보기"], ["直近2回の公式発表について", "최근 2회의 공식 발표"],
+  ["直近の基地局設置実績", "최근 기지국 설치 실적"], ["新設基地局", "신설 기지국"],
+  ["確認対象：楽天モバイル公式「Rakuten最強プランプロジェクト進行中！」／2026年8月17日更新（外部リンクなし）", "확인 자료: 라쿠텐 모바일 공식 ‘Rakuten 최강 플랜 프로젝트 진행 중!’ / 2026년 8월 17일 업데이트"],
+  ["出典：楽天モバイル公式「Rakuten最強プランプロジェクト進行中！」／2026年8月17日更新（外部リンクなし）", "출처: 라쿠텐 모바일 공식 ‘Rakuten 최강 플랜 프로젝트 진행 중!’ / 2026년 8월 17일 업데이트"],
+  ["※ 基地局の新設は改善を示す情報ですが、特定地点の電波強度や通信速度を保証するものではありません。屋内・地下・地形・混雑状況・対応端末によって利用状況は変わります。", "※ 기지국 신설은 통신 환경 개선을 나타내지만 특정 장소의 전파 강도나 통신 속도를 보장하지 않습니다. 실내, 지하, 지형, 혼잡도, 단말기에 따라 이용 상황이 달라질 수 있습니다."],
+  ["契約前に確認したい3つの場所", "계약 전에 확인할 3곳"], ["自宅", "집"], ["学校・勤務先", "학교·직장"], ["よく行く施設", "자주 가는 시설"],
+  ["部屋の位置や建物の構造でも変わるため、住所付近を公式エリアマップで拡大して確認します。", "방 위치와 건물 구조에 따라서도 달라지므로 공식 서비스 지역 지도에서 주소 주변을 확대해 확인하세요."],
+  ["毎日長く滞在する場所と、その周辺の通学・通勤経路も合わせて確認します。", "매일 오래 머무는 장소와 통학·통근 경로 주변도 함께 확인하세요."],
+  ["地下、駅、大型商業施設など、通信をよく使う場所は個別に確認しておくと安心です。", "지하, 역, 대형 상업 시설 등 통신을 자주 이용하는 장소는 개별적으로 확인하는 것이 좋습니다."],
+  ["家族の年代に合わせて使える割引", "가족 연령에 맞는 할인"], ["利用する方：", "이용자:"],
+  ["家族みんな", "가족 모두"], ["家族", "가족"], ["12歳以下", "12세 이하"], ["12歳まで", "12세까지"],
+  ["13〜22歳", "13~22세"], ["65歳以上", "65세 이상"], ["最強家族割", "최강 가족 할인"],
+  ["毎月110円引き", "매월 110엔 할인"], ["離れて暮らす家族も対象。対象の家族グループに参加すると、1人あたり月額110円（税込）が割り引かれます。", "따로 사는 가족도 대상입니다. 대상 가족 그룹에 참여하면 1인당 매월 110엔(세금 포함)이 할인됩니다."],
+  ["最強こども割", "최강 어린이 할인"], ["3GBまで毎月440円引き", "3GB까지 매월 440엔 할인"],
+  ["データ利用量が3GB以下の場合は毎月440円（税込）、それ以外の場合は毎月110円（税込）が割り引かれます。", "데이터 이용량이 3GB 이하이면 매월 440엔, 그 이상이면 매월 110엔(세금 포함)이 할인됩니다."],
+  ["最強青春割", "최강 청춘 할인"], ["13歳から22歳までを対象に、毎月110円（税込）が割り引かれます。適用手続きが必要です。", "13~22세 이용자는 매월 110엔(세금 포함)이 할인되며 적용 절차가 필요합니다."],
+  ["最強シニアプログラム", "최강 시니어 프로그램"], ["毎月110ポイント還元", "매월 110포인트 환급"],
+  ["条件を満たすと毎月110ポイントを還元。通話や店頭サポートなどをまとめた対象オプションの還元もあります。", "조건을 충족하면 매월 110포인트를 받을 수 있으며 통화와 매장 지원 등을 묶은 대상 옵션의 환급도 있습니다."],
+  ["※ 年齢、対象プラン、エントリーなどの条件があります。割引額・名称・条件は変更される場合があるため、申し込み時に楽天モバイル公式情報をご確認ください。", "※ 연령, 대상 요금제, 신청 등 조건이 있습니다. 할인 금액과 명칭, 조건은 변경될 수 있으므로 신청 시 라쿠텐 모바일 공식 정보를 확인해 주세요."],
+  ["電波状況と家族向け割引を確認できた方へ", "전파 상황과 가족 할인을 확인하셨다면"], ["他社から乗り換えで14,000ポイント", "타사 번호이동 시 14,000포인트"],
+  ["エリアと割引を確認できたら、紹介キャンペーンの条件を確認して申し込みへ進めます。", "서비스 지역과 할인을 확인한 후 추천 캠페인 조건을 확인하고 신청하세요."],
+  ["14,000ポイント特典を確認する", "14,000포인트 혜택 확인"], ["他社から乗り換えで", "타사에서 번호이동 시"],
+  ["14,000ポイント", "14,000포인트"], ["特典を確認する", "혜택 확인"], ["利用する方を選択", "이용자 선택"],
+  ["当サイトは個人が運営しており、楽天モバイル公式サイトではありません。", "이 사이트는 개인이 운영하며 라쿠텐 모바일 공식 사이트가 아닙니다."],
+  ["掲載情報は公式発表をもとに整理しています。実際の通信状況と最新条件は公式サイトでご確認ください。", "게재 정보는 공식 발표를 바탕으로 정리했습니다. 실제 통신 상황과 최신 조건은 공식 사이트에서 확인해 주세요."],
+];
+
+function localizeKoreanCoverage(value: string, relativePath: string): string {
+  const match = relativePath.match(/^tokyo\/coverage\/([^/]+)$/);
+  if (!match) return value;
+  const names = koreanTokyoMunicipalities[match[1]];
+  if (!names) throw new Error(`Missing Korean municipality name for ${match[1]}`);
+  const [japaneseName, koreanName] = names;
+  let localized = value.replaceAll(japaneseName, koreanName);
+  for (const [from, to] of koreanCoverageReplacements) localized = localized.replaceAll(from, to);
+  localized = localized
+    .replace(new RegExp(`${koreanName}は直近2回の基地局新設一覧には掲載されていません。これは圏外を意味するものではありません。現在の提供状況は公式エリアマップで地点ごとに確認してください。`, "g"), `${koreanName}는 최근 2회의 신설 기지국 목록에 포함되지 않았습니다. 이것이 서비스 불가 지역이라는 뜻은 아니므로 공식 서비스 지역 지도에서 장소별 현재 상황을 확인해 주세요.`)
+    .replace(new RegExp(`${koreanName}では、最新で([^<。]+)に基地局設置が完了したと楽天モバイルが発表しています。`, "g"), `라쿠텐 모바일은 ${koreanName}에서 최근 $1에 기지국 설치를 완료했다고 발표했습니다.`)
+    .replace(new RegExp(`${koreanName}には掲載データ上、楽天モバイルショップが(\\d+)店舗あります。対面で相談したい場合の選択肢になります。`, "g"), `게재 데이터상 ${koreanName}에는 라쿠텐 모바일 매장이 $1곳 있어 대면 상담 선택지가 됩니다.`)
+    .replace(new RegExp(`${koreanName}内に楽天モバイルショップが見つからない場合も、申し込みやMNPはオンラインで進められます。`, "g"), `${koreanName} 안에서 라쿠텐 모바일 매장을 찾지 못해도 신청과 MNP는 온라인으로 진행할 수 있습니다.`)
+    .replaceAll(`${koreanName}で相談したい場合`, `${koreanName}에서 상담하려면`)
+    .replaceAll(`${koreanName}のエリア改善情報`, `${koreanName}의 서비스 지역 개선 정보`)
+    .replaceAll(`${koreanName}の電波状況`, `${koreanName}의 전파 상황`)
+    .replaceAll(`${koreanName}の`, `${koreanName}의 `)
+    .replaceAll("基地局の新設情報あり", "신설 기지국 정보 있음")
+    .replaceAll("複数の基地局新設情報あり", "여러 신설 기지국 정보 있음")
+    .replaceAll("4G・5Gの改善情報あり", "4G·5G 개선 정보 있음")
+    .replaceAll("直近の公式発表で基地局の新設が確認でき、エリア改善が進められています。", "최근 공식 발표에서 기지국 신설이 확인되어 서비스 지역 개선이 진행 중입니다.")
+    .replaceAll("直近の公式発表で2局の基地局新設が確認でき、エリア改善の動きが見られます。", "최근 공식 발표에서 기지국 2곳의 신설이 확인되어 서비스 지역 개선이 진행 중입니다.")
+    .replaceAll("直近の公式発表で4Gと5Gの基地局新設が確認でき、通信環境の改善が進められています。", "최근 공식 발표에서 4G와 5G 기지국 신설이 확인되어 통신 환경이 개선되고 있습니다.")
+    .replaceAll("設置完了", "설치 완료")
+    .replaceAll("最強가족割", "최강 가족 할인")
+    .replaceAll("離れて暮らす가족も対象。対象の가족グループに参加すると、1人あたり月額110円（税込）が割り引かれます。", "따로 사는 가족도 대상입니다. 대상 가족 그룹에 참여하면 1인당 매월 110엔(세금 포함)이 할인됩니다.")
+    .replaceAll("電波状況と가족向け割引を確認できた方へ", "전파 상황과 가족 할인을 확인하셨다면")
+    .replaceAll("紹介キャンペーンの条件を確認する", "추천 캠페인 조건 확인")
+    .replace(/([^\"<]+)의 라쿠텐 모바일 전파 상황を、公式エリア情報と直近の基地局設置発表から確認。家族・こども・青春・シニア向け特典と紹介キャンペーンも解説します。/g, "$1의 라쿠텐 모바일 전파 상황을 공식 서비스 지역 정보와 최근 기지국 설치 발표로 확인합니다. 가족·어린이·청년·시니어 혜택과 추천 캠페인도 안내합니다.");
+  return localized;
+}
+
+function localizeCoverage(value: string, locale: ForeignLocale, relativePath: string): string {
+  if (locale === "zh") return localizeChineseCoverage(value, relativePath);
+  if (locale === "ko") return localizeKoreanCoverage(value, relativePath);
+  return value;
+}
+
 export type LegacyLanguagePage = {
   title: string;
   description: string;
@@ -153,9 +248,7 @@ export function localizeLegacyHtml(html: string, locale: ForeignLocale): string 
 }
 
 function localizeLegacySchema(schema: string, locale: ForeignLocale, relativePath: string): string {
-  const localized = locale === "zh"
-    ? localizeChineseCoverage(localizeLegacyHtml(schema, locale), relativePath)
-    : localizeLegacyHtml(schema, locale);
+  const localized = localizeCoverage(localizeLegacyHtml(schema, locale), locale, relativePath);
   try {
     const parsed = JSON.parse(localized) as Record<string, unknown>;
     if (parsed["@type"] === "WebPage") {
@@ -176,8 +269,8 @@ export function createLegacyLanguageLoader(locale: ForeignLocale) {
     const sourcePath = path.join(legacyRoot, relativePath, "index.html");
     const html = readFileSync(sourcePath, "utf8");
     return {
-      title: decodeAttribute(localizeChineseCoverage(capture(html, /<title>([\s\S]*?)<\/title>/i, "title", sourcePath), locale === "zh" ? relativePath : "")),
-      description: decodeAttribute(localizeChineseCoverage(capture(html, /<meta\s+name="description"\s+content="([^"]*)"/i, "description", sourcePath), locale === "zh" ? relativePath : "")),
+      title: decodeAttribute(localizeCoverage(capture(html, /<title>([\s\S]*?)<\/title>/i, "title", sourcePath), locale, relativePath)),
+      description: decodeAttribute(localizeCoverage(capture(html, /<meta\s+name="description"\s+content="([^"]*)"/i, "description", sourcePath), locale, relativePath)),
       robots: capture(html, /<meta\s+name="robots"\s+content="([^"]*)"/i, "robots", sourcePath),
       schemas: [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)]
         .map((match) => localizeLegacySchema(match[1].trim(), locale, relativePath)),
@@ -187,7 +280,7 @@ export function createLegacyLanguageLoader(locale: ForeignLocale) {
             .replace(/\s*<script\b[^>]*src="\/js\/[^"]+"[^>]*><\/script>/gi, ""),
           locale,
         );
-        return locale === "zh" ? localizeChineseCoverage(localized, relativePath) : localized;
+        return localizeCoverage(localized, locale, relativePath);
       })(),
       localScripts: [...html.matchAll(/<script\b[^>]*src="(\/js\/[^"]+)"[^>]*><\/script>/gi)]
         .map((match) => `/${locale}${match[1]}`)

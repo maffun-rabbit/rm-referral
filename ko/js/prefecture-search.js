@@ -35,7 +35,7 @@
     });
 
     resultCount.textContent = total;
-    status.textContent = query || activeCarrier !== "all" ? `${total}店舗に絞り込みました` : "";
+    status.textContent = query || activeCarrier !== "all" ? `${total}개 매장으로 필터링했습니다` : "";
     noResults.hidden = total !== 0;
   }
 

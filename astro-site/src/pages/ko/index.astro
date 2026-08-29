@@ -1,0 +1,6 @@
+---
+import LegacyLanguagePage from "../../components/LegacyLanguagePage.astro";
+import { loadKoreanLegacyPage } from "../../data/load-korean-pages";
+const page = loadKoreanLegacyPage("");
+---
+<LegacyLanguagePage locale="ko" page={page} canonicalPath="/" ogType="website" />

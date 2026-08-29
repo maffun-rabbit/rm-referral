@@ -1,0 +1,12 @@
+---
+import LegacyLanguagePage from "../../../components/LegacyLanguagePage.astro";
+import { loadKoreanGuidePages, type KoreanGuidePage } from "../../../data/load-korean-pages.ts";
+
+export function getStaticPaths() {
+  return loadKoreanGuidePages().map((page) => ({ params: { path: page.route }, props: { page } }));
+}
+
+type Props = { page: KoreanGuidePage };
+const { page } = Astro.props;
+---
+<LegacyLanguagePage locale="ko" page={page} canonicalPath={`/guide/${page.route}/`} headerLinkHref="/" headerLinkLabel="홈" />

@@ -1,0 +1,16 @@
+---
+import LegacyLanguagePage from "../../../components/LegacyLanguagePage.astro";
+import { koreanPrefectureSlugs, loadKoreanLegacyPage, type KoreanLegacyPage } from "../../../data/load-korean-pages.ts";
+import type { MigratedPrefectureSlug } from "../../../data/load-tokyo-shop-pages.ts";
+
+export function getStaticPaths() {
+  return koreanPrefectureSlugs.map((prefecture) => ({
+    params: { prefecture },
+    props: { prefecture, page: loadKoreanLegacyPage(prefecture) },
+  }));
+}
+
+type Props = { prefecture: MigratedPrefectureSlug; page: KoreanLegacyPage };
+const { prefecture, page } = Astro.props;
+---
+<LegacyLanguagePage locale="ko" page={page} canonicalPath={`/${prefecture}/`} />
