@@ -44,7 +44,21 @@ export const legacyLanguageConfig: Record<ForeignLocale, LegacyLanguageConfig> =
       ["</strong>stores shown", "</strong> stores shown"],
     ],
   },
-  zh: { shopListLabel: (prefectureLabel) => `${prefectureLabel}的门店`, replacements: [] },
+  zh: {
+    shopListLabel: (prefectureLabel) => `${prefectureLabel}的门店`,
+    replacements: [
+      ["通信会社で絞り込む", "按运营商筛选"],
+      [">ドコモ <small>", ">docomo <small>"],
+      [">ソフトバンク <small>", ">SoftBank <small>"],
+      [">イオンモバイル <small>", ">AEON Mobile <small>"],
+      ["条件に一致する店舗がありません。検索語または通信会社を変更してください。", "没有符合条件的门店。请更换搜索词或运营商。"],
+      ["オンラインで乗り換えを始める", "在线开始携号转网"],
+      ["紹介キャンペーンの条件を先に確認し、納得してから申し込みへ進んでください。", "申请前请先确认推荐活动的适用条件。"],
+      ["紹介キャンペーンを確認する", "查看推荐活动条件"],
+      ["情報確認日：", "信息确认日期："],
+      ["https://mnp-navi.jp/tokyo/coverage/", "https://mnp-navi.jp/zh/tokyo/coverage/"],
+    ],
+  },
   ko: { shopListLabel: (prefectureLabel) => `${prefectureLabel} 매장 목록`, replacements: [] },
   pt: { shopListLabel: (prefectureLabel) => `Lojas em ${prefectureLabel}`, replacements: [] },
 };

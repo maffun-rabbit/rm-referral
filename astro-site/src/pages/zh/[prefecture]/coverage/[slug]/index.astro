@@ -1,0 +1,16 @@
+---
+import LegacyLanguagePage from "../../../../../components/LegacyLanguagePage.astro";
+import { loadChineseCoveragePages, type ChineseCoveragePage } from "../../../../../data/load-chinese-pages.ts";
+
+export function getStaticPaths() {
+  return loadChineseCoveragePages().map((page) => ({
+    params: { prefecture: page.prefecture, slug: page.slug },
+    props: { page },
+  }));
+}
+
+type Props = { page: ChineseCoveragePage };
+const { page } = Astro.props;
+---
+
+<LegacyLanguagePage locale="zh" page={page} canonicalPath={`/${page.prefecture}/coverage/${page.slug}/`} headerLinkHref={`/${page.prefecture}/`} headerLinkLabel="东京都的门店" />

@@ -1,0 +1,18 @@
+---
+import LocalizedShopPage from "../../../../../components/LocalizedShopPage.astro";
+import { legacyLanguageConfig } from "../../../../../i18n/legacy";
+import { loadChineseShopPages, type ChineseShopPage } from "../../../../../data/load-chinese-pages.ts";
+
+export function getStaticPaths() {
+  return loadChineseShopPages().map((page) => ({
+    params: { prefecture: page.prefecture, carrier: page.carrier, slug: page.slug },
+    props: { page },
+  }));
+}
+
+type Props = { page: ChineseShopPage };
+const { page } = Astro.props;
+const shopListLabel = legacyLanguageConfig.zh.shopListLabel(page.prefectureLabel);
+---
+
+<LocalizedShopPage locale="zh" page={page} shopListLabel={shopListLabel} />

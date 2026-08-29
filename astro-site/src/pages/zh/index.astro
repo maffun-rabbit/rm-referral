@@ -1,0 +1,6 @@
+---
+import LegacyLanguagePage from "../../components/LegacyLanguagePage.astro";
+import { loadChineseLegacyPage } from "../../data/load-chinese-pages";
+const page = loadChineseLegacyPage("");
+---
+<LegacyLanguagePage locale="zh" page={page} canonicalPath="/" ogType="website" />
