@@ -1,7 +1,7 @@
 import os
 import re
 
-BASE_DIR = "/Users/masayuki/Library/CloudStorage/GoogleDrive-maffun@gmail.com/マイドライブ/AI自動整理メモ/10_Projects/RMリファラル/cloudflare-site"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 47 Prefectures Translation Map
 PREFECTURES_MAP = {

@@ -3,7 +3,7 @@ import os
 import re
 import glob
 
-BASE_DIR = "/Users/masayuki/Library/CloudStorage/GoogleDrive-maffun@gmail.com/マイドライブ/AI自動整理メモ/10_Projects/RMリファラル/cloudflare-site"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PREFECTURES_MAP = {
     "hokkaido": {"name_ja": "北海道", "en": "Hokkaido", "zh": "北海道", "ko": "홋카이도", "vi": "Hokkaido", "pt": "Hokkaido"},

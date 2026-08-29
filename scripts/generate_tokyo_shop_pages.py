@@ -3,7 +3,7 @@ import os
 import re
 import glob
 
-BASE_DIR = "/Users/masayuki/Library/CloudStorage/GoogleDrive-maffun@gmail.com/マイドライブ/AI自動整理メモ/10_Projects/RMリファラル/cloudflare-site"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 LANGUAGES = {
     "en": {"code": "en", "locale": "en_US", "name": "English", "flag": "🇺🇸 English", "guide_link_text": "Foreigners SIM Guide", "home_title": "Rakuten Mobile Switching Guide", "bread_home": "Home", "tokyo_title": "Tokyo", "filter_label": "Filter Stores", "search_placeholder": "Search by store or district..."},
