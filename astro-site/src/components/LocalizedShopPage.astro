@@ -1,0 +1,35 @@
+---
+import { getLocalePath, type Locale } from "../config/site";
+import type { ForeignLocale } from "../i18n/legacy";
+import type { LegacyShopPage } from "../data/load-legacy-language-pages";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PrimaryCta from "./PrimaryCta.astro";
+import FinalCta from "./FinalCta.astro";
+import FloatingCta from "./FloatingCta.astro";
+
+type Props = { locale: ForeignLocale; page: LegacyShopPage; shopListLabel: string };
+const { locale, page, shopListLabel } = Astro.props;
+const canonicalPath = `/${page.prefecture}/${page.carrier}/${page.slug}/`;
+const availableLocales: readonly Locale[] = ["ja", "vi", "en", "zh", "ko", "pt"];
+---
+
+<BaseLayout title={page.title} description={page.description} robots={page.robots} locale={locale} canonicalPath={canonicalPath} availableLocales={availableLocales} headerLinkHref={getLocalePath(locale, `/${page.prefecture}/`)} headerLinkLabel={shopListLabel}>
+  <Fragment slot="head">
+    {page.schemas.map((schema) => <script is:inline type="application/ld+json" set:html={schema}></script>)}
+  </Fragment>
+  <main>
+    <Fragment set:html={page.breadcrumbHtml} />
+    <section class="shop-hero">
+      <div>
+        <p class="eyebrow"><Fragment set:html={page.hero.eyebrowHtml} /></p>
+        <h1><Fragment set:html={page.hero.headingHtml} /></h1>
+        <p class="lead"><Fragment set:html={page.hero.leadHtml} /></p>
+        <PrimaryCta locale={locale} />
+      </div>
+      <aside class="shop-card"><Fragment set:html={page.hero.shopCardHtml} /></aside>
+    </section>
+    <Fragment set:html={page.middleHtml} />
+    <FinalCta locale={locale} updated={page.updated} />
+    <FloatingCta locale={locale} />
+  </main>
+</BaseLayout>

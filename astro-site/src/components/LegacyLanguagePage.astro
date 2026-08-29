@@ -1,0 +1,33 @@
+---
+import { getLocalePath, type Locale } from "../config/site";
+import type { ForeignLocale } from "../i18n/legacy";
+import type { LegacyLanguagePage } from "../data/load-legacy-language-pages";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+type Props = {
+  locale: ForeignLocale;
+  page: LegacyLanguagePage;
+  canonicalPath: string;
+  ogType?: "website" | "article";
+  headerLinkHref?: string;
+};
+const { locale, page, canonicalPath, ogType = "article", headerLinkHref = "/guide/foreigners/" } = Astro.props;
+const availableLocales: readonly Locale[] = ["ja", "vi", "en", "zh", "ko", "pt"];
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  robots={page.robots}
+  locale={locale}
+  canonicalPath={canonicalPath}
+  availableLocales={availableLocales}
+  headerLinkHref={getLocalePath(locale, headerLinkHref)}
+  ogType={ogType}
+>
+  <Fragment slot="head">
+    {page.schemas.map((schema) => <script is:inline type="application/ld+json" set:html={schema}></script>)}
+    {page.localScripts.map((src) => <script src={src} defer is:inline></script>)}
+  </Fragment>
+  <Fragment set:html={page.mainHtml} />
+</BaseLayout>
