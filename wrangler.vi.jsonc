@@ -2,5 +2,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "rm-referral-vi",
   "compatibility_date": "2026-08-21",
+  "routes": [
+    { "pattern": "mnp-navi.jp/vi/*", "zone_name": "mnp-navi.jp" }
+  ],
   "assets": { "directory": ".deploy/vi" }
 }
