@@ -96,7 +96,8 @@ export async function validateEnglishBuild() {
   if (sitemapUrls.size !== sitemapEntries.length) errors.push("sitemap contains duplicate URLs");
   if (!sitemapEntries.every((url) => url.startsWith(`${localeOrigin}/`))) errors.push("sitemap contains a URL outside /en/");
   if (/workers\.dev/.test(sitemap)) errors.push("sitemap contains a legacy Worker URL");
-  if (!robots.includes(`Sitemap: ${localeOrigin}/sitemap.xml`)) errors.push("robots.txt has the wrong sitemap URL");
+  const robotsSitemap = robots.match(/^Sitemap:\s*(\S+)$/m)?.[1];
+  if (robotsSitemap !== `${localeOrigin}/sitemap.xml`) errors.push("robots.txt has the wrong sitemap URL");
   if (/workers\.dev/.test(robots)) errors.push("robots.txt contains a legacy Worker URL");
 
   for (const file of htmlFiles) {

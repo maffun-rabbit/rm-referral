@@ -111,7 +111,7 @@ export function createLegacyLanguageLoader(locale: ForeignLocale) {
   function loadRobots(): string {
     let robots = readFileSync(path.join(legacyRoot, "robots.txt"), "utf8");
     for (const [from, to] of Object.entries(workerOrigins)) robots = robots.replaceAll(from, to);
-    return robots.replace(/^Sitemap:\s*.*$/m, `Sitemap: ${getAbsoluteLocaleUrl(locale, "/sitemap.xml")}`);
+    return robots.replace(/^Sitemap:\s*.*$/m, `Sitemap: ${getAbsoluteLocaleUrl(locale, "/sitemap.xml").replace(/\/$/, "")}`);
   }
 
   function parseShop(prefecture: MigratedPrefectureSlug, carrier: string, slug: string): LegacyShopPage {
