@@ -1,0 +1,16 @@
+---
+import LegacyLanguagePage from "../../../../../components/LegacyLanguagePage.astro";
+import { loadEnglishCoveragePages, type EnglishCoveragePage } from "../../../../../data/load-english-pages.ts";
+
+export function getStaticPaths() {
+  return loadEnglishCoveragePages().map((page) => ({
+    params: { prefecture: page.prefecture, slug: page.slug },
+    props: { page },
+  }));
+}
+
+type Props = { page: EnglishCoveragePage };
+const { page } = Astro.props;
+---
+
+<LegacyLanguagePage locale="en" page={page} canonicalPath={`/${page.prefecture}/coverage/${page.slug}/`} headerLinkHref={`/${page.prefecture}/`} />

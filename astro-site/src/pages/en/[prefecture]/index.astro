@@ -1,0 +1,17 @@
+---
+import LegacyLanguagePage from "../../../components/LegacyLanguagePage.astro";
+import { englishPrefectureSlugs, loadEnglishLegacyPage, type EnglishLegacyPage } from "../../../data/load-english-pages.ts";
+import type { MigratedPrefectureSlug } from "../../../data/load-tokyo-shop-pages.ts";
+
+export function getStaticPaths() {
+  return englishPrefectureSlugs.map((prefecture) => ({
+    params: { prefecture },
+    props: { prefecture, page: loadEnglishLegacyPage(prefecture) },
+  }));
+}
+
+type Props = { prefecture: MigratedPrefectureSlug; page: EnglishLegacyPage };
+const { prefecture, page } = Astro.props;
+---
+
+<LegacyLanguagePage locale="en" page={page} canonicalPath={`/${prefecture}/`} headerLinkHref="/" />

@@ -34,6 +34,10 @@ export type LegacyShopPage = LegacyLanguagePage & {
 };
 
 export type LegacyGuidePage = LegacyLanguagePage & { route: string };
+export type LegacyCoveragePage = LegacyLanguagePage & {
+  prefecture: MigratedPrefectureSlug;
+  slug: string;
+};
 
 function capture(html: string, pattern: RegExp, label: string, sourcePath: string): string {
   const match = html.match(pattern);
@@ -159,6 +163,18 @@ export function createLegacyLanguageLoader(locale: ForeignLocale) {
     return routes.filter(Boolean).sort().map((route) => ({ route, ...loadLegacyPage(`guide/${route}`) }));
   }
 
+  function loadCoveragePages(): LegacyCoveragePage[] {
+    return prefectureSlugs.flatMap((prefecture) => {
+      const coverageRoot = path.join(legacyRoot, prefecture, "coverage");
+      if (!existsSync(coverageRoot)) return [];
+      return readdirSync(coverageRoot, { withFileTypes: true })
+        .filter((entry) => entry.isDirectory() && existsSync(path.join(coverageRoot, entry.name, "index.html")))
+        .map((entry) => entry.name)
+        .sort()
+        .map((slug) => ({ prefecture, slug, ...loadLegacyPage(`${prefecture}/coverage/${slug}`) }));
+    });
+  }
+
   return {
     locale,
     legacyRoot,
@@ -170,5 +186,6 @@ export function createLegacyLanguageLoader(locale: ForeignLocale) {
     parseShop,
     loadShopPages,
     loadGuidePages,
+    loadCoveragePages,
   };
 }
