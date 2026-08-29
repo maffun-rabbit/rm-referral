@@ -35,7 +35,7 @@
     });
 
     resultCount.textContent = total;
-    status.textContent = query || activeCarrier !== "all" ? `${total}店舗に絞り込みました` : "";
+    status.textContent = query || activeCarrier !== "all" ? `已筛选出${total}家门店` : "";
     noResults.hidden = total !== 0;
   }
 
