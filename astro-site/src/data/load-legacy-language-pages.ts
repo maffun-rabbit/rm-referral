@@ -64,6 +64,20 @@ export function localizeLegacyHtml(html: string, locale: ForeignLocale): string 
   return localized;
 }
 
+function localizeLegacySchema(schema: string, locale: ForeignLocale, relativePath: string): string {
+  const localized = localizeLegacyHtml(schema, locale);
+  try {
+    const parsed = JSON.parse(localized) as Record<string, unknown>;
+    if (parsed["@type"] === "WebPage") {
+      parsed.url = getAbsoluteLocaleUrl(locale, `/${relativePath}/`);
+      parsed.inLanguage = LOCALE_CONFIG[locale].inLanguage;
+    }
+    return JSON.stringify(parsed);
+  } catch {
+    return localized;
+  }
+}
+
 export function createLegacyLanguageLoader(locale: ForeignLocale) {
   const legacyRoot = path.resolve(process.cwd(), "..", locale);
   const prefectureSlugs = Object.keys(migratedPrefectures) as MigratedPrefectureSlug[];
@@ -76,7 +90,7 @@ export function createLegacyLanguageLoader(locale: ForeignLocale) {
       description: decodeAttribute(capture(html, /<meta\s+name="description"\s+content="([^"]*)"/i, "description", sourcePath)),
       robots: capture(html, /<meta\s+name="robots"\s+content="([^"]*)"/i, "robots", sourcePath),
       schemas: [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)]
-        .map((match) => localizeLegacyHtml(match[1].trim(), locale)),
+        .map((match) => localizeLegacySchema(match[1].trim(), locale, relativePath)),
       mainHtml: localizeLegacyHtml(
         capture(html, /(<main\b[^>]*>[\s\S]*?<\/main>)/i, "main", sourcePath)
           .replace(/\s*<script\b[^>]*src="\/js\/[^"]+"[^>]*><\/script>/gi, ""),
