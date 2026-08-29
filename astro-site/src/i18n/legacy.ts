@@ -40,6 +40,8 @@ export const legacyLanguageConfig: Record<ForeignLocale, LegacyLanguageConfig> =
       ["紹介キャンペーンの条件を先に確認し、納得してから申し込みへ進んでください。", "Check the referral campaign terms before applying."],
       ["紹介キャンペーンを確認する", "Check the referral campaign"],
       ["情報確認日：", "Information checked: "],
+      ["https://mnp-navi.jp/tokyo/coverage/", "https://mnp-navi.jp/en/tokyo/coverage/"],
+      ["</strong>stores shown", "</strong> stores shown"],
     ],
   },
   zh: { shopListLabel: (prefectureLabel) => `${prefectureLabel}的门店`, replacements: [] },

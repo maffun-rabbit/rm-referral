@@ -10,8 +10,9 @@ type Props = {
   canonicalPath: string;
   ogType?: "website" | "article";
   headerLinkHref?: string;
+  headerLinkLabel?: string;
 };
-const { locale, page, canonicalPath, ogType = "article", headerLinkHref = "/guide/foreigners/" } = Astro.props;
+const { locale, page, canonicalPath, ogType = "article", headerLinkHref = "/guide/foreigners/", headerLinkLabel } = Astro.props;
 const availableLocales: readonly Locale[] = ["ja", "vi", "en", "zh", "ko", "pt"];
 ---
 
@@ -23,6 +24,7 @@ const availableLocales: readonly Locale[] = ["ja", "vi", "en", "zh", "ko", "pt"]
   canonicalPath={canonicalPath}
   availableLocales={availableLocales}
   headerLinkHref={getLocalePath(locale, headerLinkHref)}
+  headerLinkLabel={headerLinkLabel}
   ogType={ogType}
 >
   <Fragment slot="head">

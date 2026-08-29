@@ -147,6 +147,8 @@ export async function validateEnglishBuild() {
     }
     if (/·\s*(?:ドコモ|ソフトバンク|イオンモバイル)\s+Users/.test(html)) errors.push(`${label}: Japanese carrier remains in eyebrow`);
     if (/<dt>Current Carrier<\/dt><dd>(?:ドコモ|ソフトバンク|イオンモバイル)<\/dd>/.test(html)) errors.push(`${label}: Japanese carrier remains in store details`);
+    if (html.includes('href="https://mnp-navi.jp/tokyo/coverage/"')) errors.push(`${label}: Tokyo coverage link is not localized`);
+    if (/<strong[^>]*>\d[\d,]*<\/strong>stores shown/.test(html)) errors.push(`${label}: store result count is missing a space`);
 
     const schemas = [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
     structuredDataBlocks += schemas.length;

@@ -14,4 +14,4 @@ type Props = { prefecture: MigratedPrefectureSlug; page: EnglishLegacyPage };
 const { prefecture, page } = Astro.props;
 ---
 
-<LegacyLanguagePage locale="en" page={page} canonicalPath={`/${prefecture}/`} headerLinkHref="/" />
+<LegacyLanguagePage locale="en" page={page} canonicalPath={`/${prefecture}/`} />
