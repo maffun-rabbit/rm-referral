@@ -64,7 +64,7 @@ const shopSlugsPath = path.join(root, "data", "shop-slugs.csv");
 const localTopicsPath = path.join(root, "data", "local-topics.json");
 const baseStationsPath = path.join(root, "data", "rakuten-base-stations.json");
 const outputRoot = path.join(root, prefecture.slug);
-const siteUrl = "https://rm-referral.maffun.workers.dev";
+const siteUrl = "https://mnp-navi.jp";
 const referralUrl = "https://r10.to/hNearm";
 const updated = process.env.RM_CONTENT_DATE
   ?? new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date());

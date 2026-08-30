@@ -8,7 +8,7 @@ export const sampleShop = {
   address: "175-0094 東京都板橋区成増２－１７－２１",
   officialUrl: "https://www.au.com/storelocator/detail/?shopId=E-00434",
   updated: "2026-08-24",
-  canonical: "https://rm-referral.maffun.workers.dev/tokyo/au/au-shop-narimasu/",
+  canonical: "https://mnp-navi.jp/tokyo/au/au-shop-narimasu/",
   title: "ａｕショップ 成増（板橋区）を利用中の方へ｜auから楽天モバイルへの乗り換えガイド",
   description: "板橋区のａｕショップ 成増を利用している方向けに、auから楽天モバイルへ電話番号を引き継いで乗り換える準備と手順を整理します。",
   nearby: {

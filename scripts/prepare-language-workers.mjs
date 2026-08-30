@@ -3,12 +3,12 @@ import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
 const hosts = {
-  ja: "https://rm-referral.maffun.workers.dev",
-  en: "https://rm-referral-en.maffun.workers.dev",
-  zh: "https://rm-referral-zh.maffun.workers.dev",
-  ko: "https://rm-referral-ko.maffun.workers.dev",
-  vi: "https://rm-referral-vi.maffun.workers.dev",
-  pt: "https://rm-referral-pt.maffun.workers.dev",
+  ja: "https://mnp-navi.jp",
+  en: "https://mnp-navi.jp/en",
+  zh: "https://mnp-navi.jp/zh",
+  ko: "https://mnp-navi.jp/ko",
+  vi: "https://mnp-navi.jp/vi",
+  pt: "https://mnp-navi.jp/pt",
 };
 const languageCodes = Object.keys(hosts).filter((language) => language !== "ja");
 

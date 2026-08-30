@@ -2,7 +2,7 @@ import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
-const siteUrl = "https://rm-referral.maffun.workers.dev";
+const siteUrl = "https://mnp-navi.jp";
 const referralUrl = "https://r10.to/hNearm";
 const updated = process.env.RM_CONTENT_DATE
   ?? new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date());

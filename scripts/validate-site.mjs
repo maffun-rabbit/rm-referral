@@ -2,13 +2,13 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
-const siteUrl = "https://rm-referral.maffun.workers.dev";
+const siteUrl = "https://mnp-navi.jp";
 const languageHosts = new Map([
-  ["en", "https://rm-referral-en.maffun.workers.dev"],
-  ["zh", "https://rm-referral-zh.maffun.workers.dev"],
-  ["ko", "https://rm-referral-ko.maffun.workers.dev"],
-  ["vi", "https://rm-referral-vi.maffun.workers.dev"],
-  ["pt", "https://rm-referral-pt.maffun.workers.dev"],
+  ["en", "https://mnp-navi.jp/en"],
+  ["zh", "https://mnp-navi.jp/zh"],
+  ["ko", "https://mnp-navi.jp/ko"],
+  ["vi", "https://mnp-navi.jp/vi"],
+  ["pt", "https://mnp-navi.jp/pt"],
 ]);
 const areaSlugs = ["hokkaido", "aomori", "iwate", "miyagi", "akita", "yamagata", "fukushima", "niigata", "tochigi", "gunma", "ibaraki", "saitama", "chiba", "tokyo", "kanagawa", "nagano", "yamanashi", "toyama", "ishikawa", "fukui", "shizuoka", "aichi", "gifu", "mie", "shiga", "kyoto", "osaka", "hyogo", "nara", "wakayama", "tottori", "shimane", "okayama", "hiroshima", "yamaguchi", "tokushima", "kagawa", "ehime", "kochi", "fukuoka", "saga", "nagasaki", "kumamoto", "oita", "miyazaki", "kagoshima", "okinawa"];
 const languageSlugs = new Set(languageHosts.keys());

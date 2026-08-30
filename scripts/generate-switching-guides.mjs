@@ -2,7 +2,7 @@ import { mkdir, readdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
-const base = "https://rm-referral.maffun.workers.dev";
+const base = "https://mnp-navi.jp";
 const updated = "2026-08-19";
 const official = "楽天モバイル公式情報（2026年8月19日確認）";
 

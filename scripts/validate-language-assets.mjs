@@ -23,6 +23,9 @@ async function walk(directory) {
 await access(path.join(publicRoot, "index.html"));
 const files = await walk(output);
 const htmlFiles = files.filter((file) => file.endsWith(".html"));
+for (const file of files.filter((candidate) => [".html", ".xml", ".txt", ".js", ".json"].includes(path.extname(candidate)))) {
+  if ((await readFile(file, "utf8")).includes(".maffun.workers.dev")) errors.push(`${file}: legacy Worker URL remains`);
+}
 let astroOverlayFiles = 0;
 if (!htmlFiles.length) errors.push("no HTML files were packaged");
 

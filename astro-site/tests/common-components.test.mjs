@@ -3,10 +3,20 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
+const englishHtml = await readFile(new URL("../dist/en/index.html", import.meta.url), "utf8");
 
 test("common layout renders one header and footer", () => {
   assert.equal((html.match(/class="site-header"/g) ?? []).length, 1);
   assert.equal((html.match(/class="site-footer"/g) ?? []).length, 1);
+});
+
+test("shared header renders all production language routes", () => {
+  const languageSelector = englishHtml.match(/<select class="lang-selector"[\s\S]*?<\/select>/)?.[0] ?? "";
+  assert.equal((languageSelector.match(/<option\b/g) ?? []).length, 6);
+  for (const value of ["/", "/vi/", "/en/", "/zh/", "/ko/", "/pt/"]) {
+    assert.match(languageSelector, new RegExp(`<option value="${value.replaceAll("/", "\\/")}"`));
+  }
+  assert.doesNotMatch(languageSelector, /\.maffun\.workers\.dev/);
 });
 
 test("all shared CTA variants are present", () => {

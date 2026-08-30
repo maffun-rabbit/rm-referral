@@ -7,16 +7,20 @@ function gtag() {
 gtag("js", new Date());
 gtag("config", "G-86FFC09LTE");
 
-const cloudflareAnalyticsTokens = {
-  "rm-referral.maffun.workers.dev": "e54c3ea570dd45c68f2a42c18787a0f4",
-  "rm-referral-en.maffun.workers.dev": "48ce9eca3a0a40058524a63955bfc39c",
-  "rm-referral-zh.maffun.workers.dev": "7b29c343e78e4cb68e2f949d924a4083",
-  "rm-referral-ko.maffun.workers.dev": "b91cf3e0a7fa40739d141c10dc15a8fe",
-  "rm-referral-vi.maffun.workers.dev": "be30073f8d1d415c903276fb2c837f20",
-  "rm-referral-pt.maffun.workers.dev": "8471e406905f4fccb024f1f4bb388693",
+const cloudflareAnalyticsTokensByLocale = {
+  ja: "e54c3ea570dd45c68f2a42c18787a0f4",
+  en: "48ce9eca3a0a40058524a63955bfc39c",
+  zh: "7b29c343e78e4cb68e2f949d924a4083",
+  ko: "b91cf3e0a7fa40739d141c10dc15a8fe",
+  vi: "be30073f8d1d415c903276fb2c837f20",
+  pt: "8471e406905f4fccb024f1f4bb388693",
 };
 
-const cloudflareAnalyticsToken = cloudflareAnalyticsTokens[window.location.hostname];
+const firstPathSegment = window.location.pathname.split("/").filter(Boolean)[0];
+const analyticsLocale = Object.hasOwn(cloudflareAnalyticsTokensByLocale, firstPathSegment)
+  ? firstPathSegment
+  : "ja";
+const cloudflareAnalyticsToken = cloudflareAnalyticsTokensByLocale[analyticsLocale];
 if (cloudflareAnalyticsToken) {
   const cloudflareBeacon = document.createElement("script");
   cloudflareBeacon.type = "module";

@@ -123,6 +123,7 @@ a { color: inherit; }
 
 .site-name { font-size: 16px; }
 .header-link { color: var(--primary); font-size: 13px; }
+.site-header-actions { display: flex; align-items: center; gap: 16px; }
 
 .site-header + main,
 .site-footer {
@@ -538,9 +539,11 @@ a { color: inherit; }
 [hidden] { display: none !important; }
 
 @media (max-width: 760px) {
-  .site-header { min-height: 64px; padding: 0 18px; }
+  .site-header { min-height: 64px; padding: 8px 18px; gap: 12px; }
   .site-name { font-size: 13px; }
   .header-link { font-size: 11px; }
+  .site-header-actions { gap: 8px; }
+  .lang-selector { max-width: 132px; padding: 6px 8px; }
   .breadcrumb { padding: 14px 20px; }
   .shop-hero,
   .area-hero { padding: 44px 20px 64px; }

@@ -1,5 +1,5 @@
 ---
-import type { Locale } from "../config/site";
+import { getLocalePath, LOCALE_CONFIG, SUPPORTED_LOCALES, type Locale } from "../config/site";
 import { getMessages } from "../i18n";
 
 type Props = {
@@ -16,9 +16,36 @@ const {
   linkLabel,
 } = Astro.props;
 const messages = getMessages(locale);
+const localeLabels: Record<Locale, string> = {
+  ja: "🇯🇵 日本語",
+  vi: "🇻🇳 Tiếng Việt",
+  en: "🇺🇸 English",
+  zh: "🇨🇳 中文",
+  ko: "🇰🇷 한국어",
+  pt: "🇧🇷 Português",
+};
+const currentPrefix = LOCALE_CONFIG[locale].pathPrefix;
+const currentPath = Astro.url.pathname;
+const sharedPath = currentPrefix && (currentPath === currentPrefix || currentPath.startsWith(`${currentPrefix}/`))
+  ? currentPath.slice(currentPrefix.length) || "/"
+  : currentPath;
+const languageOptions = SUPPORTED_LOCALES.map((targetLocale) => ({
+  locale: targetLocale,
+  label: localeLabels[targetLocale],
+  href: getLocalePath(targetLocale, sharedPath),
+}));
 ---
 
 <header class="site-header">
   <a class="site-name" href={homeHref}>{messages.siteName}</a>
-  <a class="header-link" href={linkHref}>{linkLabel ?? messages.header.defaultLinkLabel}</a>
+  <div class="site-header-actions">
+    <a class="header-link" href={linkHref}>{linkLabel ?? messages.header.defaultLinkLabel}</a>
+    <div class="lang-selector-wrap">
+      <select class="lang-selector" aria-label="Language / 言語" onchange="if(this.value) location.href=this.value;">
+        {languageOptions.map((option) => (
+          <option value={option.href} selected={option.locale === locale}>{option.label}</option>
+        ))}
+      </select>
+    </div>
+  </div>
 </header>
