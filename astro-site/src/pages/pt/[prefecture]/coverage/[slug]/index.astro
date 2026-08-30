@@ -1,0 +1,12 @@
+---
+import LegacyLanguagePage from "../../../../../components/LegacyLanguagePage.astro";
+import { loadPortugueseCoveragePages, type PortugueseCoveragePage } from "../../../../../data/load-portuguese-pages.ts";
+
+export function getStaticPaths() {
+  return loadPortugueseCoveragePages().map((page) => ({ params: { prefecture: page.prefecture, slug: page.slug }, props: { page } }));
+}
+
+type Props = { page: PortugueseCoveragePage };
+const { page } = Astro.props;
+---
+<LegacyLanguagePage locale="pt" page={page} canonicalPath={`/${page.prefecture}/coverage/${page.slug}/`} headerLinkHref={`/${page.prefecture}/`} headerLinkLabel="Lojas em Tóquio" />

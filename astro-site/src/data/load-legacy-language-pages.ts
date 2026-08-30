@@ -190,9 +190,102 @@ function localizeKoreanCoverage(value: string, relativePath: string): string {
   return localized;
 }
 
+const portugueseTokyoMunicipalities: Record<string, readonly [string, string]> = {
+  adachi: ["足立区", "Adachi"], akiruno: ["あきる野市", "Akiruno"], akishima: ["昭島市", "Akishima"],
+  arakawa: ["荒川区", "Arakawa"], bunkyo: ["文京区", "Bunkyo"], chiyoda: ["千代田区", "Chiyoda"],
+  chofu: ["調布市", "Chofu"], chuo: ["中央区", "Chuo"], edogawa: ["江戸川区", "Edogawa"],
+  fuchu: ["府中市", "Fuchu"], fussa: ["福生市", "Fussa"], hachijojimahachijo: ["八丈島八丈町", "Hachijo"],
+  hachioji: ["八王子市", "Hachioji"], hamura: ["羽村市", "Hamura"], higashikurume: ["東久留米市", "Higashikurume"],
+  higashimurayama: ["東村山市", "Higashimurayama"], higashiyamato: ["東大和市", "Higashiyamato"], hino: ["日野市", "Hino"],
+  inagi: ["稲城市", "Inagi"], itabashi: ["板橋区", "Itabashi"], katsushika: ["葛飾区", "Katsushika"],
+  kita: ["北区", "Kita"], kiyose: ["清瀬市", "Kiyose"], kodaira: ["小平市", "Kodaira"],
+  koganei: ["小金井市", "Koganei"], kokubunji: ["国分寺市", "Kokubunji"], kokuritsu: ["国立市", "Kunitachi"],
+  komae: ["狛江市", "Komae"], koto: ["江東区", "Koto"], machida: ["町田市", "Machida"],
+  meguro: ["目黒区", "Meguro"], minato: ["港区", "Minato"], mitaka: ["三鷹市", "Mitaka"],
+  musashimurayama: ["武蔵村山市", "Musashimurayama"], musashino: ["武蔵野市", "Musashino"], nakano: ["中野区", "Nakano"],
+  nerima: ["練馬区", "Nerima"], "nishitama-hinode": ["西多摩郡日の出町", "Hinode, Nishitama"],
+  "nishitama-mizuho": ["西多摩郡瑞穂町", "Mizuho, Nishitama"], nishitokyo: ["西東京市", "Nishitokyo"],
+  oshima: ["大島町", "Oshima"], ota: ["大田区", "Ota"], oume: ["青梅市", "Ome"],
+  setagaya: ["世田谷区", "Setagaya"], shibuya: ["渋谷区", "Shibuya"], shinagawa: ["品川区", "Shinagawa"],
+  shinjuku: ["新宿区", "Shinjuku"], suginami: ["杉並区", "Suginami"], sumida: ["墨田区", "Sumida"],
+  taito: ["台東区", "Taito"], tama: ["多摩市", "Tama"], tatsukawa: ["立川市", "Tachikawa"],
+  toshima: ["豊島区", "Toshima"],
+};
+
+const portugueseCoverageReplacements: readonly (readonly [string, string])[] = [
+  ["東京都", "Tóquio"], ["楽天モバイル電波状況", "cobertura da Rakuten Mobile"],
+  ["エリア・基地局の最新情報", "informações recentes de cobertura e antenas"], ["楽天モバイル乗り換えガイド", "Guia de Migração para a Rakuten Mobile"],
+  ["公式の基地局設置発表をもとに、現在確認できる改善情報を整理しました。生活圏での最終確認方法と、家族で使える割引もまとめています。", "Reunimos as melhorias confirmadas nos anúncios oficiais de instalação de antenas. Veja também como conferir sua área de uso e os descontos para famílias."],
+  ["現在の確認目安", "Como verificar agora"], ["生活圏ごとの確認がおすすめ", "Confira cada local da sua rotina"],
+  ["市区町村全体を一律に良い・悪いとは判定できないため、自宅・学校・勤務先など実際に使う地点を公式エリアマップで確認してください。", "A qualidade não é igual em todo o município. Confira no mapa oficial os locais onde você realmente usa o celular, como casa, escola e trabalho."],
+  ["公式エリアマップで地点を確認する", "Verificar no mapa oficial de cobertura"], ["他社から乗り換えで14,000ポイントを確認する", "Ver oferta de 14.000 pontos na portabilidade"],
+  ["今いる場所に近い情報も確認できます", "Você também pode consultar informações próximas"], ["位置情報はブラウザ内の判定だけに使用します", "A localização é usada somente no navegador para identificar áreas próximas"],
+  ["現在地周辺を見る", "Ver perto da localização atual"], ["直近2回の公式発表について", "Sobre os dois anúncios oficiais mais recentes"],
+  ["直近の基地局設置実績", "Instalações recentes de antenas"], ["新設基地局", "Nova antena"],
+  ["確認対象：楽天モバイル公式「Rakuten最強プランプロジェクト進行中！」／2026年8月17日更新（外部リンクなし）", "Fonte consultada: anúncio oficial da Rakuten Mobile, atualizado em 17 de agosto de 2026"],
+  ["出典：楽天モバイル公式「Rakuten最強プランプロジェクト進行中！」／2026年8月17日更新（外部リンクなし）", "Fonte: anúncio oficial da Rakuten Mobile, atualizado em 17 de agosto de 2026"],
+  ["※ 基地局の新設は改善を示す情報ですが、特定地点の電波強度や通信速度を保証するものではありません。屋内・地下・地形・混雑状況・対応端末によって利用状況は変わります。", "※ Uma nova antena indica melhoria, mas não garante sinal ou velocidade em um ponto específico. O uso varia em ambientes internos, subterrâneos, conforme o relevo, a lotação e o aparelho."],
+  ["契約前に確認したい3つの場所", "3 locais para conferir antes de contratar"], ["自宅", "Casa"], ["学校・勤務先", "Escola e trabalho"], ["よく行く施設", "Locais frequentados"],
+  ["部屋の位置や建物の構造でも変わるため、住所付近を公式エリアマップで拡大して確認します。", "A posição do cômodo e a estrutura do prédio influenciam o sinal. Amplie o mapa oficial na região do endereço."],
+  ["毎日長く滞在する場所と、その周辺の通学・通勤経路も合わせて確認します。", "Confira os locais onde passa mais tempo e também os trajetos de estudo ou trabalho."],
+  ["地下、駅、大型商業施設など、通信をよく使う場所は個別に確認しておくと安心です。", "Confira separadamente locais como subsolos, estações e grandes centros comerciais onde costuma usar dados."],
+  ["家族の年代に合わせて使える割引", "Descontos conforme a idade da família"], ["利用する方：", "Usuário:"], ["利用する方を選択", "Selecionar usuário"],
+  ["家族みんな", "Toda a família"], ["家族", "Família"], ["12歳以下", "Até 12 anos"], ["12歳まで", "Até 12 anos"],
+  ["13〜22歳", "13 a 22 anos"], ["65歳以上", "65 anos ou mais"], ["最強家族割", "Desconto Saikyo Kazoku"],
+  ["毎月110円引き", "Desconto mensal de 110 ienes"], ["離れて暮らす家族も対象。対象の家族グループに参加すると、1人あたり月額110円（税込）が割り引かれます。", "Familiares que moram separados também podem participar. No grupo familiar elegível, cada pessoa recebe desconto mensal de 110 ienes, com impostos."],
+  ["最強こども割", "Desconto Saikyo Kodomo"], ["3GBまで毎月440円引き", "Até 3 GB: desconto mensal de 440 ienes"],
+  ["データ利用量が3GB以下の場合は毎月440円（税込）、それ以外の場合は毎月110円（税込）が割り引かれます。", "Com até 3 GB, o desconto mensal é de 440 ienes; acima disso, 110 ienes, com impostos."],
+  ["最強青春割", "Desconto Saikyo Seishun"], ["13歳から22歳までを対象に、毎月110円（税込）が割り引かれます。適用手続きが必要です。", "Para usuários de 13 a 22 anos, oferece desconto mensal de 110 ienes, com impostos. É necessário solicitar o benefício."],
+  ["最強シニアプログラム", "Programa Saikyo Senior"], ["毎月110ポイント還元", "110 pontos por mês"],
+  ["条件を満たすと毎月110ポイントを還元。通話や店頭サポートなどをまとめた対象オプションの還元もあります。", "Ao cumprir as condições, você recebe 110 pontos por mês. Há também benefícios em opções elegíveis de chamadas e suporte em loja."],
+  ["※ 年齢、対象プラン、エントリーなどの条件があります。割引額・名称・条件は変更される場合があるため、申し込み時に楽天モバイル公式情報をご確認ください。", "※ Há condições de idade, plano e inscrição. Valores, nomes e regras podem mudar; confirme as informações oficiais ao solicitar."],
+  ["電波状況と家族向け割引を確認できた方へ", "Depois de conferir cobertura e descontos familiares"], ["他社から乗り換えで14,000ポイント", "14.000 pontos na portabilidade de outra operadora"],
+  ["エリアと割引を確認できたら、紹介キャンペーンの条件を確認して申し込みへ進めます。", "Depois de confirmar a cobertura e os descontos, confira as condições da campanha de indicação e faça a solicitação."],
+  ["紹介キャンペーンの条件を確認する", "Ver condições da campanha de indicação"], ["14,000ポイント特典を確認する", "Ver oferta de 14.000 pontos"],
+  ["他社から乗り換えで", "Na portabilidade de outra operadora"], ["14,000ポイント", "14.000 pontos"], ["特典を確認する", "Ver oferta"],
+  ["当サイトは個人が運営しており、楽天モバイル公式サイトではありません。", "Este site é operado de forma independente e não é o site oficial da Rakuten Mobile."],
+  ["掲載情報は公式発表をもとに整理しています。実際の通信状況と最新条件は公式サイトでご確認ください。", "As informações são organizadas com base em anúncios oficiais. Confira a cobertura real e as condições atuais no site oficial."],
+];
+
+function localizePortugueseCoverage(value: string, relativePath: string): string {
+  const match = relativePath.match(/^tokyo\/coverage\/([^/]+)$/);
+  if (!match) return value;
+  const names = portugueseTokyoMunicipalities[match[1]];
+  if (!names) throw new Error(`Missing Portuguese municipality name for ${match[1]}`);
+  const [japaneseName, portugueseName] = names;
+  let localized = value
+    .replaceAll(`東京都${japaneseName}の楽天モバイル電波状況｜エリア・基地局の最新情報`, `Cobertura da Rakuten Mobile em ${portugueseName}, Tóquio | Informações recentes de área e antenas`)
+    .replaceAll(`東京都${japaneseName}の楽天モバイル電波状況を、公式エリア情報と直近の基地局設置発表から確認。家族・こども・青春・シニア向け特典と紹介キャンペーンも解説します。`, `Confira a cobertura da Rakuten Mobile em ${portugueseName}, Tóquio, com informações oficiais da área e anúncios recentes de antenas. Veja também benefícios por faixa etária e a campanha de indicação.`)
+    .replaceAll(`東京都・${japaneseName}`, `Tóquio・${portugueseName}`)
+    .replaceAll(`${japaneseName}の<br><span>楽天モバイル電波状況</span>`, `Cobertura da Rakuten Mobile<br><span>em ${portugueseName}</span>`)
+    .replaceAll(japaneseName, portugueseName);
+  for (const [from, to] of portugueseCoverageReplacements) localized = localized.replaceAll(from, to);
+  localized = localized
+    .replace(new RegExp(`${portugueseName}は直近2回の基地局新設一覧には掲載されていません。これは圏外を意味するものではありません。現在の提供状況は公式エリアマップで地点ごとに確認してください。`, "g"), `${portugueseName} não aparece nas duas listas mais recentes de novas antenas. Isso não significa ausência de cobertura; confira cada local no mapa oficial.`)
+    .replace(new RegExp(`${portugueseName}では、最新で([^<。]+)に基地局設置が完了したと楽天モバイルが発表しています。`, "g"), `A Rakuten Mobile informou que a instalação mais recente de antena em ${portugueseName} foi concluída em $1.`)
+    .replace(new RegExp(`${portugueseName}には掲載データ上、楽天モバイルショップが(\\d+)店舗あります。対面で相談したい場合の選択肢になります。`, "g"), `Segundo os dados publicados, há $1 loja da Rakuten Mobile em ${portugueseName}, uma opção para atendimento presencial.`)
+    .replace(new RegExp(`${portugueseName}内に楽天モバイルショップが見つからない場合も、申し込みやMNPはオンラインで進められます。`, "g"), `Mesmo sem uma loja da Rakuten Mobile em ${portugueseName}, a solicitação e a portabilidade MNP podem ser feitas online.`)
+    .replaceAll(`${portugueseName}で相談したい場合`, `Onde pedir ajuda em ${portugueseName}`)
+    .replaceAll(`${portugueseName}のエリア改善情報`, `Melhorias de cobertura em ${portugueseName}`)
+    .replaceAll(`${portugueseName}の電波状況`, `Cobertura em ${portugueseName}`)
+    .replaceAll(`${portugueseName}の`, `de ${portugueseName} `)
+    .replaceAll("基地局の新設情報あり", "Há informação de nova antena")
+    .replaceAll("複数の基地局新設情報あり", "Há informações de várias novas antenas")
+    .replaceAll("4G・5Gの改善情報あり", "Há informações de melhoria em 4G e 5G")
+    .replaceAll("直近の公式発表で基地局の新設が確認でき、エリア改善が進められています。", "O anúncio oficial mais recente confirmou uma nova antena e a cobertura está sendo melhorada.")
+    .replaceAll("直近の公式発表で2局の基地局新設が確認でき、エリア改善の動きが見られます。", "O anúncio oficial mais recente confirmou duas novas antenas e melhorias de cobertura.")
+    .replaceAll("直近の公式発表で4Gと5Gの基地局新設が確認でき、通信環境の改善が進められています。", "O anúncio oficial mais recente confirmou novas antenas 4G e 5G e melhorias na rede.")
+    .replaceAll("設置完了", "Instalação concluída")
+    .replaceAll("最強Família割", "Desconto Saikyo Kazoku")
+    .replaceAll("電波状況とFamília向け割引を確認できた方へ", "Depois de conferir cobertura e descontos familiares")
+    .replace(/([^\"<]+)de ([^\"<]+) cobertura da Rakuten Mobileを、公式エリア情報と直近の基地局設置発表から確認。家族・こども・青春・シニア向け特典と紹介キャンペーンも解説します。/g, "Confira a cobertura da Rakuten Mobile em $2 com informações oficiais da área e anúncios recentes de antenas. Veja também benefícios familiares e a campanha de indicação.");
+  return localized;
+}
+
 function localizeCoverage(value: string, locale: ForeignLocale, relativePath: string): string {
   if (locale === "zh") return localizeChineseCoverage(value, relativePath);
   if (locale === "ko") return localizeKoreanCoverage(value, relativePath);
+  if (locale === "pt") return localizePortugueseCoverage(value, relativePath);
   return value;
 }
 

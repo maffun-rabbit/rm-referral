@@ -1,0 +1,12 @@
+---
+import LegacyLanguagePage from "../../../components/LegacyLanguagePage.astro";
+import { loadPortugueseGuidePages, type PortugueseGuidePage } from "../../../data/load-portuguese-pages.ts";
+
+export function getStaticPaths() {
+  return loadPortugueseGuidePages().map((page) => ({ params: { path: page.route }, props: { page } }));
+}
+
+type Props = { page: PortugueseGuidePage };
+const { page } = Astro.props;
+---
+<LegacyLanguagePage locale="pt" page={page} canonicalPath={`/guide/${page.route}/`} headerLinkHref="/" headerLinkLabel="Início" />

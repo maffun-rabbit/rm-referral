@@ -1,0 +1,14 @@
+---
+import LocalizedShopPage from "../../../../../components/LocalizedShopPage.astro";
+import { legacyLanguageConfig } from "../../../../../i18n/legacy";
+import { loadPortugueseShopPages, type PortugueseShopPage } from "../../../../../data/load-portuguese-pages.ts";
+
+export function getStaticPaths() {
+  return loadPortugueseShopPages().map((page) => ({ params: { prefecture: page.prefecture, carrier: page.carrier, slug: page.slug }, props: { page } }));
+}
+
+type Props = { page: PortugueseShopPage };
+const { page } = Astro.props;
+const shopListLabel = legacyLanguageConfig.pt.shopListLabel(page.prefectureLabel);
+---
+<LocalizedShopPage locale="pt" page={page} shopListLabel={shopListLabel} />

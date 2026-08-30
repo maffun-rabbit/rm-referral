@@ -1,0 +1,6 @@
+---
+import LegacyLanguagePage from "../../components/LegacyLanguagePage.astro";
+import { loadPortugueseLegacyPage } from "../../data/load-portuguese-pages";
+const page = loadPortugueseLegacyPage("");
+---
+<LegacyLanguagePage locale="pt" page={page} canonicalPath="/" ogType="website" />

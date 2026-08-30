@@ -17,9 +17,10 @@
     "verify:english": "node scripts/validate-english-build.mjs",
     "verify:chinese": "node scripts/validate-chinese-build.mjs",
     "verify:korean": "node scripts/validate-korean-build.mjs",
+    "verify:portuguese": "node scripts/validate-portuguese-build.mjs",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
-    "test": "npm run build && npm run verify:parity && npm run verify:migrated && npm run verify:english && npm run verify:chinese && npm run verify:korean && node --test tests/*.test.mjs"
+    "test": "npm run build && npm run verify:parity && npm run verify:migrated && npm run verify:english && npm run verify:chinese && npm run verify:korean && npm run verify:portuguese && node --test tests/*.test.mjs"
   },
   "dependencies": {
     "astro": "7.2.7"
