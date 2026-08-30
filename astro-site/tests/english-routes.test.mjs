@@ -20,9 +20,9 @@ test("English loader covers every page family", () => {
   assert.equal(loadEnglishGuidePages().length, 19);
 });
 
-test("English Astro output contains all 6,834 public HTML pages", () => {
+test("English Astro output contains all 6,835 public HTML pages", () => {
   assert.ok(statSync(distRoot).isDirectory());
-  assert.equal(countHtml(distRoot), 6834);
+  assert.equal(countHtml(distRoot), 6835);
   assert.ok(existsSync(path.join(distRoot, "index.html")));
   assert.ok(existsSync(path.join(distRoot, "tokyo", "index.html")));
   assert.ok(existsSync(path.join(distRoot, "tokyo", "au", "au-shop-narimasu", "index.html")));

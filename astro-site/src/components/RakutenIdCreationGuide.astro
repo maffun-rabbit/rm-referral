@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PrimaryCta from "./PrimaryCta.astro";
+import { getLocaleAssetPath, getLocalePath, type Locale } from "../config/site";
+
+type ForeignLocale = Exclude<Locale, "ja">;
+type Props = { locale: ForeignLocale };
+const { locale } = Astro.props;
+const locales: readonly Locale[] = ["vi", "en", "zh", "ko", "pt"];
+const path = "/guide/topics/create-rakuten-id-step-by-step/";
+const officialRegistration = "https://grp01.id.rakuten.co.jp/rms/nid/registfwd?service_id=top";
+
+const copy = {
+  en: {
+    title: "How to Create a Rakuten ID in Japan: Step-by-Step Visual Guide",
+    description: "A visual guide for foreign residents showing how to create a free Rakuten ID on the Japanese registration page before applying for Rakuten Mobile.",
+    lead: "Rakuten Mobile applications require a free Rakuten membership and Rakuten ID. You do not need to shop on Rakuten Ichiba.",
+    labels: ["Open the employee referral offer first", "Open the Rakuten membership registration page", "Enter email, user ID and password", "Enter your name and furigana", "Agree to the terms and review your details", "Return to the referral offer and apply"],
+    steps: [
+      "Open the employee referral offer before starting. Use the same Rakuten ID from referral login through the Rakuten Mobile application.",
+      "Choose Create a Rakuten ID. The registration page has English and Simplified Chinese links at the top; Vietnamese, Korean and Portuguese are not currently shown.",
+      "Enter the same email address twice. You may use that email as your user ID. Create a password of at least 6 half-width letters and numbers that is different from the user ID.",
+      "Enter surname and given name, then enter the pronunciation in full-width katakana. For the later mobile application, keep the spelling consistent with your identity document.",
+      "Read the terms and privacy policy, then press 同意して次へ (Agree and continue). Review the information on the next screen before completing registration.",
+      "After the Rakuten ID is created, return to the employee referral offer, sign in with that same ID and continue to Rakuten Mobile. Do not start from an unrelated application page.",
+    ],
+    screen: ["会員情報の入力 = Enter member information", "必須 = Required", "メールアドレス = Email address", "ユーザID = User ID", "パスワード = Password", "氏名 = Name", "氏名（フリガナ） = Name in katakana", "同意して次へ = Agree and continue"],
+    note: "Creating a Rakuten ID itself does not require an identity document. Identity verification and eligible documents are checked separately when you apply for Rakuten Mobile.",
+    shop: "If online registration is difficult, open the referral offer first and ask a nearby Rakuten Mobile shop about application support. Foreign-language support is not guaranteed at every shop.",
+    cta: "Open the official Rakuten ID registration page",
+  },
+  vi: {
+    title: "Cách tạo Rakuten ID tại Nhật: hướng dẫn từng bước bằng hình ảnh",
+    description: "Hướng dẫn trực quan giúp người nước ngoài tạo Rakuten ID miễn phí trên trang tiếng Nhật trước khi đăng ký Rakuten Mobile.",
+    lead: "Để đăng ký Rakuten Mobile, bạn cần tài khoản thành viên Rakuten miễn phí và Rakuten ID. Bạn không bắt buộc phải mua hàng trên Rakuten Ichiba.",
+    labels: ["Mở ưu đãi giới thiệu nhân viên trước", "Mở trang đăng ký thành viên Rakuten", "Nhập email, ID người dùng và mật khẩu", "Nhập họ tên và furigana", "Đồng ý điều khoản và kiểm tra thông tin", "Quay lại ưu đãi giới thiệu để đăng ký"],
+    steps: [
+      "Hãy mở ưu đãi giới thiệu nhân viên trước khi bắt đầu. Dùng cùng một Rakuten ID từ bước đăng nhập ưu đãi cho đến khi đăng ký Rakuten Mobile.",
+      "Chọn tạo Rakuten ID. Phía trên trang có lựa chọn English và tiếng Trung giản thể; hiện không có tiếng Việt, tiếng Hàn hoặc tiếng Bồ Đào Nha.",
+      "Nhập cùng một địa chỉ email hai lần. Bạn có thể dùng email làm ID người dùng. Mật khẩu cần ít nhất 6 chữ cái/số dạng half-width và không được giống ID.",
+      "Nhập họ và tên, sau đó nhập cách đọc bằng katakana full-width. Khi đăng ký di động sau đó, hãy giữ cách viết trùng với giấy tờ tùy thân.",
+      "Đọc điều khoản và chính sách bảo mật rồi bấm 同意して次へ (Đồng ý và tiếp tục). Kiểm tra lại thông tin ở màn hình tiếp theo trước khi hoàn tất.",
+      "Sau khi tạo Rakuten ID, quay lại ưu đãi giới thiệu nhân viên, đăng nhập bằng ID đó và tiếp tục đăng ký Rakuten Mobile.",
+    ],
+    screen: ["会員情報の入力 = Nhập thông tin thành viên", "必須 = Bắt buộc", "メールアドレス = Địa chỉ email", "ユーザID = ID người dùng", "パスワード = Mật khẩu", "氏名 = Họ tên", "氏名（フリガナ） = Họ tên bằng katakana", "同意して次へ = Đồng ý và tiếp tục"],
+    note: "Việc tạo Rakuten ID không yêu cầu giấy tờ tùy thân. Xác minh danh tính và giấy tờ hợp lệ được kiểm tra riêng khi đăng ký Rakuten Mobile.",
+    shop: "Nếu thủ tục trực tuyến khó, hãy mở ưu đãi giới thiệu trước rồi hỏi cửa hàng Rakuten Mobile gần nhất về hỗ trợ đăng ký. Không phải cửa hàng nào cũng đảm bảo hỗ trợ ngoại ngữ.",
+    cta: "Mở trang đăng ký Rakuten ID chính thức",
+  },
+  zh: {
+    title: "在日本创建Rakuten ID：带截图的分步指南",
+    description: "面向在日外国人的图解指南，说明如何在申请Rakuten Mobile前免费创建Rakuten ID。",
+    lead: "申请Rakuten Mobile需要免费的Rakuten会员账户和Rakuten ID，但不需要在Rakuten Ichiba购物。",
+    labels: ["先打开员工推荐活动", "打开Rakuten会员注册页面", "填写邮箱、用户ID和密码", "填写姓名和片假名读音", "同意条款并确认信息", "返回推荐活动并申请"],
+    steps: [
+      "开始前先打开员工推荐活动。从推荐登录到Rakuten Mobile申请，请始终使用同一个Rakuten ID。",
+      "选择创建Rakuten ID。注册页面顶部可以切换English和简体中文；目前没有越南语、韩语或葡萄牙语。",
+      "两次填写相同的邮箱。可以直接把邮箱作为用户ID。密码至少需要6位半角英文字母和数字，并且不能与用户ID相同。",
+      "填写姓和名，再用全角片假名填写读音。之后申请手机服务时，姓名拼写应与身份证明文件一致。",
+      "阅读条款和隐私政策后，点击同意して次へ（同意并继续）。在下一页确认信息后再完成注册。",
+      "Rakuten ID创建完成后，返回员工推荐活动，用同一ID登录，再继续申请Rakuten Mobile。",
+    ],
+    screen: ["会員情報の入力 = 输入会员信息", "必須 = 必填", "メールアドレス = 电子邮箱", "ユーザID = 用户ID", "パスワード = 密码", "氏名 = 姓名", "氏名（フリガナ） = 姓名片假名读音", "同意して次へ = 同意并继续"],
+    note: "仅创建Rakuten ID不需要身份证明文件。申请Rakuten Mobile时，会另行进行身份验证并检查可用证件。",
+    shop: "如果在线操作困难，请先打开推荐活动，再向附近的Rakuten Mobile门店咨询申请支持。并非所有门店都保证提供外语服务。",
+    cta: "打开Rakuten ID官方注册页面",
+  },
+  ko: {
+    title: "일본에서 Rakuten ID 만드는 방법: 화면으로 보는 단계별 가이드",
+    description: "외국인 거주자가 Rakuten Mobile 신청 전에 일본어 등록 화면에서 무료 Rakuten ID를 만드는 방법을 설명합니다.",
+    lead: "Rakuten Mobile 신청에는 무료 Rakuten 회원 계정과 Rakuten ID가 필요하지만, Rakuten Ichiba에서 쇼핑할 필요는 없습니다.",
+    labels: ["먼저 임직원 추천 혜택 열기", "Rakuten 회원 등록 페이지 열기", "이메일·사용자 ID·비밀번호 입력", "이름과 후리가나 입력", "약관 동의 후 정보 확인", "추천 혜택으로 돌아가 신청"],
+    steps: [
+      "시작하기 전에 임직원 추천 혜택을 먼저 여세요. 추천 로그인부터 Rakuten Mobile 신청까지 같은 Rakuten ID를 사용합니다.",
+      "Rakuten ID 만들기를 선택합니다. 등록 페이지 상단에는 English와 중국어 간체 전환이 있지만 현재 베트남어·한국어·포르투갈어는 없습니다.",
+      "같은 이메일 주소를 두 번 입력합니다. 이메일을 사용자 ID로 사용할 수 있습니다. 비밀번호는 사용자 ID와 다르게 반각 영문·숫자 6자 이상으로 만듭니다.",
+      "성과 이름을 입력한 뒤 읽는 법을 전각 가타카나로 입력합니다. 이후 모바일 신청에서는 신분증과 이름 표기를 일치시키세요.",
+      "약관과 개인정보 보호방침을 읽고 同意して次へ(동의하고 다음)를 누릅니다. 다음 화면에서 내용을 확인한 뒤 등록을 완료합니다.",
+      "Rakuten ID를 만든 뒤 임직원 추천 혜택으로 돌아가 같은 ID로 로그인하고 Rakuten Mobile 신청을 계속합니다.",
+    ],
+    screen: ["会員情報の入力 = 회원 정보 입력", "必須 = 필수", "メールアドレス = 이메일 주소", "ユーザID = 사용자 ID", "パスワード = 비밀번호", "氏名 = 이름", "氏名（フリガナ） = 가타카나 이름", "同意して次へ = 동의하고 다음"],
+    note: "Rakuten ID를 만드는 것만으로는 신분증이 필요하지 않습니다. 본인 확인과 사용 가능한 서류는 Rakuten Mobile 신청 때 별도로 확인합니다.",
+    shop: "온라인 등록이 어렵다면 추천 혜택을 먼저 연 뒤 가까운 Rakuten Mobile 매장에 신청 지원을 문의하세요. 모든 매장에서 외국어 지원이 보장되지는 않습니다.",
+    cta: "Rakuten ID 공식 등록 페이지 열기",
+  },
+  pt: {
+    title: "Como criar um Rakuten ID no Japão: guia visual passo a passo",
+    description: "Guia visual para estrangeiros criarem gratuitamente um Rakuten ID na página japonesa antes de solicitar a Rakuten Mobile.",
+    lead: "Para solicitar a Rakuten Mobile, é necessário ter cadastro gratuito e Rakuten ID. Não é preciso comprar no Rakuten Ichiba.",
+    labels: ["Abra primeiro a oferta de indicação de funcionário", "Abra a página de cadastro Rakuten", "Informe e-mail, ID de usuário e senha", "Informe nome e furigana", "Aceite os termos e revise os dados", "Volte à indicação e faça a solicitação"],
+    steps: [
+      "Abra a oferta de indicação de funcionário antes de começar. Use o mesmo Rakuten ID desde o login da indicação até a solicitação da Rakuten Mobile.",
+      "Escolha criar um Rakuten ID. No topo há opções em inglês e chinês simplificado; atualmente não aparecem vietnamita, coreano ou português.",
+      "Digite o mesmo e-mail duas vezes. Ele pode ser usado como ID de usuário. Crie uma senha com pelo menos 6 letras e números de meia largura, diferente do ID.",
+      "Informe sobrenome e nome e depois a leitura em katakana de largura completa. Na solicitação do celular, mantenha a grafia igual à do documento de identidade.",
+      "Leia os termos e a política de privacidade e pressione 同意して次へ (Concordar e continuar). Revise os dados na tela seguinte antes de concluir.",
+      "Depois de criar o Rakuten ID, volte à oferta de indicação, entre com o mesmo ID e continue a solicitação da Rakuten Mobile.",
+    ],
+    screen: ["会員情報の入力 = Inserir dados do membro", "必須 = Obrigatório", "メールアドレス = E-mail", "ユーザID = ID de usuário", "パスワード = Senha", "氏名 = Nome", "氏名（フリガナ） = Nome em katakana", "同意して次へ = Concordar e continuar"],
+    note: "A criação do Rakuten ID não exige documento de identidade. A verificação de identidade e os documentos aceitos são tratados separadamente na solicitação da Rakuten Mobile.",
+    shop: "Se o cadastro online for difícil, abra primeiro a oferta de indicação e procure uma loja Rakuten Mobile próxima. O atendimento em idioma estrangeiro não é garantido em todas as lojas.",
+    cta: "Abrir o cadastro oficial do Rakuten ID",
+  },
+} as const;
+
+const text = copy[locale];
+const images = ["step-1-account-fields.png", "step-2-profile-fields.png", "step-3-terms-confirmation.png"];
+---
+
+<BaseLayout title={text.title} description={text.description} locale={locale} canonicalPath={path} availableLocales={locales} headerLinkHref={getLocalePath(locale, "/guide/topics/")} ogType="article">
+  <main class="home-main">
+    <nav class="breadcrumb"><a href={getLocalePath(locale)}>{locale === "en" ? "Home" : "Home"}</a><span>›</span><a href={getLocalePath(locale, "/guide/topics/")}>Topics</a><span>›</span><span>Rakuten ID</span></nav>
+    <section class="home-hero"><div class="home-hero-copy"><p class="eyebrow">RAKUTEN ID VISUAL GUIDE</p><h1>{text.title}</h1><p class="lead">{text.lead}</p><div class="home-hero-actions"><PrimaryCta locale={locale} showNote={false} /><a class="home-text-link" href={officialRegistration} target="_blank" rel="noopener">{text.cta} ↗</a></div></div></section>
+    <section class="home-section" style="max-width:980px;margin:0 auto"><div class="note-card"><strong>{text.note}</strong></div></section>
+    <section class="home-section" style="max-width:980px;margin:0 auto"><div class="home-section-heading"><div><p class="section-label">JAPANESE SCREEN WORDS</p><h2>Screen labels</h2></div></div><article class="note-card"><ul class="trust-list">{text.screen.map((item) => <li><span>✓</span><strong>{item}</strong></li>)}</ul></article></section>
+    <section class="home-section" style="max-width:980px;margin:0 auto"><div class="home-section-heading"><div><p class="section-label">STEP BY STEP</p><h2>{text.title}</h2></div></div>
+      {text.steps.map((step, index) => <article class="note-card" style="margin-bottom:28px"><p class="pill">STEP {index + 1}</p><h3>{text.labels[index]}</h3><p>{step}</p>{index >= 2 && index <= 4 && <a href={getLocaleAssetPath(locale, `/images/guides/rakuten-id/${images[index - 2]}`)} target="_blank" rel="noopener"><img src={getLocaleAssetPath(locale, `/images/guides/rakuten-id/${images[index - 2]}`)} alt={`${text.labels[index]} — Rakuten registration screen`} loading="lazy" style="display:block;width:100%;height:auto;margin-top:18px;border:1px solid #d8dce6;border-radius:12px" /></a>}</article>)}
+    </section>
+    <section class="home-section" style="max-width:980px;margin:0 auto"><article class="note-card"><h2>Shop support</h2><p>{text.shop}</p></article></section>
+    <section class="final-cta home-final-cta"><p class="section-label">START WITH THE REFERRAL OFFER</p><h2>{text.labels[0]}</h2><PrimaryCta locale={locale} showNote={false} /><p><a class="home-text-link" href={officialRegistration} target="_blank" rel="noopener">{text.cta} ↗</a></p></section>
+  </main>
+</BaseLayout>

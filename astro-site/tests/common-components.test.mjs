@@ -33,6 +33,19 @@ test("foreign-language topics only switch to topic routes that exist", () => {
   assert.doesNotMatch(englishTopicHtml, /hreflang="ja-JP"|hreflang="x-default"|\.maffun\.workers\.dev/);
 });
 
+test("Rakuten ID visual guide is published in all five foreign languages", async () => {
+  for (const locale of ["vi", "en", "zh", "ko", "pt"]) {
+    const guide = await readFile(new URL(`../dist/${locale}/guide/topics/create-rakuten-id-step-by-step/index.html`, import.meta.url), "utf8");
+    assert.match(guide, new RegExp(`https://mnp-navi\\.jp/${locale}/guide/topics/create-rakuten-id-step-by-step/`));
+    assert.equal((guide.match(/images\/guides\/rakuten-id\//g) ?? []).length, 6);
+    assert.match(guide, /https:\/\/grp01\.id\.rakuten\.co\.jp\/rms\/nid\/registfwd\?service_id=top/);
+    assert.match(guide, /target="_blank" rel="noopener"/);
+    assert.doesNotMatch(guide, /\.maffun\.workers\.dev/);
+    const sitemap = await readFile(new URL(`../dist/${locale}/sitemap.xml`, import.meta.url), "utf8");
+    assert.match(sitemap, new RegExp(`https://mnp-navi\\.jp/${locale}/guide/topics/create-rakuten-id-step-by-step/`));
+  }
+});
+
 test("all shared CTA variants are present", () => {
   assert.match(html, /data-primary-cta/);
   assert.match(html, /data-final-cta/);

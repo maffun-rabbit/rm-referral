@@ -76,8 +76,8 @@ export async function validateKoreanBuild() {
   let structuredDataBlocks = 0;
   let internalLinksChecked = 0;
 
-  if (htmlFiles.length !== 6834) errors.push(`expected 6,834 Korean HTML pages, found ${htmlFiles.length}`);
-  if (sitemapEntries.length !== 6834) errors.push(`expected 6,834 sitemap URLs, found ${sitemapEntries.length}`);
+  if (htmlFiles.length !== 6835) errors.push(`expected 6,835 Korean HTML pages, found ${htmlFiles.length}`);
+  if (sitemapEntries.length !== 6835) errors.push(`expected 6,835 sitemap URLs, found ${sitemapEntries.length}`);
   if (sitemapUrls.size !== sitemapEntries.length) errors.push("sitemap contains duplicate URLs");
   if (!sitemapEntries.every((url) => url.startsWith(`${localeOrigin}/`))) errors.push("sitemap contains a URL outside /ko/");
   if (/workers\.dev/.test(sitemap)) errors.push("sitemap contains a legacy Worker URL");
@@ -148,7 +148,7 @@ export async function validateKoreanBuild() {
 
   for (const url of expectedUrls) if (!sitemapUrls.has(url)) errors.push(`${url}: missing from sitemap`);
   for (const url of sitemapUrls) if (!expectedUrls.has(url)) errors.push(`${url}: sitemap URL has no HTML output`);
-  const expectedCounts = { home: 1, prefecture: 47, shop: 6714, coverage: 53, guide: 19 };
+  const expectedCounts = { home: 1, prefecture: 47, shop: 6714, coverage: 53, guide: 20 };
   for (const [family, expected] of Object.entries(expectedCounts)) if (routeCounts[family] !== expected) errors.push(`${family}: expected ${expected}, found ${routeCounts[family]}`);
 
   return { passed: errors.length === 0, errors, summary: { htmlPages: htmlFiles.length, sitemapUrls: sitemapEntries.length, uniqueCanonicals: canonicalUrls.size, routeCounts, structuredDataBlocks, internalLinksChecked, japaneseUiFallbacks: errors.filter((error) => error.includes("Japanese")).length, legacyWorkerUrls: errors.filter((error) => error.includes("Worker URL")).length, brokenInternalTargets: errors.filter((error) => error.includes("broken internal target")).length } };

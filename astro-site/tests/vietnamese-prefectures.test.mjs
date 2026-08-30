@@ -29,7 +29,7 @@ test("Vietnamese sitemap and robots use only the new canonical origin", async ()
     readFile(new URL("../dist/vi/robots.txt", import.meta.url), "utf8"),
   ]);
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  assert.equal(urls.length, 6834);
+  assert.equal(urls.length, 6835);
   assert.ok(urls.every((url) => url.startsWith("https://mnp-navi.jp/vi/")));
   assert.equal(new Set(urls).size, urls.length);
   for (const prefecture of vietnamesePrefectureSlugs) {
