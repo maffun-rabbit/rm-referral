@@ -106,7 +106,11 @@ export async function validatePortugueseBuild() {
     if (!/href="\/pt\/css\/style\.css"/.test(html) || !/src="\/pt\/js\/analytics\.js"/.test(html)) errors.push(`${label}: Portuguese static assets are missing`);
     if ((html.match(/class="site-header"/g) ?? []).length !== 1 || (html.match(/class="site-footer"/g) ?? []).length !== 1) errors.push(`${label}: shared header or footer count mismatch`);
     const alternates = new Map([...html.matchAll(/<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"/gi)].map((match) => [match[1], match[2].replaceAll("&amp;", "&")]));
-    for (const [hreflang, prefix] of expectedHreflangs) if (alternates.get(hreflang) !== `${origin}${prefix}${pathname}`) errors.push(`${label}: wrong or missing hreflang ${hreflang}`);
+    const pageExpectedHreflangs = pathname.startsWith("/guide/topics/")
+      ? new Map([...expectedHreflangs].filter(([hreflang]) => !["ja-JP", "x-default"].includes(hreflang)))
+      : expectedHreflangs;
+    if (alternates.size !== pageExpectedHreflangs.size) errors.push(`${label}: expected ${pageExpectedHreflangs.size} hreflang links, found ${alternates.size}`);
+    for (const [hreflang, prefix] of pageExpectedHreflangs) if (alternates.get(hreflang) !== `${origin}${prefix}${pathname}`) errors.push(`${label}: wrong or missing hreflang ${hreflang}`);
     const uiHtml = html.replace(/<small[^>]*lang="ja"[\s\S]*?<\/small>/gi, "").replace(/<ul class="coverage-shop-list"[\s\S]*?<\/ul>/gi, "").replace(/Fonte: Rakuten Mobile[^<]+/g, "");
     for (const phrase of forbiddenJapaneseUi) if (uiHtml.includes(phrase)) errors.push(`${label}: Japanese UI remains (${phrase})`);
     if (/<dt>Operadora Atual<\/dt><dd>(?:ドコモ|ソフトバンク|イオンモバイル)<\/dd>/.test(uiHtml)) errors.push(`${label}: Japanese carrier remains in details`);

@@ -65,6 +65,7 @@ const alternateLinks = canonicalPath && availableLocales.length
       homeHref={getLocalePath(locale)}
       linkHref={headerLinkHref}
       linkLabel={headerLinkLabel}
+      availableLocales={availableLocales.length ? availableLocales : undefined}
     />
     <slot />
     <SiteFooter locale={locale} />

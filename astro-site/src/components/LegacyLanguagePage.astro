@@ -13,7 +13,11 @@ type Props = {
   headerLinkLabel?: string;
 };
 const { locale, page, canonicalPath, ogType = "article", headerLinkHref = "/guide/foreigners/", headerLinkLabel } = Astro.props;
-const availableLocales: readonly Locale[] = ["ja", "vi", "en", "zh", "ko", "pt"];
+const foreignLocales: readonly Locale[] = ["vi", "en", "zh", "ko", "pt"];
+const allLocales: readonly Locale[] = ["ja", ...foreignLocales];
+// Topic articles intentionally have no Japanese counterpart. Keep both the
+// visible switcher and hreflang links limited to routes that actually exist.
+const availableLocales = canonicalPath.startsWith("/guide/topics/") ? foreignLocales : allLocales;
 ---
 
 <BaseLayout

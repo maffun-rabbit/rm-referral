@@ -137,8 +137,11 @@ export async function validateEnglishBuild() {
     const localizedPath = pathname;
     const alternates = new Map([...html.matchAll(/<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"/gi)]
       .map((match) => [match[1], match[2].replaceAll("&amp;", "&")]));
-    if (alternates.size !== expectedHreflangs.size) errors.push(`${label}: expected 7 hreflang links, found ${alternates.size}`);
-    for (const [hreflang, prefix] of expectedHreflangs) {
+    const pageExpectedHreflangs = pathname.startsWith("/guide/topics/")
+      ? new Map([...expectedHreflangs].filter(([hreflang]) => !["ja-JP", "x-default"].includes(hreflang)))
+      : expectedHreflangs;
+    if (alternates.size !== pageExpectedHreflangs.size) errors.push(`${label}: expected ${pageExpectedHreflangs.size} hreflang links, found ${alternates.size}`);
+    for (const [hreflang, prefix] of pageExpectedHreflangs) {
       const expected = `${origin}${prefix}${localizedPath}`;
       if (alternates.get(hreflang) !== expected) errors.push(`${label}: wrong or missing hreflang ${hreflang}`);
     }

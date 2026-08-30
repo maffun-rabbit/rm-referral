@@ -4,6 +4,10 @@ import test from "node:test";
 
 const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
 const englishHtml = await readFile(new URL("../dist/en/index.html", import.meta.url), "utf8");
+const englishTopicHtml = await readFile(
+  new URL("../dist/en/guide/topics/why-rakuten-mobile-for-foreigners-japan/index.html", import.meta.url),
+  "utf8",
+);
 
 test("common layout renders one header and footer", () => {
   assert.equal((html.match(/class="site-header"/g) ?? []).length, 1);
@@ -17,6 +21,16 @@ test("shared header renders all production language routes", () => {
     assert.match(languageSelector, new RegExp(`<option value="${value.replaceAll("/", "\\/")}"`));
   }
   assert.doesNotMatch(languageSelector, /\.maffun\.workers\.dev/);
+});
+
+test("foreign-language topics only switch to topic routes that exist", () => {
+  const languageSelector = englishTopicHtml.match(/<select class="lang-selector"[\s\S]*?<\/select>/)?.[0] ?? "";
+  assert.equal((languageSelector.match(/<option\b/g) ?? []).length, 5);
+  for (const locale of ["vi", "en", "zh", "ko", "pt"]) {
+    assert.match(languageSelector, new RegExp(`<option value="\\/${locale}\\/guide\\/topics\\/why-rakuten-mobile-for-foreigners-japan\\/"`));
+  }
+  assert.doesNotMatch(languageSelector, /<option value="\/guide\/topics\//);
+  assert.doesNotMatch(englishTopicHtml, /hreflang="ja-JP"|hreflang="x-default"|\.maffun\.workers\.dev/);
 });
 
 test("all shared CTA variants are present", () => {

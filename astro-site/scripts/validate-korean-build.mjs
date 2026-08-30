@@ -114,7 +114,11 @@ export async function validateKoreanBuild() {
     if ((html.match(/class="site-header"/g) ?? []).length !== 1 || (html.match(/class="site-footer"/g) ?? []).length !== 1) errors.push(`${label}: shared header or footer count mismatch`);
 
     const alternates = new Map([...html.matchAll(/<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"/gi)].map((match) => [match[1], match[2].replaceAll("&amp;", "&")]));
-    for (const [hreflang, prefix] of expectedHreflangs) if (alternates.get(hreflang) !== `${origin}${prefix}${pathname}`) errors.push(`${label}: wrong or missing hreflang ${hreflang}`);
+    const pageExpectedHreflangs = pathname.startsWith("/guide/topics/")
+      ? new Map([...expectedHreflangs].filter(([hreflang]) => !["ja-JP", "x-default"].includes(hreflang)))
+      : expectedHreflangs;
+    if (alternates.size !== pageExpectedHreflangs.size) errors.push(`${label}: expected ${pageExpectedHreflangs.size} hreflang links, found ${alternates.size}`);
+    for (const [hreflang, prefix] of pageExpectedHreflangs) if (alternates.get(hreflang) !== `${origin}${prefix}${pathname}`) errors.push(`${label}: wrong or missing hreflang ${hreflang}`);
 
     const uiHtml = html
       .replace(/<small[^>]*lang="ja"[\s\S]*?<\/small>/gi, "")
