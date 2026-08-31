@@ -83,7 +83,8 @@ for(const prefecture of prefectures){const items=[...municipalities.values()].fi
 await writeFile(path.join(root,"data","municipality-centroids.json"),`${JSON.stringify(centroidData)}\n`);
 await writeFile(path.join(root,"js","municipality-centroids.js"),`window.RM_MUNICIPALITIES=${JSON.stringify(centroidData)};\n`);
 
-async function collectUrls(directory){const urls=[];for(const entry of await readdir(directory,{withFileTypes:true})){if([".git","node_modules"].includes(entry.name))continue;const full=path.join(directory,entry.name);if(entry.isDirectory())urls.push(...await collectUrls(full));else if(entry.name==="index.html"&&full!==path.join(root,"index.html")){urls.push(`/${path.relative(root,path.dirname(full)).split(path.sep).join("/")}/`);}}return urls;}
+const excludedSitemapDirectories=new Set([".deploy",".git","astro-site","docs","en","ko","node_modules","pt","vi","vi-component-preview","zh"]);
+async function collectUrls(directory){const urls=[];for(const entry of await readdir(directory,{withFileTypes:true})){if(entry.isDirectory()&&excludedSitemapDirectories.has(entry.name))continue;const full=path.join(directory,entry.name);if(entry.isDirectory())urls.push(...await collectUrls(full));else if(entry.name==="index.html"&&full!==path.join(root,"index.html")){urls.push(`/${path.relative(root,path.dirname(full)).split(path.sep).join("/")}/`);}}return urls;}
 const urls=["/",...await collectUrls(root)].sort();
 await writeFile(path.join(root,"sitemap.xml"),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url)=>`  <url><loc>${siteUrl}${url}</loc><lastmod>${updated}</lastmod></url>`).join("\n")}\n</urlset>\n`);
 console.log(`Generated ${generated} municipality coverage pages plus 47 prefecture coverage indexes.`);

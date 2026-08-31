@@ -1,7 +1,59 @@
 {
-  "reviewedAt": "2026-08-24",
+  "reviewedAt": "2026-08-31",
   "retentionDays": 90,
   "topics": [
+    {
+      "id": "2026-08-26-business-service-counters",
+      "category": "SERVICE EXPANSION",
+      "title": "6都市の楽天モバイルショップに法人窓口を開設",
+      "summary": "札幌・金沢・川崎・広島・松山・熊本の対象店舗で、法人回線の契約や端末購入、楽天の法人向けソリューションを対面で相談できる窓口が始まりました。",
+      "publishedAt": "2026-08-26",
+      "expiresAt": "2026-11-24",
+      "mediaName": "ケータイ Watch",
+      "sourceTitle": "楽天モバイルショップに法人窓口、札幌・金沢など6店舗で対面契約や相談に対応",
+      "sourceUrl": "https://k-tai.watch.impress.co.jp/docs/news/2135686.html",
+      "targets": [
+        {
+          "prefecture": "北海道",
+          "municipalities": ["札幌市中央区"]
+        },
+        {
+          "prefecture": "石川県",
+          "municipalities": ["金沢市"]
+        },
+        {
+          "prefecture": "神奈川県",
+          "municipalities": ["川崎市川崎区"]
+        },
+        {
+          "prefecture": "広島県",
+          "municipalities": ["広島市中区"]
+        },
+        {
+          "prefecture": "愛媛県",
+          "municipalities": ["松山市"]
+        },
+        {
+          "prefecture": "熊本県",
+          "municipalities": ["熊本市中央区"]
+        }
+      ],
+      "evidence": "ケータイ Watchが対象6店舗と法人窓口の対応内容を報道。楽天モバイル公式YouTubeの動画タイトル、公式チャンネル名、公開日、および公式店舗APIの所在地で内容と対象地域を確認した。",
+      "corroboration": [
+        {
+          "mediaName": "楽天モバイル公式YouTube",
+          "sourceTitle": "ショップから始まる新しい法人営業のカタチ―「楽天モバイルショップ」一部の店舗にて法人サービスの窓口を開設",
+          "sourceUrl": "https://www.youtube.com/watch?v=TplLUIIE-Io",
+          "publishedAt": "2026-08-17"
+        },
+        {
+          "mediaName": "楽天モバイル公式店舗API",
+          "sourceTitle": "楽天モバイルショップ公開店舗データ",
+          "sourceUrl": "https://network.mobile.rakuten.co.jp/shopmaster-public/v1/shops",
+          "checkedAt": "2026-08-31"
+        }
+      ]
+    },
     {
       "id": "2026-08-04-saga-autonomous-bus",
       "category": "REGIONAL PROJECT",

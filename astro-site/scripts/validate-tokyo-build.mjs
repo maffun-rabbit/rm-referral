@@ -7,7 +7,7 @@ const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const astroRoot = path.resolve(scriptDir, "..");
 const legacyRoot = path.resolve(astroRoot, "..");
 const distRoot = path.join(astroRoot, "dist");
-const siteOrigin = "https://rm-referral.maffun.workers.dev";
+const siteOrigin = "https://mnp-navi.jp";
 
 async function walk(directory) {
   const files = [];

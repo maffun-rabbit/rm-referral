@@ -8,7 +8,7 @@ test("auショップ 成増を既存URLへ静的出力する", async () => {
   const html = await readFile(outputPath, "utf8");
   assert.match(html, /<html lang="ja">/);
   assert.match(html, /ａｕショップ 成増（板橋区）を利用中の方へ｜auから楽天モバイルへの乗り換えガイド/);
-  assert.match(html, /rel="canonical" href="https:\/\/rm-referral\.maffun\.workers\.dev\/tokyo\/au\/au-shop-narimasu\/"/);
+  assert.match(html, /rel="canonical" href="https:\/\/mnp-navi\.jp\/tokyo\/au\/au-shop-narimasu\/"/);
   assert.match(html, /name="robots" content="index, follow"/);
   assert.match(html, /G-86FFC09LTE/);
   assert.match(html, /"@type":"WebPage"/);
