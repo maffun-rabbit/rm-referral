@@ -43,7 +43,13 @@ async function walk(directory) {
 const errors = [];
 const overlayFiles = await walk(overlay);
 const htmlFiles = overlayFiles.filter((file) => file.endsWith(".html"));
-if (htmlFiles.length !== 7955) errors.push(`expected 7955 production HTML files including one Google verification file, found ${htmlFiles.length}`);
+const sourceSitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");
+const expectedPublicHtmlFiles = new Set([...sourceSitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])).size;
+const verificationHtmlFiles = htmlFiles.filter((file) => /^google[\w-]+\.html$/.test(path.basename(file))).length;
+const expectedHtmlFiles = expectedPublicHtmlFiles + verificationHtmlFiles;
+if (htmlFiles.length !== expectedHtmlFiles) {
+  errors.push(`expected ${expectedHtmlFiles} production HTML files including ${verificationHtmlFiles} Google verification file(s), found ${htmlFiles.length}`);
+}
 
 for (const forbidden of [".wrangler", "astro-site", "docs", "vi-component-preview"]) {
   if (overlayFiles.some((file) => file.includes(`${path.sep}${forbidden}${path.sep}`) || file.endsWith(`${path.sep}${forbidden}`))) {
