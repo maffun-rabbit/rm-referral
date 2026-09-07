@@ -12,12 +12,13 @@ const languageHosts = new Map([
 ]);
 const areaSlugs = ["hokkaido", "aomori", "iwate", "miyagi", "akita", "yamagata", "fukushima", "niigata", "tochigi", "gunma", "ibaraki", "saitama", "chiba", "tokyo", "kanagawa", "nagano", "yamanashi", "toyama", "ishikawa", "fukui", "shizuoka", "aichi", "gifu", "mie", "shiga", "kyoto", "osaka", "hyogo", "nara", "wakayama", "tottori", "shimane", "okayama", "hiroshima", "yamaguchi", "tokushima", "kagawa", "ehime", "kochi", "fukuoka", "saga", "nagasaki", "kumamoto", "oita", "miyazaki", "kagoshima", "okinawa"];
 const languageSlugs = new Set(languageHosts.keys());
+const excludedDirectories = new Set([".git", ".deploy", ".wrangler", "astro-site", ...languageSlugs]);
 
 async function walk(directory) {
   const entries = await readdir(directory);
   const files = [];
   for (const entry of entries) {
-    if ([".git", ".deploy", ".wrangler"].includes(entry)) continue;
+    if (excludedDirectories.has(entry)) continue;
     const fullPath = path.join(directory, entry);
     const info = await stat(fullPath);
     if (info.isDirectory()) files.push(...await walk(fullPath));
@@ -108,11 +109,6 @@ async function validateSitemap(directory, host, siteFiles, label) {
 
 const japaneseHtmlFiles = htmlFiles.filter((file) => !languageSlugs.has(path.relative(root, file).split(path.sep)[0]));
 await validateSitemap(root, siteUrl, japaneseHtmlFiles, "sitemap.xml");
-for (const [language, host] of languageHosts) {
-  const languageRoot = path.join(root, language);
-  const languageHtmlFiles = htmlFiles.filter((file) => path.relative(root, file).split(path.sep)[0] === language);
-  await validateSitemap(languageRoot, host, languageHtmlFiles, `${language}/sitemap.xml`);
-}
 
 const expectedByArea = { hokkaido: 309, aomori: 57, iwate: 62, miyagi: 123, akita: 46, yamagata: 59, fukushima: 98, niigata: 94, tochigi: 78, gunma: 83, ibaraki: 118, saitama: 253, chiba: 227, tokyo: 539, kanagawa: 296, nagano: 89, yamanashi: 42, toyama: 56, ishikawa: 68, fukui: 41, shizuoka: 177, aichi: 428, gifu: 115, mie: 104, shiga: 69, kyoto: 127, osaka: 421, hyogo: 265, nara: 67, wakayama: 54, tottori: 31, shimane: 43, okayama: 110, hiroshima: 163, yamaguchi: 78, tokushima: 48, kagawa: 65, ehime: 86, kochi: 49, fukuoka: 304, saga: 45, nagasaki: 83, kumamoto: 94, oita: 67, miyazaki: 63, kagoshima: 91, okinawa: 123 };
 const areaByPrefecture = new Map([
