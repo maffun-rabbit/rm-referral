@@ -11,6 +11,13 @@ All future pages (guides, area pages, topic articles, etc.) MUST strictly adhere
 2. **Unified Design System**: Identical layout widths, typography, card structures, and CSS classes matching the language homepages (`/en/`, `/zh/`, `/ko/`, `/vi/`, `/pt/`).
 3. **Mobile-First Responsiveness**: Flawless responsive behavior from mobile screens (320px+) to desktop (1180px/1116px).
 
+### Brand color
+
+- Official Rakuten pink: `#FF41BE` for primary buttons, selected states, badges, borders, and decorative highlights.
+- Accessible deep magenta: `#A70072` for small text and links on light backgrounds.
+- Deep magenta gradient: `#74004F` → `#A70072` → `#C6008E` for large panels with white text.
+- Pale pink surface: `#FFF0FA` for tinted backgrounds.
+
 ---
 
 ## 2. Layout & Width Specifications
@@ -22,7 +29,7 @@ All future pages (guides, area pages, topic articles, etc.) MUST strictly adhere
 | **Hero Section** | `<section class="home-hero">` | **1180px** (`margin: auto`) | `92px 32px 105px` (Mobile: `44px 20px 64px`) |
 | **Content Section** | `<section class="home-section">` | **1116px** (`margin: auto`) | `105px 32px` (Mobile: `70px 20px`) |
 | **Surface Section** | `<section class="campaign-section">` | 100% (`var(--surface)`) | `100px max(32px, calc((100vw - 1052px) / 2))` |
-| **Final CTA** | `<section class="final-cta home-final-cta">` | 100% (Gradient Red) | `88px 24px 105px` |
+| **Final CTA** | `<section class="final-cta home-final-cta">` | 100% (Magenta Gradient) | `88px 24px 105px` |
 
 > [!CAUTION]
 > **No Custom Content Widths**: Do not apply custom container widths like `max-width: 920px` or `width: 80%`. Always stick to the standard widths (1180px for hero, 1116px for content sections).
