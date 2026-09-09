@@ -2,6 +2,7 @@
 .gitignore
 .wrangler
 scripts
+tests
 data
 astro-site
 docs
