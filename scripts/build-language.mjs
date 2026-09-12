@@ -12,6 +12,10 @@ function run(command, args) {
 }
 
 if (locale === "ja") {
+  // Cloudflare's build environment installs dependencies only from the
+  // repository root. The Astro package lives in a nested directory, so
+  // install its lockfile explicitly before running the test/build pipeline.
+  run("npm", ["--prefix", "astro-site", "ci", "--ignore-scripts"]);
   run("npm", ["--prefix", "astro-site", "test"]);
   run("node", ["scripts/prepare-japanese-assets.mjs"]);
   run("node", ["scripts/validate-japanese-overlay.mjs"]);
