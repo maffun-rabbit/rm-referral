@@ -1,3 +1,12 @@
+.localized-program{max-width:900px;margin:auto;padding:32px 24px 64px;font-size:17px;line-height:1.75}
+.localized-program h1{font-size:clamp(32px,5vw,44px);line-height:1.35;overflow-wrap:anywhere}
+.localized-program h2{font-size:26px;line-height:1.4;margin-top:48px}
+.localized-program .lead{font-size:21px}
+.localized-program nav{display:flex;gap:16px;flex-wrap:wrap}
+.localized-program a{overflow-wrap:anywhere}
+.localized-program footer{margin-top:48px;font-size:16px;border-top:1px solid #ddd;padding-top:24px}
+
+
 * {
   box-sizing: border-box;
 }
