@@ -5,11 +5,9 @@ script_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
 root="$(dirname -- "$script_dir")"
 cd "$root"
 
-# Cloudflare Workers Builds may not install dependencies from nested package
-# manifests. Ensure Astro's lockfile is installed before the language build.
-if [ -f "$root/astro-site/package-lock.json" ]; then
-  npm --prefix "$root/astro-site" ci --ignore-scripts
-fi
+# The static build exceeds Node's default 2 GiB heap in Workers Builds.
+# Keep room for native allocations within the build runner's memory budget.
+export NODE_OPTIONS="${NODE_OPTIONS:-} --max-old-space-size=6144"
 
 locale="${1:-}"
 if [ -z "$locale" ]; then
