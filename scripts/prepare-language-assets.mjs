@@ -1,4 +1,5 @@
 import { cp, mkdir, readFile, readdir, rename, rm, stat, writeFile } from "node:fs/promises";
+import { localizeNavigation } from "./localize-navigation.mjs";
 import path from "node:path";
 import { requireLanguage } from "./language-config.mjs";
 
@@ -41,6 +42,7 @@ async function rewriteLegacyOrigins(directory) {
     const original = await readFile(file, "utf8");
     let rewritten = original;
     for (const [legacy, production] of productionOrigins) rewritten = rewritten.replaceAll(legacy, production);
+    if (file.endsWith(".html")) rewritten = await localizeNavigation(rewritten, locale, root);
     if (rewritten !== original) await writeFile(file, rewritten, "utf8");
   }
 }
