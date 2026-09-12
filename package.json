@@ -1,0 +1,7 @@
+{
+  "name": "rm-referral-cloudflare-build",
+  "private": true,
+  "scripts": {
+    "postinstall": "node scripts/prepare-all-language-assets.mjs"
+  }
+}
