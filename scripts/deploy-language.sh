@@ -5,6 +5,12 @@ script_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
 root="$(dirname -- "$script_dir")"
 cd "$root"
 
+# Cloudflare Workers Builds may not install dependencies from nested package
+# manifests. Ensure Astro's lockfile is installed before the language build.
+if [ -f "$root/astro-site/package-lock.json" ]; then
+  npm --prefix "$root/astro-site" ci --ignore-scripts
+fi
+
 locale="${1:-}"
 if [ -z "$locale" ]; then
   echo "Usage: scripts/deploy-language.sh <ja|vi|en|zh|ko|pt>" >&2
