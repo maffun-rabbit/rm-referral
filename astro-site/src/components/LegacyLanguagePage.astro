@@ -3,6 +3,8 @@ import { getLocalePath, type Locale } from "../config/site";
 import type { ForeignLocale } from "../i18n/legacy";
 import type { LegacyLanguagePage } from "../data/load-legacy-language-pages";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import {readSource} from '../../../scripts/page-sources.mjs';
+import {localizeLegacyHtml} from '../data/load-legacy-language-pages';
 
 type Props = {
   locale: ForeignLocale;
@@ -18,6 +20,10 @@ const allLocales: readonly Locale[] = ["ja", ...foreignLocales];
 // Topic articles intentionally have no Japanese counterpart. Keep both the
 // visible switcher and hreflang links limited to routes that actually exist.
 const availableLocales = canonicalPath.startsWith("/guide/topics/") ? foreignLocales : allLocales;
+const source=readSource(locale,canonicalPath.replace(/^\/+|\/+$/g,''));
+const sourceScripts=localizeLegacyHtml(source.scripts.join(''),locale);
+// The compatibility loader extracts scripts embedded inside main separately.
+const extractedScripts=page.localScripts.filter(src=>!sourceScripts.includes(`src="${src}"`));
 ---
 
 <BaseLayout
@@ -32,8 +38,10 @@ const availableLocales = canonicalPath.startsWith("/guide/topics/") ? foreignLoc
   ogType={ogType}
 >
   <Fragment slot="head">
+    <Fragment set:html={source.styles.join('')} />
     {page.schemas.map((schema) => <script is:inline type="application/ld+json" set:html={schema}></script>)}
-    {page.localScripts.map((src) => <script src={src} defer is:inline></script>)}
   </Fragment>
   <Fragment set:html={page.mainHtml} />
+  <Fragment set:html={sourceScripts} />
+  {extractedScripts.map(src=><script src={src} defer is:inline />)}
 </BaseLayout>

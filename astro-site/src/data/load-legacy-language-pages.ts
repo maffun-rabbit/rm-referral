@@ -1,4 +1,5 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
+import {sourceMarkup} from '../../../scripts/page-sources.mjs';
 import path from "node:path";
 import { getAbsoluteLocaleUrl, LOCALE_CONFIG, type Locale } from "../config/site.ts";
 import { legacyLanguageConfig, type ForeignLocale } from "../i18n/legacy.ts";
@@ -360,7 +361,7 @@ export function createLegacyLanguageLoader(locale: ForeignLocale) {
 
   function loadLegacyPage(relativePath: string): LegacyLanguagePage {
     const sourcePath = path.join(legacyRoot, relativePath, "index.html");
-    const html = readFileSync(sourcePath, "utf8");
+    const html = sourceMarkup(locale, relativePath);
     return {
       title: decodeAttribute(localizeCoverage(capture(html, /<title>([\s\S]*?)<\/title>/i, "title", sourcePath), locale, relativePath)),
       description: decodeAttribute(localizeCoverage(capture(html, /<meta\s+name="description"\s+content="([^"]*)"/i, "description", sourcePath), locale, relativePath)),

@@ -1,5 +1,6 @@
 ---
 import SiteHeader from "../components/SiteHeader.astro";
+import HomeHeader from "../components/HomeHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { getAbsoluteLocaleUrl, getAlternateLinks, getLocaleAssetPath, getLocalePath, type Locale } from "../config/site";
 import { getMessages } from "../i18n";
@@ -42,6 +43,7 @@ const alternateLinks = canonicalPath && availableLocales.length
 <html lang={messages.htmlLang}>
   <head>
     <meta charset="UTF-8" />
+    <meta name="rm-layout" content="shared-v1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -60,13 +62,13 @@ const alternateLinks = canonicalPath && availableLocales.length
     <slot name="head" />
   </head>
   <body>
-    <SiteHeader
+    {canonicalPath === '/' ? <HomeHeader locale={locale} /> : <SiteHeader
       locale={locale}
       homeHref={getLocalePath(locale)}
       linkHref={headerLinkHref}
       linkLabel={headerLinkLabel}
       availableLocales={availableLocales.length ? availableLocales : undefined}
-    />
+    />}
     <slot />
     <SiteFooter locale={locale} />
   </body>

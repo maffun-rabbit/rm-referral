@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "rm-referral-zh",
+  "build": { "command": "node scripts/prepare-release.mjs" },
   "compatibility_date": "2026-08-21",
   "routes": [
     { "pattern": "mnp-navi.jp/zh/*", "zone_name": "mnp-navi.jp" }

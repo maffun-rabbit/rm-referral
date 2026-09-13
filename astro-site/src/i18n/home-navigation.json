@@ -1,0 +1,160 @@
+{
+  "ja": {
+    "name": "楽天モバイル乗り換えガイド",
+    "label": "メインナビゲーション",
+    "language": "🇯🇵 日本語",
+    "links": [
+      {
+        "href": "#area",
+        "text": "都道府県から探す"
+      },
+      {
+        "href": "#switching-guide",
+        "text": "乗り換え手順"
+      },
+      {
+        "href": "/guide/replacement-program/",
+        "text": "買い替え超トク"
+      },
+      {
+        "href": "#campaign",
+        "text": "紹介キャンペーン"
+      }
+    ]
+  },
+  "en": {
+    "name": "Rakuten Mobile Switching Guide",
+    "label": "Main navigation",
+    "language": "🇺🇸 English",
+    "links": [
+      {
+        "href": "#area",
+        "text": "Search by Prefecture"
+      },
+      {
+        "href": "#switching-guide",
+        "text": "Switching Steps"
+      },
+      {
+        "href": "/guide/replacement-program/",
+        "text": "Replacement Program"
+      },
+      {
+        "href": "/guide/topics/",
+        "text": "Helpful Topics"
+      },
+      {
+        "href": "#campaign",
+        "text": "Referral Campaign"
+      }
+    ]
+  },
+  "zh": {
+    "name": "乐天移动换网指南",
+    "label": "主导航",
+    "language": "🇨🇳 中文",
+    "links": [
+      {
+        "href": "#area",
+        "text": "按都道府县查找"
+      },
+      {
+        "href": "#switching-guide",
+        "text": "转网步骤"
+      },
+      {
+        "href": "/guide/replacement-program/",
+        "text": "换新超值计划"
+      },
+      {
+        "href": "/guide/topics/",
+        "text": "实用指南"
+      },
+      {
+        "href": "#campaign",
+        "text": "推荐活动"
+      }
+    ]
+  },
+  "ko": {
+    "name": "라쿠텐 모바일 번호이동 가이드",
+    "label": "주요 메뉴",
+    "language": "🇰🇷 한국어",
+    "links": [
+      {
+        "href": "#area",
+        "text": "지역(도도부현)으로 찾기"
+      },
+      {
+        "href": "#switching-guide",
+        "text": "번호이동 절차"
+      },
+      {
+        "href": "/guide/replacement-program/",
+        "text": "기기 변경 혜택"
+      },
+      {
+        "href": "/guide/topics/",
+        "text": "도움말"
+      },
+      {
+        "href": "#campaign",
+        "text": "추천 캠페인"
+      }
+    ]
+  },
+  "vi": {
+    "name": "Hướng dẫn chuyển sang Rakuten Mobile",
+    "label": "Điều hướng chính",
+    "language": "🇻🇳 Tiếng Việt",
+    "links": [
+      {
+        "href": "#area",
+        "text": "Tìm theo tỉnh/thành"
+      },
+      {
+        "href": "#switching-guide",
+        "text": "Quy trình chuyển mạng"
+      },
+      {
+        "href": "/guide/replacement-program/",
+        "text": "Đổi máy ưu đãi"
+      },
+      {
+        "href": "/guide/topics/",
+        "text": "Chủ đề hữu ích"
+      },
+      {
+        "href": "#campaign",
+        "text": "Khuyến mãi giới thiệu"
+      }
+    ]
+  },
+  "pt": {
+    "name": "Guia de Migração para Rakuten Mobile",
+    "label": "Navegação principal",
+    "language": "🇧🇷 Português",
+    "links": [
+      {
+        "href": "#area",
+        "text": "Buscar por Província"
+      },
+      {
+        "href": "#switching-guide",
+        "text": "Passos da Migração"
+      },
+      {
+        "href": "/guide/replacement-program/",
+        "text": "Programa de Troca"
+      },
+      {
+        "href": "/guide/topics/",
+        "text": "Tópicos úteis"
+      },
+      {
+        "href": "#campaign",
+        "text": "Campanha de Indicação"
+      }
+    ]
+  }
+}

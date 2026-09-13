@@ -35,9 +35,9 @@ test("shared loader exposes all route families for all migration locales", () =>
   assert.equal(vietnamese.prefectureSlugs.length, 47);
   assert.equal(english.prefectureSlugs.length, 47);
   assert.equal(chinese.prefectureSlugs.length, 47);
-  assert.equal(vietnamese.loadGuidePages().length, 19);
-  assert.equal(english.loadGuidePages().length, 19);
-  assert.equal(chinese.loadGuidePages().length, 19);
+  assert.equal(vietnamese.loadGuidePages().length, 20);
+  assert.equal(english.loadGuidePages().length, 20);
+  assert.equal(chinese.loadGuidePages().length, 20);
   assert.equal(vietnamese.loadShopPages().length, 6714);
   assert.equal(english.loadShopPages().length, 6714);
   assert.equal(chinese.loadShopPages().length, 6714);

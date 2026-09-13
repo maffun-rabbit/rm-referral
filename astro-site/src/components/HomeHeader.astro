@@ -1,0 +1,13 @@
+---
+import {getLocalePath, type Locale} from '../config/site';
+import nav from '../i18n/home-navigation.json';
+const {locale='ja'}=Astro.props as {locale?:Locale};
+const t=nav[locale];
+---
+<header class="site-header home-header">
+ <a class="site-name" href={getLocalePath(locale,'/')}>{t.name}</a>
+ <nav class="home-nav" aria-label={t.label}>{t.links.map(link=><a href={link.href.startsWith('#')?link.href:getLocalePath(locale,link.href)}>{link.text}</a>)}</nav>
+ <div class="lang-selector-wrap"><select class="lang-selector" aria-label="Language" onchange="if(this.value) location.href=this.value;">
+ {Object.entries(nav).map(([l,item])=><option value={getLocalePath(l as Locale,'/')} selected={l===locale}>{item.language}</option>)}
+ </select></div>
+</header>

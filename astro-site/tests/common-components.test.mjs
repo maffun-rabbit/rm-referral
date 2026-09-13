@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
+const html = await readFile(new URL("../dist/component-preview/index.html", import.meta.url), "utf8");
 const englishHtml = await readFile(new URL("../dist/en/index.html", import.meta.url), "utf8");
 const englishTopicHtml = await readFile(
   new URL("../dist/en/guide/topics/why-rakuten-mobile-for-foreigners-japan/index.html", import.meta.url),

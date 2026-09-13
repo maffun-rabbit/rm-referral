@@ -1,4 +1,5 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
+import {sourceMarkup} from '../../../scripts/page-sources.mjs';
 import path from "node:path";
 
 const legacyRoot = path.resolve(process.cwd(), "..");
@@ -116,7 +117,7 @@ function decodeAttribute(value: string): string {
 }
 
 function parseLegacyPage(sourcePath: string, prefectureSlug: MigratedPrefectureSlug, carrier: string, slug: string): LegacyShopPage {
-  const html = readFileSync(sourcePath, "utf8");
+  const html = sourceMarkup('ja', `${prefectureSlug}/${carrier}/${slug}`);
   const mainHtml = capture(html, /<main\b[^>]*>([\s\S]*?)<\/main>/i, "main", sourcePath);
   const heroMatch = mainHtml.match(/<section class="shop-hero">([\s\S]*?)<\/section>/i);
   if (!heroMatch || heroMatch.index === undefined) throw new Error(`shop hero was not found in ${sourcePath}`);

@@ -17,12 +17,12 @@ function countHtml(directory) {
 test("Chinese loader covers every page family", () => {
   assert.equal(loadChineseShopPages().length, 6714);
   assert.equal(loadChineseCoveragePages().length, 53);
-  assert.equal(loadChineseGuidePages().length, 19);
+  assert.equal(loadChineseGuidePages().length, 20);
 });
 
-test("Chinese Astro output contains all 6,835 public HTML pages", () => {
+test("Chinese Astro output contains 6,837 pages plus site verification", () => {
   assert.ok(statSync(distRoot).isDirectory());
-  assert.equal(countHtml(distRoot), 6835);
+  assert.equal(countHtml(distRoot), 6838);
   assert.ok(existsSync(path.join(distRoot, "index.html")));
   assert.ok(existsSync(path.join(distRoot, "tokyo", "index.html")));
   assert.ok(existsSync(path.join(distRoot, "tokyo", "au", "au-shop-narimasu", "index.html")));

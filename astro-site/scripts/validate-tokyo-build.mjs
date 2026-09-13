@@ -93,7 +93,10 @@ async function validateBuild(pages, prefectureSlugs) {
 
   const generatedShopFiles = (await Promise.all(prefectureSlugs.map((prefectureSlug) => walk(path.join(distRoot, prefectureSlug)))))
     .flat()
-    .filter((file) => file.endsWith("index.html"));
+    .filter((file) => {
+      const parts = path.relative(distRoot, file).split(path.sep);
+      return parts.length === 4 && parts[1] !== "coverage" && parts[3] === "index.html";
+    });
   if (generatedShopFiles.length !== pages.length) errors.push(`expected ${pages.length} shop outputs, found ${generatedShopFiles.length}`);
 
   const canonicalSet = new Set();

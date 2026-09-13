@@ -1,0 +1,19 @@
+---
+import ContentPage from '../components/ContentPage.astro';
+import {routes,inventory,key} from '../../../scripts/page-sources.mjs';
+import {migratedPrefectures} from '../data/load-tokyo-shop-pages';
+export function getStaticPaths(){
+ const prefs=new Set(Object.keys(migratedPrefectures));
+ const frozen=new Set(inventory().pages.map(p=>key(p.locale,p.route)));
+ return routes().filter(p=>{
+  const s=p.route.split('/');
+  if(!p.route)return false;
+  if(p.native)return false;
+  if(!frozen.has(key(p.locale,p.route)))return true;
+  if(p.locale==='ja')return !(prefs.has(s[0])&&s.length===3&&s[1]!=='coverage');
+  if(p.locale==='vi'&&s[1]==='coverage')return true;
+  return !((prefs.has(s[0])&&(s.length===1||s.length===3))||(s[0]==='guide'&&s.length>1));
+ }).map(p=>({params:{content:(p.locale==='ja'?'':p.locale+'/')+p.route},props:{locale:p.locale,route:p.route}}));
+}
+---
+<ContentPage {...Astro.props} />

@@ -41,7 +41,7 @@ test("Vietnamese pages keep assets and internal navigation below /vi/", () => {
 
 test("shared header and footer render once and representative shop uses shared CTAs", () => {
   for (const html of Object.values(pages)) {
-    assert.equal((html.match(/class="site-header"/g) ?? []).length, 1);
+    assert.equal((html.match(/class="site-header(?: home-header)?"/g) ?? []).length, 1);
     assert.equal((html.match(/class="site-footer"/g) ?? []).length, 1);
   }
   assert.equal((pages.shop.match(/data-primary-cta/g) ?? []).length, 1);

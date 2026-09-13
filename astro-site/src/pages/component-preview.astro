@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PrimaryCta from "../components/PrimaryCta.astro";
+import FinalCta from "../components/FinalCta.astro";
+import FloatingCta from "../components/FloatingCta.astro";
+
+const title = "RMリファラル Astro共通パーツ検証";
+const description = "現行サイトへ影響を与えず、Astroの共通パーツを検証するための仮ページです。";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  robots="noindex, nofollow"
+  headerLinkHref="/tokyo/"
+  headerLinkLabel="東京の店舗一覧"
+>
+  <main>
+    <section class="shop-hero">
+      <div>
+        <p class="eyebrow">ASTRO COMPONENT TEST</p>
+        <h1>共通パーツの検証ページ</h1>
+        <p class="lead">このページは工程3のローカル検証専用で、本番には公開しません。</p>
+        <PrimaryCta />
+      </div>
+    </section>
+    <section class="content-section">
+      <h2>共通化したパーツ</h2>
+      <ul class="check-list">
+        <li>ヘッダー</li>
+        <li>フッター</li>
+        <li>通常CTA</li>
+        <li>最終CTA</li>
+        <li>追従CTA</li>
+      </ul>
+    </section>
+    <FinalCta updated="2026年8月26日" />
+    <FloatingCta />
+  </main>
+</BaseLayout>

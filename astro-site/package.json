@@ -20,6 +20,7 @@
     "verify:portuguese": "node scripts/validate-portuguese-build.mjs",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "test:output": "node --test tests/*.test.mjs",
     "test": "npm run build && npm run verify:parity && npm run verify:migrated && npm run verify:english && npm run verify:chinese && npm run verify:korean && npm run verify:portuguese && node --test tests/*.test.mjs"
   },
   "dependencies": {

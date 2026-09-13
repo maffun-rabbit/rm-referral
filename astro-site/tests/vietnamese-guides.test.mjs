@@ -7,8 +7,8 @@ const pages = loadVietnameseGuidePages();
 const sitemap = await readFile(new URL("../dist/vi/sitemap.xml", import.meta.url), "utf8");
 const sitemapUrls = new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]));
 
-test("all 19 Vietnamese guide and topic pages have unique routes and sitemap coverage", () => {
-  assert.equal(pages.length, 19);
+test("all 20 Vietnamese guide and topic pages have unique routes and sitemap coverage", () => {
+  assert.equal(pages.length, 20);
   assert.equal(new Set(pages.map((page) => page.route)).size, pages.length);
   assert.equal(pages.filter((page) => page.route.startsWith("topics/")).length, 16);
   for (const page of pages) {
@@ -32,7 +32,8 @@ test("all Vietnamese guide and topic pages preserve content, links and localized
     for (const fallback of ["紹介キャンペーンを確認する", "オンラインで乗り換えを始める", "情報確認日："]) {
       assert.doesNotMatch(html, new RegExp(fallback), `${page.route}: Japanese UI fallback remains`);
     }
-    if (page.route !== "topics") {
+    // The replacement overview is an informational page with links to related guides.
+    if (page.route !== "topics" && page.route !== "replacement-program") {
       assert.match(html, /href="https:\/\/r10\.to\/hNearm"/, `${page.route}: referral CTA missing`);
     }
   }

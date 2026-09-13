@@ -1,0 +1,4 @@
+interface:
+  display_name: "RMリファラル共通生成"
+  short_description: "共通部品と本文データから6言語サイトを生成し、検証済み成果物だけを公開する"
+  default_prompt: "$rm-cloudflare-components を使い、共通部品からRMリファラルの変更を生成・検証してください。"
