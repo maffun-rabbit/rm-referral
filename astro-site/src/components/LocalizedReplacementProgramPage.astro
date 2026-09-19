@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getLocalePath, REFERRAL_URL } from "../config/site";
+import type { Locale } from "../config/site";
+import {readSource} from '../../../scripts/page-sources.mjs';
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const source = readSource(locale, 'guide/replacement-program');
+const t = source.program;
+if (!t) throw new Error(`Missing replacement program data: ${locale}`);
+const route = "/guide/replacement-program/";
+const official = "https://network.mobile.rakuten.co.jp/service/replacement-program/";
+const procedure = "https://network.mobile.rakuten.co.jp/guide/replacement-program/";
+---
+<BaseLayout title={t.title} description={t.description} locale={locale} canonicalPath={route} availableLocales={["ja","en","zh","ko","vi","pt"]} ogType="article" headerLinkHref={getLocalePath(locale,"/")} headerLinkLabel={t.home}>
+  <Fragment slot="head">{source.schemas.map(schema => <script is:inline type="application/ld+json" set:html={schema} />)}</Fragment>
+  <main class="program-page" data-component="replacement-program-v2">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href={getLocalePath(locale,"/")}>{t.home}</a><span aria-hidden="true">›</span><span>{t.title}</span></nav>
+    <section class="program-hero"><div><p class="eyebrow">{t.eyebrow}</p><h1>{t.heading}<br/><span>{t.headingAccent}</span></h1><p class="program-hero-message">{t.lead}</p><div class="program-hero-actions"><a class="button" href="#how-it-works">{t.jump}</a><a class="program-text-link" href={official} rel="noopener">{t.official}</a></div></div><aside class="program-summary-card"><p class="pill">{t.summaryLabel}</p><ol>{t.summary.map(([number,label])=><li><b>{number}</b><span>{label}</span></li>)}</ol></aside></section>
+    <section class="program-answer" id="how-it-works"><p class="section-label">{t.answerLabel}</p><h2>{t.answerTitle}</h2><p>{t.answerBody}</p></section>
+    <section class="program-section"><div class="program-section-heading"><p class="section-label">{t.timelineLabel}</p><h2>{t.timelineTitle}</h2></div><ol class="payment-timeline">{t.timeline.map((item,index)=><li class:list={{"timeline-choice":index===2}}><span>{item.when}</span><div><b>{item.title}</b><p>{item.body}</p></div></li>)}</ol><div class="choice-grid"><article><p class="pill">{t.returnLabel}</p><h3>{t.returnTitle}</h3><p>{t.returnBody}</p></article><article><p class="pill">{t.keepLabel}</p><h3>{t.keepTitle}</h3><p>{t.keepBody}</p></article></div></section>
+    <section class="program-section program-example"><div class="program-section-heading"><p class="section-label">{t.exampleLabel}</p><h2>{t.exampleTitle}</h2></div><p class="example-note">{t.exampleNote}</p><div class="example-formula"><div><span>{t.price}</span><strong>¥120,000</strong></div><b>÷</b><div><span>{t.installments}</span><strong>¥2,500</strong></div></div><div class="example-result"><div><span>{t.paid}</span><strong>¥60,000</strong></div><span aria-hidden="true">＋</span><div><span>{t.fee}</span><strong>¥3,300</strong></div><span aria-hidden="true">＝</span><div class="example-total"><span>{t.total}</span><strong>¥63,300</strong></div></div><p class="caution">{t.exampleCaution}</p></section>
+    <section class="program-section"><div class="program-section-heading"><p class="section-label">{t.fitLabel}</p><h2>{t.fitTitle}</h2></div><div class="fit-grid"><article class="fit-card good"><h3><span>○</span>{t.goodTitle}</h3><ul>{t.good.map(item=><li>{item}</li>)}</ul></article><article class="fit-card caution-card"><h3><span>△</span>{t.considerTitle}</h3><ul>{t.consider.map(item=><li>{item}</li>)}</ul></article></div></section>
+    <section class="program-section program-cautions"><div class="program-section-heading"><p class="section-label">{t.cautionLabel}</p><h2>{t.cautionTitle}</h2></div><div class="caution-grid">{t.cautions.map((item,index)=><article><b>{String(index+1).padStart(2,"0")}</b><h3>{item.title}</h3><p>{item.body}</p></article>)}</div><div class="damage-note"><strong>{t.damageTitle}</strong><p>{t.damageBody}</p></div></section>
+    <section class="program-section"><div class="program-section-heading"><p class="section-label">{t.stepsLabel}</p><h2>{t.stepsTitle}</h2></div><ol class="program-steps">{t.steps.map((item,index)=><li><b>{index+1}</b><div><h3>{item.title}</h3><p>{item.body}</p></div></li>)}</ol></section>
+    <section class="program-section faq-home program-faq"><div class="program-section-heading"><p class="section-label">{t.faqLabel}</p><h2>{t.faqTitle}</h2></div><div class="faq-list">{t.faq.map(item=><details><summary>{item.title}<span aria-hidden="true">＋</span></summary><p>{item.body}</p></details>)}</div></section>
+    {t.related?.length > 0 && <section class="program-section"><div class="program-section-heading"><h2>{t.relatedTitle}</h2></div><ul>{t.related.map(item => <li><a href={item.href}>{item.label}</a></li>)}</ul></section>}
+    <section class="source-panel"><h2>{t.sourceTitle}</h2><p>{t.sourceBody}</p><div class="source-actions"><a class="button" href={official} rel="noopener">{t.sourceButton}</a><a class="official-link" href={procedure} rel="noopener">{t.sourceProcedure}</a></div><p class="updated">{t.checked}</p></section>
+    <section class="final-cta program-final-cta"><p class="eyebrow">{t.ctaLabel}</p><h2>{t.ctaTitle}</h2><p>{t.ctaBody}</p><a class="button light" href={REFERRAL_URL} rel="sponsored nofollow noopener">{t.ctaButton}</a><p class="updated">{t.disclosure}</p></section>
+  </main>
+</BaseLayout>

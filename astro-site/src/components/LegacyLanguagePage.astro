@@ -5,6 +5,7 @@ import type { LegacyLanguagePage } from "../data/load-legacy-language-pages";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import {readSource} from '../../../scripts/page-sources.mjs';
 import {localizeLegacyHtml} from '../data/load-legacy-language-pages';
+import LocalizedReplacementProgramPage from './LocalizedReplacementProgramPage.astro';
 
 type Props = {
   locale: ForeignLocale;
@@ -24,9 +25,10 @@ const source=readSource(locale,canonicalPath.replace(/^\/+|\/+$/g,''));
 const sourceScripts=localizeLegacyHtml(source.scripts.join(''),locale);
 // The compatibility loader extracts scripts embedded inside main separately.
 const extractedScripts=page.localScripts.filter(src=>!sourceScripts.includes(`src="${src}"`));
+const isReplacementProgram = canonicalPath === "/guide/replacement-program/";
 ---
 
-<BaseLayout
+{isReplacementProgram ? <LocalizedReplacementProgramPage locale={locale} /> : <BaseLayout
   title={page.title}
   description={page.description}
   robots={page.robots}
@@ -44,4 +46,4 @@ const extractedScripts=page.localScripts.filter(src=>!sourceScripts.includes(`sr
   <Fragment set:html={page.mainHtml} />
   <Fragment set:html={sourceScripts} />
   {extractedScripts.map(src=><script src={src} defer is:inline />)}
-</BaseLayout>
+</BaseLayout>}

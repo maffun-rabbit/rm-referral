@@ -6,9 +6,185 @@
   "robots": "index,follow",
   "canonical": "https://mnp-navi.jp/pt/guide/replacement-program/",
   "schemas": [],
-  "styles": [
-    "<style>.localized-program{max-width:900px;margin:auto;padding:32px 24px 64px;font-size:17px;line-height:1.75}.localized-program h1{font-size:clamp(32px,5vw,44px);line-height:1.35;overflow-wrap:anywhere}.localized-program h2{font-size:26px;line-height:1.4;margin-top:48px}.localized-program .lead{font-size:21px}.localized-program nav{display:flex;gap:16px;flex-wrap:wrap}.localized-program a{overflow-wrap:anywhere}.localized-program footer{margin-top:48px;font-size:16px;border-top:1px solid #ddd;padding-top:24px}</style>"
-  ],
+  "styles": [],
   "scripts": [],
-  "mainHtml": "<main class=\"localized-program\"><nav><a href=\"/pt/\">Início</a><a href=\"/en/guide/replacement-program/\" lang=\"en\">EN</a><a href=\"/zh/guide/replacement-program/\" lang=\"zh\">ZH</a><a href=\"/ko/guide/replacement-program/\" lang=\"ko\">KO</a><a href=\"/vi/guide/replacement-program/\" lang=\"vi\">VI</a><a href=\"/pt/guide/replacement-program/\" lang=\"pt\" aria-current=\"page\">PT</a></nav><h1>Programa de troca de aparelhos da Rakuten Mobile</h1><p class=\"lead\">Entenda as prestações, as condições de devolução e os custos antes de escolher um novo celular.</p><section><h2>Como funciona?</h2><p>Compre um aparelho elegível em 48 prestações usando um Rakuten Card em seu nome. A partir do 25º mês, a devolução do aparelho, sujeita à avaliação, pode dispensar até 24 prestações restantes. Pagar metade não significa ficar com o celular.</p></section><section><h2>Devolver ou continuar usando?</h2><p>A devolução tem taxa administrativa. Danos podem gerar cobrança adicional ou impedir a aceitação. Se ficar com o aparelho, pague todas as 48 prestações. Cancelar a linha móvel não cancela a dívida do aparelho.</p></section><section><h2>Exemplo de custo</h2><p>Para um aparelho hipotético de ¥120.000 com prestações iguais: ¥2.500 × 24 + taxa de devolução de ¥3.300 = ¥63.300. O aparelho deve ser devolvido. Danos e serviço móvel não estão incluídos; o calendário real depende do produto e da promoção.</p></section><section><h2>Antes de aderir</h2><p>A adesão deve ocorrer na compra de um aparelho elegível; não pode ser feita depois. Confira o modelo, as prestações e as regras de devolução. Danos podem custar ¥22.000 ou mais, conforme o modelo e o estado; alguns aparelhos não são aceitos.</p></section><section><h2>Prepare a devolução</h2><p>Faça backup, remova os bloqueios de conta e restaure as configurações de fábrica. Siga as instruções e o prazo de devolução. Se pretende usar o mesmo celular por vários anos, compare o custo total com uma compra à vista.</p></section><section><h2>Guias relacionados</h2><ul><li><a href=\"/pt/guide/topics/replacement-program-android/\">Elegibilidade de aparelhos Android</a></li><li><a href=\"/pt/guide/topics/replacement-program-disadvantages/\">Desvantagens e cuidados</a></li></ul></section><footer><p>Verificado em 13/09/2026. As condições podem mudar.</p><a href=\"https://network.mobile.rakuten.co.jp/service/replacement-program/\" rel=\"noopener\">Condições oficiais (em japonês)</a></footer></main>"
+  "mainHtml": "<main class=\"localized-program\"><nav><a href=\"/pt/\">Início</a><a href=\"/en/guide/replacement-program/\" lang=\"en\">EN</a><a href=\"/zh/guide/replacement-program/\" lang=\"zh\">ZH</a><a href=\"/ko/guide/replacement-program/\" lang=\"ko\">KO</a><a href=\"/vi/guide/replacement-program/\" lang=\"vi\">VI</a><a href=\"/pt/guide/replacement-program/\" lang=\"pt\" aria-current=\"page\">PT</a></nav><h1>Programa de troca de aparelhos da Rakuten Mobile</h1><p class=\"lead\">Entenda as prestações, as condições de devolução e os custos antes de escolher um novo celular.</p><section><h2>Como funciona?</h2><p>Compre um aparelho elegível em 48 prestações usando um Rakuten Card em seu nome. A partir do 25º mês, a devolução do aparelho, sujeita à avaliação, pode dispensar até 24 prestações restantes. Pagar metade não significa ficar com o celular.</p></section><section><h2>Devolver ou continuar usando?</h2><p>A devolução tem taxa administrativa. Danos podem gerar cobrança adicional ou impedir a aceitação. Se ficar com o aparelho, pague todas as 48 prestações. Cancelar a linha móvel não cancela a dívida do aparelho.</p></section><section><h2>Exemplo de custo</h2><p>Para um aparelho hipotético de ¥120.000 com prestações iguais: ¥2.500 × 24 + taxa de devolução de ¥3.300 = ¥63.300. O aparelho deve ser devolvido. Danos e serviço móvel não estão incluídos; o calendário real depende do produto e da promoção.</p></section><section><h2>Antes de aderir</h2><p>A adesão deve ocorrer na compra de um aparelho elegível; não pode ser feita depois. Confira o modelo, as prestações e as regras de devolução. Danos podem custar ¥22.000 ou mais, conforme o modelo e o estado; alguns aparelhos não são aceitos.</p></section><section><h2>Prepare a devolução</h2><p>Faça backup, remova os bloqueios de conta e restaure as configurações de fábrica. Siga as instruções e o prazo de devolução. Se pretende usar o mesmo celular por vários anos, compare o custo total com uma compra à vista.</p></section><section><h2>Guias relacionados</h2><ul><li><a href=\"/pt/guide/topics/replacement-program-android/\">Elegibilidade de aparelhos Android</a></li><li><a href=\"/pt/guide/topics/replacement-program-disadvantages/\">Desvantagens e cuidados</a></li></ul></section><footer><p>Verificado em 13/09/2026. As condições podem mudar.</p><a href=\"https://network.mobile.rakuten.co.jp/service/replacement-program/\" rel=\"noopener\">Condições oficiais (em japonês)</a></footer></main>",
+  "program": {
+    "title": "Programa de troca de aparelhos da Rakuten Mobile",
+    "description": "Entenda as prestações, as condições de devolução e os custos antes de escolher um novo celular.",
+    "home": "Início",
+    "eyebrow": "GUIA DO PROGRAMA DE TROCA",
+    "heading": "O programa de troca,",
+    "headingAccent": "explicado de forma simples.",
+    "lead": "Compre um aparelho elegível em 48 parcelas. A partir do 25º mês, ao devolvê-lo e cumprir as condições, até 24 parcelas restantes podem ser dispensadas.",
+    "jump": "Ver como funciona ↓",
+    "official": "Ver site oficial ↗ (japonês)",
+    "summaryLabel": "Lembre-se de 3 números",
+    "summary": [
+      [
+        "48",
+        "Parcelas do aparelho"
+      ],
+      [
+        "25",
+        "Mês em que a devolução fica disponível"
+      ],
+      [
+        "Até 24",
+        "Parcelas que podem ser dispensadas"
+      ]
+    ],
+    "answerLabel": "COMO FUNCIONA",
+    "answerTitle": "Não é um plano em que o aparelho vira seu depois de pagar apenas a metade.",
+    "answerBody": "Para dispensar o saldo, é preciso devolver o aparelho a partir do 25º mês e passar pela avaliação. Sem devolução, o pagamento continua até a 48ª parcela.",
+    "timelineLabel": "CRONOLOGIA",
+    "timelineTitle": "O processo ao longo do tempo",
+    "timeline": [
+      {
+        "when": "Na compra",
+        "title": "Escolha um aparelho elegível em 48 parcelas",
+        "body": "A adesão é feita na compra e exige Rakuten Card no nome do titular."
+      },
+      {
+        "when": "Meses 1–24",
+        "title": "Pague o valor mensal do aparelho",
+        "body": "O valor varia conforme o modelo e a campanha."
+      },
+      {
+        "when": "A partir do mês 25",
+        "title": "Escolha devolver ou continuar usando",
+        "body": "Pelas condições atuais, a solicitação pode ser feita até o 47º mês."
+      }
+    ],
+    "returnLabel": "Devolver",
+    "returnTitle": "O saldo pode ser dispensado",
+    "returnBody": "Após aprovação, as parcelas seguintes são dispensadas; há taxa de devolução.",
+    "keepLabel": "Manter",
+    "keepTitle": "Pagar as 48 parcelas",
+    "keepBody": "Continue usando o aparelho e conclua todos os pagamentos.",
+    "exampleLabel": "EXEMPLO",
+    "exampleTitle": "Exemplo com aparelho de ¥120.000",
+    "exampleNote": "Exemplo simplificado com parcelas iguais.",
+    "price": "Preço do aparelho",
+    "installments": "48 parcelas",
+    "paid": "24 parcelas pagas",
+    "fee": "Taxa de devolução",
+    "total": "Total do exemplo",
+    "exampleCaution": "Não inclui danos nem serviço móvel.",
+    "fitLabel": "PARA QUEM É?",
+    "fitTitle": "Quem pode se beneficiar",
+    "goodTitle": "Pode ser adequado",
+    "good": [
+      "Troca de aparelho a cada dois anos",
+      "Quer reduzir a parcela mensal",
+      "Consegue conservar bem o aparelho",
+      "Possui Rakuten Card"
+    ],
+    "considerTitle": "Avalie com cuidado",
+    "consider": [
+      "Usa o mesmo aparelho por 3 ou 4 anos",
+      "Quer ficar com o aparelho antigo",
+      "Tem risco de dano ou contato com água",
+      "Quer pagar com outro cartão"
+    ],
+    "cautionLabel": "IMPORTANTE",
+    "cautionTitle": "O que verificar antes de aderir",
+    "cautions": [
+      {
+        "title": "Rakuten Card obrigatório",
+        "body": "O cartão deve estar no nome do titular."
+      },
+      {
+        "title": "Adesão na compra",
+        "body": "Não é possível aderir depois."
+      },
+      {
+        "title": "Taxa de devolução",
+        "body": "Há uma taxa ao devolver o aparelho."
+      },
+      {
+        "title": "Danos podem gerar cobrança",
+        "body": "Pode haver taxa extra ou recusa da devolução."
+      },
+      {
+        "title": "Apague os dados",
+        "body": "Faça backup, remova bloqueios e restaure o aparelho."
+      },
+      {
+        "title": "Confira as regras",
+        "body": "Veja as condições oficiais atualizadas."
+      }
+    ],
+    "damageTitle": "Cobrança por danos",
+    "damageBody": "Conforme o modelo e o estado, danos aplicáveis podem gerar cobrança de ¥22.000.",
+    "stepsLabel": "ETAPAS",
+    "stepsTitle": "Da compra à devolução",
+    "steps": [
+      {
+        "title": "Escolha um aparelho elegível",
+        "body": "Confirme a elegibilidade na página do aparelho."
+      },
+      {
+        "title": "Selecione o programa",
+        "body": "Escolha 48 parcelas no Rakuten Card."
+      },
+      {
+        "title": "Pague as primeiras 24 parcelas",
+        "body": "O pagamento começa no mês de recebimento."
+      },
+      {
+        "title": "Solicite a partir do mês 25",
+        "body": "Use o my Rakuten Mobile ou uma loja elegível."
+      },
+      {
+        "title": "Faça backup e restaure",
+        "body": "Remova bloqueios e dados pessoais."
+      },
+      {
+        "title": "Devolva no prazo",
+        "body": "Siga o método indicado e aguarde a avaliação."
+      }
+    ],
+    "faqLabel": "FAQ",
+    "faqTitle": "Perguntas frequentes",
+    "faq": [
+      {
+        "title": "O aparelho é meu após 24 parcelas?",
+        "body": "Não. A dispensa do saldo depende da devolução elegível e da avaliação."
+      },
+      {
+        "title": "Posso usar outro cartão?",
+        "body": "Não. É necessário um Rakuten Card no nome do titular."
+      },
+      {
+        "title": "Posso aderir depois da compra?",
+        "body": "Não. O programa deve ser escolhido na compra."
+      },
+      {
+        "title": "Cancelar a linha encerra as parcelas?",
+        "body": "Não. O contrato móvel e as parcelas do aparelho são separados."
+      }
+    ],
+    "sourceTitle": "Confirme as informações oficiais mais recentes",
+    "sourceBody": "Modelos, valores, campanhas e condições de devolução podem mudar.",
+    "sourceButton": "Página oficial do programa ↗ (japonês)",
+    "sourceProcedure": "Procedimento oficial ↗ (japonês)",
+    "checked": "Informações verificadas em 13/09/2026",
+    "ctaLabel": "PRÓXIMO PASSO",
+    "ctaTitle": "Confira também o benefício de portabilidade",
+    "ctaBody": "Verifique separadamente a campanha de indicação e as condições de compra, seguindo a ordem exigida.",
+    "ctaButton": "Ver campanha de indicação →",
+    "disclosure": "Este site contém link de indicação.",
+    "relatedTitle": "Guias relacionados",
+    "related": [
+      {
+        "label": "Elegibilidade de aparelhos Android",
+        "href": "/pt/guide/topics/replacement-program-android/"
+      },
+      {
+        "label": "Desvantagens e cuidados",
+        "href": "/pt/guide/topics/replacement-program-disadvantages/"
+      }
+    ]
+  }
 }

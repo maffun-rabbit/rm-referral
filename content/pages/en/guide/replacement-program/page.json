@@ -6,9 +6,185 @@
   "robots": "index,follow",
   "canonical": "https://mnp-navi.jp/en/guide/replacement-program/",
   "schemas": [],
-  "styles": [
-    "<style>.localized-program{max-width:900px;margin:auto;padding:32px 24px 64px;font-size:17px;line-height:1.75}.localized-program h1{font-size:clamp(32px,5vw,44px);line-height:1.35;overflow-wrap:anywhere}.localized-program h2{font-size:26px;line-height:1.4;margin-top:48px}.localized-program .lead{font-size:21px}.localized-program nav{display:flex;gap:16px;flex-wrap:wrap}.localized-program a{overflow-wrap:anywhere}.localized-program footer{margin-top:48px;font-size:16px;border-top:1px solid #ddd;padding-top:24px}</style>"
-  ],
+  "styles": [],
   "scripts": [],
-  "mainHtml": "<main class=\"localized-program\"><nav><a href=\"/en/\">Home</a><a href=\"/en/guide/replacement-program/\" lang=\"en\" aria-current=\"page\">EN</a><a href=\"/zh/guide/replacement-program/\" lang=\"zh\">ZH</a><a href=\"/ko/guide/replacement-program/\" lang=\"ko\">KO</a><a href=\"/vi/guide/replacement-program/\" lang=\"vi\">VI</a><a href=\"/pt/guide/replacement-program/\" lang=\"pt\">PT</a></nav><h1>Rakuten Mobile Device Replacement Program</h1><p class=\"lead\">Understand the payments, return requirements and costs before choosing a new phone.</p><section><h2>How it works</h2><p>Buy an eligible phone in 48 instalments with a Rakuten Card in your own name. From month 25, returning the device and meeting the assessment requirements can waive up to 24 remaining instalments. This is not a purchase where paying half lets you keep the phone.</p></section><section><h2>Return it or keep it?</h2><p>If you return the device, an administration fee applies and damage may result in additional charges or rejection. If you keep it, continue paying all 48 instalments. Cancelling your mobile service does not cancel the device payments.</p></section><section><h2>A simple cost example</h2><p>For an illustrative ¥120,000 phone with equal payments, ¥2,500 × 24 plus a ¥3,300 return fee is ¥63,300. You return the phone. This excludes damage charges and mobile service fees; actual payment schedules vary by product and promotion.</p></section><section><h2>Check before applying</h2><p>Apply when purchasing an eligible device; you cannot join afterwards. Check the model, payment schedule and return conditions. Damage charges can be ¥22,000 or more depending on the model and condition, and some devices cannot be accepted.</p></section><section><h2>Prepare for return</h2><p>Back up your data, remove account locks and reset the phone. Follow the return instructions and deadline. Compare the total cost with buying outright, especially if you want to keep the phone for several years.</p></section><section><h2>Related guides</h2><ul><li><a href=\"/en/guide/topics/replacement-program-android/\">Android eligibility</a></li><li><a href=\"/en/guide/topics/replacement-program-disadvantages/\">Disadvantages and precautions</a></li></ul></section><footer><p>Checked: 13 September 2026. Conditions may change.</p><a href=\"https://network.mobile.rakuten.co.jp/service/replacement-program/\" rel=\"noopener\">Official program terms (Japanese)</a></footer></main>"
+  "mainHtml": "<main class=\"localized-program\"><nav><a href=\"/en/\">Home</a><a href=\"/en/guide/replacement-program/\" lang=\"en\" aria-current=\"page\">EN</a><a href=\"/zh/guide/replacement-program/\" lang=\"zh\">ZH</a><a href=\"/ko/guide/replacement-program/\" lang=\"ko\">KO</a><a href=\"/vi/guide/replacement-program/\" lang=\"vi\">VI</a><a href=\"/pt/guide/replacement-program/\" lang=\"pt\">PT</a></nav><h1>Rakuten Mobile Device Replacement Program</h1><p class=\"lead\">Understand the payments, return requirements and costs before choosing a new phone.</p><section><h2>How it works</h2><p>Buy an eligible phone in 48 instalments with a Rakuten Card in your own name. From month 25, returning the device and meeting the assessment requirements can waive up to 24 remaining instalments. This is not a purchase where paying half lets you keep the phone.</p></section><section><h2>Return it or keep it?</h2><p>If you return the device, an administration fee applies and damage may result in additional charges or rejection. If you keep it, continue paying all 48 instalments. Cancelling your mobile service does not cancel the device payments.</p></section><section><h2>A simple cost example</h2><p>For an illustrative ¥120,000 phone with equal payments, ¥2,500 × 24 plus a ¥3,300 return fee is ¥63,300. You return the phone. This excludes damage charges and mobile service fees; actual payment schedules vary by product and promotion.</p></section><section><h2>Check before applying</h2><p>Apply when purchasing an eligible device; you cannot join afterwards. Check the model, payment schedule and return conditions. Damage charges can be ¥22,000 or more depending on the model and condition, and some devices cannot be accepted.</p></section><section><h2>Prepare for return</h2><p>Back up your data, remove account locks and reset the phone. Follow the return instructions and deadline. Compare the total cost with buying outright, especially if you want to keep the phone for several years.</p></section><section><h2>Related guides</h2><ul><li><a href=\"/en/guide/topics/replacement-program-android/\">Android eligibility</a></li><li><a href=\"/en/guide/topics/replacement-program-disadvantages/\">Disadvantages and precautions</a></li></ul></section><footer><p>Checked: 13 September 2026. Conditions may change.</p><a href=\"https://network.mobile.rakuten.co.jp/service/replacement-program/\" rel=\"noopener\">Official program terms (Japanese)</a></footer></main>",
+  "program": {
+    "title": "Rakuten Mobile Device Replacement Program",
+    "description": "Understand the payments, return requirements and costs before choosing a new phone.",
+    "home": "Home",
+    "eyebrow": "REPLACEMENT PROGRAM GUIDE",
+    "heading": "The device upgrade program,",
+    "headingAccent": "made simple.",
+    "lead": "Buy an eligible phone in 48 installments. From month 25, return it after meeting the conditions and up to 24 remaining payments may be waived.",
+    "jump": "See how it works ↓",
+    "official": "Check Rakuten Mobile ↗ (Japanese)",
+    "summaryLabel": "Remember these 3 numbers",
+    "summary": [
+      [
+        "48",
+        "Installments for the device"
+      ],
+      [
+        "25",
+        "Month when return becomes available"
+      ],
+      [
+        "Up to 24",
+        "Remaining payments that may be waived"
+      ]
+    ],
+    "answerLabel": "HOW IT WORKS",
+    "answerTitle": "It is not a plan where the phone becomes yours after paying only half.",
+    "answerBody": "To waive the remaining payments, you must return the device from month 25 and pass inspection. If you keep it, payments continue through installment 48.",
+    "timelineLabel": "PAYMENT TIMELINE",
+    "timelineTitle": "The process at a glance",
+    "timeline": [
+      {
+        "when": "At purchase",
+        "title": "Choose an eligible device and 48 payments",
+        "body": "Join the program when purchasing. A Rakuten Card in the subscriber’s name is required."
+      },
+      {
+        "when": "Months 1–24",
+        "title": "Pay the scheduled device amount",
+        "body": "Monthly amounts vary by model and campaign."
+      },
+      {
+        "when": "From month 25",
+        "title": "Choose whether to return or keep the device",
+        "body": "A return procedure is available through month 47, subject to the current terms."
+      }
+    ],
+    "returnLabel": "Return",
+    "returnTitle": "Remaining payments may be waived",
+    "returnBody": "After inspection, later installments are waived. A return handling fee applies.",
+    "keepLabel": "Keep",
+    "keepTitle": "Pay through installment 48",
+    "keepBody": "Continue using the device and complete all payments.",
+    "exampleLabel": "SIMPLE EXAMPLE",
+    "exampleTitle": "Example with a ¥120,000 phone",
+    "exampleNote": "A simplified equal-payment example. Actual amounts vary.",
+    "price": "Device price",
+    "installments": "48 payments",
+    "paid": "24 payments",
+    "fee": "Return fee",
+    "total": "Example total",
+    "exampleCaution": "Excludes damage fees and communication charges.",
+    "fitLabel": "WHO IS IT FOR?",
+    "fitTitle": "Who it may suit",
+    "goodTitle": "Good fit",
+    "good": [
+      "You replace your phone about every two years",
+      "You want smaller monthly device payments",
+      "You can keep the device in good condition",
+      "You have a Rakuten Card"
+    ],
+    "considerTitle": "Think carefully",
+    "consider": [
+      "You keep the same phone for three or four years",
+      "You want to keep the old device",
+      "Damage or water exposure is likely",
+      "You want to pay without a Rakuten Card"
+    ],
+    "cautionLabel": "IMPORTANT",
+    "cautionTitle": "Checks before applying",
+    "cautions": [
+      {
+        "title": "Rakuten Card required",
+        "body": "The card must be in the subscriber’s name."
+      },
+      {
+        "title": "Join at purchase",
+        "body": "The program cannot be added later."
+      },
+      {
+        "title": "Return fee",
+        "body": "A handling fee applies when returning the device."
+      },
+      {
+        "title": "Damage may cost extra",
+        "body": "Damage can lead to an additional charge or rejected return."
+      },
+      {
+        "title": "Erase your data",
+        "body": "Back up, unlock accounts, and factory-reset before return."
+      },
+      {
+        "title": "Check cancellation rules",
+        "body": "Confirm the latest terms before applying."
+      }
+    ],
+    "damageTitle": "Damage charge",
+    "damageBody": "Official guidance may require a ¥22,000 charge for eligible damage, depending on the model and condition.",
+    "stepsLabel": "STEPS",
+    "stepsTitle": "From purchase to return",
+    "steps": [
+      {
+        "title": "Choose an eligible device",
+        "body": "Check eligibility on the device page."
+      },
+      {
+        "title": "Select the program",
+        "body": "Choose 48 payments with Rakuten Card."
+      },
+      {
+        "title": "Pay the first 24 installments",
+        "body": "Payments begin from the month you receive the device."
+      },
+      {
+        "title": "Apply from month 25",
+        "body": "Start the return procedure in my Rakuten Mobile or an eligible shop."
+      },
+      {
+        "title": "Back up and reset",
+        "body": "Remove locks and erase personal data."
+      },
+      {
+        "title": "Return by the deadline",
+        "body": "Use the instructed method and wait for inspection."
+      }
+    ],
+    "faqLabel": "FAQ",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "title": "Is the phone mine after 24 payments?",
+        "body": "No. The remaining payments are waived only after an eligible return and inspection."
+      },
+      {
+        "title": "Can I use a card other than Rakuten Card?",
+        "body": "No. A Rakuten Card in the subscriber’s name is required."
+      },
+      {
+        "title": "Can I join after buying the phone?",
+        "body": "No. You must select the program at purchase."
+      },
+      {
+        "title": "Does cancelling the mobile plan stop device payments?",
+        "body": "No. The line contract and device installments are separate."
+      }
+    ],
+    "sourceTitle": "Confirm the latest official information",
+    "sourceBody": "Eligible models, prices, campaigns, and return requirements can change.",
+    "sourceButton": "Official program page ↗ (Japanese)",
+    "sourceProcedure": "Official return procedure ↗ (Japanese)",
+    "checked": "Information checked: September 13, 2026",
+    "ctaLabel": "READY TO CHECK",
+    "ctaTitle": "Check the switching benefit too",
+    "ctaBody": "Review the referral campaign and device-purchase terms separately and follow the required order.",
+    "ctaButton": "Check the referral campaign →",
+    "disclosure": "This site contains a referral link.",
+    "relatedTitle": "Related guides",
+    "related": [
+      {
+        "label": "Android eligibility",
+        "href": "/en/guide/topics/replacement-program-android/"
+      },
+      {
+        "label": "Disadvantages and precautions",
+        "href": "/en/guide/topics/replacement-program-disadvantages/"
+      }
+    ]
+  }
 }
