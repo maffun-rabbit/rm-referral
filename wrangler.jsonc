@@ -1,7 +1,12 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "rm-referral",
+  "main": "worker/index.mjs",
   "build": { "command": "node scripts/prepare-release.mjs" },
   "compatibility_date": "2026-08-21",
-  "assets": { "directory": ".deploy/ja" }
+  "assets": {
+    "directory": ".deploy/ja",
+    "binding": "ASSETS",
+    "run_worker_first": ["/guide/*"]
+  }
 }

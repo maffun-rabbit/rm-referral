@@ -25,6 +25,18 @@ export async function verifyReceipt(expected){
   for(const item of r.files[l]){const f=path.join(base,item.file);if(!f.startsWith(base+path.sep))throw new Error('Invalid receipt path');const b=await readFile(f);if(hash(b)!==item.sha256)throw new Error('Release was edited: '+f);}
  }return r;
 }
+export async function writeEdgeIncludes(dist){
+ const source=path.join(dist,'guide','replacement-program','index.html');
+ const html=await readFile(source,'utf8');
+ const target=path.join(dist,'_includes','ja');
+ await mkdir(target,{recursive:true});
+ for(const name of ['header','footer']){
+  const pattern=new RegExp(`<rm-include\\s+src="/_includes/ja/${name}\\.html">([\\s\\S]*?)</rm-include>`);
+  const match=html.match(pattern);
+  if(!match?.[1]?.trim())throw new Error('Missing edge include fallback: '+name);
+  await writeFile(path.join(target,name+'.html'),match[1].trim()+'\n');
+ }
+}
 function run(command,args){const r=spawnSync(command,args,{cwd:root,stdio:'inherit',env:{...process.env,NODE_OPTIONS:(process.env.NODE_OPTIONS||'')+' --max-old-space-size=6144',ASTRO_TELEMETRY_DISABLED:'1'}});if(r.status!==0)throw new Error(command+' failed ('+r.status+')');}
 export async function prepareRelease(){
  verifyFrozen();const input=await fingerprint();
@@ -43,9 +55,12 @@ export async function prepareRelease(){
    const first=path.relative(dist,f).split(path.sep)[0];if(f.endsWith('.html')&&locales.includes(first))html=await localizeNavigation(html,first,dist);
    await writeFile(f,html);
   }
+  await writeEdgeIncludes(dist);
   const manifest={version:1,input,createdAt:new Date().toISOString(),pages:expectedRoutes.length,files:{}};
   const publicHtml=new Set(expectedRoutes.map(p=>path.join(p.locale==='ja'?'':p.locale,p.route,'index.html')));
   publicHtml.add('google55b1c42743aa7ee2.html');
+  publicHtml.add(path.join('_includes','ja','header.html'));
+  publicHtml.add(path.join('_includes','ja','footer.html'));
   for(const l of locales.filter(l=>l!=='ja'))publicHtml.add(l+'/google55b1c42743aa7ee2.html');
   for(const l of locales){const target=path.join(release,l);await rm(target,{recursive:true,force:true});await mkdir(target,{recursive:true});
    for(const f of await walk(dist)){const rel=path.relative(dist,f),first=rel.split(path.sep)[0];if(l==='ja'?locales.includes(first):first!==l)continue;if(f.endsWith('.html')&&!publicHtml.has(rel))continue;
