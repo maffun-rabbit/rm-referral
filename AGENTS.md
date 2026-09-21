@@ -8,3 +8,4 @@
 - 承認済み公開は `npm run deploy -- <locale>`。Wranglerのbuildフックを迂回しない。
 - 未翻訳の内部リンクを日本語へ向けない。公開を確認するまで公開済みと報告しない。
 - 調査・状態確認だけの依頼は読み取り専用。公開・削除の承認を推測で広げない。
+- 新規 `topics/` ページは `npm run page:new-topic -- <locale> <slug>` で作成し、`docs/page-design/guide-topic-regulation.md` を必ず守る。`guide/` は体系的なガイド、`topics/` は個別検索意図の記事として分ける。固定シェルを `mainHtml`、ページ固有CSS、ページ固有JSで上書きしない。

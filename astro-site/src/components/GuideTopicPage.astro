@@ -1,0 +1,36 @@
+---
+import { getLocalePath, type Locale } from '../config/site';
+type Link = { label: string; href: string; note?: string; external?: boolean };
+type Props = { locale: Locale; route: string; page: any };
+const { locale, page } = Astro.props;
+const topic = page.topic;
+const parentHref = getLocalePath(locale, '/topics/');
+const homeHref = getLocalePath(locale, '/');
+const firstSectionHref = `#${topic.sections[0].id}`;
+const isExternal = (link: Link) => link.external ?? /^https?:\/\//.test(link.href);
+---
+<main class="guide-topic-page" data-guide-topic-version="1">
+  <nav class="breadcrumb guide-topic-breadcrumb" aria-label={topic.breadcrumb.ariaLabel}>
+    <a href={homeHref}>{topic.breadcrumb.home}</a><span aria-hidden="true">›</span><a href={parentHref}>{topic.breadcrumb.topics}</a><span aria-hidden="true">›</span><span aria-current="page">{topic.breadcrumb.current}</span>
+  </nav>
+  <section class="guide-topic-hero">
+    <div class="guide-topic-hero-copy"><p class="eyebrow">{topic.hero.eyebrow}</p><h1>{topic.hero.heading}</h1><p class="guide-topic-lead">{topic.hero.lead}</p><div class="guide-topic-hero-actions"><a class="button" href={firstSectionHref}>{topic.hero.primaryActionLabel}</a><a class="guide-topic-text-link" href="#guide-topic-sources">{topic.hero.sourceActionLabel}</a></div></div>
+    <aside class="guide-topic-summary" aria-label={topic.hero.summaryLabel}><p class="pill">{topic.hero.summaryLabel}</p><ol>{topic.hero.points.map((point: string, index: number) => <li><b>{String(index + 1).padStart(2, '0')}</b><span>{point}</span></li>)}</ol></aside>
+  </section>
+  <div class="guide-topic-body">
+    {topic.sections.map((section: any) => <section id={section.id} class:list={["guide-topic-section", `guide-topic-${section.type}`]}>
+      <div class="guide-topic-section-heading">{section.eyebrow && <p class="section-label">{section.eyebrow}</p>}<h2>{section.heading}</h2>{section.lead && <p>{section.lead}</p>}</div>
+      {section.type === 'prose' && <div class="guide-topic-prose">{section.paragraphs.map((text: string) => <p>{text}</p>)}{section.bullets?.length > 0 && <ul>{section.bullets.map((text: string) => <li>{text}</li>)}</ul>}</div>}
+      {section.type === 'steps' && <ol class="guide-topic-steps">{section.items.map((item: any, index: number) => <li><b>{String(index + 1).padStart(2, '0')}</b><div><h3>{item.title}</h3><p>{item.body}</p></div></li>)}</ol>}
+      {section.type === 'comparison' && <div class="guide-topic-comparison">{section.columns.map((column: any) => <article data-tone={column.tone ?? 'neutral'}><p class="pill">{column.label}</p><h3>{column.title}</h3><ul>{column.items.map((item: string) => <li>{item}</li>)}</ul></article>)}</div>}
+      {section.type === 'cards' && <div class="guide-topic-cards">{section.items.map((item: any, index: number) => <article><b>{item.kicker ?? String(index + 1).padStart(2, '0')}</b><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>}
+      {section.type === 'warning' && <aside class="guide-topic-warning"><strong>{section.label}</strong>{section.paragraphs.map((text: string) => <p>{text}</p>)}</aside>}
+      {section.type === 'faq' && <div class="faq-list guide-topic-faq-list">{section.items.map((item: any) => <details><summary>{item.question}<span aria-hidden="true">＋</span></summary><p>{item.answer}</p></details>)}</div>}
+      {section.type === 'table' && <div class="guide-topic-table-wrap"><table><thead><tr>{section.columns.map((column: string) => <th scope="col">{column}</th>)}</tr></thead><tbody>{section.rows.map((row: string[]) => <tr>{row.map((cell: string, index: number) => index === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>)}</tbody></table></div>}
+      {section.type === 'media' && <figure class="guide-topic-media"><img src={section.image.src} alt={section.image.alt} loading="lazy" />{section.image.caption && <figcaption>{section.image.caption}</figcaption>}</figure>}
+    </section>)}
+  </div>
+  <section class="guide-topic-sources" id="guide-topic-sources"><p class="section-label">{topic.sources.eyebrow}</p><h2>{topic.sources.heading}</h2><p>{topic.sources.description}</p><ul>{topic.sources.items.map((link: Link) => <li><a href={link.href} rel={isExternal(link) ? 'noopener' : undefined} target={isExternal(link) ? '_blank' : undefined}>{link.label}<span aria-hidden="true">{isExternal(link) ? ' ↗' : ' →'}</span></a>{link.note && <small>{link.note}</small>}</li>)}</ul><p class="updated">{topic.sources.updatedLabel}：<time datetime={topic.updatedAt}>{topic.updatedAt}</time></p></section>
+  <section class="guide-topic-cta"><p class="eyebrow">{topic.cta.eyebrow}</p><h2>{topic.cta.heading}</h2><p>{topic.cta.body}</p><a class="button light" href={topic.cta.link.href} rel={isExternal(topic.cta.link) ? 'sponsored nofollow noopener' : undefined}>{topic.cta.link.label}<span aria-hidden="true"> →</span></a>{topic.cta.disclosure && <p class="guide-topic-disclosure">{topic.cta.disclosure}</p>}</section>
+  <section class="guide-topic-related"><p class="section-label">{topic.related.eyebrow}</p><h2>{topic.related.heading}</h2><div>{topic.related.items.map((item: any) => <a href={item.href}><strong>{item.title}</strong>{item.summary && <span>{item.summary}</span>}<small>{topic.related.linkLabel} →</small></a>)}</div></section>
+</main>

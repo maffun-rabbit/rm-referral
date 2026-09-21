@@ -6,8 +6,9 @@
     "verify:release": "node scripts/release.mjs verify",
     "deploy": "node scripts/release.mjs deploy",
     "page:edit": "node scripts/page-sources.mjs edit",
+    "page:new-topic": "node scripts/create-guide-topic.mjs",
     "check:sources": "node scripts/page-sources.mjs check",
-    "test:shared": "node --test tests/shared-release.test.mjs"
+    "test:shared": "node --test tests/shared-release.test.mjs tests/guide-topic-regulation.test.mjs"
   },
   "devDependencies": {"wrangler": "4.131.1"}
 }

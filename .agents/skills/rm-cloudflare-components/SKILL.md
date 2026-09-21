@@ -31,6 +31,8 @@ description: GitHub＋Cloudflare版RMリファラルのページ・共通UI・�
 
 新規 `page.json` は `locale`、`route`（先頭末尾の `/` なし）、`title`、`description`、`mainHtml`（`<main>...</main>`）を指定する。必要な場合だけ `robots`、`schemas`、`styles`、`scripts` を追加する。後3項目は文字列の配列。既存本文は可能な限り保持し、共通CSSを使う。新規ページはルート一覧・サイトマップに自動で入るため、URLの重複と同言語の導線も確認する。
 
+新規の検索意図別記事は `topics/` 配下に置き、自由記述の `mainHtml` を使わない。`guide/` は制度・手順を体系的に説明するガイドとして扱う。`npm run page:new-topic -- <locale> <slug>` で `pageType: guide-topic-v1` の構造化データを作り、`docs/page-design/guide-topic-regulation.md` に従う。ヘッダー、フッター、パンくず、記事幅、ヒーロー、出典、更新日、CTA、関連ページは固定部品を使用する。本文は承認済みの `prose`、`steps`、`comparison`、`cards`、`warning`、`faq`、`table`、`media` から選ぶ。新しい表現が必要ならページ固有HTML/CSSで回避せず、共通セクション型を追加して検証する。既存ページは明示的な移行依頼がない限り変更しない。
+
 すでに専用部品で構造化されている楽天ID図解は `astro-site/src/components/RakutenIdCreationGuide.astro` とその参照データを編集する。`create-rakuten-id-step-by-step` を汎用本文で重複定義しない。
 
 ## 生成と検証

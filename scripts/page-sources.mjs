@@ -25,7 +25,7 @@ export function inventory(){return manifest??=JSON.parse(readFileSync(manifestPa
 export function routes(){
  const out=new Map(inventory().pages.map(p=>[key(p.locale,p.route),p]));
  for(const locale of locales.filter(l=>l!=='ja')){const route='guide/topics/create-rakuten-id-step-by-step';if(!out.has(key(locale,route)))out.set(key(locale,route),{locale,route,native:true});}
- function walk(dir){if(!existsSync(dir))return;for(const e of readdirSync(dir,{withFileTypes:true})){const f=path.join(dir,e.name);if(e.isDirectory())walk(f);else if(e.name==='page.json'){const p=JSON.parse(readFileSync(f,'utf8'));validateSource(p);out.set(key(p.locale,p.route),p);}}}
+ function walk(dir){if(!existsSync(dir))return;for(const e of readdirSync(dir,{withFileTypes:true})){const f=path.join(dir,e.name);if(e.isDirectory())walk(f);else if(e.name==='page.json'){const p=JSON.parse(readFileSync(f,'utf8'));validateSource(p,{isOverride:true});out.set(key(p.locale,p.route),p);}}}
  walk(path.join(root,'content/pages'));return [...out.values()];
 }
 function capture(html,re,fallback=''){return html.match(re)?.[1]?.trim()??fallback;}
@@ -37,15 +37,57 @@ export function extract(html,locale,route){
  const scripts=[...head.matchAll(/<script\b[^>]*>[\s\S]*?<\/script>/gi),...after.matchAll(/<script\b[^>]*>[\s\S]*?<\/script>/gi)].map(m=>m[0]).filter(s=>!/application\/ld\+json|googletagmanager|analytics\.js/.test(s));
  return {locale,route,title:capture(head,/<title>([\s\S]*?)<\/title>/i),description:capture(head,/<meta\s+name="description"\s+content="([^"]*)"/i),robots:capture(head,/<meta\s+name="robots"\s+content="([^"]*)"/i,'index, follow'),canonical:capture(head,/<link\s+rel="canonical"\s+href="([^"]*)"/i),schemas:[...head.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)].map(m=>m[1]),styles:[...head.matchAll(/<style\b[^>]*>[\s\S]*?<\/style>/gi)].map(m=>m[0]),scripts,mainHtml:main};
 }
-export function validateSource(p){
- key(p.locale,p.route);if(!p.title||!p.mainHtml||!/^<main\b/.test(p.mainHtml))throw new Error('Page requires title and mainHtml');
- if(/<(?:html|head|body)\b|class=["'][^"']*\bsite-(?:header|footer)\b/i.test(p.mainHtml))throw new Error('Shared document/header/footer cannot be embedded in page data');
+const guideTopicTypes=new Set(['prose','steps','comparison','cards','warning','faq','table','media']);
+const filled=value=>typeof value==='string'&&value.trim().length>0;
+const list=value=>Array.isArray(value)&&value.length>0;
+const assert=(condition,message)=>{if(!condition)throw new Error('Guide topic regulation: '+message);};
+export function validateGuideTopicSource(p){
+ const t=p.topic;
+ assert(p.pageType==='guide-topic-v1','pageType must be guide-topic-v1');
+ assert(p.route.startsWith('topics/'),'route must be under topics/');
+ assert(t&&typeof t==='object','topic data is required');
+ assert(t.breadcrumb&&filled(t.breadcrumb.ariaLabel)&&filled(t.breadcrumb.home)&&filled(t.breadcrumb.topics)&&filled(t.breadcrumb.current),'breadcrumb labels are required');
+ assert(t.hero&&filled(t.hero.eyebrow)&&filled(t.hero.heading)&&filled(t.hero.lead),'hero copy is required');
+ assert(filled(t.hero.primaryActionLabel)&&filled(t.hero.sourceActionLabel)&&filled(t.hero.summaryLabel),'hero action and summary labels are required');
+ assert(Array.isArray(t.hero.points)&&t.hero.points.length===3&&t.hero.points.every(filled),'hero must contain exactly three summary points');
+ assert(list(t.sections),'at least one content section is required');
+ const ids=new Set();
+ for(const section of t.sections){
+  assert(filled(section.id)&&/^[a-z][a-z0-9-]*$/.test(section.id),'section ids must be lowercase ASCII slugs');
+  assert(!ids.has(section.id),'section ids must be unique');ids.add(section.id);
+  assert(guideTopicTypes.has(section.type),'unsupported section type: '+section.type);
+  assert(filled(section.heading),'every section requires a heading');
+  if(section.type==='prose')assert(list(section.paragraphs)&&section.paragraphs.every(filled),'prose requires paragraphs');
+  if(section.type==='steps'||section.type==='cards')assert(list(section.items)&&section.items.every(item=>filled(item.title)&&filled(item.body)),'steps/cards require title and body items');
+  if(section.type==='comparison')assert(Array.isArray(section.columns)&&section.columns.length===2&&section.columns.every(column=>filled(column.label)&&filled(column.title)&&list(column.items)&&column.items.every(filled)),'comparison requires exactly two complete columns');
+  if(section.type==='warning')assert(filled(section.label)&&list(section.paragraphs)&&section.paragraphs.every(filled),'warning requires label and paragraphs');
+  if(section.type==='faq')assert(list(section.items)&&section.items.every(item=>filled(item.question)&&filled(item.answer)),'faq requires question and answer items');
+  if(section.type==='table'){assert(list(section.columns)&&section.columns.every(filled)&&list(section.rows),'table requires columns and rows');assert(section.rows.every(row=>Array.isArray(row)&&row.length===section.columns.length&&row.every(filled)),'table rows must match column count');}
+  if(section.type==='media')assert(section.image&&filled(section.image.src)&&filled(section.image.alt),'media requires image src and alt');
+ }
+ assert(t.sources&&filled(t.sources.eyebrow)&&filled(t.sources.heading)&&filled(t.sources.description)&&filled(t.sources.updatedLabel),'source panel copy is required');
+ assert(list(t.sources.items)&&t.sources.items.every(item=>filled(item.label)&&filled(item.href)),'at least one source link is required');
+ assert(/^\d{4}-\d{2}-\d{2}$/.test(t.updatedAt),'updatedAt must use YYYY-MM-DD');
+ assert(t.cta&&filled(t.cta.eyebrow)&&filled(t.cta.heading)&&filled(t.cta.body)&&t.cta.link&&filled(t.cta.link.label)&&filled(t.cta.link.href),'CTA copy and link are required');
+ assert(t.related&&filled(t.related.eyebrow)&&filled(t.related.heading)&&filled(t.related.linkLabel),'related section copy is required');
+ assert(list(t.related.items)&&t.related.items.every(item=>filled(item.title)&&filled(item.href)),'at least one related link is required');
+ assert(!p.mainHtml,'guide-topic-v1 cannot define mainHtml');
+ assert(!list(p.styles)&&!list(p.scripts),'guide-topic-v1 cannot define page-local styles or scripts');
+}
+export function validateSource(p,{isOverride=false}={}){
+ key(p.locale,p.route);if(!p.title)throw new Error('Page requires title');
+ if(isOverride&&p.route.startsWith('topics/')&&p.pageType!=='guide-topic-v1')throw new Error('New topics overrides must use pageType guide-topic-v1');
+ if(p.pageType==='guide-topic-v1')validateGuideTopicSource(p);
+ else {
+  if(!p.mainHtml||!/^<main\b/.test(p.mainHtml))throw new Error('Page requires mainHtml');
+  if(/<(?:html|head|body)\b|class=["'][^"']*\bsite-(?:header|footer)\b/i.test(p.mainHtml))throw new Error('Shared document/header/footer cannot be embedded in page data');
+ }
 }
 export function readSource(locale,route=''){
  const override=overrideFile(locale,route);let p;
- if(existsSync(override)){p=JSON.parse(readFileSync(override,'utf8'));if(key(p.locale,p.route)!==key(locale,route))throw new Error('Source route mismatch');}
+ if(existsSync(override)){p=JSON.parse(readFileSync(override,'utf8'));if(key(p.locale,p.route)!==key(locale,route))throw new Error('Source route mismatch');validateSource(p,{isOverride:true});}
  else {byKey??=new Map(inventory().pages.map(p=>[key(p.locale,p.route),p]));const entry=byKey.get(key(locale,route));if(!entry)throw new Error('Unknown page '+key(locale,route));p=extract(readFileSync(path.join(root,entry.file),'utf8'),locale,route);}
- validateSource(p);return {description:'',robots:'index, follow',schemas:[],styles:[],scripts:[],...p,mainHtml:p.mainHtml.replaceAll('https://r10.to/hNearm',REFERRAL_URL)};
+ validateSource(p);const normalized={description:'',robots:'index, follow',schemas:[],styles:[],scripts:[],...p};if(typeof normalized.mainHtml==='string')normalized.mainHtml=normalized.mainHtml.replaceAll('https://r10.to/hNearm',REFERRAL_URL);return normalized;
 }
 // Compatibility adapter for existing shop parsers: no document/header/footer is returned.
 export function sourceMarkup(locale,route=''){

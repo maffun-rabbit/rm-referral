@@ -1,0 +1,12 @@
+{
+  "locale": "ja",
+  "route": "topics",
+  "title": "楽天モバイルの乗り換え・端末トピック | 乗り換えガイド",
+  "description": "楽天モバイルの乗り換え、端末購入、買い替え超トクプログラムについて、よくある疑問をテーマごとに解説します。",
+  "robots": "index, follow",
+  "canonical": "https://mnp-navi.jp/topics/",
+  "schemas": [],
+  "styles": [],
+  "scripts": [],
+  "mainHtml": "<main class=\"program-page\"><nav class=\"breadcrumb\" aria-label=\"パンくずリスト\"><a href=\"/\">トップ</a><span>›</span><span>トピック</span></nav><section class=\"program-hero\"><div><p class=\"eyebrow\">TOPICS</p><h1>スマホ選びの<br><span>気になる疑問を、ひとつずつ。</span></h1><p class=\"program-hero-message\">料金、端末、乗り換え手続きなど、判断に迷いやすいテーマを整理します。</p></div><aside class=\"program-summary-card\"><p class=\"pill\">まずはこちら</p><ol><li><b>48</b><span>買い替え超トクの仕組み</span></li><li><b>25</b><span>返却を検討する時期</span></li><li><b>CHECK</b><span>傷・故障と返却前の確認</span></li></ol></aside></section><section class=\"program-section\"><div class=\"program-section-heading\"><p class=\"section-label\">REPLACEMENT PROGRAM</p><h2>買い替え超トクプログラムのトピック</h2></div><div class=\"choice-grid\"><article><p class=\"pill\">BASIC</p><h3><a href=\"/guide/replacement-program/\">買い替え超トクプログラムの仕組みと注意点</a></h3><p>48回払い、返却、支払いの基本を最初に確認するガイドです。</p></article><article><p class=\"pill\">TIMING</p><h3><a href=\"/topics/replacement-program-return-timing/\">25カ月目はいつ？返却時期・期限を確認</a></h3><p>返却できる期間、返送期限、手続きの流れを整理します。</p></article><article><p class=\"pill\">CAUTION</p><h3><a href=\"/topics/replacement-program-disadvantages/\">買い替え超トクのデメリット</a></h3><p>返却前提が合うか、費用と条件を確認します。</p></article><article><p class=\"pill\">DEVICE CHECK</p><h3><a href=\"/topics/replacement-program-damage/\">傷・故障がある端末は返却できる？</a></h3><p>返却前に確認したい端末状態、設定、費用の考え方を解説します。</p></article></div></section></main>"
+}
