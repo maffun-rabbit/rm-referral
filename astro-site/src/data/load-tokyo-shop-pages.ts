@@ -1,5 +1,6 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import {sourceMarkup} from '../../../scripts/page-sources.mjs';
+import {refreshLocalTopics, topicAsOf} from '../../../scripts/local-topics.mjs';
 import path from "node:path";
 
 const legacyRoot = path.resolve(process.cwd(), "..");
@@ -125,6 +126,13 @@ function parseLegacyPage(sourcePath: string, prefectureSlug: MigratedPrefectureS
   const finalIndex = mainHtml.indexOf('<section class="final-cta"');
   if (finalIndex < 0) throw new Error(`final CTA was not found in ${sourcePath}`);
   const middleStart = heroMatch.index + heroMatch[0].length;
+  const shopCard = capture(heroHtml, /<aside class="shop-card">([\s\S]*?)<\/aside>/i, "shop card", sourcePath);
+  const address = capture(shopCard, /<dt>所在地<\/dt><dd>([^<]+)<\/dd>/i, "shop address", sourcePath);
+  const officialUrl = decodeAttribute(capture(shopCard, /<a class="official-link" href="([^"]+)"/i, "shop URL", sourcePath));
+  const shopName = capture(shopCard, /<h2>([^<]+)<\/h2>/i, "shop name", sourcePath);
+  const prefecture = address.match(/(?:^|\s)(北海道|東京都|京都府|大阪府|.{2,3}県)/)?.[1]
+    ?? ({hokkaido: "北海道", tokyo: "東京都", kyoto: "京都府", osaka: "大阪府"} as Record<string, string>)[prefectureSlug]
+    ?? `${migratedPrefectures[prefectureSlug]}県`;
 
   return {
     prefectureSlug,
@@ -141,10 +149,10 @@ function parseLegacyPage(sourcePath: string, prefectureSlug: MigratedPrefectureS
       eyebrowHtml: capture(heroHtml, /<p class="eyebrow">([\s\S]*?)<\/p>/i, "hero eyebrow", sourcePath),
       headingHtml: capture(heroHtml, /<h1>([\s\S]*?)<\/h1>/i, "hero heading", sourcePath),
       leadHtml: capture(heroHtml, /<p class="lead">([\s\S]*?)<\/p>/i, "hero lead", sourcePath),
-      shopCardHtml: capture(heroHtml, /<aside class="shop-card">([\s\S]*?)<\/aside>/i, "shop card", sourcePath),
+      shopCardHtml: shopCard,
     },
-    middleHtml: mainHtml.slice(middleStart, finalIndex).trim(),
-    updated: capture(mainHtml, /<p class="updated">情報確認日：([^<]+)<\/p>/i, "updated date", sourcePath),
+    middleHtml: refreshLocalTopics(mainHtml.slice(middleStart, finalIndex).trim(), {slug: prefectureSlug, prefecture, shopName, address, officialUrl}),
+    updated: topicAsOf,
   };
 }
 

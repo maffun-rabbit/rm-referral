@@ -43,6 +43,12 @@ function extractMain(html) {
   return firstMatch(html, /<main\b[^>]*>([\s\S]*?)<\/main>/i, "main");
 }
 
+function stableMain(main) {
+  return main
+    .replace(/<section class="local-topics-section"[\s\S]*?<\/section>/g, "")
+    .replace(/<p class="updated">情報確認日：\d{4}-\d{2}-\d{2}<\/p>/g, "");
+}
+
 function extractHeadings(main) {
   return [...main.matchAll(/<h([1-3])\b[^>]*>([\s\S]*?)<\/h\1>/gi)].map((match) => ({
     level: Number(match[1]),
@@ -72,12 +78,14 @@ function sameJson(left, right) {
 export function compareHtml(legacyHtml, generatedHtml) {
   const legacyMain = extractMain(legacyHtml);
   const generatedMain = extractMain(generatedHtml);
+  const stableLegacyMain = stableMain(legacyMain);
+  const stableGeneratedMain = stableMain(generatedMain);
   const checks = {
     title: firstMatch(legacyHtml, /<title>([\s\S]*?)<\/title>/i, "title") === firstMatch(generatedHtml, /<title>([\s\S]*?)<\/title>/i, "title"),
     description: firstMatch(legacyHtml, /<meta\s+name=["']description["']\s+content=["']([^"']*)["']/i, "description") === firstMatch(generatedHtml, /<meta\s+name=["']description["']\s+content=["']([^"']*)["']/i, "description"),
     canonical: firstMatch(legacyHtml, /<link\s+rel=["']canonical["']\s+href=["']([^"']*)["']/i, "canonical") === firstMatch(generatedHtml, /<link\s+rel=["']canonical["']\s+href=["']([^"']*)["']/i, "canonical"),
-    visibleMainText: textContent(legacyMain) === textContent(generatedMain),
-    headings: sameJson(extractHeadings(legacyMain), extractHeadings(generatedMain)),
+    visibleMainText: textContent(stableLegacyMain) === textContent(stableGeneratedMain),
+    headings: sameJson(extractHeadings(stableLegacyMain), extractHeadings(stableGeneratedMain)),
     structuredData: sameJson(extractSchemas(legacyHtml), extractSchemas(generatedHtml)),
     mainLinks: sameJson(extractLinks(legacyMain), extractLinks(generatedMain)),
     externalScripts: sameJson(extractExternalScripts(legacyHtml), extractExternalScripts(generatedHtml)),
