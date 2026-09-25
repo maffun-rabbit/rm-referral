@@ -37,6 +37,7 @@ const resolvedCanonical = canonical ?? (canonicalPath ? getAbsoluteLocaleUrl(loc
 const alternateLinks = canonicalPath && availableLocales.length
   ? getAlternateLinks(canonicalPath, availableLocales)
   : [];
+const useEdgeIncludes = locale === "ja" && canonicalPath?.startsWith("/guide/");
 ---
 
 <!doctype html>
@@ -62,14 +63,20 @@ const alternateLinks = canonicalPath && availableLocales.length
     <slot name="head" />
   </head>
   <body>
-    {canonicalPath === '/' ? <HomeHeader locale={locale} /> : <SiteHeader
-      locale={locale}
-      homeHref={getLocalePath(locale)}
-      linkHref={headerLinkHref}
-      linkLabel={headerLinkLabel}
-      availableLocales={availableLocales.length ? availableLocales : undefined}
-    />}
+    {canonicalPath === '/' ? <HomeHeader locale={locale} /> : useEdgeIncludes ? <rm-include src="/_includes/ja/header.html" data-locales={availableLocales.join(',')} data-header-label={headerLinkLabel ?? messages.header.defaultLinkLabel}><SiteHeader
+        locale={locale}
+        homeHref={getLocalePath(locale)}
+        linkHref={headerLinkHref}
+        linkLabel={headerLinkLabel}
+        availableLocales={availableLocales.length ? availableLocales : undefined}
+      /></rm-include> : <SiteHeader
+        locale={locale}
+        homeHref={getLocalePath(locale)}
+        linkHref={headerLinkHref}
+        linkLabel={headerLinkLabel}
+        availableLocales={availableLocales.length ? availableLocales : undefined}
+      />}
     <slot />
-    <SiteFooter locale={locale} />
+    {useEdgeIncludes ? <rm-include src="/_includes/ja/footer.html"><SiteFooter locale={locale} /></rm-include> : <SiteFooter locale={locale} />}
   </body>
 </html>

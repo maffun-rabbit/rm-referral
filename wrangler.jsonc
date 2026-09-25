@@ -1,7 +1,12 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "rm-referral",
-  "build": { "command": "node scripts/prepare-release.mjs" },
+  "main": "worker/index.mjs",
+  "build": { "command": "node scripts/deploy-boundary.mjs --wrangler" },
   "compatibility_date": "2026-08-21",
-  "assets": { "directory": ".deploy/ja" }
+  "assets": {
+    "directory": ".deploy/pilot-ja",
+    "binding": "ASSETS",
+    "run_worker_first": ["/guide/rakuten-mobile-three-features/"]
+  }
 }

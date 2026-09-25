@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "readOnlyCapture": true,
+  "worker": "rm-referral",
+  "config": "wrangler.jsonc",
+  "deploymentId": "1e8adc59-cf3a-49e6-97eb-5606ca65f215",
+  "versionId": "6be5618a-cc3b-41c6-8c54-06def5f77c61",
+  "traffic": 100,
+  "capturedAt": "2026-09-23T12:07:12Z",
+  "deploymentCreatedOn": "2026-09-23T11:41:23.301663Z",
+  "deploymentMessage": "Rollback工程4-B: unexpected asset scope exceeded one-article pilot",
+  "versionCreatedOn": "2026-09-21T08:17:14.237177Z",
+  "versionNumber": 105,
+  "versionSource": "wrangler",
+  "assetsManifestExported": false,
+  "assetBytesExported": false,
+  "productionBaseline": false
+}

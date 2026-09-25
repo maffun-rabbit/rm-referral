@@ -1,0 +1,320 @@
+{
+  "comparisonBasis": "HTTP response after rollback, not raw production manifest; include 404 has no baseline asset checksum",
+  "assets": [
+    {
+      "path": "/_includes/ja/footer.html",
+      "type": "include",
+      "local": "3e0b8e87b7a83371c841dd011c84c31f6f85cbb6b1c286fdde37d994849adceb",
+      "live": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": 404,
+      "url": "https://mnp-navi.jp/_includes/ja/footer.html",
+      "receipt": "3e0b8e87b7a83371c841dd011c84c31f6f85cbb6b1c286fdde37d994849adceb",
+      "localIncludes": 0,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": false,
+      "mtime": "2026-09-20T06:49:55.421Z"
+    },
+    {
+      "path": "/guide/shop-consultation/index.html",
+      "type": "article",
+      "local": "d21e6702526bc5c3a46e57b63302d7375c60fc03c759ed14e0f0224d1060f6e6",
+      "live": "54351ff87ca9a7cb070b16d9d21129e6ae9ab865ece571216b733e16c0c4eb0d",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/shop-consultation/",
+      "receipt": "d21e6702526bc5c3a46e57b63302d7375c60fc03c759ed14e0f0224d1060f6e6",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.743Z"
+    },
+    {
+      "path": "/guide/rakuten-link/index.html",
+      "type": "article",
+      "local": "043f29d02f7f860f8068f5408af45e435625aade9e638f0e82697899dbdf2d48",
+      "live": "faf2019fa3da1aba71da8edfa966664579061cb5ea620d6ab78a338884b5959a",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/rakuten-link/",
+      "receipt": "043f29d02f7f860f8068f5408af45e435625aade9e638f0e82697899dbdf2d48",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.741Z"
+    },
+    {
+      "path": "/guide/monthly-cost/index.html",
+      "type": "article",
+      "local": "5b7dd7c155a546c940ed5384658b6094638ecc53a0e9a387437111f49bf2ce17",
+      "live": "ad15d31a81d7e3615a79bf2a8ec215d64c42cd1b13c66924e97818eddc4b191a",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/monthly-cost/",
+      "receipt": "5b7dd7c155a546c940ed5384658b6094638ecc53a0e9a387437111f49bf2ce17",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.740Z"
+    },
+    {
+      "path": "/guide/data-transfer/index.html",
+      "type": "article",
+      "local": "7a274bd3e12f227db3335071eaa58bbec6cab49bc24abf22c62deac8944fb60d",
+      "live": "1d6cfbdb03fb82122570e6b3347b78253dc8553154cf259b89ce8eb8cee7500c",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/data-transfer/",
+      "receipt": "7a274bd3e12f227db3335071eaa58bbec6cab49bc24abf22c62deac8944fb60d",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.738Z"
+    },
+    {
+      "path": "/guide/minor-senior-contract/index.html",
+      "type": "article",
+      "local": "761e6deb4656df35f76db5a726e9884e4ba9044f1f1e176a86b99b458ce3b5ba",
+      "live": "ed9fd0ac160275037548ac2d15b73e26e73acc79135238b82a4251e027de78cb",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/minor-senior-contract/",
+      "receipt": "761e6deb4656df35f76db5a726e9884e4ba9044f1f1e176a86b99b458ce3b5ba",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.739Z"
+    },
+    {
+      "path": "/guide/referral-campaign-how-to/index.html",
+      "type": "article",
+      "local": "65c051af69aac770d002f47d9ad1c96467471c9012d07fde5b1cc6964e36d7f8",
+      "live": "40e49788cceb6665833add70f682ad6d76652dc417444eb56cb8eb66cbfa6813",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/referral-campaign-how-to/",
+      "receipt": "65c051af69aac770d002f47d9ad1c96467471c9012d07fde5b1cc6964e36d7f8",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.742Z"
+    },
+    {
+      "path": "/_includes/ja/header.html",
+      "type": "include",
+      "local": "ede7055de835c5059864492e20eb34b2d68d2aca6435621a2d020165d6b54b6f",
+      "live": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": 404,
+      "url": "https://mnp-navi.jp/_includes/ja/header.html",
+      "receipt": "ede7055de835c5059864492e20eb34b2d68d2aca6435621a2d020165d6b54b6f",
+      "localIncludes": 0,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": false,
+      "mtime": "2026-09-20T06:49:55.421Z"
+    },
+    {
+      "path": "/guide/sim-or-esim/index.html",
+      "type": "article",
+      "local": "1b704e47985bb84dbb0322d4690cfeb663a22f1be10c11e946c8e93f34b4c859",
+      "live": "e6a413fba8fb0832082f751cc82a6bde6a78308547eb98ae5f3e490e4ffec8c2",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/sim-or-esim/",
+      "receipt": "1b704e47985bb84dbb0322d4690cfeb663a22f1be10c11e946c8e93f34b4c859",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.744Z"
+    },
+    {
+      "path": "/guide/activation-time/index.html",
+      "type": "article",
+      "local": "8bdb57e4a6160a95ed8790e305abc59e3a5040dee214e42677872621157013b5",
+      "live": "fc705e7c94bf1294d38900a660375ef8c983062affdaf8b0951e0bb11902e0b2",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/activation-time/",
+      "receipt": "8bdb57e4a6160a95ed8790e305abc59e3a5040dee214e42677872621157013b5",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.736Z"
+    },
+    {
+      "path": "/guide/point-schedule/index.html",
+      "type": "article",
+      "local": "4090bb1a28f2c29c4bb800ed0d6b5992a853f4e2fdc6b7c483cd95b39822b142",
+      "live": "0f31c1b46e09ba495568467b1a1f6ea8b097d2267fa2cfd168aab64f900f2524",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/point-schedule/",
+      "receipt": "4090bb1a28f2c29c4bb800ed0d6b5992a853f4e2fdc6b7c483cd95b39822b142",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.740Z"
+    },
+    {
+      "path": "/guide/cancellation-and-balance/index.html",
+      "type": "article",
+      "local": "f3e59762874ef01c2c752f5344ccaf4c948fc590f62ebe2c45a5ebaafb9b88a9",
+      "live": "d4f5d1b15564da73586ad5f5a0c15d188946f06ca9092fbc14aed26144f0f58c",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/cancellation-and-balance/",
+      "receipt": "f3e59762874ef01c2c752f5344ccaf4c948fc590f62ebe2c45a5ebaafb9b88a9",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.736Z"
+    },
+    {
+      "path": "/guide/index.html",
+      "type": "article",
+      "local": "15883d2906b5bbb3bc3a3343e85a421417071bc152609c9f5bbea7c30761a73c",
+      "live": "501bb84472a14d7783ab215211e53a70d2023eb630636fd645b551268c4dad55",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/",
+      "receipt": "15883d2906b5bbb3bc3a3343e85a421417071bc152609c9f5bbea7c30761a73c",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.739Z"
+    },
+    {
+      "path": "/guide/replacement-program/index.html",
+      "type": "article",
+      "local": "57b1c04ae492c8a340353a4d1cbd7d861fc9bfaec6e9762b7dd1f292ed195b7c",
+      "live": "40ea93943d70cd9778cad9c811dc452ac23738c23e796ae7f156b0282c13369b",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/replacement-program/",
+      "receipt": "57b1c04ae492c8a340353a4d1cbd7d861fc9bfaec6e9762b7dd1f292ed195b7c",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.743Z"
+    },
+    {
+      "path": "/guide/support/index.html",
+      "type": "article",
+      "local": "72e516f3f7fbc4461ea028385d636850c550a3615106a96df58a1dffd9e37c68",
+      "live": "b8c00ffeaf70745fdf2f08ea66787dfead1e5f0f4946c6b9ee713e3d64eb5d28",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/support/",
+      "receipt": "72e516f3f7fbc4461ea028385d636850c550a3615106a96df58a1dffd9e37c68",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.744Z"
+    },
+    {
+      "path": "/guide/device-compatibility/index.html",
+      "type": "article",
+      "local": "d862b0828edd0044f800181d51ed5bff591d15316a123dc8a861e45c2008d489",
+      "live": "421f23677e16f9d9784b393a5dad2609781c1db5b149d7f0c7ca0b9dc92aeb45",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/device-compatibility/",
+      "receipt": "d862b0828edd0044f800181d51ed5bff591d15316a123dc8a861e45c2008d489",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.738Z"
+    },
+    {
+      "path": "/guide/coverage-check/index.html",
+      "type": "article",
+      "local": "949c24b493c20711a8e4ab8ae7d18af33a1d287bd2003254f9671998e3b7e9bd",
+      "live": "171513eb8b782c9ff0881ee127e63e41ee2996b0cead85c7024783b64ae121fc",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/coverage-check/",
+      "receipt": "949c24b493c20711a8e4ab8ae7d18af33a1d287bd2003254f9671998e3b7e9bd",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.737Z"
+    },
+    {
+      "path": "/guide/family-total-cost/index.html",
+      "type": "article",
+      "local": "53562f399ce6395bb48adbbaeb3b6576512058d3ae55a26b916a231ab223186e",
+      "live": "285fdde1e0bc9e20f3bbffa81150db20d3bf002b98be49541b6ae6379ac24425",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/family-total-cost/",
+      "receipt": "53562f399ce6395bb48adbbaeb3b6576512058d3ae55a26b916a231ab223186e",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.738Z"
+    },
+    {
+      "path": "/guide/referral-points/index.html",
+      "type": "article",
+      "local": "47c81a8d88317bb143e4750eee3923b4ad5ba1af583a0cbea373661f40fd75cb",
+      "live": "40adb892264ce5224f38f34a9e6671a6ecb2e0122eb2bb57a1a01b4601b9f0c5",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/referral-points/",
+      "receipt": "47c81a8d88317bb143e4750eee3923b4ad5ba1af583a0cbea373661f40fd75cb",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": true,
+      "mtime": "2026-09-20T06:49:56.742Z"
+    },
+    {
+      "path": "/guide/rakuten-mobile-three-features/index.html",
+      "type": "article",
+      "local": "88836b8d724de5bc76c5f84e0a48fc5fb79b48a8119a6e249efa2ff343882845",
+      "live": "f38435702452e392001eab15bee8bca57f2276233ab141bc61662b3a22ecb15f",
+      "status": 200,
+      "url": "https://mnp-navi.jp/guide/rakuten-mobile-three-features/",
+      "receipt": "cfd5875268cbe95bc1fcb2f7284a9717bdc13d7b7b4a1732fd764d57eec1d775",
+      "localIncludes": 2,
+      "liveIncludes": 0,
+      "equalWithoutIncludeWrappers": false,
+      "mtime": "2026-09-23T11:40:42.456Z"
+    }
+  ],
+  "localValidation": {
+    "dir": "/private/tmp/rm-4b1-local-bWYL1x",
+    "planFile": "/private/tmp/rm-4b1-local-bWYL1x/plan.json",
+    "localTestOnly": true,
+    "result": {
+      "baselineFiles": 7975,
+      "candidateFiles": 7975,
+      "filesChanged": 1,
+      "changed": [
+        "/guide/rakuten-mobile-three-features/index.html"
+      ],
+      "removed": [],
+      "unexpected": [],
+      "targetArticleChanges": 1,
+      "unexpectedArticleChanges": 0,
+      "filesUploaded": 0,
+      "productionEvidence": null
+    },
+    "originalUnchanged": true,
+    "baselineScan": 7975,
+    "candidateScan": 7975,
+    "wranglerRecursiveEntries": 16206,
+    "sentinels": [
+      {
+        "path": "/index.html",
+        "preserved": true
+      },
+      {
+        "path": "/guide/replacement-program/index.html",
+        "preserved": true
+      },
+      {
+        "path": "/css/style.css",
+        "preserved": true
+      },
+      {
+        "path": "/js/analytics.js",
+        "preserved": true
+      },
+      {
+        "path": "/_includes/ja/header.html",
+        "preserved": true
+      },
+      {
+        "path": "/_includes/ja/footer.html",
+        "preserved": true
+      }
+    ],
+    "productionRejection": "DEPLOY BOUNDARY: Verified, independently pinned production baseline required",
+    "htmlGenerated": 0,
+    "filesUploaded": 0,
+    "htmlUploaded": 0,
+    "fullBuild": 0,
+    "maintenanceFullBuild": 0
+  }
+}
