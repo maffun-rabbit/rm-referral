@@ -63,7 +63,7 @@ const useEdgeIncludes = locale === "ja" && canonicalPath?.startsWith("/guide/");
     <slot name="head" />
   </head>
   <body>
-    {canonicalPath === '/' ? <HomeHeader locale={locale} /> : useEdgeIncludes ? <rm-include src="/_includes/ja/header.html"><SiteHeader
+    {canonicalPath === '/' ? <HomeHeader locale={locale} /> : useEdgeIncludes ? <rm-include src="/_includes/ja/header.html" data-locales={availableLocales.join(',')} data-header-label={headerLinkLabel ?? messages.header.defaultLinkLabel}><SiteHeader
         locale={locale}
         homeHref={getLocalePath(locale)}
         linkHref={headerLinkHref}

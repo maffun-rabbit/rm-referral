@@ -33,20 +33,30 @@ description: GitHub＋Cloudflare版RMリファラルのページ・共通UI・�
 
 すでに専用部品で構造化されている楽天ID図解は `astro-site/src/components/RakutenIdCreationGuide.astro` とその参照データを編集する。`create-rakuten-id-step-by-step` を汎用本文で重複定義しない。
 
-## 生成と検証
+## 日本語の通常記事更新
 
-1. `npm ci --ignore-scripts` で固定依存関係を用意する。
-2. `npm run test:shared` で共通生成の制約を検証する。
-3. `npm run build` で6言語の共通部品から全公開ページと `.deploy/{locale}/` を生成する。入力と出力が一致する検証済みリリースだけは再利用できる。
-4. `npm run verify:release` で入力ハッシュ・成果物ハッシュ・欠落を確認する。`.deploy/release.json` を手作業で作成・修正しない。
-5. 変更した種類のページをPCとモバイルで確認する。URL、title、description、本文、画像、リンク、紹介導線を維持する。視覚的変更には利用可能な `dads-inspired-design` を併用し、未導入なら既存スタイルを維持して文字切れ・可読性を確認する。
+1. `content/pages/ja/{route}/page.json`を入力とし、`RM_PAGE=ja/{route}`を明示する。完成HTMLや古い`.deploy/ja`を入力にしない。
+2. 保存済みProduction Baselineのartifact、receipt、attestationを検証し、Cloudflareのcurrent deployment/version/trafficと一致しなければ停止する。
+3. `npm run test:shared`、`npm run test:deploy-boundary`、`npm run test:bootstrap`を実行する。
+4. 承認済みplanとhashを指定し、`npm run deploy -- ja`を入口にする。この経路が`build:page`で対象HTML 1件だけを生成し、baselineをclean candidateへ展開してtargetだけをoverlayする。
+5. shared assetが必要な場合はexact path、SHA-256、size、reasonをallowlistへ別枠で固定する。candidateの全path/size/hashを比較し、unexpected change、削除、target外HTML変更が1件でもあれば停止する。
+6. production preflightでbaseline、attestation、config transition、current version drift、Worker、locale、candidateを再検証してからWorker Versionだけをuploadする。
+7. Version URLでtargetのheader/footer、navigation、CTA、SEO、未処理include 0を確認し、non-targetをbaselineとbyte/hash比較する。
+8. production切替直前にversion driftを再確認し、検証済みversionだけへ明示的にtrafficを切り替える。本番HTTP回帰後、candidate全体を新artifact/receipt/attestationとして保存し、次回baselineにする。
+
+通常更新でAstro full build、全ページ再生成、`maintenance:full-build`、未検証baseline、stale `.deploy`、allowlist外変更、guard迂回、他言語同時deployを行わない。通常の日本語`wrangler.jsonc`は必要なplan/hash/environmentがなければfail-closedとする。
+
+## Maintenance
+
+`npm run maintenance:full-build`はmaintenance / migration / disaster recovery専用。通常の記事追加・更新・deploy・rollbackから暗黙に呼ばない。6言語・全guide・topicsへの展開は、個別に承認された別milestoneとして扱う。
 
 外国語の通常の内部リンクは同一言語に保つ。未翻訳先を日本語へフォールバックさせない。明示的な言語切替と外部公式サイトは別扱いにし、日本語の外部情報はその旨を表示する。削除・リンク無効化を行った場合は報告する。
 
-## 公開
+## 公開とrollback
 
-- 公開承認がある場合だけ、対象コミットをGitHubへ反映し、`npm run deploy -- ja`（言語は `ja/en/zh/ko/vi/pt`）を使用する。共通変更の場合は全言語への影響を確認する。
-- 各 `wrangler*.jsonc` のビルドフックでも共通生成と検証が起動する。`--skip-custom-build`、ガードの削除、旧HTMLのコピー、別設定による迂回で失敗を隠さない。
+- 公開承認がある日本語対象だけ、正式runbookと`npm run deploy -- ja`を使用する。現時点で他言語を同じ操作へ含めない。
+- 通常の`wrangler deploy`、`wrangler versions upload`を直接実行してguardを迂回しない。bootstrapとmaintenanceは専用config/commandへ隔離する。`--skip-custom-build`、guard削除、旧HTMLコピー、別configで失敗を隠さない。
+- 切替直前のProduction versionをrollback targetとして保持する。重大問題時はcurrent stateを再確認してversion rollbackし、Astro full buildをrollback手段にしない。その場で修正再deployしない。
 - GitHubのプッシュ成功、Cloudflareのビルド成功、デプロイ成功、本番確認を別々に報告する。本番URLのHTTP・言語・変更内容を確認しない限り「公開完了」としない。
 - ログの原因を解消して再試行する。認証、権限、決済、破壊的変更など新たな権限が必要なら停止し、必要な対応だけを引き継ぐ。認証情報は出力しない。
 - Vaultの `10_Projects/RMリファラル/制作物カタログ.md` に変更・言語・状態・コード実体・公開URL・検証結果を記録する。未完了を完了にしない。

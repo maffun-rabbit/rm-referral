@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "locale": "ja",
+  "page": "ja/guide/rakuten-mobile-three-features",
+  "baseline": "/private/tmp/rm-referral-htmlrewriter-includes/.deploy/bootstrap-ja",
+  "baselineArtifact": "/Users/masayuki/Library/CloudStorage/GoogleDrive-maffun@gmail.com/マイドライブ/制作ワークスペース/RMリファラル/release-artifacts/production-baselines/ja/bootstrap-20260923/rm-referral-ja-bootstrap-20260923.tar",
+  "receipt": "/Users/masayuki/Library/CloudStorage/GoogleDrive-maffun@gmail.com/マイドライブ/制作ワークスペース/RMリファラル/release-artifacts/production-baselines/ja/bootstrap-20260923/rm-referral-ja-bootstrap-20260923.receipt.json",
+  "receiptSha256": "96c30ed23c97a5baac6571218c59e6f1a3edbae0b21e3199b60d0209a7980c74",
+  "receiptFileSha256": "d9e987aed93ed52d2ea0b049b64194f998370baaf2c93dc450a6f67cc9ff6714",
+  "attestation": "/Users/masayuki/Library/CloudStorage/GoogleDrive-maffun@gmail.com/マイドライブ/制作ワークスペース/RMリファラル/release-artifacts/production-baselines/ja/bootstrap-20260923/rm-referral-ja-bootstrap-20260923.attestation.json",
+  "attestationSha256": "0b0eed2ab8c6c09912110a0ca825169468fad91cbc5a0787e4489aca153d1613",
+  "generated": "/private/tmp/rm-referral-htmlrewriter-includes/.deploy/pilot-overlays",
+  "candidate": "/private/tmp/rm-referral-htmlrewriter-includes/.deploy/pilot-ja",
+  "overlays": {
+    "/guide/rakuten-mobile-three-features/index.html": {
+      "source": "/private/tmp/rm-referral-htmlrewriter-includes/.deploy/pilot-overlays/guide/rakuten-mobile-three-features/index.html",
+      "sha256": "88836b8d724de5bc76c5f84e0a48fc5fb79b48a8119a6e249efa2ff343882845",
+      "reason": "single article pilot generated from page.json through BaseLayout"
+    },
+    "/_includes/ja/header.html": {
+      "source": "/private/tmp/rm-referral-htmlrewriter-includes/.deploy/ja/_includes/ja/header.html",
+      "sha256": "ede7055de835c5059864492e20eb34b2d68d2aca6435621a2d020165d6b54b6f",
+      "reason": "NEW REQUIRED SHARED ASSET: HTMLRewriter header include for exact pilot pathname"
+    },
+    "/_includes/ja/footer.html": {
+      "source": "/private/tmp/rm-referral-htmlrewriter-includes/.deploy/ja/_includes/ja/footer.html",
+      "sha256": "3e0b8e87b7a83371c841dd011c84c31f6f85cbb6b1c286fdde37d994849adceb",
+      "reason": "NEW REQUIRED SHARED ASSET: HTMLRewriter footer include for exact pilot pathname"
+    }
+  }
+}

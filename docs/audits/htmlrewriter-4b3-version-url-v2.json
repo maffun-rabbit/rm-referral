@@ -1,0 +1,242 @@
+{
+  "schema": 1,
+  "origin": "https://bootstrap-ja-20260923-rm-referral.maffun.workers.dev",
+  "versionId": "a96044c9-dec7-4bc4-8aa6-8f7b3122f429",
+  "capturedAt": "2026-09-23T12:52:22.554Z",
+  "sentinel": {
+    "schema": 1,
+    "origin": "https://bootstrap-ja-20260923-rm-referral.maffun.workers.dev",
+    "limitation": "Sentinel equality does not prove equality of the complete production asset set.",
+    "verdict": "PASS",
+    "results": [
+      {
+        "url": "/",
+        "status": 200,
+        "contentType": "text/html",
+        "localBytes": 19241,
+        "liveBytes": 19241,
+        "localSha256": "acc5e056af580915b0d5d8bc7da56bb925f7c316c43de33597e8a07b1920fb0b",
+        "liveSha256": "acc5e056af580915b0d5d8bc7da56bb925f7c316c43de33597e8a07b1920fb0b",
+        "byteEqual": true,
+        "canonical": {
+          "local": "https://mnp-navi.jp/",
+          "live": "https://mnp-navi.jp/",
+          "equal": true
+        },
+        "title": {
+          "local": "楽天モバイル乗り換えガイド | キャリア・地域・店舗から手順を確認",
+          "live": "楽天モバイル乗り換えガイド | キャリア・地域・店舗から手順を確認",
+          "equal": true
+        },
+        "pass": true
+      },
+      {
+        "url": "/guide/",
+        "status": 200,
+        "contentType": "text/html",
+        "localBytes": 5974,
+        "liveBytes": 5974,
+        "localSha256": "501bb84472a14d7783ab215211e53a70d2023eb630636fd645b551268c4dad55",
+        "liveSha256": "501bb84472a14d7783ab215211e53a70d2023eb630636fd645b551268c4dad55",
+        "byteEqual": true,
+        "canonical": {
+          "local": "https://mnp-navi.jp/guide/",
+          "live": "https://mnp-navi.jp/guide/",
+          "equal": true
+        },
+        "title": {
+          "local": "楽天モバイルへ乗り換える前の不安・疑問ガイド",
+          "live": "楽天モバイルへ乗り換える前の不安・疑問ガイド",
+          "equal": true
+        },
+        "pass": true
+      },
+      {
+        "url": "/guide/rakuten-mobile-three-features/",
+        "status": 200,
+        "contentType": "text/html",
+        "localBytes": 9421,
+        "liveBytes": 9421,
+        "localSha256": "f38435702452e392001eab15bee8bca57f2276233ab141bc61662b3a22ecb15f",
+        "liveSha256": "f38435702452e392001eab15bee8bca57f2276233ab141bc61662b3a22ecb15f",
+        "byteEqual": true,
+        "canonical": {
+          "local": "https://mnp-navi.jp/guide/rakuten-mobile-three-features/",
+          "live": "https://mnp-navi.jp/guide/rakuten-mobile-three-features/",
+          "equal": true
+        },
+        "title": {
+          "local": "楽天モバイルで迷うことが減る3つの特徴｜料金・通話・MNPを解説",
+          "live": "楽天モバイルで迷うことが減る3つの特徴｜料金・通話・MNPを解説",
+          "equal": true
+        },
+        "pass": true
+      },
+      {
+        "url": "/guide/monthly-cost/",
+        "status": 200,
+        "contentType": "text/html",
+        "localBytes": 5595,
+        "liveBytes": 5595,
+        "localSha256": "ad15d31a81d7e3615a79bf2a8ec215d64c42cd1b13c66924e97818eddc4b191a",
+        "liveSha256": "ad15d31a81d7e3615a79bf2a8ec215d64c42cd1b13c66924e97818eddc4b191a",
+        "byteEqual": true,
+        "canonical": {
+          "local": "https://mnp-navi.jp/guide/monthly-cost/",
+          "live": "https://mnp-navi.jp/guide/monthly-cost/",
+          "equal": true
+        },
+        "title": {
+          "local": "楽天モバイルで月額料金が安くなるか確認する方法",
+          "live": "楽天モバイルで月額料金が安くなるか確認する方法",
+          "equal": true
+        },
+        "pass": true
+      },
+      {
+        "url": "/guide/rakuten-link/",
+        "status": 200,
+        "contentType": "text/html",
+        "localBytes": 5559,
+        "liveBytes": 5559,
+        "localSha256": "faf2019fa3da1aba71da8edfa966664579061cb5ea620d6ab78a338884b5959a",
+        "liveSha256": "faf2019fa3da1aba71da8edfa966664579061cb5ea620d6ab78a338884b5959a",
+        "byteEqual": true,
+        "canonical": {
+          "local": "https://mnp-navi.jp/guide/rakuten-link/",
+          "live": "https://mnp-navi.jp/guide/rakuten-link/",
+          "equal": true
+        },
+        "title": {
+          "local": "Rakuten Linkの通話料金・品質・使い方を確認",
+          "live": "Rakuten Linkの通話料金・品質・使い方を確認",
+          "equal": true
+        },
+        "pass": true
+      },
+      {
+        "url": "/guide/replacement-program/",
+        "status": 200,
+        "contentType": "text/html",
+        "localBytes": 16148,
+        "liveBytes": 16148,
+        "localSha256": "40ea93943d70cd9778cad9c811dc452ac23738c23e796ae7f156b0282c13369b",
+        "liveSha256": "40ea93943d70cd9778cad9c811dc452ac23738c23e796ae7f156b0282c13369b",
+        "byteEqual": true,
+        "canonical": {
+          "local": "https://mnp-navi.jp/guide/replacement-program/",
+          "live": "https://mnp-navi.jp/guide/replacement-program/",
+          "equal": true
+        },
+        "title": {
+          "local": "楽天モバイル買い替え超トクプログラムとは？仕組みと注意点をやさしく解説",
+          "live": "楽天モバイル買い替え超トクプログラムとは？仕組みと注意点をやさしく解説",
+          "equal": true
+        },
+        "pass": true
+      },
+      {
+        "url": "/topics/replacement-program-disadvantages/",
+        "status": 200,
+        "contentType": "text/html",
+        "localBytes": 12632,
+        "liveBytes": 12632,
+        "localSha256": "b48351d06993ac4a5ed9fbf23ca2346b65ca6e07062444e7f8e3d2a51eb1d731",
+        "liveSha256": "b48351d06993ac4a5ed9fbf23ca2346b65ca6e07062444e7f8e3d2a51eb1d731",
+        "byteEqual": true,
+        "canonical": {
+          "local": "https://mnp-navi.jp/topics/replacement-program-disadvantages/",
+          "live": "https://mnp-navi.jp/topics/replacement-program-disadvantages/",
+          "equal": true
+        },
+        "title": {
+          "local": "買い替え超トクのデメリットは？損しやすいケースと注意点を解説",
+          "live": "買い替え超トクのデメリットは？損しやすいケースと注意点を解説",
+          "equal": true
+        },
+        "pass": true
+      },
+      {
+        "url": "/css/style.css",
+        "status": 200,
+        "contentType": "text/css",
+        "localBytes": 54328,
+        "liveBytes": 54328,
+        "localSha256": "17fbfb7671d60a9cdc03eaaffec8f9fb9db44ae3dc12ab0f2f55c8d5b7c95811",
+        "liveSha256": "17fbfb7671d60a9cdc03eaaffec8f9fb9db44ae3dc12ab0f2f55c8d5b7c95811",
+        "byteEqual": true,
+        "canonical": null,
+        "title": null,
+        "pass": true
+      },
+      {
+        "url": "/js/analytics.js",
+        "status": 200,
+        "contentType": "text/javascript",
+        "localBytes": 1415,
+        "liveBytes": 1415,
+        "localSha256": "950170f6d59b8f8064a88a3b14e075733711851379bc985c121e7dfedf653795",
+        "liveSha256": "950170f6d59b8f8064a88a3b14e075733711851379bc985c121e7dfedf653795",
+        "byteEqual": true,
+        "canonical": null,
+        "title": null,
+        "pass": true
+      },
+      {
+        "url": "/images/guides/rakuten-id/step-1-account-fields.png",
+        "status": 200,
+        "contentType": "image/png",
+        "localBytes": 48660,
+        "liveBytes": 48660,
+        "localSha256": "39b3a5a7d665fb756832ee7b219d4a5ae61f50a022d09e3d6493de8d7886e57f",
+        "liveSha256": "39b3a5a7d665fb756832ee7b219d4a5ae61f50a022d09e3d6493de8d7886e57f",
+        "byteEqual": true,
+        "canonical": null,
+        "title": null,
+        "pass": true
+      },
+      {
+        "url": "/robots.txt",
+        "status": 200,
+        "contentType": "text/plain",
+        "localBytes": 65,
+        "liveBytes": 65,
+        "localSha256": "a04e1a6dc17fe829e31e5600ff4d7fb60752b591a8f385c1670c165b6826d95b",
+        "liveSha256": "a04e1a6dc17fe829e31e5600ff4d7fb60752b591a8f385c1670c165b6826d95b",
+        "byteEqual": true,
+        "canonical": null,
+        "title": null,
+        "pass": true
+      },
+      {
+        "url": "/sitemap.xml",
+        "status": 200,
+        "contentType": "application/xml",
+        "localBytes": 853091,
+        "liveBytes": 853091,
+        "localSha256": "cf2c2e7a021ab2635b4e3dd4fc43e4aed6e247a943038d4be4a3fb18af4ab5dd",
+        "liveSha256": "cf2c2e7a021ab2635b4e3dd4fc43e4aed6e247a943038d4be4a3fb18af4ab5dd",
+        "byteEqual": true,
+        "canonical": null,
+        "title": null,
+        "pass": true
+      }
+    ]
+  },
+  "checks": {
+    "http200": true,
+    "header": true,
+    "footer": true,
+    "navigation": true,
+    "cta": true,
+    "title": true,
+    "canonical": true,
+    "jsonLd": true,
+    "rmInclude": true
+  },
+  "notFound": {
+    "status": 404,
+    "pass": true
+  },
+  "verdict": "PASS"
+}

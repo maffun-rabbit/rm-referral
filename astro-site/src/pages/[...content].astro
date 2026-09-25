@@ -5,7 +5,9 @@ import {migratedPrefectures} from '../data/load-tokyo-shop-pages';
 export function getStaticPaths(){
  const prefs=new Set(Object.keys(migratedPrefectures));
  const frozen=new Set(inventory().pages.map(p=>key(p.locale,p.route)));
+ const requested = process.env.RM_SINGLE_PAGE?.replace(/^\/+|\/+$/g, '');
  return routes().filter(p=>{
+  if (requested && key(p.locale, p.route) !== requested) return false;
   const s=p.route.split('/');
   if(!p.route)return false;
   if(p.native)return false;

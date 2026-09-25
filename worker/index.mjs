@@ -1,4 +1,4 @@
-const GUIDE_PREFIX = "/guide/";
+export const PILOT_PATHNAME = "/guide/rakuten-mobile-three-features/";
 
 export class IncludeHandler {
   constructor(request, assets) {
@@ -16,7 +16,20 @@ export class IncludeHandler {
       if (!response.ok) return;
       const html = await response.text();
       if (!html.trim()) return;
-      element.replace(html, { html: true });
+      if (src.endsWith('/header.html')) {
+        const pathname = new URL(this.request.url).pathname;
+        const locales = new Set((element.getAttribute('data-locales') || 'ja').split(','));
+        const label = element.getAttribute('data-header-label');
+        const header = html
+          .replace(/<option value="\/(en|zh|ko|vi|pt)\/guide\/replacement-program\/"[^>]*>.*?<\/option>/g,
+            (option, locale) => locales.has(locale) ? option.replace('/guide/replacement-program/', pathname) : '')
+          .replaceAll('/guide/replacement-program/', pathname)
+          .replace(/(<a class="header-link"[^>]*>).*?(<\/a>)/,
+            (match, start, end) => label ? start + label.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;') + end : match);
+        element.replace(header, { html: true });
+      } else {
+        element.replace(html, { html: true });
+      }
     } catch {
       // Leave the element and its fallback children untouched.
     }
@@ -31,7 +44,7 @@ export default {
 
     if (
       request.method !== "GET" && request.method !== "HEAD" ||
-      !url.pathname.startsWith(GUIDE_PREFIX) ||
+      url.pathname !== PILOT_PATHNAME ||
       !response.ok ||
       !contentType.toLowerCase().includes("text/html") ||
       request.method === "HEAD"

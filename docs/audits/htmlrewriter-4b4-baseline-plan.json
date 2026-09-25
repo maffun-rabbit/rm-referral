@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "operation": "single-article-production-baseline",
+  "worker": "rm-referral",
+  "locale": "ja",
+  "config": "wrangler.jsonc",
+  "artifact": "/Users/masayuki/Library/CloudStorage/GoogleDrive-maffun@gmail.com/マイドライブ/制作ワークスペース/RMリファラル/release-artifacts/production-baselines/ja/single-article-20260924-a47da27c/rm-referral-ja-a47da27c.tar",
+  "artifactSha256": "f0c59f185bb6fe4b3fe000bf7d2d6793de11e2ab99fb34b3565d841932a8f65c",
+  "receipt": "/Users/masayuki/Library/CloudStorage/GoogleDrive-maffun@gmail.com/マイドライブ/制作ワークスペース/RMリファラル/release-artifacts/production-baselines/ja/single-article-20260924-a47da27c/rm-referral-ja-a47da27c.receipt.json",
+  "receiptSha256": "77867adfa588e07ff26829e523bd13f9581eb2f833f944e8524500ffc9051885",
+  "receiptFileSha256": "0b09a8b249d44351b7d470a7cd1d08e7b7bc6234c61496e992562d20d644f685"
+}

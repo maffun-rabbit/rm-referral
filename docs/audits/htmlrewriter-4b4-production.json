@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "origin": "https://mnp-navi.jp",
+  "versionId": "a47da27c-ebcb-474e-b357-9ec31602a35a",
+  "capturedAt": "2026-09-24T09:09:59.998Z",
+  "target": {
+    "status": 200,
+    "headerCount": 1,
+    "footerCount": 1,
+    "rmIncludeCount": 0,
+    "navigation": true,
+    "cta": true,
+    "title": true,
+    "description": true,
+    "canonical": true,
+    "robots": true,
+    "jsonLd": true,
+    "css": true,
+    "js": true,
+    "body": true,
+    "pass": true
+  },
+  "nonTarget": [
+    {
+      "url": "/",
+      "status": 200,
+      "contentType": "text/html",
+      "baselineSha256": "acc5e056af580915b0d5d8bc7da56bb925f7c316c43de33597e8a07b1920fb0b",
+      "versionSha256": "acc5e056af580915b0d5d8bc7da56bb925f7c316c43de33597e8a07b1920fb0b",
+      "byteEqual": true,
+      "pass": true
+    },
+    {
+      "url": "/guide/",
+      "status": 200,
+      "contentType": "text/html",
+      "baselineSha256": "501bb84472a14d7783ab215211e53a70d2023eb630636fd645b551268c4dad55",
+      "versionSha256": "501bb84472a14d7783ab215211e53a70d2023eb630636fd645b551268c4dad55",
+      "byteEqual": true,
+      "pass": true
+    },
+    {
+      "url": "/guide/monthly-cost/",
+      "status": 200,
+      "contentType": "text/html",
+      "baselineSha256": "ad15d31a81d7e3615a79bf2a8ec215d64c42cd1b13c66924e97818eddc4b191a",
+      "versionSha256": "ad15d31a81d7e3615a79bf2a8ec215d64c42cd1b13c66924e97818eddc4b191a",
+      "byteEqual": true,
+      "pass": true
+    },
+    {
+      "url": "/guide/rakuten-link/",
+      "status": 200,
+      "contentType": "text/html",
+      "baselineSha256": "faf2019fa3da1aba71da8edfa966664579061cb5ea620d6ab78a338884b5959a",
+      "versionSha256": "faf2019fa3da1aba71da8edfa966664579061cb5ea620d6ab78a338884b5959a",
+      "byteEqual": true,
+      "pass": true
+    },
+    {
+      "url": "/guide/replacement-program/",
+      "status": 200,
+      "contentType": "text/html",
+      "baselineSha256": "40ea93943d70cd9778cad9c811dc452ac23738c23e796ae7f156b0282c13369b",
+      "versionSha256": "40ea93943d70cd9778cad9c811dc452ac23738c23e796ae7f156b0282c13369b",
+      "byteEqual": true,
+      "pass": true
+    },
+    {
+      "url": "/topics/replacement-program-disadvantages/",
+      "status": 200,
+      "contentType": "text/html",
+      "baselineSha256": "b48351d06993ac4a5ed9fbf23ca2346b65ca6e07062444e7f8e3d2a51eb1d731",
+      "versionSha256": "b48351d06993ac4a5ed9fbf23ca2346b65ca6e07062444e7f8e3d2a51eb1d731",
+      "byteEqual": true,
+      "pass": true
+    },
+    {
+      "url": "/css/style.css",
+      "status": 200,
+      "contentType": "text/css",
+      "baselineSha256": "17fbfb7671d60a9cdc03eaaffec8f9fb9db44ae3dc12ab0f2f55c8d5b7c95811",
+      "versionSha256": "17fbfb7671d60a9cdc03eaaffec8f9fb9db44ae3dc12ab0f2f55c8d5b7c95811",
+      "byteEqual": true,
+      "pass": true
+    },
+    {
+      "url": "/js/analytics.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "baselineSha256": "950170f6d59b8f8064a88a3b14e075733711851379bc985c121e7dfedf653795",
+      "versionSha256": "950170f6d59b8f8064a88a3b14e075733711851379bc985c121e7dfedf653795",
+      "byteEqual": true,
+      "pass": true
+    },
+    {
+      "url": "/images/guides/rakuten-id/step-1-account-fields.png",
+      "status": 200,
+      "contentType": "image/png",
+      "baselineSha256": "39b3a5a7d665fb756832ee7b219d4a5ae61f50a022d09e3d6493de8d7886e57f",
+      "versionSha256": "39b3a5a7d665fb756832ee7b219d4a5ae61f50a022d09e3d6493de8d7886e57f",
+      "byteEqual": true,
+      "pass": true
+    },
+    {
+      "url": "/robots.txt",
+      "status": 200,
+      "contentType": "text/plain",
+      "baselineSha256": "a04e1a6dc17fe829e31e5600ff4d7fb60752b591a8f385c1670c165b6826d95b",
+      "versionSha256": "a04e1a6dc17fe829e31e5600ff4d7fb60752b591a8f385c1670c165b6826d95b",
+      "byteEqual": true,
+      "pass": true
+    },
+    {
+      "url": "/sitemap.xml",
+      "status": 200,
+      "contentType": "application/xml",
+      "baselineSha256": "cf2c2e7a021ab2635b4e3dd4fc43e4aed6e247a943038d4be4a3fb18af4ab5dd",
+      "versionSha256": "cf2c2e7a021ab2635b4e3dd4fc43e4aed6e247a943038d4be4a3fb18af4ab5dd",
+      "byteEqual": true,
+      "pass": true
+    }
+  ],
+  "slash": {
+    "status": 307,
+    "location": "/guide/rakuten-mobile-three-features/",
+    "pass": true
+  },
+  "notFound": {
+    "status": 404,
+    "pass": true
+  },
+  "verdict": "PASS"
+}

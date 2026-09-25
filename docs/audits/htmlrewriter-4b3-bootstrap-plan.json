@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "operation": "production-baseline-bootstrap",
+  "worker": "rm-referral",
+  "locale": "ja",
+  "config": "wrangler.bootstrap.jsonc",
+  "artifact": "/Users/masayuki/Library/CloudStorage/GoogleDrive-maffun@gmail.com/マイドライブ/制作ワークスペース/RMリファラル/release-artifacts/production-baselines/ja/bootstrap-20260923/rm-referral-ja-bootstrap-20260923.tar",
+  "artifactSha256": "13052eabaefc3331ae02430c145ffe571ee1eccfd6d83d3b0dce51fdbdf5a362",
+  "receipt": "/Users/masayuki/Library/CloudStorage/GoogleDrive-maffun@gmail.com/マイドライブ/制作ワークスペース/RMリファラル/release-artifacts/production-baselines/ja/bootstrap-20260923/rm-referral-ja-bootstrap-20260923.receipt.json",
+  "receiptSha256": "96c30ed23c97a5baac6571218c59e6f1a3edbae0b21e3199b60d0209a7980c74",
+  "receiptFileSha256": "d9e987aed93ed52d2ea0b049b64194f998370baaf2c93dc450a6f67cc9ff6714",
+  "extractedTree": "/private/tmp/rm-referral-htmlrewriter-includes/.deploy/bootstrap-ja",
+  "sentinelReport": "/private/tmp/rm-referral-htmlrewriter-includes/docs/audits/htmlrewriter-4b3-sentinels.json",
+  "sentinelReportSha256": "b621eb7442e93c56df84682ecbd5584a30493bc96658876163310a0a9bc61ab7",
+  "review": "/private/tmp/rm-referral-htmlrewriter-includes/docs/audits/htmlrewriter-4b3-bootstrap-review.json",
+  "expectedCurrentDeployment": "1e8adc59-cf3a-49e6-97eb-5606ca65f215",
+  "expectedCurrentVersion": "6be5618a-cc3b-41c6-8c54-06def5f77c61",
+  "rollbackVersion": "6be5618a-cc3b-41c6-8c54-06def5f77c61",
+  "otherLocales": []
+}
