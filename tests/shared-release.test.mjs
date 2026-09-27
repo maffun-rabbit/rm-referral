@@ -8,6 +8,7 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {readFile} from 'node:fs/promises';
 import worker,{IncludeHandler,PILOT_PATHNAME} from '../worker/index.mjs';
+import {languageConfig,requireLanguage,supportedLanguages} from '../scripts/language-config.mjs';
 test('raw HTML cannot pass the shared-layout gate',()=>{
  assert.throws(()=>assertShared('<html><main>copied</main></html>','fixture'));
  const h='<meta name="rm-layout" content="shared-v1"><header class="site-header"><div class="site-header-actions"></div></header><main>content</main><footer class="site-footer"></footer>';
@@ -47,6 +48,15 @@ test('normal deploy configs are locale-isolated guarded candidates',async()=>{
  assert.equal(ja.name,'rm-referral');assert.equal(ja.main,'worker/index.mjs');assert.equal(ja.assets.directory,'.deploy/candidate-ja');
  assert.equal(ja.assets.binding,'ASSETS');assert.deepEqual(ja.assets.run_worker_first,['/guide/rakuten-mobile-three-features/','/topics/*']);
  for(const locale of locales.filter(x=>x!=='ja')){const c=JSON.parse(await readFile(new URL('../wrangler.'+locale+'.jsonc',import.meta.url),'utf8'));assert.notEqual(c.name,ja.name);assert.notEqual(c.assets.directory,ja.assets.directory);}
+});
+test('language registry binds six independent Workers and Wrangler configs',()=>{
+ assert.deepEqual(new Set(supportedLanguages),new Set(locales));
+ assert.equal(new Set(supportedLanguages.map(locale=>languageConfig[locale].worker)).size,6);
+ assert.equal(new Set(supportedLanguages.map(locale=>languageConfig[locale].config)).size,6);
+ for(const locale of supportedLanguages){const entry=requireLanguage(locale);assert.equal(entry.config,locale==='ja'?'wrangler.jsonc':`wrangler.${locale}.jsonc`);assert.equal(entry.worker,locale==='ja'?'rm-referral':`rm-referral-${locale}`);}
+});
+test('unknown locale is rejected before guarded packaging or deployment',()=>{
+ assert.throws(()=>requireLanguage('fr'),/Unsupported locale/);
 });
 test('include replacement keeps fallback when the shared asset fails',async()=>{
  let replaced='';const element={getAttribute:name=>({src:'/_includes/ja/header.html','data-locales':'ja'}[name]??null),replace:value=>{replaced=value;}};
