@@ -1,12 +1,14 @@
+import { getPublicPrefix } from "../../../scripts/locale-mapping.mjs";
+
 export const SITE_ORIGIN = "https://mnp-navi.jp";
 
 export const LOCALE_CONFIG = {
-  ja: { pathPrefix: "", htmlLang: "ja", ogLocale: "ja_JP", inLanguage: "ja-JP", worker: "rm-referral" },
-  vi: { pathPrefix: "/vi", htmlLang: "vi", ogLocale: "vi_VN", inLanguage: "vi-VN", worker: "rm-referral-vi" },
-  en: { pathPrefix: "/en", htmlLang: "en", ogLocale: "en_US", inLanguage: "en", worker: "rm-referral-en" },
-  zh: { pathPrefix: "/zh", htmlLang: "zh-CN", ogLocale: "zh_CN", inLanguage: "zh-CN", worker: "rm-referral-zh" },
-  ko: { pathPrefix: "/ko", htmlLang: "ko", ogLocale: "ko_KR", inLanguage: "ko-KR", worker: "rm-referral-ko" },
-  pt: { pathPrefix: "/pt", htmlLang: "pt-BR", ogLocale: "pt_BR", inLanguage: "pt-BR", worker: "rm-referral-pt" },
+  ja: { pathPrefix: getPublicPrefix("ja"), htmlLang: "ja", ogLocale: "ja_JP", inLanguage: "ja-JP", worker: "rm-referral" },
+  vi: { pathPrefix: getPublicPrefix("vi"), htmlLang: "vi", ogLocale: "vi_VN", inLanguage: "vi-VN", worker: "rm-referral-vi" },
+  en: { pathPrefix: getPublicPrefix("en"), htmlLang: "en", ogLocale: "en_US", inLanguage: "en", worker: "rm-referral-en" },
+  zh: { pathPrefix: getPublicPrefix("zh"), htmlLang: "zh-CN", ogLocale: "zh_CN", inLanguage: "zh-CN", worker: "rm-referral-zh" },
+  ko: { pathPrefix: getPublicPrefix("ko"), htmlLang: "ko", ogLocale: "ko_KR", inLanguage: "ko-KR", worker: "rm-referral-ko" },
+  pt: { pathPrefix: getPublicPrefix("pt"), htmlLang: "pt-BR", ogLocale: "pt_BR", inLanguage: "pt-BR", worker: "rm-referral-pt" },
 } as const;
 
 export const REFERRAL_URL = "https://r10.to/hNearm";

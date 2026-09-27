@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mnp-navi.jp/schemas/promotion-release-plan.schema.json",
+  "title": "Promotion production release plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "promotionId", "manifestSha256", "createdAt", "locales"],
+  "properties": {
+    "schema": { "const": 1 },
+    "promotionId": { "type": "string" },
+    "manifestSha256": { "$ref": "#/$defs/sha256" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "locales": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ja", "en", "ko", "pt", "vi", "zh"],
+      "properties": {"ja":{"$ref":"#/$defs/locale"},"en":{"$ref":"#/$defs/locale"},"ko":{"$ref":"#/$defs/locale"},"pt":{"$ref":"#/$defs/locale"},"vi":{"$ref":"#/$defs/locale"},"zh":{"$ref":"#/$defs/locale"}}
+    }
+  },
+  "$defs": {
+    "sha256": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "locale": {
+      "type":"object","additionalProperties":false,
+      "required":["pathname","assetPath","sitemapPath","worker","config","baselineArtifactSha256","baselineReceiptSha256","baselineAttestationSha256","candidateInventorySha256","targetSha256","sitemapBeforeSha256","sitemapAfterSha256","expectedCurrentVersionId","rollbackVersionId","allowedChangedPaths","allowedDeletedPaths"],
+      "properties":{"pathname":{"type":"string"},"assetPath":{"type":"string"},"sitemapPath":{"type":"string"},"worker":{"type":"string"},"config":{"type":"string"},"baselineArtifactSha256":{"$ref":"#/$defs/sha256"},"baselineReceiptSha256":{"$ref":"#/$defs/sha256"},"baselineAttestationSha256":{"$ref":"#/$defs/sha256"},"candidateInventorySha256":{"$ref":"#/$defs/sha256"},"targetSha256":{"$ref":"#/$defs/sha256"},"sitemapBeforeSha256":{"$ref":"#/$defs/sha256"},"sitemapAfterSha256":{"$ref":"#/$defs/sha256"},"expectedCurrentVersionId":{"type":"string"},"rollbackVersionId":{"type":"string"},"allowedChangedPaths":{"type":"array","items":{"type":"string"},"uniqueItems":true},"allowedDeletedPaths":{"type":"array","maxItems":0}}
+    }
+  }
+}

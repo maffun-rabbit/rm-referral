@@ -3,6 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {activeDeployment, sha256} from './deploy-boundary.mjs';
 import {verifyArtifact} from './bootstrap-artifact.mjs';
+import {requireBootstrapLocale} from './bootstrap-locales.mjs';
 
 const fail = message => { throw new Error('BOOTSTRAP ATTESTATION: ' + message); };
 
@@ -14,8 +15,9 @@ export async function createAttestation({receiptFile, artifactFile, deploymentsF
   const version = JSON.parse(await readFile(versionFile));
   const planBytes = planFile ? await readFile(planFile) : null;
   const plan = planBytes ? JSON.parse(planBytes) : null;
+  const runtime=requireBootstrapLocale(receipt.locale);
   if (plan && (plan.artifact !== artifactFile || plan.receipt !== receiptFile || plan.worker !== receipt.worker || plan.locale !== receipt.locale ||
-      !((plan.operation==='production-baseline-bootstrap'&&plan.config==='wrangler.bootstrap.jsonc')||(plan.operation==='single-article-production-baseline'&&plan.config==='wrangler.jsonc')))) fail('Production baseline plan mismatch');
+      !((plan.operation==='production-baseline-bootstrap'&&plan.config===runtime.bootstrapConfig)||(plan.operation==='single-article-production-baseline'&&plan.config===runtime.config)))) fail('Production baseline plan mismatch');
   const versionId = version.id ?? version.result?.id;
   if (!versionId || versionId !== deployment.versions[0].version_id) fail('Cloudflare version/deployment mismatch');
   if (!Number.isFinite(Date.parse(deployment.created_on)) || !Number.isFinite(Date.parse(verifiedAt))) fail('Invalid timestamp');
@@ -34,7 +36,7 @@ export async function createAttestation({receiptFile, artifactFile, deploymentsF
     deployedAt: deployment.created_on,
     verifiedAt,
   };
-  if (attestation.traffic !== 100 || attestation.worker !== 'rm-referral' || attestation.locale !== 'ja') fail('Unexpected production target');
+  if (attestation.traffic !== 100 || attestation.worker !== runtime.worker || ![runtime.config,runtime.bootstrapConfig].includes(attestation.config)) fail('Unexpected production target');
   await writeFile(output, JSON.stringify(attestation, null, 2) + '\n', {flag: 'wx'});
   return attestation;
 }

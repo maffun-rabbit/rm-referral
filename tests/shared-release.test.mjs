@@ -18,17 +18,17 @@ test('page data cannot redefine document/header/footer',()=>{
  assert.throws(()=>validateSource({...p,mainHtml:'<main><header class="site-header">Duplicate</header></main>'}));
  assert.throws(()=>key('en','../../secret'));assert.throws(()=>key('xx','guide'));
 });
-test('all language entrypoints use the guarded shared build',()=>{
- for(const l of locales){const c=JSON.parse(readFileSync(new URL('../wrangler'+(l==='ja'?'':'.'+l)+'.jsonc',import.meta.url),'utf8'));if(l==='ja'){assert.equal(c.build.command,'node scripts/deploy-boundary.mjs --wrangler');assert.equal(c.assets.directory,'.deploy/pilot-ja');}else{assert.equal(c.build.command,'node scripts/prepare-release.mjs');assert.equal(c.assets.directory,'.deploy/'+l);}}
+test('all language entrypoints use the guarded Production release build',()=>{
+ for(const l of locales){const c=JSON.parse(readFileSync(new URL('../wrangler'+(l==='ja'?'':'.'+l)+'.jsonc',import.meta.url),'utf8'));assert.equal(c.build.command,'node scripts/production-release-guard.mjs --wrangler');assert.equal(c.assets.directory,`.deploy/candidate-${l}`);assert.equal(c.workers_dev,false);assert.equal(c.preview_urls,true);assert.equal(c.vars.LOCALE,l);assert.equal(c.vars.APPROVED_PROMOTION_PATHNAME,'');assert.equal(c.main,'worker/index.mjs');}
 });
-test('Japanese guide requests alone run through the include Worker',()=>{
+test('each locale routes only its Topic namespace through the exact-authorizing Worker',()=>{
  const c=JSON.parse(readFileSync(new URL('../wrangler.jsonc',import.meta.url),'utf8'));
  assert.equal(c.main,'worker/index.mjs');
  assert.equal(c.assets.binding,'ASSETS');
- assert.deepEqual(c.assets.run_worker_first,['/guide/rakuten-mobile-three-features/']);
+ assert.deepEqual(c.assets.run_worker_first,['/guide/rakuten-mobile-three-features/','/topics/*']);
  for(const l of locales.filter(l=>l!=='ja')){
   const other=JSON.parse(readFileSync(new URL('../wrangler.'+l+'.jsonc',import.meta.url),'utf8'));
-  assert.equal(other.main,undefined);assert.equal(other.assets.run_worker_first,undefined);
+  assert.equal(other.main,'worker/index.mjs');assert.deepEqual(other.assets.run_worker_first,[`/${l}/topics/*`]);
  }
 });
 test('normal Wrangler build has no implicit full-release fallback',async()=>{
@@ -42,10 +42,10 @@ test('normal Wrangler build has no implicit full-release fallback',async()=>{
  const deploy=await readFile(new URL('../scripts/single-article-deploy.mjs',import.meta.url),'utf8');
  assert.match(deploy,/productionPreflight/);assert.match(deploy,/versions','upload/);assert.doesNotMatch(deploy,/wrangler','deploy|maintenance:full-build|release\.mjs/);
 });
-test('normal deploy config is exact Japanese guarded pilot and other languages cannot substitute',async()=>{
+test('normal deploy configs are locale-isolated guarded candidates',async()=>{
  const ja=JSON.parse(await readFile(new URL('../wrangler.jsonc',import.meta.url),'utf8'));
- assert.equal(ja.name,'rm-referral');assert.equal(ja.main,'worker/index.mjs');assert.equal(ja.assets.directory,'.deploy/pilot-ja');
- assert.equal(ja.assets.binding,'ASSETS');assert.deepEqual(ja.assets.run_worker_first,['/guide/rakuten-mobile-three-features/']);
+ assert.equal(ja.name,'rm-referral');assert.equal(ja.main,'worker/index.mjs');assert.equal(ja.assets.directory,'.deploy/candidate-ja');
+ assert.equal(ja.assets.binding,'ASSETS');assert.deepEqual(ja.assets.run_worker_first,['/guide/rakuten-mobile-three-features/','/topics/*']);
  for(const locale of locales.filter(x=>x!=='ja')){const c=JSON.parse(await readFile(new URL('../wrangler.'+locale+'.jsonc',import.meta.url),'utf8'));assert.notEqual(c.name,ja.name);assert.notEqual(c.assets.directory,ja.assets.directory);}
 });
 test('include replacement keeps fallback when the shared asset fails',async()=>{

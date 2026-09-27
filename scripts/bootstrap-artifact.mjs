@@ -3,6 +3,8 @@ import {open, readFile, writeFile, mkdir} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {inventory, sha256} from './deploy-boundary.mjs';
+import {assertLocaleInventory, parseLocaleArgs, requireBootstrapLocale} from './bootstrap-locales.mjs';
+import {INVENTORY_SCHEMA,INVENTORY_ALGORITHM,inventorySha256} from './promotion-release.mjs';
 
 const fail = message => { throw new Error('BOOTSTRAP ARTIFACT: ' + message); };
 const digestPattern = /^[0-9a-f]{64}$/;
@@ -46,18 +48,27 @@ export function categories(files) {
   }
   return counts;
 }
-export async function createArtifact({source, sourceReceipt, sourceEvidence, artifact, receipt, createdAt, config='wrangler.jsonc'}) {
+export async function createArtifact({source, sourceReceipt, sourceEvidence, artifact, receipt, createdAt, locale='ja', config}) {
   const files = await inventory(source);
+  const runtime=assertLocaleInventory(files,locale);config??=runtime.bootstrapConfig;
+  if(config!==runtime.bootstrapConfig&&config!==runtime.config)fail('Config does not match locale');
   let sourceInfo;
-  if(sourceReceipt){
+  if(sourceEvidence?.type==='human-approved-known-path-production-reconstruction'){
+    const gateBytes=await readFile(sourceEvidence.gate1Evidence),releaseBytes=await readFile(sourceEvidence.releaseReceipt);
+    if(sha256(gateBytes)!==sourceEvidence.gate1EvidenceSha256||sha256(releaseBytes)!==sourceEvidence.releaseReceiptSha256)fail('Initial migration evidence digest mismatch');
+    const gate=JSON.parse(gateBytes),legacy=JSON.parse(releaseBytes),expected=Object.fromEntries((legacy.files?.[locale]??[]).map(x=>['/'+x.file,{sha256:x.sha256,size:x.size}]));
+    const keys=[...new Set([...Object.keys(files),...Object.keys(expected)])],mismatch=keys.filter(key=>files[key]?.sha256!==expected[key]?.sha256||(expected[key]?.size!==undefined&&files[key]?.size!==expected[key].size));
+    if(mismatch.length||gate.locale!==locale||gate.summary?.matched!==Object.keys(files).length||gate.summary?.mismatched||gate.summary?.unresolved||gate.summary?.failed||gate.candidateBefore?.inventorySha256!==inventorySha256(files))fail('Initial migration source is not Gate 1 verified');
+    sourceInfo={...sourceEvidence,knownPathCount:Object.keys(files).length,knownPathMatchCount:gate.summary.matched};
+  }else if(sourceReceipt){
     const sourceBytes = await readFile(sourceReceipt), legacy = JSON.parse(sourceBytes);
-    const expected = Object.fromEntries((legacy.files?.ja ?? []).map(x=>['/'+x.file,{sha256:x.sha256,size:x.size}]));
+    const expected = Object.fromEntries((legacy.files?.[locale] ?? []).map(x=>['/'+x.file,{sha256:x.sha256,size:x.size}]));
     const keys=[...new Set([...Object.keys(files),...Object.keys(expected)])];
     const mismatch=keys.filter(key=>files[key]?.sha256!==expected[key]?.sha256||(expected[key]?.size!==undefined&&files[key]?.size!==expected[key].size));
     if (!Object.keys(expected).length || mismatch.length) fail('Source tree does not match verified release receipt: '+JSON.stringify(mismatch.slice(0,20)));
     sourceInfo={type:'verified-release-tree',receipt:path.resolve(sourceReceipt),receiptSha256:sha256(sourceBytes)};
   }else{
-    if(sourceEvidence?.type!=='verified-single-article-candidate'||!digestPattern.test(sourceEvidence.planSha256??'')||sourceEvidence.fileCount!==Object.keys(files).length)fail('Verified candidate evidence required');
+    if(!['verified-single-article-candidate','verified-foundation-candidate'].includes(sourceEvidence?.type)||!digestPattern.test(sourceEvidence.planSha256??'')||sourceEvidence.fileCount!==Object.keys(files).length)fail('Verified candidate evidence required');
     sourceInfo=sourceEvidence;
   }
   await mkdir(path.dirname(artifact), {recursive:true});
@@ -71,26 +82,27 @@ export async function createArtifact({source, sourceReceipt, sourceEvidence, art
     await append(handle,artifactHash,pad(1024),state);
   } finally { await handle.close(); }
   const artifactSha256=artifactHash.digest('hex');
-  const core={schema:2,locale:'ja',worker:'rm-referral',config,createdAt,source:sourceInfo,artifact:{format:'ustar',reference:path.resolve(artifact),sha256:artifactSha256,size:state.offset},fileCount:Object.keys(files).length,categories:categories(files),files};
+  const core={schema:2,locale,worker:runtime.worker,config,createdAt,source:sourceInfo,artifact:{format:'ustar',reference:path.resolve(artifact),sha256:artifactSha256,size:state.offset},fileCount:Object.keys(files).length,totalBytes:Object.values(files).reduce((sum,item)=>sum+item.size,0),inventorySchema:INVENTORY_SCHEMA,inventoryAlgorithm:INVENTORY_ALGORITHM,inventorySha256:inventorySha256(files),categories:categories(files),files};
   const receiptSha256=sha256(JSON.stringify(core));
   const output={...core,receiptHashScope:'SHA-256 of canonical JSON.stringify(receipt with receiptSha256 and receiptHashScope omitted)',receiptSha256};
   await writeFile(receipt,JSON.stringify(output,null,2)+'\n',{flag:'wx'});
   return output;
 }
-export async function verifyArtifact(receiptFile, artifactFile) {
+export async function verifyArtifact(receiptFile, artifactFile, expectedLocale) {
   const receipt=JSON.parse(await readFile(receiptFile));
+  if(expectedLocale&&receipt.locale!==expectedLocale)fail('Receipt locale mismatch');
   const {receiptSha256,receiptHashScope,...withScope}=receipt; delete withScope.receiptHashScope;
   if (!digestPattern.test(receiptSha256??'') || sha256(JSON.stringify(withScope))!==receiptSha256) fail('Receipt digest mismatch');
   const bytes=await readFile(artifactFile);
   if (bytes.length!==receipt.artifact.size||sha256(bytes)!==receipt.artifact.sha256)fail('Artifact digest mismatch');
-  return {artifactSha256:receipt.artifact.sha256,receiptSha256,fileCount:receipt.fileCount};
+  return {artifactSha256:receipt.artifact.sha256,receiptSha256,fileCount:receipt.fileCount,locale:receipt.locale,worker:receipt.worker};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
-  const [mode,...args]=process.argv.slice(2);
+  const [mode,...raw]=process.argv.slice(2);const {locale,rest:args}=parseLocaleArgs(raw);requireBootstrapLocale(locale);
   if(mode==='create'){
-    const result=await createArtifact({source:args[0],sourceReceipt:args[1],artifact:args[2],receipt:args[3],createdAt:process.env.RM_CAPTURED_AT});
+    const result=await createArtifact({source:args[0],sourceReceipt:args[1],artifact:args[2],receipt:args[3],createdAt:process.env.RM_CAPTURED_AT,locale});
     console.log(JSON.stringify({artifactSha256:result.artifact.sha256,artifactSize:result.artifact.size,receiptSha256:result.receiptSha256,fileCount:result.fileCount},null,2));
   }
-  else if(mode==='verify')console.log(JSON.stringify(await verifyArtifact(args[0],args[1]),null,2));
-  else fail('Usage: bootstrap-artifact.mjs create <tree> <release.json> <artifact.tar> <receipt.json> | verify <receipt.json> <artifact.tar>');
+  else if(mode==='verify')console.log(JSON.stringify(await verifyArtifact(args[0],args[1],locale),null,2));
+  else fail('Usage: bootstrap-artifact.mjs create|verify --locale <locale> ...');
 }

@@ -1,10 +1,14 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "rm-referral-zh",
-  "build": { "command": "node scripts/prepare-release.mjs" },
+  "main": "worker/index.mjs",
+  "build": { "command": "node scripts/production-release-guard.mjs --wrangler" },
   "compatibility_date": "2026-08-21",
+  "workers_dev": false,
+  "preview_urls": true,
+  "vars": { "LOCALE": "zh", "APPROVED_PROMOTION_PATHNAME": "" },
   "routes": [
     { "pattern": "mnp-navi.jp/zh/*", "zone_name": "mnp-navi.jp" }
   ],
-  "assets": { "directory": ".deploy/zh" }
+  "assets": { "directory": ".deploy/candidate-zh", "binding": "ASSETS", "run_worker_first": ["/zh/topics/*"] }
 }

@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "rm-referral",
   "compatibility_date": "2026-08-21",
-  "build": { "command": "node scripts/bootstrap-guard.mjs live $RM_BOOTSTRAP_PLAN" },
+  "build": { "command": "node scripts/bootstrap-guard.mjs live --locale ja $RM_BOOTSTRAP_PLAN" },
   "assets": {
     "directory": ".deploy/bootstrap-ja"
   }

@@ -2,11 +2,14 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "rm-referral",
   "main": "worker/index.mjs",
-  "build": { "command": "node scripts/deploy-boundary.mjs --wrangler" },
+  "build": { "command": "node scripts/production-release-guard.mjs --wrangler" },
   "compatibility_date": "2026-08-21",
+  "workers_dev": false,
+  "preview_urls": true,
+  "vars": { "LOCALE": "ja", "APPROVED_PROMOTION_PATHNAME": "" },
   "assets": {
-    "directory": ".deploy/pilot-ja",
+    "directory": ".deploy/candidate-ja",
     "binding": "ASSETS",
-    "run_worker_first": ["/guide/rakuten-mobile-three-features/"]
+    "run_worker_first": ["/guide/rakuten-mobile-three-features/", "/topics/*"]
   }
 }

@@ -4,6 +4,7 @@ import HomeHeader from "../components/HomeHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { getAbsoluteLocaleUrl, getAlternateLinks, getLocaleAssetPath, getLocalePath, type Locale } from "../config/site";
 import { getMessages } from "../i18n";
+import { getIncludePath, usesEdgeIncludes } from "../../../scripts/locale-mapping.mjs";
 
 type Props = {
   title: string;
@@ -37,7 +38,7 @@ const resolvedCanonical = canonical ?? (canonicalPath ? getAbsoluteLocaleUrl(loc
 const alternateLinks = canonicalPath && availableLocales.length
   ? getAlternateLinks(canonicalPath, availableLocales)
   : [];
-const useEdgeIncludes = locale === "ja" && canonicalPath?.startsWith("/guide/");
+const useEdgeIncludes = usesEdgeIncludes(locale, canonicalPath);
 ---
 
 <!doctype html>
@@ -63,7 +64,7 @@ const useEdgeIncludes = locale === "ja" && canonicalPath?.startsWith("/guide/");
     <slot name="head" />
   </head>
   <body>
-    {canonicalPath === '/' ? <HomeHeader locale={locale} /> : useEdgeIncludes ? <rm-include src="/_includes/ja/header.html" data-locales={availableLocales.join(',')} data-header-label={headerLinkLabel ?? messages.header.defaultLinkLabel}><SiteHeader
+    {canonicalPath === '/' ? <HomeHeader locale={locale} /> : useEdgeIncludes ? <rm-include src={getIncludePath(locale, "header")} data-locales={availableLocales.join(',')} data-header-label={headerLinkLabel ?? messages.header.defaultLinkLabel}><SiteHeader
         locale={locale}
         homeHref={getLocalePath(locale)}
         linkHref={headerLinkHref}
@@ -77,6 +78,6 @@ const useEdgeIncludes = locale === "ja" && canonicalPath?.startsWith("/guide/");
         availableLocales={availableLocales.length ? availableLocales : undefined}
       />}
     <slot />
-    {useEdgeIncludes ? <rm-include src="/_includes/ja/footer.html"><SiteFooter locale={locale} /></rm-include> : <SiteFooter locale={locale} />}
+    {useEdgeIncludes ? <rm-include src={getIncludePath(locale, "footer")}><SiteFooter locale={locale} /></rm-include> : <SiteFooter locale={locale} />}
   </body>
 </html>

@@ -3,6 +3,7 @@ import {existsSync} from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {readSource, key, root} from './page-sources.mjs';
+import {topicMapping} from './promotion-release.mjs';
 
 const usage = 'Usage: npm run build:page -- <locale/route> [--output <dir>]';
 const argv = process.argv.slice(2);
@@ -22,7 +23,7 @@ const outputArg = positional.indexOf('--output');
 const output = path.resolve(root, process.env.RM_PAGE_OUTPUT || (outputArg >= 0 ? positional[outputArg + 1] : (wrangler ? '.deploy/ja' : '.single-page-output')));
 // Wrangler's assets directory is already locale-scoped (.deploy/{locale}); keep
 // the generated artifact route-scoped for both the Japanese and language configs.
-const targetRel = path.join(route, 'index.html');
+const targetRel = route.startsWith('topics/') ? topicMapping(locale,route.slice('topics/'.length)).assetPath.slice(1) : path.join(route, 'index.html');
 const target = path.join(staging, targetRel);
 const outputTarget = path.join(output, targetRel);
 

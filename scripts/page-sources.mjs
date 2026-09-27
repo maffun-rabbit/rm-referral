@@ -84,8 +84,9 @@ export function validateSource(p,{isOverride=false}={}){
  }
 }
 export function readSource(locale,route=''){
- const override=overrideFile(locale,route);let p;
- if(existsSync(override)){p=JSON.parse(readFileSync(override,'utf8'));if(key(p.locale,p.route)!==key(locale,route))throw new Error('Source route mismatch');validateSource(p,{isOverride:true});}
+ const override=overrideFile(locale,route), explicit=process.env.RM_PAGE_SOURCE_FILE;let p;
+ if(explicit){if(process.env.RM_PROMOTION_BUILD!=='1')throw new Error('Explicit source files are allowed only for the Promotion build path');p=JSON.parse(readFileSync(path.resolve(explicit),'utf8'));if(key(p.locale,p.route)!==key(locale,route))throw new Error('Source route mismatch');validateSource(p,{isOverride:true});}
+ else if(existsSync(override)){p=JSON.parse(readFileSync(override,'utf8'));if(key(p.locale,p.route)!==key(locale,route))throw new Error('Source route mismatch');validateSource(p,{isOverride:true});}
  else {byKey??=new Map(inventory().pages.map(p=>[key(p.locale,p.route),p]));const entry=byKey.get(key(locale,route));if(!entry)throw new Error('Unknown page '+key(locale,route));p=extract(readFileSync(path.join(root,entry.file),'utf8'),locale,route);}
  validateSource(p);const normalized={description:'',robots:'index, follow',schemas:[],styles:[],scripts:[],...p};if(typeof normalized.mainHtml==='string')normalized.mainHtml=normalized.mainHtml.replaceAll('https://r10.to/hNearm',REFERRAL_URL);return normalized;
 }

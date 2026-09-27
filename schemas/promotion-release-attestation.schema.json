@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://mnp-navi.jp/schemas/promotion-release-attestation.schema.json","title":"Promotion release attestation","type":"object","additionalProperties":false,
+  "required":["schema","promotionId","manifestSha256","releasePlanSha256","receiptSha256","locale","worker","config","versionId","deploymentId","traffic","deployedAt","verifiedAt"],
+  "properties":{"schema":{"const":1},"promotionId":{"type":"string"},"manifestSha256":{"$ref":"#/$defs/sha256"},"releasePlanSha256":{"$ref":"#/$defs/sha256"},"receiptSha256":{"$ref":"#/$defs/sha256"},"locale":{"enum":["ja","en","ko","pt","vi","zh"]},"worker":{"type":"string"},"config":{"type":"string"},"versionId":{"type":"string"},"deploymentId":{"type":"string"},"traffic":{"const":100},"deployedAt":{"type":"string","format":"date-time"},"verifiedAt":{"type":"string","format":"date-time"}},
+  "$defs":{"sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"}}
+}

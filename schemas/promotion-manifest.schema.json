@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mnp-navi.jp/schemas/promotion-manifest.schema.json",
+  "title": "RM Referral six-locale Promotion Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "promotionId", "slug", "locales"],
+  "properties": {
+    "schema": { "const": 1 },
+    "promotionId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "locales": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ja", "en", "ko", "pt", "vi", "zh"],
+      "properties": {
+        "ja": { "$ref": "#/$defs/locale" },
+        "en": { "$ref": "#/$defs/locale" },
+        "ko": { "$ref": "#/$defs/locale" },
+        "pt": { "$ref": "#/$defs/locale" },
+        "vi": { "$ref": "#/$defs/locale" },
+        "zh": { "$ref": "#/$defs/locale" }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "locale": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "pathname", "assetPath", "sourceSha256", "targetSha256", "sitemapAssetPath", "baselineReceiptSha256", "baselineAttestationSha256"],
+      "properties": {
+        "source": { "type": "string" },
+        "pathname": { "type": "string" },
+        "assetPath": { "type": "string" },
+        "sourceSha256": { "$ref": "#/$defs/sha256" },
+        "targetSha256": { "$ref": "#/$defs/sha256" },
+        "sitemapAssetPath": { "type": "string" },
+        "baselineReceiptSha256": { "$ref": "#/$defs/sha256" },
+        "baselineAttestationSha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}
