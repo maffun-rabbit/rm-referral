@@ -3,12 +3,14 @@ import assert from 'node:assert/strict';
 import {sha256} from '../scripts/deploy-boundary.mjs';
 import {PROMOTION_LOCALES,topicMapping,manifestSha256} from '../scripts/promotion-release.mjs';
 import {LOCALE_RUNTIME,productionPlanSha256,validateProductionReleasePlan,compileApprovedPromotionRoutes,isApprovedPromotionRequest,evaluatePromotionState} from '../scripts/promotion-production.mjs';
+import {publicationStateSha256} from '../scripts/publication-state-node.mjs';
 
 const hash=value=>sha256(String(value));
 function fixture(){
  const locales={};for(const locale of PROMOTION_LOCALES){const m=topicMapping(locale,'promo');locales[locale]={source:m.source,pathname:m.pathname,assetPath:m.assetPath,sitemapAssetPath:m.sitemapAssetPath,sourceSha256:hash(locale+' source'),targetSha256:hash(locale+' target'),baselineReceiptSha256:hash(locale+' receipt'),baselineAttestationSha256:hash(locale+' attestation')};}
  const manifest={schema:1,promotionId:'promo',slug:'promo',locales};
- const plan={schema:1,promotionId:'promo',manifestSha256:manifestSha256(manifest),createdAt:'2026-09-25T00:00:00Z',locales:{}};
+ const publicationState={schema:1,promotionId:'promo',slug:'promo',currentLocale:'zh',locales:Object.fromEntries(PROMOTION_LOCALES.map(locale=>[locale,{locale,status:locale==='zh'?'CURRENT_RELEASE_CANDIDATE':'UNPUBLISHED',pathname:topicMapping(locale,'promo').pathname,bindingSource:'test'}]))};
+ const plan={schema:1,promotionId:'promo',manifestSha256:manifestSha256(manifest),createdAt:'2026-09-25T00:00:00Z',publicationState,publicationStateSha256:publicationStateSha256(publicationState),locales:{}};
  for(const locale of PROMOTION_LOCALES){const m=topicMapping(locale,'promo'),sitemapBefore=hash(locale+' sitemap before'),sitemapAfter=locale==='ja'?hash(locale+' sitemap after'):sitemapBefore;plan.locales[locale]={pathname:m.pathname,assetPath:m.assetPath,sitemapPath:m.sitemapAssetPath,worker:LOCALE_RUNTIME[locale].worker,config:LOCALE_RUNTIME[locale].config,baselineArtifactSha256:hash(locale+' artifact'),baselineReceiptSha256:locales[locale].baselineReceiptSha256,baselineAttestationSha256:locales[locale].baselineAttestationSha256,candidateInventorySha256:hash(locale+' candidate'),targetSha256:locales[locale].targetSha256,sitemapBeforeSha256:sitemapBefore,sitemapAfterSha256:sitemapAfter,expectedCurrentVersionId:locale+'-current',rollbackVersionId:locale+'-rollback',allowedChangedPaths:[m.assetPath,...(sitemapBefore===sitemapAfter?[]:[m.sitemapAssetPath])],allowedDeletedPaths:[]};}
  return {manifest,plan};
 }

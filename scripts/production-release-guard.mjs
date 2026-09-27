@@ -3,6 +3,8 @@ import path from 'node:path';
 import {inventory,sha256} from './deploy-boundary.mjs';
 import {inventorySha256,topicMapping} from './promotion-release.mjs';
 import {LOCALE_RUNTIME} from './promotion-production.mjs';
+import {validatePublicationState,validatePromotionStaticPublication,visiblePromotionLocales} from './promotion-edge-response.mjs';
+import {publicationStateSha256} from './publication-state-node.mjs';
 
 const fail=message=>{throw new Error('PRODUCTION RELEASE GUARD: '+message);};
 export async function verifyProductionCandidate({plan,approvedPlanSha256,candidate,config,locale}){
@@ -17,6 +19,10 @@ export async function verifyProductionCandidate({plan,approvedPlanSha256,candida
   if((plan.changed??[]).some(p=>!allowed.has(p))||(plan.added??[]).some(p=>!allowed.has(p)))fail('Allowlist mismatch');
   if(plan.kind==='promotion'){
     if(!plan.approvedPathname||!plan.slug)fail('Promotion exact pathname missing');
+    validatePublicationState(plan.publicationState,{promotionId:plan.promotionId,slug:plan.slug,currentLocale:locale});
+    if(plan.publicationStateSha256!==publicationStateSha256(plan.publicationState))fail('Publication State hash mismatch');
+    const visible=visiblePromotionLocales(plan.publicationState,{promotionId:plan.promotionId,slug:plan.slug,currentLocale:locale});
+    if(JSON.stringify(plan.publicationLocales)!==JSON.stringify(visible))fail('Promotion Publication State mismatch');
     const mapping=topicMapping(locale,plan.slug),added=plan.added??[],changed=plan.changed??[],unexpected=plan.unexpected??[];
     if(plan.approvedPathname!==mapping.pathname||plan.assetPath!==mapping.assetPath||plan.sitemapAssetPath!==mapping.sitemapAssetPath)fail('Promotion mapping mismatch');
     if(new Set(added).size!==added.length||new Set(changed).size!==changed.length||added.some(p=>changed.includes(p)))fail('Promotion diff contains duplicate paths');
@@ -25,6 +31,8 @@ export async function verifyProductionCandidate({plan,approvedPlanSha256,candida
     const expectedAllowed=[mapping.assetPath,...(sitemapCount?[mapping.sitemapAssetPath]:[])];
     if(targetCount!==1||added.includes(mapping.sitemapAssetPath)||unexpected.length||added.length+changed.length!==1+sitemapCount||added.length+changed.length>2)fail('Promotion diff exceeds exact Topic 1 + sitemap 0/1');
     if(allowed.size!==expectedAllowed.length||expectedAllowed.some(p=>!allowed.has(p)))fail('Promotion allowlist mismatch');
+    const targetHtml=await readFile(path.join(candidate,mapping.assetPath.slice(1)),'utf8');
+    validatePromotionStaticPublication({html:targetHtml,locale,slug:plan.slug,publicationState:plan.publicationState,promotionId:plan.promotionId});
   }else if(plan.approvedPathname)fail('Foundation cannot activate a Promotion route');
   return {files,inventorySha256:hash};
 }

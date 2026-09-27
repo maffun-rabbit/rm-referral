@@ -8,8 +8,9 @@ type Props={locale:Locale;route:string};
 const {locale,route}=Astro.props;
 const page=readSource(locale,route);
 const decode=(s:string)=>s.replaceAll('&amp;','&').replaceAll('&quot;','"').replace(/&#39;|&apos;/g,"'");
+const publicationLocales=process.env.RM_PROMOTION_PUBLICATION_LOCALES?.split(',').filter(Boolean) as Locale[]|undefined;
 ---
-{route === 'guide/replacement-program' ? <LocalizedReplacementProgramPage locale={locale} /> : <BaseLayout title={decode(page.title)} description={decode(page.description)} robots={page.robots} locale={locale} canonicalPath={`/${route}${route?'/':''}`} availableLocales={routeLocales(route)} ogType={route?'article':'website'} headerLinkHref={getLocalePath(locale,'/')}>
+{route === 'guide/replacement-program' ? <LocalizedReplacementProgramPage locale={locale} /> : <BaseLayout title={decode(page.title)} description={decode(page.description)} robots={page.robots} locale={locale} canonicalPath={`/${route}${route?'/':''}`} availableLocales={publicationLocales??routeLocales(route)} ogType={route?'article':'website'} headerLinkHref={getLocalePath(locale,'/')}>
  <Fragment slot="head"><Fragment set:html={page.styles.join('')} />{page.schemas.map(schema=><script is:inline type="application/ld+json" set:html={schema} />)}</Fragment>
  {page.pageType === 'guide-topic-v1'
    ? <GuideTopicPage locale={locale} route={route} page={page} />

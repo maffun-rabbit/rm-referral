@@ -1,5 +1,7 @@
 import {createHash} from 'node:crypto';
 import {PROMOTION_LOCALES,manifestSha256,topicMapping} from './promotion-release.mjs';
+import {validatePublicationState} from './promotion-edge-response.mjs';
+import {publicationStateSha256} from './publication-state-node.mjs';
 
 const fail=message=>{throw new Error('PROMOTION PRODUCTION: '+message);};
 const digest=/^[0-9a-f]{64}$/;
@@ -12,6 +14,8 @@ export const productionPlanSha256=plan=>createHash('sha256').update(JSON.stringi
 
 export function validateProductionReleasePlan(plan,manifest,{approvedPlanSha256}={}){
  if(plan?.schema!==1||plan.promotionId!==manifest.promotionId||plan.manifestSha256!==manifestSha256(manifest)||!Number.isFinite(Date.parse(plan.createdAt??'')))fail('Plan header does not bind manifest');
+ validatePublicationState(plan.publicationState,{promotionId:manifest.promotionId,slug:manifest.slug,currentLocale:plan.publicationState?.currentLocale});
+ if(plan.publicationStateSha256!==publicationStateSha256(plan.publicationState))fail('Publication State hash mismatch');
  if(Object.keys(plan.locales??{}).length!==PROMOTION_LOCALES.length||PROMOTION_LOCALES.some(locale=>!plan.locales[locale]))fail('Plan must contain six locales');
  for(const locale of PROMOTION_LOCALES){
   const item=plan.locales[locale],mapping=topicMapping(locale,manifest.slug),runtime=LOCALE_RUNTIME[locale],source=manifest.locales[locale];

@@ -4,6 +4,7 @@ import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {readSource, key, root} from './page-sources.mjs';
 import {topicMapping} from './promotion-release.mjs';
+import {validatePublicationState,visiblePromotionLocales} from './promotion-edge-response.mjs';
 
 const usage = 'Usage: npm run build:page -- <locale/route> [--output <dir>]';
 const argv = process.argv.slice(2);
@@ -35,6 +36,11 @@ await writeFile(path.join(singleSrc, 'pages/index.astro'), `---\nimport ContentP
 await rm(outputTarget, {force: true});
 await mkdir(output, {recursive: true});
 const env = {...process.env, RM_SINGLE_PAGE: expected, RM_SINGLE_SRC: singleSrc, RM_SINGLE_OUT: staging, ASTRO_TELEMETRY_DISABLED: '1'};
+if(route.startsWith('topics/')&&process.env.RM_PROMOTION_PUBLICATION_STATE){
+  const state=JSON.parse(await readFile(path.resolve(process.env.RM_PROMOTION_PUBLICATION_STATE),'utf8'));
+  validatePublicationState(state,{promotionId:state.promotionId,slug:route.slice('topics/'.length),currentLocale:locale});
+  env.RM_PROMOTION_PUBLICATION_LOCALES=visiblePromotionLocales(state,{promotionId:state.promotionId,slug:state.slug,currentLocale:locale}).join(',');
+}
 const started = performance.now();
 const result = spawnSync('npm', ['--prefix', 'astro-site', 'run', 'build'], {cwd: root, env, stdio: 'inherit'});
 if (result.status !== 0) throw new Error(`Single-page Astro generation failed (${result.status})`);

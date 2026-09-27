@@ -1,4 +1,5 @@
-import {getIncludePath,getPublicPrefix} from '../scripts/locale-mapping.mjs';
+import {getIncludePath} from '../scripts/locale-mapping.mjs';
+import {transformHeaderInclude} from '../scripts/promotion-edge-response.mjs';
 
 export const PILOT_PATHNAME = "/guide/rakuten-mobile-three-features/";
 
@@ -36,16 +37,9 @@ export class IncludeHandler {
       if (!html.trim()) return;
       if (src === headerPath) {
         const pathname = new URL(this.request.url).pathname;
-        const prefix = getPublicPrefix(locale);
-        const sharedPath = prefix && pathname.startsWith(`${prefix}/`) ? pathname.slice(prefix.length) : pathname;
         const locales = new Set((element.getAttribute('data-locales') || 'ja').split(','));
         const label = element.getAttribute('data-header-label');
-        const header = html
-          .replace(/<option value="\/(en|zh|ko|vi|pt)\/guide\/replacement-program\/"[^>]*>.*?<\/option>/g,
-            (option, targetLocale) => locales.has(targetLocale) ? option.replace('/guide/replacement-program/', sharedPath) : '')
-          .replaceAll('/guide/replacement-program/', sharedPath)
-          .replace(/(<a class="header-link"[^>]*>).*?(<\/a>)/,
-            (match, start, end) => label ? start + label.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;') + end : match);
+        const header = transformHeaderInclude({html,locale,pathname,publicationLocales:[...locales],label});
         element.replace(header, { html: true });
       } else {
         element.replace(html, { html: true });

@@ -13,6 +13,7 @@
     "test:bootstrap": "node --test tests/bootstrap-artifact.test.mjs tests/bootstrap-control.test.mjs tests/bootstrap-locale-recovery.test.mjs",
     "test:promotion": "node --test tests/promotion-release.test.mjs tests/promotion-build.test.mjs tests/promotion-production.test.mjs",
     "test:foundation": "node --test tests/foundation-migration.test.mjs",
+    "test:edge-response": "node --test tests/promotion-edge-response.test.mjs",
     "promotion:validate": "node scripts/promotion-release.mjs validate",
     "promotion:stage": "node scripts/promotion-release.mjs stage",
     "maintenance:full-build": "node scripts/release.mjs build",

@@ -4,12 +4,14 @@
   "title": "Promotion production release plan",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "promotionId", "manifestSha256", "createdAt", "locales"],
+  "required": ["schema", "promotionId", "manifestSha256", "createdAt", "publicationState", "publicationStateSha256", "locales"],
   "properties": {
     "schema": { "const": 1 },
     "promotionId": { "type": "string" },
     "manifestSha256": { "$ref": "#/$defs/sha256" },
     "createdAt": { "type": "string", "format": "date-time" },
+    "publicationStateSha256": { "$ref": "#/$defs/sha256" },
+    "publicationState": { "$ref": "#/$defs/publicationState" },
     "locales": {
       "type": "object", "additionalProperties": false,
       "required": ["ja", "en", "ko", "pt", "vi", "zh"],
@@ -18,6 +20,8 @@
   },
   "$defs": {
     "sha256": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "publicationLocale": {"type":"object","additionalProperties":false,"required":["locale","status","pathname","bindingSource"],"properties":{"locale":{"enum":["ja","en","ko","pt","vi","zh"]},"status":{"enum":["UNPUBLISHED","VERSION_UPLOADED","CURRENT_RELEASE_CANDIDATE","PRODUCTION_VERIFIED","PRODUCTION_FAILED","ROLLED_BACK"]},"pathname":{"type":"string"},"bindingSource":{"type":"string","minLength":1}}},
+    "publicationState": {"type":"object","additionalProperties":false,"required":["schema","promotionId","slug","currentLocale","locales"],"properties":{"schema":{"const":1},"promotionId":{"type":"string"},"slug":{"type":"string"},"currentLocale":{"enum":["ja","en","ko","pt","vi","zh"]},"locales":{"type":"object","additionalProperties":false,"required":["ja","en","ko","pt","vi","zh"],"properties":{"ja":{"$ref":"#/$defs/publicationLocale"},"en":{"$ref":"#/$defs/publicationLocale"},"ko":{"$ref":"#/$defs/publicationLocale"},"pt":{"$ref":"#/$defs/publicationLocale"},"vi":{"$ref":"#/$defs/publicationLocale"},"zh":{"$ref":"#/$defs/publicationLocale"}}}}},
     "locale": {
       "type":"object","additionalProperties":false,
       "required":["pathname","assetPath","sitemapPath","worker","config","baselineArtifactSha256","baselineReceiptSha256","baselineAttestationSha256","candidateInventorySha256","targetSha256","sitemapBeforeSha256","sitemapAfterSha256","expectedCurrentVersionId","rollbackVersionId","allowedChangedPaths","allowedDeletedPaths"],

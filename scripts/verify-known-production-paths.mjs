@@ -59,19 +59,21 @@ async function requestOnce(url,fetchImpl,timeoutMs){
   }
   return {response,redirects,crossOrigin:false,finalUrl:response.url||current};
 }
-export async function verifyAsset({assetPath,expected,baseUrl,fetchImpl=fetch,attempts=DEFAULT_ATTEMPTS,timeoutMs=DEFAULT_TIMEOUT_MS}){
+export async function verifyAsset({assetPath,expected,expectedResponse,baseUrl,fetchImpl=fetch,attempts=DEFAULT_ATTEMPTS,timeoutMs=DEFAULT_TIMEOUT_MS}){
+  const responseExpected=expectedResponse?.bytes?{size:expectedResponse.bytes.length,sha256:sha256(expectedResponse.bytes)}:expected;
+  if(expectedResponse?.bytes&&((expectedResponse.size!==undefined&&expectedResponse.size!==responseExpected.size)||(expectedResponse.sha256!==undefined&&expectedResponse.sha256!==responseExpected.sha256)))fail('Transformed expected response identity mismatch');
   const requestUrl=new URL(productionPath(assetPath),baseUrl).href,attemptLog=[];
   for(let attempt=1;attempt<=attempts;attempt++){
     try{
       const fetched=await requestOnce(requestUrl,fetchImpl,timeoutMs),status=fetched.response.status;
       if(transient.has(status)&&attempt<attempts){attemptLog.push({attempt,status,retry:true});continue;}
       const body=Buffer.from(await fetched.response.arrayBuffer()),actualSha256=sha256(body),redirectCount=fetched.redirects.length;
-      const bytesMatch=body.length===expected.size&&actualSha256===expected.sha256;
+      const bytesMatch=body.length===responseExpected.size&&actualSha256===responseExpected.sha256;
       const redirectValid=redirectCount===0&&!fetched.crossOrigin;
       const matched=status===200&&bytesMatch&&redirectValid;
       let result=matched?'MATCH':status===404?'NOT_FOUND':redirectValid&&status===200?'MISMATCH':'UNEXPECTED_REDIRECT';
       if(transient.has(status))result='FAILED';
-      return {assetPath,requestUrl,category:category(assetPath),expectedSize:expected.size,actualSize:body.length,expectedSha256:expected.sha256,actualSha256,
+      return {assetPath,requestUrl,category:category(assetPath),staticExpectedSize:expected.size,staticExpectedSha256:expected.sha256,expectedSize:responseExpected.size,actualSize:body.length,expectedSha256:responseExpected.sha256,actualSha256,transformation:expectedResponse?.transformation??'STATIC',
         initialStatus:fetched.redirects[0]?.status??status,location:fetched.redirects[0]?.location??null,finalUrl:fetched.finalUrl,finalStatus:status,redirectCount,
         contentType:fetched.response.headers.get('content-type'),etag:fetched.response.headers.get('etag'),lastModified:fetched.response.headers.get('last-modified'),
         cacheControl:fetched.response.headers.get('cache-control'),cfCacheStatus:fetched.response.headers.get('cf-cache-status'),attempts:[...attemptLog,{attempt,status,retry:false}],result};
@@ -82,9 +84,9 @@ export async function verifyAsset({assetPath,expected,baseUrl,fetchImpl=fetch,at
     }
   }
 }
-export async function verifyInventory({files,baseUrl,fetchImpl=fetch,concurrency=DEFAULT_CONCURRENCY,onProgress=()=>{}}){
+export async function verifyInventory({files,baseUrl,edgeResponses={},fetchImpl=fetch,concurrency=DEFAULT_CONCURRENCY,onProgress=()=>{}}){
   const entries=Object.entries(files).sort(([a],[b])=>a<b?-1:a>b?1:0),results=new Array(entries.length);let cursor=0,completed=0;
-  async function worker(){while(true){const index=cursor++;if(index>=entries.length)return;const [assetPath,expected]=entries[index];results[index]=await verifyAsset({assetPath,expected,baseUrl,fetchImpl});completed++;onProgress(completed,entries.length);}}
+  async function worker(){while(true){const index=cursor++;if(index>=entries.length)return;const [assetPath,expected]=entries[index];results[index]=await verifyAsset({assetPath,expected,expectedResponse:edgeResponses[assetPath],baseUrl,fetchImpl});completed++;onProgress(completed,entries.length);}}
   await Promise.all(Array.from({length:Math.min(concurrency,entries.length)},()=>worker()));return results;
 }
 export function summarize(results){

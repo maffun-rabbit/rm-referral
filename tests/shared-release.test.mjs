@@ -49,7 +49,7 @@ test('normal deploy configs are locale-isolated guarded candidates',async()=>{
  for(const locale of locales.filter(x=>x!=='ja')){const c=JSON.parse(await readFile(new URL('../wrangler.'+locale+'.jsonc',import.meta.url),'utf8'));assert.notEqual(c.name,ja.name);assert.notEqual(c.assets.directory,ja.assets.directory);}
 });
 test('include replacement keeps fallback when the shared asset fails',async()=>{
- let replaced='';const element={getAttribute:()=> '/_includes/ja/header.html',replace:value=>{replaced=value;}};
+ let replaced='';const element={getAttribute:name=>({src:'/_includes/ja/header.html','data-locales':'ja'}[name]??null),replace:value=>{replaced=value;}};
  await new IncludeHandler(new Request('https://mnp-navi.jp/guide/test/'),{fetch:async()=>new Response('missing',{status:404})}).element(element);
  assert.equal(replaced,'');
  await new IncludeHandler(new Request('https://mnp-navi.jp/guide/test/'),{fetch:async()=>new Response('<header>shared</header>',{status:200})}).element(element);
