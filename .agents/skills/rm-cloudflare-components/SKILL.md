@@ -35,29 +35,41 @@ description: GitHub＋Cloudflare版RMリファラルのページ・共通UI・�
 
 すでに専用部品で構造化されている楽天ID図解は `astro-site/src/components/RakutenIdCreationGuide.astro` とその参照データを編集する。`create-rakuten-id-step-by-step` を汎用本文で重複定義しない。
 
-## 日本語の通常記事更新
+## Six-locale normal Promotion release
 
-1. `content/pages/ja/{route}/page.json`を入力とし、`RM_PAGE=ja/{route}`を明示する。完成HTMLや古い`.deploy/ja`を入力にしない。
-2. 保存済みProduction Baselineのartifact、receipt、attestationを検証し、Cloudflareのcurrent deployment/version/trafficと一致しなければ停止する。
-3. `npm run test:shared`、`npm run test:deploy-boundary`、`npm run test:bootstrap`を実行する。
-4. 承認済みplanとhashを指定し、`npm run deploy -- ja`を入口にする。この経路が`build:page`で対象HTML 1件だけを生成し、baselineをclean candidateへ展開してtargetだけをoverlayする。
-5. shared assetが必要な場合はexact path、SHA-256、size、reasonをallowlistへ別枠で固定する。candidateの全path/size/hashを比較し、unexpected change、削除、target外HTML変更が1件でもあれば停止する。
-6. production preflightでbaseline、attestation、config transition、current version drift、Worker、locale、candidateを再検証してからWorker Versionだけをuploadする。
-7. Version URLでtargetのheader/footer、navigation、CTA、SEO、未処理include 0を確認し、non-targetをbaselineとbyte/hash比較する。
-8. production切替直前にversion driftを再確認し、検証済みversionだけへ明示的にtrafficを切り替える。本番HTTP回帰後、candidate全体を新artifact/receipt/attestationとして保存し、次回baselineにする。
+The established locale mapping in `scripts/locale-mapping.mjs` is authoritative:
 
-通常更新でAstro full build、全ページ再生成、`maintenance:full-build`、未検証baseline、stale `.deploy`、allowlist外変更、guard迂回、他言語同時deployを行わない。通常の日本語`wrangler.jsonc`は必要なplan/hash/environmentがなければfail-closedとする。
+| Locale | Public prefix | Topic example |
+| --- | --- | --- |
+| ja | empty | `/topics/<slug>/` |
+| en | `/en` | `/en/topics/<slug>/` |
+| ko | `/ko` | `/ko/topics/<slug>/` |
+| pt | `/pt` | `/pt/topics/<slug>/` |
+| vi | `/vi` | `/vi/topics/<slug>/` |
+| zh | `/zh` | `/zh/topics/<slug>/` |
+
+Do not introduce `/ja/`. Treat each locale as an independent serial release unit. Use that locale's current verified Production Baseline as the only candidate source; create a clean candidate and generate only the target Topic HTML. Never reuse a stale `.deploy` candidate. The normal diff is exactly one target Topic asset (`added` for a new Topic or `changed` for an update) plus zero or one change to that locale's sitemap. Deletions and all other changes fail closed; Foundation assets, shared includes, Topics index, shop, guide, other Topics, root pages, CSS, JavaScript, images, fonts, and robots are outside the normal Promotion allowlist.
+
+Bind the Promotion Manifest, exact target pathname, Release Plan, baseline receipt/attestation, and Publication State. Selector and hreflang output may include only locales allowed by that release's Publication State; do not leak unpublished Promotion URLs. Do not change existing pages to normalize hreflang as part of an ordinary single-Topic release.
+
+Verification separates static candidate identity from deterministic edge identity. Compare non-transformed paths byte-for-byte and by SHA-256 with the candidate. For an authorized HTMLRewriter route, derive expected response bytes using the same deterministic transformation as the Worker and compare those bytes/hash to the Version URL or Production response. Keep each exact route independently authorized; never broaden the route allowlist to fix a verifier mismatch.
+
+Before upload, verify the current Production deployment/version/100% traffic, baseline binding, candidate inventory/diff, Publication State, exact-route security cases, and formal regression suite. The normal human approval gates are: (1) Version Upload for the one locale and (2) switch of that verified Version to 100% Production traffic. Do not upload another Version or change Production without its corresponding approval. Verify the Version URL before the switch; after the switch, verify sentinels and all known candidate paths. On verification failure, restore only that locale's recorded previous Version, confirm 100% traffic and sentinel recovery, and do not establish a new Baseline. On full PASS, create the next artifact, canonical receipt, and attestation bound to the deployment/version and verification evidence; perform a clean extraction/inventory round-trip before marking the Baseline established.
+
+Execute builds and candidate verification from local SSD working storage. Google Drive is durable storage for source-of-truth records and approved evidence, not the execution directory for I/O-intensive generation. Record and verify hashes when copying. Do not make a local temporary copy the durable Production source of truth or bind machine-specific absolute paths into release plans/configuration.
+
+Normal operation is single-page generation only. Never invoke Astro full build, `maintenance:full-build`, `prepare-release.mjs`, or site-wide generation as a normal release or fallback. The maintenance full build is an explicit maintenance/migration/disaster-recovery operation only, separately authorized and invoked by its dedicated command.
 
 ## Maintenance
 
-`npm run maintenance:full-build`はmaintenance / migration / disaster recovery専用。通常の記事追加・更新・deploy・rollbackから暗黙に呼ばない。6言語・全guide・topicsへの展開は、個別に承認された別milestoneとして扱う。
+`npm run maintenance:full-build` is for explicitly authorized maintenance, migration, or disaster recovery only. It is never an implicit fallback for normal Promotion, deploy, verification, or rollback. Any full-site regeneration requires a separate scope and authorization.
 
 外国語の通常の内部リンクは同一言語に保つ。未翻訳先を日本語へフォールバックさせない。明示的な言語切替と外部公式サイトは別扱いにし、日本語の外部情報はその旨を表示する。削除・リンク無効化を行った場合は報告する。
 
-## 公開とrollback
+## Release approval and rollback
 
-- 公開承認がある日本語対象だけ、正式runbookと`npm run deploy -- ja`を使用する。現時点で他言語を同じ操作へ含めない。
-- 通常の`wrangler deploy`、`wrangler versions upload`を直接実行してguardを迂回しない。bootstrapとmaintenanceは専用config/commandへ隔離する。`--skip-custom-build`、guard削除、旧HTMLコピー、別configで失敗を隠さない。
+- Release one approved locale at a time through the guarded Promotion release path. The normal human gates are Version Upload and Production switch; approval for one does not authorize the other.
+- Do not invoke `wrangler deploy` or `wrangler versions upload` directly to bypass the guard. Bootstrap and maintenance remain isolated behind their dedicated configuration/command. Do not use `--skip-custom-build`, remove guards, copy old HTML, or hide failures with another config.
 - 切替直前のProduction versionをrollback targetとして保持する。重大問題時はcurrent stateを再確認してversion rollbackし、Astro full buildをrollback手段にしない。その場で修正再deployしない。
 - GitHubのプッシュ成功、Cloudflareのビルド成功、デプロイ成功、本番確認を別々に報告する。本番URLのHTTP・言語・変更内容を確認しない限り「公開完了」としない。
 - ログの原因を解消して再試行する。認証、権限、決済、破壊的変更など新たな権限が必要なら停止し、必要な対応だけを引き継ぐ。認証情報は出力しない。

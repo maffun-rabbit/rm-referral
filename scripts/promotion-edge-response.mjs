@@ -4,6 +4,7 @@ const visibleStates=new Set(['PRODUCTION_VERIFIED','CURRENT_RELEASE_CANDIDATE'])
 const knownStates=new Set([...visibleStates,'UNPUBLISHED','VERSION_UPLOADED','PRODUCTION_FAILED','ROLLED_BACK']);
 const fail=message=>{throw new Error('PROMOTION EDGE RESPONSE: '+message);};
 const escape=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+export const RETAINED_JA_P0_PATHNAME='/guide/rakuten-mobile-three-features/';
 
 export function validatePublicationState(state,{promotionId,slug,currentLocale}={}){
   if(state?.schema!==1||state.promotionId!==promotionId||state.slug!==slug||state.currentLocale!==currentLocale)fail('Publication State header mismatch');
@@ -63,15 +64,25 @@ function includeMatch(html,src){
   return html.match(new RegExp(`<rm-include\\s+src="${escaped}"([^>]*)>([\\s\\S]*?)<\\/rm-include>`));
 }
 
-export function transformPromotionEdgeResponse({staticHtml,locale,pathname,headerHtml,footerHtml,publicationState,promotionId,slug}){
-  const {publicationLocales:locales}=validatePromotionStaticPublication({html:staticHtml,locale,slug,publicationState,promotionId});
-  if(pathname!==getTopicPath(locale,slug))fail('Authorized pathname mismatch');
+function transformExactIncludeEdgeResponse({staticHtml,locale,pathname,headerHtml,footerHtml,publicationLocales}){
+  if(typeof staticHtml!=='string'||typeof headerHtml!=='string'||typeof footerHtml!=='string')fail('Expected deterministic edge inputs');
   const headerPath=getIncludePath(locale,'header'),footerPath=getIncludePath(locale,'footer');
   const header=includeMatch(staticHtml,headerPath),footer=includeMatch(staticHtml,footerPath);
   if(!header||!footer)fail('Expected include wrapper is missing');
   const declared=(header[1].match(/\bdata-locales="([^"]*)"/)?.[1]??'').split(',').filter(Boolean);
-  if(JSON.stringify(declared)!==JSON.stringify(locales))fail('Static publication locale binding mismatch');
+  if(JSON.stringify(declared)!==JSON.stringify(publicationLocales))fail('Static publication locale binding mismatch');
   const label=(header[1].match(/\bdata-header-label="([^"]*)"/)?.[1]??'').replaceAll('&quot;','"').replaceAll('&#39;',"'").replaceAll('&lt;','<').replaceAll('&gt;','>').replaceAll('&amp;','&');
-  const transformedHeader=transformHeaderInclude({html:headerHtml,locale,pathname,publicationLocales:locales,label});
+  const transformedHeader=transformHeaderInclude({html:headerHtml,locale,pathname,publicationLocales,label});
   return staticHtml.replace(header[0],transformedHeader).replace(footer[0],footerHtml);
+}
+
+export function transformRetainedJaP0EdgeResponse({staticHtml,locale,pathname,headerHtml,footerHtml}){
+  if(locale!=='ja'||pathname!==RETAINED_JA_P0_PATHNAME)fail('Retained JA P0 exact pathname mismatch');
+  return transformExactIncludeEdgeResponse({staticHtml,locale,pathname,headerHtml,footerHtml,publicationLocales:['ja']});
+}
+
+export function transformPromotionEdgeResponse({staticHtml,locale,pathname,headerHtml,footerHtml,publicationState,promotionId,slug}){
+  const {publicationLocales:locales}=validatePromotionStaticPublication({html:staticHtml,locale,slug,publicationState,promotionId});
+  if(pathname!==getTopicPath(locale,slug))fail('Authorized pathname mismatch');
+  return transformExactIncludeEdgeResponse({staticHtml,locale,pathname,headerHtml,footerHtml,publicationLocales:locales});
 }

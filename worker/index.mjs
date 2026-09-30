@@ -1,7 +1,7 @@
 import {getIncludePath} from '../scripts/locale-mapping.mjs';
-import {transformHeaderInclude} from '../scripts/promotion-edge-response.mjs';
+import {RETAINED_JA_P0_PATHNAME,transformHeaderInclude} from '../scripts/promotion-edge-response.mjs';
 
-export const PILOT_PATHNAME = "/guide/rakuten-mobile-three-features/";
+export const PILOT_PATHNAME = RETAINED_JA_P0_PATHNAME;
 
 export function approvedPathname(env) {
   const value = env.APPROVED_PROMOTION_PATHNAME ?? "";
