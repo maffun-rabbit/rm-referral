@@ -1,42 +1,46 @@
 {
   "locale": "vi",
   "route": "guide/replacement-program",
-  "title": "Chương trình đổi điện thoại của Rakuten Mobile",
-  "description": "Hiểu khoản trả góp, điều kiện trả máy và chi phí trước khi chọn điện thoại mới.",
+  "title": "Chương trình đổi máy Rakuten Mobile: thời điểm trả và chi phí",
+  "description": "Tìm hiểu 48 kỳ trả góp, trả máy từ tháng 25–47, điều kiện miễn phần còn lại, trường hợp không trả máy và phí hư hỏng theo thời điểm mua.",
   "robots": "index,follow",
   "canonical": "https://mnp-navi.jp/vi/guide/replacement-program/",
-  "schemas": [],
+  "schemas": [
+    "{\"@context\":\"https://schema.org\",\"@type\":\"WebPage\",\"name\":\"Chương trình đổi máy Rakuten Mobile: thời điểm trả và chi phí\",\"description\":\"Tìm hiểu 48 kỳ trả góp, trả máy từ tháng 25–47, điều kiện miễn phần còn lại, trường hợp không trả máy và phí hư hỏng theo thời điểm mua.\",\"url\":\"https://mnp-navi.jp/vi/guide/replacement-program/\",\"dateModified\":\"2026-10-01\",\"inLanguage\":\"vi\"}",
+    "{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Trang chủ\",\"item\":\"https://mnp-navi.jp/vi/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Chương trình đổi máy Rakuten Mobile: thời điểm trả và chi phí\",\"item\":\"https://mnp-navi.jp/vi/guide/replacement-program/\"}]}",
+    "{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Tôi có thể trả máy ở tháng 25 không?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Bạn có thể yêu cầu trả máy từ tháng 25 đến tháng 47. Ngày chính xác tùy hợp đồng; hãy xem Thông tin thiết bị trong my Rakuten Mobile. Có phí thủ tục ¥3.300.\"}},{\"@type\":\"Question\",\"name\":\"Nếu không trả máy thì sao?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Bạn tiếp tục thanh toán đến kỳ 48. Khi hết 48 tháng, chương trình tự kết thúc và bạn giữ thiết bị mà không cần trả lại.\"}},{\"@type\":\"Question\",\"name\":\"Hủy đường truyền rồi vẫn trả máy được không?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Hợp đồng đường truyền và trả góp/chương trình thiết bị là riêng biệt. Hủy đường truyền không dừng thanh toán thiết bị. Hãy kiểm tra hợp đồng và yêu cầu trả máy trong my Rakuten Mobile.\"}},{\"@type\":\"Question\",\"name\":\"Phí hư hỏng là bao nhiêu?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Với thiết bị mua từ 9:00 ngày 23/7/2026, mức phí tùy mẫu máy. Thiết bị mua trước hoặc lúc 8:59 cùng ngày áp dụng mức cũ ¥22.000 (không chịu thuế). Hãy kiểm tra mức mới và điều kiện bảo hành.\"}},{\"@type\":\"Question\",\"name\":\"Nếu thiết bị không được chấp nhận thì sao?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Thiết bị sẽ bị trả lại và toàn bộ dư nợ có thể bị thu một lần. Hãy tắt khóa màn hình, tài khoản liên kết và tính năng tìm thiết bị, đồng thời kiểm tra điều kiện chính thức.\"}}]}"
+  ],
   "styles": [],
   "scripts": [],
-  "mainHtml": "<main class=\"localized-program\"><nav><a href=\"/vi/\">Trang chủ</a><a href=\"/en/guide/replacement-program/\" lang=\"en\">EN</a><a href=\"/zh/guide/replacement-program/\" lang=\"zh\">ZH</a><a href=\"/ko/guide/replacement-program/\" lang=\"ko\">KO</a><a href=\"/vi/guide/replacement-program/\" lang=\"vi\" aria-current=\"page\">VI</a><a href=\"/pt/guide/replacement-program/\" lang=\"pt\">PT</a></nav><h1>Chương trình đổi điện thoại của Rakuten Mobile</h1><p class=\"lead\">Hiểu khoản trả góp, điều kiện trả máy và chi phí trước khi chọn điện thoại mới.</p><section><h2>Chương trình hoạt động thế nào?</h2><p>Mua điện thoại đủ điều kiện bằng 48 kỳ trả góp với thẻ Rakuten Card đứng tên bạn. Từ tháng thứ 25, nếu trả máy và đáp ứng tiêu chuẩn kiểm tra, bạn có thể được miễn tối đa 24 kỳ còn lại. Đây không phải cách trả nửa giá rồi giữ điện thoại.</p></section><section><h2>Trả máy hay tiếp tục dùng?</h2><p>Khi trả máy có phí thủ tục. Máy hỏng có thể bị tính thêm phí hoặc không được tiếp nhận. Nếu giữ máy, bạn thanh toán đủ 48 kỳ. Hủy thuê bao di động không làm chấm dứt khoản trả góp thiết bị.</p></section><section><h2>Ví dụ chi phí</h2><p>Giả sử máy giá 120.000 yên và mỗi kỳ bằng nhau: 2.500 yên × 24 kỳ + phí trả máy 3.300 yên = 63.300 yên. Bạn phải trả lại máy. Ví dụ chưa gồm phí hư hỏng và cước di động; lịch thanh toán thực tế tùy sản phẩm và ưu đãi.</p></section><section><h2>Kiểm tra trước khi đăng ký</h2><p>Bạn phải tham gia khi mua thiết bị đủ điều kiện, không thể đăng ký thêm sau đó. Kiểm tra mẫu máy, lịch trả góp và yêu cầu trả máy. Phí hư hỏng có thể là 22.000 yên hoặc cao hơn tùy mẫu và tình trạng; một số máy không được thu hồi.</p></section><section><h2>Chuẩn bị trả máy</h2><p>Sao lưu dữ liệu, gỡ khóa tài khoản rồi khôi phục cài đặt gốc. Gửi trả theo hướng dẫn và đúng hạn. Nếu muốn dùng một máy nhiều năm, hãy so sánh tổng chi phí với mua trả thẳng.</p></section><section><h2>Bài hướng dẫn liên quan</h2><ul><li><a href=\"/vi/guide/topics/replacement-program-android/\">Điều kiện dành cho Android</a></li><li><a href=\"/vi/guide/topics/replacement-program-disadvantages/\">Nhược điểm và lưu ý</a></li></ul></section><footer><p>Kiểm tra ngày 13/09/2026. Điều kiện có thể thay đổi.</p><a href=\"https://network.mobile.rakuten.co.jp/service/replacement-program/\" rel=\"noopener\">Điều khoản chính thức (tiếng Nhật)</a></footer></main>",
+  "mainHtml": "<main class=\"program-page\" data-component=\"replacement-program-v2\"><nav class=\"breadcrumb\" aria-label=\"Breadcrumb\"><a href=\"/vi/\">Trang chủ</a><span aria-hidden=\"true\">›</span><span>Chương trình đổi máy Rakuten Mobile: thời điểm trả và chi phí</span></nav><section class=\"program-hero\"><div><p class=\"eyebrow\">HƯỚNG DẪN ĐỔI MÁY</p><h1>Hiểu chương trình đổi máy<br><span>một cách đơn giản.</span></h1><p class=\"program-hero-message\">Mua thiết bị đủ điều kiện theo 48 kỳ. Nếu trả máy trong tháng 25–47 và đáp ứng điều kiện kiểm tra, các kỳ còn lại được miễn; nếu không trả, bạn tiếp tục thanh toán đến kỳ 48.</p><div class=\"program-hero-actions\"><a class=\"button\" href=\"#how-it-works\">Xem cách hoạt động ↓</a><a class=\"program-text-link\" href=\"https://network.mobile.rakuten.co.jp/service/replacement-program/\" rel=\"noopener\">Xem trang chính thức ↗ (tiếng Nhật)</a></div></div><aside class=\"program-summary-card\"><p class=\"pill\">Hãy nhớ 3 con số</p><ol><li><b>48</b><span>Kỳ trả góp thiết bị</span></li><li><b>25–47</b><span>Tháng có thể yêu cầu trả máy</span></li><li><b>Tối đa 24</b><span>Kỳ còn lại có thể được miễn</span></li></ol></aside></section><section class=\"program-answer\" id=\"how-it-works\"><p class=\"section-label\">CÁCH HOẠT ĐỘNG</p><h2>Chỉ được miễn số tiền còn lại khi trả máy và đạt điều kiện</h2><p>Đây là chương trình trả góp thiết bị trong 48 kỳ. Nếu trả máy trong tháng 25–47 và đáp ứng tiêu chuẩn kiểm tra của Rakuten Mobile, các kỳ sau được miễn. Đây không phải chương trình luôn mua máy với nửa giá; bạn còn phải tính phí thủ tục ¥3.300 và phí theo tình trạng thiết bị. Nếu không trả máy, bạn thanh toán đến kỳ 48; hết tháng 48 chương trình tự kết thúc và không cần trả máy.</p></section><section class=\"program-section\"><div class=\"program-section-heading\"><p class=\"section-label\">LỊCH THANH TOÁN</p><h2>Quy trình theo thời gian</h2></div><ol class=\"payment-timeline\"><li><span>Khi mua</span><div><b>Chọn thiết bị đủ điều kiện và trả 48 kỳ</b><p>Phải tham gia lúc mua và dùng Rakuten Card chính chủ.</p></div></li><li><span>Tháng 1–24</span><div><b>Trả tiền thiết bị mỗi tháng</b><p>Số tiền thay đổi theo thiết bị và chương trình.</p></div></li><li class=\"timeline-choice\"><span>Tháng 25–47</span><div><b>Chọn trả máy hoặc tiếp tục sử dụng</b><p>Kiểm tra ngày đủ điều kiện chính xác trong mục Thông tin thiết bị của my Rakuten Mobile, rồi yêu cầu chỉ trả máy hoặc đổi máy.</p></div></li></ol><div class=\"choice-grid\"><article><p class=\"pill\">Hoàn máy</p><h3>Có thể được miễn phần còn lại</h3><p>Nếu đạt kiểm tra, các kỳ sau được miễn. Khi trả máy có phí thủ tục ¥3.300.</p></article><article><p class=\"pill\">Giữ máy</p><h3>Trả đủ 48 kỳ</h3><p>Nếu không trả, bạn tiếp tục thanh toán đến kỳ 48. Hết tháng 48 chương trình tự kết thúc và không cần trả thiết bị.</p></article></div></section><section class=\"program-section program-example\"><div class=\"program-section-heading\"><p class=\"section-label\">VÍ DỤ</p><h2>Ví dụ máy giá 120.000 yên</h2></div><p class=\"example-note\">Ví dụ đơn giản với số tiền mỗi kỳ bằng nhau.</p><div class=\"example-formula\"><div><span>Giá thiết bị</span><strong>¥120,000</strong></div><b>÷</b><div><span>48 kỳ</span><strong>¥2,500</strong></div></div><div class=\"example-result\"><div><span>Đã trả 24 kỳ</span><strong>¥60,000</strong></div><span aria-hidden=\"true\">＋</span><div><span>Phí hoàn máy</span><strong>¥3,300</strong></div><span aria-hidden=\"true\">＝</span><div class=\"example-total\"><span>Tổng ví dụ</span><strong>¥63,300</strong></div></div><p class=\"caution\">Chưa gồm phí hư hỏng và cước liên lạc.</p></section><section class=\"program-section\"><div class=\"program-section-heading\"><p class=\"section-label\">PHÙ HỢP VỚI AI?</p><h2>Trường hợp phù hợp và cần cân nhắc</h2></div><div class=\"fit-grid\"><article class=\"fit-card good\"><h3><span>○</span>Có thể phù hợp</h3><ul><li>Đổi máy khoảng hai năm một lần</li><li>Muốn giảm tiền thiết bị mỗi tháng</li><li>Có thể giữ máy trong tình trạng tốt</li><li>Có Rakuten Card</li></ul></article><article class=\"fit-card caution-card\"><h3><span>△</span>Nên cân nhắc</h3><ul><li>Dùng một máy trong 3–4 năm</li><li>Muốn giữ lại máy cũ</li><li>Lo máy bị vỡ hoặc vào nước</li><li>Muốn thanh toán bằng thẻ khác</li></ul></article></div></section><section class=\"program-section program-cautions\"><div class=\"program-section-heading\"><p class=\"section-label\">QUAN TRỌNG</p><h2>Điểm cần kiểm tra trước khi đăng ký</h2></div><div class=\"caution-grid\"><article><b>01</b><h3>Cần Rakuten Card</h3><p>Thẻ phải đứng tên người đăng ký.</p></article><article><b>02</b><h3>Đăng ký lúc mua</h3><p>Không thể tham gia sau khi mua.</p></article><article><b>03</b><h3>Phí hoàn máy</h3><p>Có phí xử lý khi hoàn thiết bị.</p></article><article><b>04</b><h3>Hư hỏng có thể tốn thêm</h3><p>Có thể bị thu thêm phí hoặc từ chối nhận.</p></article><article><b>05</b><h3>Xóa dữ liệu</h3><p>Sao lưu, mở khóa tài khoản và khôi phục cài đặt gốc.</p></article><article><b>06</b><h3>Xem điều kiện mới nhất</h3><p>Kiểm tra điều khoản chính thức trước khi đăng ký.</p></article></div><div class=\"damage-note\"><strong>Phí hư hỏng phụ thuộc thời điểm mua</strong><p>Với thiết bị mua từ 9:00 ngày 23/7/2026, phí hư hỏng khác nhau theo mẫu máy. Thiết bị mua trước hoặc lúc 8:59 cùng ngày vẫn áp dụng mức cũ ¥22.000 (không chịu thuế). Hãy kiểm tra mức mới theo mẫu và điều kiện bảo hành. Thiết bị không được chấp nhận sẽ bị trả lại và toàn bộ dư nợ có thể bị thu một lần.</p></div></section><section class=\"program-section\"><div class=\"program-section-heading\"><p class=\"section-label\">CÁC BƯỚC</p><h2>Từ lúc mua đến khi hoàn máy</h2></div><ol class=\"program-steps\"><li><b>1</b><div><h3>Chọn thiết bị đủ điều kiện</h3><p>Kiểm tra trên trang thiết bị.</p></div></li><li><b>2</b><div><h3>Chọn chương trình khi mua</h3><p>Chọn trả 48 kỳ bằng Rakuten Card.</p></div></li><li><b>3</b><div><h3>Tiếp tục trả góp</h3><p>Thanh toán bắt đầu từ tháng bạn nhận thiết bị.</p></div></li><li><b>4</b><div><h3>Yêu cầu trong tháng 25–47</h3><p>Kiểm tra ngày chính xác trong my Rakuten Mobile, rồi yêu cầu chỉ trả máy hoặc đổi máy.</p></div></li><li><b>5</b><div><h3>Sao lưu và đặt lại</h3><p>Gỡ khóa và xóa dữ liệu cá nhân.</p></div></li><li><b>6</b><div><h3>Hoàn máy đúng hạn</h3><p>Gửi theo hướng dẫn và chờ kiểm định.</p></div></li></ol></section><section class=\"program-section faq-home program-faq\"><div class=\"program-section-heading\"><p class=\"section-label\">FAQ</p><h2>Câu hỏi thường gặp</h2></div><div class=\"faq-list\"><details><summary>Tôi có thể trả máy ở tháng 25 không?<span aria-hidden=\"true\">＋</span></summary><p>Bạn có thể yêu cầu trả máy từ tháng 25 đến tháng 47. Ngày chính xác tùy hợp đồng; hãy xem Thông tin thiết bị trong my Rakuten Mobile. Có phí thủ tục ¥3.300.</p></details><details><summary>Nếu không trả máy thì sao?<span aria-hidden=\"true\">＋</span></summary><p>Bạn tiếp tục thanh toán đến kỳ 48. Khi hết 48 tháng, chương trình tự kết thúc và bạn giữ thiết bị mà không cần trả lại.</p></details><details><summary>Hủy đường truyền rồi vẫn trả máy được không?<span aria-hidden=\"true\">＋</span></summary><p>Hợp đồng đường truyền và trả góp/chương trình thiết bị là riêng biệt. Hủy đường truyền không dừng thanh toán thiết bị. Hãy kiểm tra hợp đồng và yêu cầu trả máy trong my Rakuten Mobile.</p></details><details><summary>Phí hư hỏng là bao nhiêu?<span aria-hidden=\"true\">＋</span></summary><p>Với thiết bị mua từ 9:00 ngày 23/7/2026, mức phí tùy mẫu máy. Thiết bị mua trước hoặc lúc 8:59 cùng ngày áp dụng mức cũ ¥22.000 (không chịu thuế). Hãy kiểm tra mức mới và điều kiện bảo hành.</p></details><details><summary>Nếu thiết bị không được chấp nhận thì sao?<span aria-hidden=\"true\">＋</span></summary><p>Thiết bị sẽ bị trả lại và toàn bộ dư nợ có thể bị thu một lần. Hãy tắt khóa màn hình, tài khoản liên kết và tính năng tìm thiết bị, đồng thời kiểm tra điều kiện chính thức.</p></details></div></section><section class=\"program-section\"><div class=\"program-section-heading\"><h2>Bài hướng dẫn liên quan</h2></div><ul><li><a href=\"/vi/guide/topics/replacement-program-android/\">Điều kiện dành cho Android</a></li><li><a href=\"/vi/guide/topics/replacement-program-disadvantages/\">Nhược điểm và lưu ý</a></li></ul></section><section class=\"source-panel\"><h2>Hãy kiểm tra thông tin chính thức mới nhất</h2><p>Mẫu máy, số tiền hằng tháng, phí hư hỏng và điều kiện trả có thể thay đổi. Hợp đồng đường truyền và chương trình thiết bị là riêng biệt; hủy đường truyền không dừng trả góp. Hãy kiểm tra điều khoản chính thức và ngày trả chính xác trong my Rakuten Mobile.</p><div class=\"source-actions\"><a class=\"button\" href=\"https://network.mobile.rakuten.co.jp/service/replacement-program/\" rel=\"noopener\">Trang chương trình chính thức ↗ (tiếng Nhật)</a><a class=\"official-link\" href=\"https://network.mobile.rakuten.co.jp/guide/replacement-program/\" rel=\"noopener\">Cách hoàn máy chính thức ↗ (tiếng Nhật)</a><a class=\"official-link\" href=\"https://network.mobile.rakuten.co.jp/information/news/service/3781/\" rel=\"noopener\">Thay đổi phí hư hỏng và điều kiện theo ngày mua ↗ (tiếng Nhật)</a></div><p class=\"updated\">Ngày kiểm tra thông tin chính thức: 1/10/2026</p></section><section class=\"final-cta program-final-cta\"><p class=\"eyebrow\">TIẾP THEO</p><h2>Kiểm tra cả ưu đãi chuyển mạng</h2><p>Hãy kiểm tra riêng điều kiện giới thiệu và mua thiết bị, rồi đăng ký đúng thứ tự.</p><a class=\"button light\" href=\"https://go.mnp-navi.jp/r/switching-guide_vi_topics-replacement\" rel=\"sponsored nofollow noopener\">Xem chương trình giới thiệu →</a><p class=\"updated\">Trang này có chứa liên kết giới thiệu.</p></section></main>",
   "program": {
-    "title": "Chương trình đổi điện thoại của Rakuten Mobile",
-    "description": "Hiểu khoản trả góp, điều kiện trả máy và chi phí trước khi chọn điện thoại mới.",
+    "title": "Chương trình đổi máy Rakuten Mobile: thời điểm trả và chi phí",
+    "description": "Tìm hiểu 48 kỳ trả góp, trả máy từ tháng 25–47, điều kiện miễn phần còn lại, trường hợp không trả máy và phí hư hỏng theo thời điểm mua.",
     "home": "Trang chủ",
     "eyebrow": "HƯỚNG DẪN ĐỔI MÁY",
     "heading": "Hiểu chương trình đổi máy",
     "headingAccent": "một cách đơn giản.",
-    "lead": "Mua thiết bị đủ điều kiện theo 48 kỳ. Từ tháng 25, nếu hoàn máy và đạt kiểm định, tối đa 24 kỳ còn lại có thể được miễn.",
+    "lead": "Mua thiết bị đủ điều kiện theo 48 kỳ. Nếu trả máy trong tháng 25–47 và đáp ứng điều kiện kiểm tra, các kỳ còn lại được miễn; nếu không trả, bạn tiếp tục thanh toán đến kỳ 48.",
     "jump": "Xem cách hoạt động ↓",
     "official": "Xem trang chính thức ↗ (tiếng Nhật)",
     "summaryLabel": "Hãy nhớ 3 con số",
     "summary": [
       [
         "48",
-        "Số kỳ trả góp thiết bị"
+        "Kỳ trả góp thiết bị"
       ],
       [
-        "25",
-        "Tháng có thể bắt đầu hoàn máy"
+        "25–47",
+        "Tháng có thể yêu cầu trả máy"
       ],
       [
         "Tối đa 24",
-        "Số kỳ còn lại có thể được miễn"
+        "Kỳ còn lại có thể được miễn"
       ]
     ],
     "answerLabel": "CÁCH HOẠT ĐỘNG",
-    "answerTitle": "Đây không phải là chương trình trả một nửa rồi được sở hữu máy.",
-    "answerBody": "Muốn được miễn phần còn lại, bạn phải hoàn máy từ tháng 25 và đạt kiểm định. Nếu giữ máy, bạn tiếp tục trả đủ 48 kỳ.",
+    "answerTitle": "Chỉ được miễn số tiền còn lại khi trả máy và đạt điều kiện",
+    "answerBody": "Đây là chương trình trả góp thiết bị trong 48 kỳ. Nếu trả máy trong tháng 25–47 và đáp ứng tiêu chuẩn kiểm tra của Rakuten Mobile, các kỳ sau được miễn. Đây không phải chương trình luôn mua máy với nửa giá; bạn còn phải tính phí thủ tục ¥3.300 và phí theo tình trạng thiết bị. Nếu không trả máy, bạn thanh toán đến kỳ 48; hết tháng 48 chương trình tự kết thúc và không cần trả máy.",
     "timelineLabel": "LỊCH THANH TOÁN",
     "timelineTitle": "Quy trình theo thời gian",
     "timeline": [
@@ -51,17 +55,17 @@
         "body": "Số tiền thay đổi theo thiết bị và chương trình."
       },
       {
-        "when": "Từ tháng 25",
-        "title": "Chọn hoàn máy hoặc tiếp tục sử dụng",
-        "body": "Theo điều kiện hiện hành, có thể làm thủ tục đến tháng 47."
+        "when": "Tháng 25–47",
+        "title": "Chọn trả máy hoặc tiếp tục sử dụng",
+        "body": "Kiểm tra ngày đủ điều kiện chính xác trong mục Thông tin thiết bị của my Rakuten Mobile, rồi yêu cầu chỉ trả máy hoặc đổi máy."
       }
     ],
     "returnLabel": "Hoàn máy",
     "returnTitle": "Có thể được miễn phần còn lại",
-    "returnBody": "Sau khi đạt kiểm định, các kỳ sau được miễn; có phí xử lý hoàn máy.",
+    "returnBody": "Nếu đạt kiểm tra, các kỳ sau được miễn. Khi trả máy có phí thủ tục ¥3.300.",
     "keepLabel": "Giữ máy",
     "keepTitle": "Trả đủ 48 kỳ",
-    "keepBody": "Tiếp tục sử dụng và thanh toán toàn bộ.",
+    "keepBody": "Nếu không trả, bạn tiếp tục thanh toán đến kỳ 48. Hết tháng 48 chương trình tự kết thúc và không cần trả thiết bị.",
     "exampleLabel": "VÍ DỤ",
     "exampleTitle": "Ví dụ máy giá 120.000 yên",
     "exampleNote": "Ví dụ đơn giản với số tiền mỗi kỳ bằng nhau.",
@@ -115,8 +119,8 @@
         "body": "Kiểm tra điều khoản chính thức trước khi đăng ký."
       }
     ],
-    "damageTitle": "Phí hư hỏng",
-    "damageBody": "Tùy máy và tình trạng, hư hỏng thuộc diện áp dụng có thể phát sinh 22.000 yên.",
+    "damageTitle": "Phí hư hỏng phụ thuộc thời điểm mua",
+    "damageBody": "Với thiết bị mua từ 9:00 ngày 23/7/2026, phí hư hỏng khác nhau theo mẫu máy. Thiết bị mua trước hoặc lúc 8:59 cùng ngày vẫn áp dụng mức cũ ¥22.000 (không chịu thuế). Hãy kiểm tra mức mới theo mẫu và điều kiện bảo hành. Thiết bị không được chấp nhận sẽ bị trả lại và toàn bộ dư nợ có thể bị thu một lần.",
     "stepsLabel": "CÁC BƯỚC",
     "stepsTitle": "Từ lúc mua đến khi hoàn máy",
     "steps": [
@@ -129,12 +133,12 @@
         "body": "Chọn trả 48 kỳ bằng Rakuten Card."
       },
       {
-        "title": "Trả 24 kỳ đầu",
-        "body": "Bắt đầu từ tháng nhận thiết bị."
+        "title": "Tiếp tục trả góp",
+        "body": "Thanh toán bắt đầu từ tháng bạn nhận thiết bị."
       },
       {
-        "title": "Đăng ký từ tháng 25",
-        "body": "Làm thủ tục trên my Rakuten Mobile hoặc cửa hàng đủ điều kiện."
+        "title": "Yêu cầu trong tháng 25–47",
+        "body": "Kiểm tra ngày chính xác trong my Rakuten Mobile, rồi yêu cầu chỉ trả máy hoặc đổi máy."
       },
       {
         "title": "Sao lưu và đặt lại",
@@ -149,27 +153,31 @@
     "faqTitle": "Câu hỏi thường gặp",
     "faq": [
       {
-        "title": "Trả 24 kỳ thì máy thuộc về tôi?",
-        "body": "Không. Phải hoàn máy hợp lệ và đạt kiểm định mới có thể được miễn phần còn lại."
+        "title": "Tôi có thể trả máy ở tháng 25 không?",
+        "body": "Bạn có thể yêu cầu trả máy từ tháng 25 đến tháng 47. Ngày chính xác tùy hợp đồng; hãy xem Thông tin thiết bị trong my Rakuten Mobile. Có phí thủ tục ¥3.300."
       },
       {
-        "title": "Có thể dùng thẻ khác không?",
-        "body": "Không. Cần Rakuten Card chính chủ."
+        "title": "Nếu không trả máy thì sao?",
+        "body": "Bạn tiếp tục thanh toán đến kỳ 48. Khi hết 48 tháng, chương trình tự kết thúc và bạn giữ thiết bị mà không cần trả lại."
       },
       {
-        "title": "Mua xong mới tham gia được không?",
-        "body": "Không. Phải chọn khi mua."
+        "title": "Hủy đường truyền rồi vẫn trả máy được không?",
+        "body": "Hợp đồng đường truyền và trả góp/chương trình thiết bị là riêng biệt. Hủy đường truyền không dừng thanh toán thiết bị. Hãy kiểm tra hợp đồng và yêu cầu trả máy trong my Rakuten Mobile."
       },
       {
-        "title": "Hủy gói di động thì tiền máy dừng không?",
-        "body": "Không. Hợp đồng liên lạc và trả góp thiết bị là riêng biệt."
+        "title": "Phí hư hỏng là bao nhiêu?",
+        "body": "Với thiết bị mua từ 9:00 ngày 23/7/2026, mức phí tùy mẫu máy. Thiết bị mua trước hoặc lúc 8:59 cùng ngày áp dụng mức cũ ¥22.000 (không chịu thuế). Hãy kiểm tra mức mới và điều kiện bảo hành."
+      },
+      {
+        "title": "Nếu thiết bị không được chấp nhận thì sao?",
+        "body": "Thiết bị sẽ bị trả lại và toàn bộ dư nợ có thể bị thu một lần. Hãy tắt khóa màn hình, tài khoản liên kết và tính năng tìm thiết bị, đồng thời kiểm tra điều kiện chính thức."
       }
     ],
     "sourceTitle": "Hãy kiểm tra thông tin chính thức mới nhất",
-    "sourceBody": "Thiết bị, số tiền, ưu đãi và điều kiện hoàn máy có thể thay đổi.",
+    "sourceBody": "Mẫu máy, số tiền hằng tháng, phí hư hỏng và điều kiện trả có thể thay đổi. Hợp đồng đường truyền và chương trình thiết bị là riêng biệt; hủy đường truyền không dừng trả góp. Hãy kiểm tra điều khoản chính thức và ngày trả chính xác trong my Rakuten Mobile.",
     "sourceButton": "Trang chương trình chính thức ↗ (tiếng Nhật)",
     "sourceProcedure": "Cách hoàn máy chính thức ↗ (tiếng Nhật)",
-    "checked": "Ngày kiểm tra: 13/09/2026",
+    "checked": "Ngày kiểm tra thông tin chính thức: 1/10/2026",
     "ctaLabel": "TIẾP THEO",
     "ctaTitle": "Kiểm tra cả ưu đãi chuyển mạng",
     "ctaBody": "Hãy kiểm tra riêng điều kiện giới thiệu và mua thiết bị, rồi đăng ký đúng thứ tự.",
@@ -185,6 +193,9 @@
         "label": "Nhược điểm và lưu ý",
         "href": "/vi/guide/topics/replacement-program-disadvantages/"
       }
-    ]
+    ],
+    "damageSourceHref": "https://network.mobile.rakuten.co.jp/information/news/service/3781/",
+    "damageSourceLabel": "Thay đổi phí hư hỏng và điều kiện theo ngày mua ↗ (tiếng Nhật)",
+    "ctaHref": "https://go.mnp-navi.jp/r/switching-guide_vi_topics-replacement"
   }
 }

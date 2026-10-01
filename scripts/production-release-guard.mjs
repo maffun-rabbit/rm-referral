@@ -5,10 +5,11 @@ import {inventorySha256,topicMapping} from './promotion-release.mjs';
 import {LOCALE_RUNTIME} from './promotion-production.mjs';
 import {validatePublicationState,validatePromotionStaticPublication,visiblePromotionLocales} from './promotion-edge-response.mjs';
 import {publicationStateSha256} from './publication-state-node.mjs';
+import {verifyGuidePlan} from './guide-release.mjs';
 
 const fail=message=>{throw new Error('PRODUCTION RELEASE GUARD: '+message);};
 export async function verifyProductionCandidate({plan,approvedPlanSha256,candidate,config,locale}){
-  if(!plan||!['foundation','promotion'].includes(plan.kind))fail('Unknown release kind');
+  if(!plan||!['foundation','promotion','guide-single-page'].includes(plan.kind))fail('Unknown release kind');
   if(sha256(Buffer.from(JSON.stringify(plan)))!==approvedPlanSha256)fail('Plan hash mismatch');
   const runtime=LOCALE_RUNTIME[locale];
   if(!runtime||plan.locale!==locale||plan.worker!==runtime.worker||plan.config!==config)fail('Locale/Worker/config mismatch');
@@ -17,7 +18,10 @@ export async function verifyProductionCandidate({plan,approvedPlanSha256,candida
   if(plan.deleted?.length)fail('Deleted assets are forbidden');
   const allowed=new Set(plan.allowedChangedPaths??[]);
   if((plan.changed??[]).some(p=>!allowed.has(p))||(plan.added??[]).some(p=>!allowed.has(p)))fail('Allowlist mismatch');
-  if(plan.kind==='promotion'){
+  if(plan.kind==='guide-single-page'){
+    if(!plan.baselineDirectory)fail('Guide baseline directory missing');
+    await verifyGuidePlan({plan,approvedPlanSha256,baseline:plan.baselineDirectory,candidate});
+  }else if(plan.kind==='promotion'){
     if(!plan.approvedPathname||!plan.slug)fail('Promotion exact pathname missing');
     validatePublicationState(plan.publicationState,{promotionId:plan.promotionId,slug:plan.slug,currentLocale:locale});
     if(plan.publicationStateSha256!==publicationStateSha256(plan.publicationState))fail('Publication State hash mismatch');

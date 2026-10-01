@@ -1,22 +1,26 @@
 {
   "locale": "pt",
   "route": "guide/replacement-program",
-  "title": "Programa de troca de aparelhos da Rakuten Mobile",
-  "description": "Entenda as prestações, as condições de devolução e os custos antes de escolher um novo celular.",
+  "title": "Programa de troca da Rakuten Mobile: devolução, prazo e custos",
+  "description": "Entenda as 48 parcelas, a devolução entre o 25º e o 47º mês, a dispensa das parcelas restantes, o que ocorre sem devolução e as taxas por dano conforme a data da compra.",
   "robots": "index,follow",
   "canonical": "https://mnp-navi.jp/pt/guide/replacement-program/",
-  "schemas": [],
+  "schemas": [
+    "{\"@context\":\"https://schema.org\",\"@type\":\"WebPage\",\"name\":\"Programa de troca da Rakuten Mobile: devolução, prazo e custos\",\"description\":\"Entenda as 48 parcelas, a devolução entre o 25º e o 47º mês, a dispensa das parcelas restantes, o que ocorre sem devolução e as taxas por dano conforme a data da compra.\",\"url\":\"https://mnp-navi.jp/pt/guide/replacement-program/\",\"dateModified\":\"2026-10-01\",\"inLanguage\":\"pt-BR\"}",
+    "{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Início\",\"item\":\"https://mnp-navi.jp/pt/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Programa de troca da Rakuten Mobile: devolução, prazo e custos\",\"item\":\"https://mnp-navi.jp/pt/guide/replacement-program/\"}]}",
+    "{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Posso devolver no 25º mês?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"A devolução pode ser solicitada do 25º ao 47º mês. A data exata depende do contrato; consulte Informações do aparelho no my Rakuten Mobile. Há taxa administrativa de ¥3.300.\"}},{\"@type\":\"Question\",\"name\":\"O que acontece se eu não devolver?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"As parcelas continuam até a 48ª. Ao fim dos 48 meses, o programa termina automaticamente e você pode ficar com o aparelho, sem devolvê-lo.\"}},{\"@type\":\"Question\",\"name\":\"Posso devolver após cancelar a linha?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"O contrato da linha e as parcelas/programa do aparelho são separados. Cancelar a linha não interrompe as parcelas. Confira o contrato e solicite a devolução no my Rakuten Mobile.\"}},{\"@type\":\"Question\",\"name\":\"Qual é a taxa por dano?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Para compras a partir das 9h de 23 de julho de 2026, o valor varia conforme o modelo. Compras até 8h59 desse dia seguem a antiga taxa fixa de ¥22.000 (isenta de imposto). Consulte o valor atual e a garantia.\"}},{\"@type\":\"Question\",\"name\":\"O que ocorre se o aparelho não for aceito?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"O aparelho não aceito é devolvido e todo o saldo restante pode ser cobrado de uma vez. Desative bloqueios, contas vinculadas e a função de localizar o aparelho, e confirme as condições oficiais.\"}}]}"
+  ],
   "styles": [],
   "scripts": [],
-  "mainHtml": "<main class=\"localized-program\"><nav><a href=\"/pt/\">Início</a><a href=\"/en/guide/replacement-program/\" lang=\"en\">EN</a><a href=\"/zh/guide/replacement-program/\" lang=\"zh\">ZH</a><a href=\"/ko/guide/replacement-program/\" lang=\"ko\">KO</a><a href=\"/vi/guide/replacement-program/\" lang=\"vi\">VI</a><a href=\"/pt/guide/replacement-program/\" lang=\"pt\" aria-current=\"page\">PT</a></nav><h1>Programa de troca de aparelhos da Rakuten Mobile</h1><p class=\"lead\">Entenda as prestações, as condições de devolução e os custos antes de escolher um novo celular.</p><section><h2>Como funciona?</h2><p>Compre um aparelho elegível em 48 prestações usando um Rakuten Card em seu nome. A partir do 25º mês, a devolução do aparelho, sujeita à avaliação, pode dispensar até 24 prestações restantes. Pagar metade não significa ficar com o celular.</p></section><section><h2>Devolver ou continuar usando?</h2><p>A devolução tem taxa administrativa. Danos podem gerar cobrança adicional ou impedir a aceitação. Se ficar com o aparelho, pague todas as 48 prestações. Cancelar a linha móvel não cancela a dívida do aparelho.</p></section><section><h2>Exemplo de custo</h2><p>Para um aparelho hipotético de ¥120.000 com prestações iguais: ¥2.500 × 24 + taxa de devolução de ¥3.300 = ¥63.300. O aparelho deve ser devolvido. Danos e serviço móvel não estão incluídos; o calendário real depende do produto e da promoção.</p></section><section><h2>Antes de aderir</h2><p>A adesão deve ocorrer na compra de um aparelho elegível; não pode ser feita depois. Confira o modelo, as prestações e as regras de devolução. Danos podem custar ¥22.000 ou mais, conforme o modelo e o estado; alguns aparelhos não são aceitos.</p></section><section><h2>Prepare a devolução</h2><p>Faça backup, remova os bloqueios de conta e restaure as configurações de fábrica. Siga as instruções e o prazo de devolução. Se pretende usar o mesmo celular por vários anos, compare o custo total com uma compra à vista.</p></section><section><h2>Guias relacionados</h2><ul><li><a href=\"/pt/guide/topics/replacement-program-android/\">Elegibilidade de aparelhos Android</a></li><li><a href=\"/pt/guide/topics/replacement-program-disadvantages/\">Desvantagens e cuidados</a></li></ul></section><footer><p>Verificado em 13/09/2026. As condições podem mudar.</p><a href=\"https://network.mobile.rakuten.co.jp/service/replacement-program/\" rel=\"noopener\">Condições oficiais (em japonês)</a></footer></main>",
+  "mainHtml": "<main class=\"program-page\" data-component=\"replacement-program-v2\"><nav class=\"breadcrumb\" aria-label=\"Breadcrumb\"><a href=\"/pt/\">Início</a><span aria-hidden=\"true\">›</span><span>Programa de troca da Rakuten Mobile: devolução, prazo e custos</span></nav><section class=\"program-hero\"><div><p class=\"eyebrow\">GUIA DO PROGRAMA DE TROCA</p><h1>O programa de troca,<br><span>explicado de forma simples.</span></h1><p class=\"program-hero-message\">Compre um aparelho elegível em 48 parcelas. Ao devolvê-lo entre o 25º e o 47º mês e cumprir os critérios de inspeção, as parcelas restantes são dispensadas; sem devolução, o pagamento segue até a 48ª.</p><div class=\"program-hero-actions\"><a class=\"button\" href=\"#how-it-works\">Ver como funciona ↓</a><a class=\"program-text-link\" href=\"https://network.mobile.rakuten.co.jp/service/replacement-program/\" rel=\"noopener\">Ver site oficial ↗ (japonês)</a></div></div><aside class=\"program-summary-card\"><p class=\"pill\">Lembre-se de 3 números</p><ol><li><b>48</b><span>Parcelas do aparelho</span></li><li><b>25–47</b><span>Meses em que a devolução pode ser solicitada</span></li><li><b>Até 24</b><span>Parcelas restantes que podem ser dispensadas</span></li></ol></aside></section><section class=\"program-answer\" id=\"how-it-works\"><p class=\"section-label\">COMO FUNCIONA</p><h2>A dispensa do saldo depende da devolução e da inspeção</h2><p>É um programa de pagamento do aparelho em 48 parcelas. Se você devolver o aparelho entre o 25º e o 47º mês e cumprir os critérios da Rakuten Mobile, as parcelas posteriores são dispensadas. Não é uma compra garantida pela metade do preço: há taxa administrativa de ¥3.300 e possíveis custos conforme o estado do aparelho. Sem devolução, o pagamento segue até o 48º mês; ao final, o programa termina automaticamente e não é preciso devolver o aparelho.</p></section><section class=\"program-section\"><div class=\"program-section-heading\"><p class=\"section-label\">CRONOLOGIA</p><h2>O processo ao longo do tempo</h2></div><ol class=\"payment-timeline\"><li><span>Na compra</span><div><b>Escolha um aparelho elegível em 48 parcelas</b><p>A adesão é feita na compra e exige Rakuten Card no nome do titular.</p></div></li><li><span>Meses 1–24</span><div><b>Pague o valor mensal do aparelho</b><p>O valor varia conforme o modelo e a campanha.</p></div></li><li class=\"timeline-choice\"><span>Do 25º ao 47º mês</span><div><b>Escolha devolver ou continuar com o aparelho</b><p>Confira a data exata em Informações do aparelho no my Rakuten Mobile e solicite apenas a devolução ou a troca.</p></div></li></ol><div class=\"choice-grid\"><article><p class=\"pill\">Devolver</p><h3>O saldo pode ser dispensado</h3><p>Após aprovação na inspeção, as parcelas posteriores são dispensadas. A devolução tem taxa administrativa de ¥3.300.</p></article><article><p class=\"pill\">Manter</p><h3>Pagar as 48 parcelas</h3><p>Sem devolução, o pagamento continua até a 48ª parcela. No fim do 48º mês, o programa termina automaticamente e o aparelho não precisa ser devolvido.</p></article></div></section><section class=\"program-section program-example\"><div class=\"program-section-heading\"><p class=\"section-label\">EXEMPLO</p><h2>Exemplo com aparelho de ¥120.000</h2></div><p class=\"example-note\">Exemplo simplificado com parcelas iguais.</p><div class=\"example-formula\"><div><span>Preço do aparelho</span><strong>¥120,000</strong></div><b>÷</b><div><span>48 parcelas</span><strong>¥2,500</strong></div></div><div class=\"example-result\"><div><span>24 parcelas pagas</span><strong>¥60,000</strong></div><span aria-hidden=\"true\">＋</span><div><span>Taxa de devolução</span><strong>¥3,300</strong></div><span aria-hidden=\"true\">＝</span><div class=\"example-total\"><span>Total do exemplo</span><strong>¥63,300</strong></div></div><p class=\"caution\">Não inclui danos nem serviço móvel.</p></section><section class=\"program-section\"><div class=\"program-section-heading\"><p class=\"section-label\">PARA QUEM É?</p><h2>Quem pode se beneficiar</h2></div><div class=\"fit-grid\"><article class=\"fit-card good\"><h3><span>○</span>Pode ser adequado</h3><ul><li>Troca de aparelho a cada dois anos</li><li>Quer reduzir a parcela mensal</li><li>Consegue conservar bem o aparelho</li><li>Possui Rakuten Card</li></ul></article><article class=\"fit-card caution-card\"><h3><span>△</span>Avalie com cuidado</h3><ul><li>Usa o mesmo aparelho por 3 ou 4 anos</li><li>Quer ficar com o aparelho antigo</li><li>Tem risco de dano ou contato com água</li><li>Quer pagar com outro cartão</li></ul></article></div></section><section class=\"program-section program-cautions\"><div class=\"program-section-heading\"><p class=\"section-label\">IMPORTANTE</p><h2>O que verificar antes de aderir</h2></div><div class=\"caution-grid\"><article><b>01</b><h3>Rakuten Card obrigatório</h3><p>O cartão deve estar no nome do titular.</p></article><article><b>02</b><h3>Adesão na compra</h3><p>Não é possível aderir depois.</p></article><article><b>03</b><h3>Taxa de devolução</h3><p>Há uma taxa ao devolver o aparelho.</p></article><article><b>04</b><h3>Danos podem gerar cobrança</h3><p>Pode haver taxa extra ou recusa da devolução.</p></article><article><b>05</b><h3>Apague os dados</h3><p>Faça backup, remova bloqueios e restaure o aparelho.</p></article><article><b>06</b><h3>Confira as regras</h3><p>Veja as condições oficiais atualizadas.</p></article></div><div class=\"damage-note\"><strong>A taxa por dano depende da data da compra</strong><p>Para compras a partir das 9h de 23 de julho de 2026, a taxa por dano varia conforme o modelo. Compras realizadas até 8h59 desse dia permanecem na regra anterior de ¥22.000 (isentos de imposto). Consulte o valor atual por modelo e as condições de garantia. Um aparelho não aceito é devolvido, e o saldo restante pode ser cobrado integralmente.</p></div></section><section class=\"program-section\"><div class=\"program-section-heading\"><p class=\"section-label\">ETAPAS</p><h2>Da compra à devolução</h2></div><ol class=\"program-steps\"><li><b>1</b><div><h3>Escolha um aparelho elegível</h3><p>Confirme a elegibilidade na página do aparelho.</p></div></li><li><b>2</b><div><h3>Selecione o programa</h3><p>Escolha 48 parcelas no Rakuten Card.</p></div></li><li><b>3</b><div><h3>Continue pagando as parcelas</h3><p>Os pagamentos começam no mês em que o aparelho é recebido.</p></div></li><li><b>4</b><div><h3>Solicite entre o 25º e o 47º mês</h3><p>Confira a data exata no my Rakuten Mobile e solicite somente a devolução ou a troca do aparelho.</p></div></li><li><b>5</b><div><h3>Faça backup e restaure</h3><p>Remova bloqueios e dados pessoais.</p></div></li><li><b>6</b><div><h3>Devolva no prazo</h3><p>Siga o método indicado e aguarde a avaliação.</p></div></li></ol></section><section class=\"program-section faq-home program-faq\"><div class=\"program-section-heading\"><p class=\"section-label\">FAQ</p><h2>Perguntas frequentes</h2></div><div class=\"faq-list\"><details><summary>Posso devolver no 25º mês?<span aria-hidden=\"true\">＋</span></summary><p>A devolução pode ser solicitada do 25º ao 47º mês. A data exata depende do contrato; consulte Informações do aparelho no my Rakuten Mobile. Há taxa administrativa de ¥3.300.</p></details><details><summary>O que acontece se eu não devolver?<span aria-hidden=\"true\">＋</span></summary><p>As parcelas continuam até a 48ª. Ao fim dos 48 meses, o programa termina automaticamente e você pode ficar com o aparelho, sem devolvê-lo.</p></details><details><summary>Posso devolver após cancelar a linha?<span aria-hidden=\"true\">＋</span></summary><p>O contrato da linha e as parcelas/programa do aparelho são separados. Cancelar a linha não interrompe as parcelas. Confira o contrato e solicite a devolução no my Rakuten Mobile.</p></details><details><summary>Qual é a taxa por dano?<span aria-hidden=\"true\">＋</span></summary><p>Para compras a partir das 9h de 23 de julho de 2026, o valor varia conforme o modelo. Compras até 8h59 desse dia seguem a antiga taxa fixa de ¥22.000 (isenta de imposto). Consulte o valor atual e a garantia.</p></details><details><summary>O que ocorre se o aparelho não for aceito?<span aria-hidden=\"true\">＋</span></summary><p>O aparelho não aceito é devolvido e todo o saldo restante pode ser cobrado de uma vez. Desative bloqueios, contas vinculadas e a função de localizar o aparelho, e confirme as condições oficiais.</p></details></div></section><section class=\"program-section\"><div class=\"program-section-heading\"><h2>Guias relacionados</h2></div><ul><li><a href=\"/pt/guide/topics/replacement-program-android/\">Elegibilidade de aparelhos Android</a></li><li><a href=\"/pt/guide/topics/replacement-program-disadvantages/\">Desvantagens e cuidados</a></li></ul></section><section class=\"source-panel\"><h2>Confirme as informações oficiais mais recentes</h2><p>Modelos elegíveis, valores mensais, taxas por dano e condições de devolução podem mudar. O contrato da linha e o programa do aparelho são separados; cancelar a linha não encerra as parcelas. Confira as regras oficiais e a data exata de devolução no my Rakuten Mobile.</p><div class=\"source-actions\"><a class=\"button\" href=\"https://network.mobile.rakuten.co.jp/service/replacement-program/\" rel=\"noopener\">Página oficial do programa ↗ (japonês)</a><a class=\"official-link\" href=\"https://network.mobile.rakuten.co.jp/guide/replacement-program/\" rel=\"noopener\">Procedimento oficial ↗ (japonês)</a><a class=\"official-link\" href=\"https://network.mobile.rakuten.co.jp/information/news/service/3781/\" rel=\"noopener\">Revisão da taxa por dano e regras por data de compra ↗ (japonês)</a></div><p class=\"updated\">Informações oficiais verificadas em 1º de outubro de 2026</p></section><section class=\"final-cta program-final-cta\"><p class=\"eyebrow\">PRÓXIMO PASSO</p><h2>Confira também o benefício de portabilidade</h2><p>Verifique separadamente a campanha de indicação e as condições de compra, seguindo a ordem exigida.</p><a class=\"button light\" href=\"https://go.mnp-navi.jp/r/switching-guide_pt_topics-replacement\" rel=\"sponsored nofollow noopener\">Ver campanha de indicação →</a><p class=\"updated\">Este site contém link de indicação.</p></section></main>",
   "program": {
-    "title": "Programa de troca de aparelhos da Rakuten Mobile",
-    "description": "Entenda as prestações, as condições de devolução e os custos antes de escolher um novo celular.",
+    "title": "Programa de troca da Rakuten Mobile: devolução, prazo e custos",
+    "description": "Entenda as 48 parcelas, a devolução entre o 25º e o 47º mês, a dispensa das parcelas restantes, o que ocorre sem devolução e as taxas por dano conforme a data da compra.",
     "home": "Início",
     "eyebrow": "GUIA DO PROGRAMA DE TROCA",
     "heading": "O programa de troca,",
     "headingAccent": "explicado de forma simples.",
-    "lead": "Compre um aparelho elegível em 48 parcelas. A partir do 25º mês, ao devolvê-lo e cumprir as condições, até 24 parcelas restantes podem ser dispensadas.",
+    "lead": "Compre um aparelho elegível em 48 parcelas. Ao devolvê-lo entre o 25º e o 47º mês e cumprir os critérios de inspeção, as parcelas restantes são dispensadas; sem devolução, o pagamento segue até a 48ª.",
     "jump": "Ver como funciona ↓",
     "official": "Ver site oficial ↗ (japonês)",
     "summaryLabel": "Lembre-se de 3 números",
@@ -26,17 +30,17 @@
         "Parcelas do aparelho"
       ],
       [
-        "25",
-        "Mês em que a devolução fica disponível"
+        "25–47",
+        "Meses em que a devolução pode ser solicitada"
       ],
       [
         "Até 24",
-        "Parcelas que podem ser dispensadas"
+        "Parcelas restantes que podem ser dispensadas"
       ]
     ],
     "answerLabel": "COMO FUNCIONA",
-    "answerTitle": "Não é um plano em que o aparelho vira seu depois de pagar apenas a metade.",
-    "answerBody": "Para dispensar o saldo, é preciso devolver o aparelho a partir do 25º mês e passar pela avaliação. Sem devolução, o pagamento continua até a 48ª parcela.",
+    "answerTitle": "A dispensa do saldo depende da devolução e da inspeção",
+    "answerBody": "É um programa de pagamento do aparelho em 48 parcelas. Se você devolver o aparelho entre o 25º e o 47º mês e cumprir os critérios da Rakuten Mobile, as parcelas posteriores são dispensadas. Não é uma compra garantida pela metade do preço: há taxa administrativa de ¥3.300 e possíveis custos conforme o estado do aparelho. Sem devolução, o pagamento segue até o 48º mês; ao final, o programa termina automaticamente e não é preciso devolver o aparelho.",
     "timelineLabel": "CRONOLOGIA",
     "timelineTitle": "O processo ao longo do tempo",
     "timeline": [
@@ -51,17 +55,17 @@
         "body": "O valor varia conforme o modelo e a campanha."
       },
       {
-        "when": "A partir do mês 25",
-        "title": "Escolha devolver ou continuar usando",
-        "body": "Pelas condições atuais, a solicitação pode ser feita até o 47º mês."
+        "when": "Do 25º ao 47º mês",
+        "title": "Escolha devolver ou continuar com o aparelho",
+        "body": "Confira a data exata em Informações do aparelho no my Rakuten Mobile e solicite apenas a devolução ou a troca."
       }
     ],
     "returnLabel": "Devolver",
     "returnTitle": "O saldo pode ser dispensado",
-    "returnBody": "Após aprovação, as parcelas seguintes são dispensadas; há taxa de devolução.",
+    "returnBody": "Após aprovação na inspeção, as parcelas posteriores são dispensadas. A devolução tem taxa administrativa de ¥3.300.",
     "keepLabel": "Manter",
     "keepTitle": "Pagar as 48 parcelas",
-    "keepBody": "Continue usando o aparelho e conclua todos os pagamentos.",
+    "keepBody": "Sem devolução, o pagamento continua até a 48ª parcela. No fim do 48º mês, o programa termina automaticamente e o aparelho não precisa ser devolvido.",
     "exampleLabel": "EXEMPLO",
     "exampleTitle": "Exemplo com aparelho de ¥120.000",
     "exampleNote": "Exemplo simplificado com parcelas iguais.",
@@ -115,8 +119,8 @@
         "body": "Veja as condições oficiais atualizadas."
       }
     ],
-    "damageTitle": "Cobrança por danos",
-    "damageBody": "Conforme o modelo e o estado, danos aplicáveis podem gerar cobrança de ¥22.000.",
+    "damageTitle": "A taxa por dano depende da data da compra",
+    "damageBody": "Para compras a partir das 9h de 23 de julho de 2026, a taxa por dano varia conforme o modelo. Compras realizadas até 8h59 desse dia permanecem na regra anterior de ¥22.000 (isentos de imposto). Consulte o valor atual por modelo e as condições de garantia. Um aparelho não aceito é devolvido, e o saldo restante pode ser cobrado integralmente.",
     "stepsLabel": "ETAPAS",
     "stepsTitle": "Da compra à devolução",
     "steps": [
@@ -129,12 +133,12 @@
         "body": "Escolha 48 parcelas no Rakuten Card."
       },
       {
-        "title": "Pague as primeiras 24 parcelas",
-        "body": "O pagamento começa no mês de recebimento."
+        "title": "Continue pagando as parcelas",
+        "body": "Os pagamentos começam no mês em que o aparelho é recebido."
       },
       {
-        "title": "Solicite a partir do mês 25",
-        "body": "Use o my Rakuten Mobile ou uma loja elegível."
+        "title": "Solicite entre o 25º e o 47º mês",
+        "body": "Confira a data exata no my Rakuten Mobile e solicite somente a devolução ou a troca do aparelho."
       },
       {
         "title": "Faça backup e restaure",
@@ -149,27 +153,31 @@
     "faqTitle": "Perguntas frequentes",
     "faq": [
       {
-        "title": "O aparelho é meu após 24 parcelas?",
-        "body": "Não. A dispensa do saldo depende da devolução elegível e da avaliação."
+        "title": "Posso devolver no 25º mês?",
+        "body": "A devolução pode ser solicitada do 25º ao 47º mês. A data exata depende do contrato; consulte Informações do aparelho no my Rakuten Mobile. Há taxa administrativa de ¥3.300."
       },
       {
-        "title": "Posso usar outro cartão?",
-        "body": "Não. É necessário um Rakuten Card no nome do titular."
+        "title": "O que acontece se eu não devolver?",
+        "body": "As parcelas continuam até a 48ª. Ao fim dos 48 meses, o programa termina automaticamente e você pode ficar com o aparelho, sem devolvê-lo."
       },
       {
-        "title": "Posso aderir depois da compra?",
-        "body": "Não. O programa deve ser escolhido na compra."
+        "title": "Posso devolver após cancelar a linha?",
+        "body": "O contrato da linha e as parcelas/programa do aparelho são separados. Cancelar a linha não interrompe as parcelas. Confira o contrato e solicite a devolução no my Rakuten Mobile."
       },
       {
-        "title": "Cancelar a linha encerra as parcelas?",
-        "body": "Não. O contrato móvel e as parcelas do aparelho são separados."
+        "title": "Qual é a taxa por dano?",
+        "body": "Para compras a partir das 9h de 23 de julho de 2026, o valor varia conforme o modelo. Compras até 8h59 desse dia seguem a antiga taxa fixa de ¥22.000 (isenta de imposto). Consulte o valor atual e a garantia."
+      },
+      {
+        "title": "O que ocorre se o aparelho não for aceito?",
+        "body": "O aparelho não aceito é devolvido e todo o saldo restante pode ser cobrado de uma vez. Desative bloqueios, contas vinculadas e a função de localizar o aparelho, e confirme as condições oficiais."
       }
     ],
     "sourceTitle": "Confirme as informações oficiais mais recentes",
-    "sourceBody": "Modelos, valores, campanhas e condições de devolução podem mudar.",
+    "sourceBody": "Modelos elegíveis, valores mensais, taxas por dano e condições de devolução podem mudar. O contrato da linha e o programa do aparelho são separados; cancelar a linha não encerra as parcelas. Confira as regras oficiais e a data exata de devolução no my Rakuten Mobile.",
     "sourceButton": "Página oficial do programa ↗ (japonês)",
     "sourceProcedure": "Procedimento oficial ↗ (japonês)",
-    "checked": "Informações verificadas em 13/09/2026",
+    "checked": "Informações oficiais verificadas em 1º de outubro de 2026",
     "ctaLabel": "PRÓXIMO PASSO",
     "ctaTitle": "Confira também o benefício de portabilidade",
     "ctaBody": "Verifique separadamente a campanha de indicação e as condições de compra, seguindo a ordem exigida.",
@@ -185,6 +193,9 @@
         "label": "Desvantagens e cuidados",
         "href": "/pt/guide/topics/replacement-program-disadvantages/"
       }
-    ]
+    ],
+    "damageSourceHref": "https://network.mobile.rakuten.co.jp/information/news/service/3781/",
+    "damageSourceLabel": "Revisão da taxa por dano e regras por data de compra ↗ (japonês)",
+    "ctaHref": "https://go.mnp-navi.jp/r/switching-guide_pt_topics-replacement"
   }
 }

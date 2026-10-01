@@ -1,42 +1,46 @@
 {
   "locale": "zh",
   "route": "guide/replacement-program",
-  "title": "乐天手机换新超值计划指南",
-  "description": "选购新手机前，先了解分期付款、归还条件与实际费用。",
+  "title": "乐天手机换新超值计划是什么？归还时间与费用说明",
+  "description": "说明48期付款、25至47个月归还、满足条件后免除剩余款项、不归还时的处理，以及按购买时间区分的故障费用。",
   "robots": "index,follow",
   "canonical": "https://mnp-navi.jp/zh/guide/replacement-program/",
-  "schemas": [],
+  "schemas": [
+    "{\"@context\":\"https://schema.org\",\"@type\":\"WebPage\",\"name\":\"乐天手机换新超值计划是什么？归还时间与费用说明\",\"description\":\"说明48期付款、25至47个月归还、满足条件后免除剩余款项、不归还时的处理，以及按购买时间区分的故障费用。\",\"url\":\"https://mnp-navi.jp/zh/guide/replacement-program/\",\"dateModified\":\"2026-10-01\",\"inLanguage\":\"zh-CN\"}",
+    "{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"首页\",\"item\":\"https://mnp-navi.jp/zh/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"乐天手机换新超值计划是什么？归还时间与费用说明\",\"item\":\"https://mnp-navi.jp/zh/guide/replacement-program/\"}]}",
+    "{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"第25个月可以归还吗？\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"可在第25至47个月申请归还。准确日期因合同而异，请在my 乐天手机的“设备信息”中确认。归还时需支付3,300日元手续费。\"}},{\"@type\":\"Question\",\"name\":\"不归还会怎样？\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"分期将继续到第48期。48个月届满后计划自动结束，设备无需归还。\"}},{\"@type\":\"Question\",\"name\":\"线路解约后仍可归还设备吗？\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"线路合同与设备分期及计划彼此独立。线路解约不会停止设备付款。请确认合同条件，并在my 乐天手机申请归还。\"}},{\"@type\":\"Question\",\"name\":\"故障费用是多少？\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"2026年7月23日9时以后购买的设备，金额按机型而异；同日8时59分以前购买的设备适用调整前统一22,000日元（免税）的规则。请确认最新机型金额及保修条件。\"}},{\"@type\":\"Question\",\"name\":\"如果设备无法受理会怎样？\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"设备会被退回，剩余款项可能被一次性收取。请解除屏幕锁、关联账户和“查找设备”功能，并确认官方归还条件。\"}}]}"
+  ],
   "styles": [],
   "scripts": [],
-  "mainHtml": "<main class=\"localized-program\"><nav><a href=\"/zh/\">首页</a><a href=\"/en/guide/replacement-program/\" lang=\"en\">EN</a><a href=\"/zh/guide/replacement-program/\" lang=\"zh\" aria-current=\"page\">ZH</a><a href=\"/ko/guide/replacement-program/\" lang=\"ko\">KO</a><a href=\"/vi/guide/replacement-program/\" lang=\"vi\">VI</a><a href=\"/pt/guide/replacement-program/\" lang=\"pt\">PT</a></nav><h1>乐天手机换新超值计划指南</h1><p class=\"lead\">选购新手机前，先了解分期付款、归还条件与实际费用。</p><section><h2>计划如何运作</h2><p>使用本人名下的乐天信用卡，将符合条件的手机分48期购买。从第25个月起归还设备并符合验收标准，可免除最多24期剩余款项。这并不意味着支付一半价格后就能保留手机。</p></section><section><h2>归还还是继续使用？</h2><p>归还设备需要支付手续费；设备损坏可能产生额外费用，或无法回收。不归还则继续支付全部48期款项。取消手机通信套餐并不会免除设备分期付款。</p></section><section><h2>一个简单的费用例子</h2><p>假设手机售价120,000日元、每期金额相同，支付2,500日元×24期，再加3,300日元归还手续费，共63,300日元，且需归还手机。本例不含损坏费用和通信费；实际分期金额因产品和活动而异。</p></section><section><h2>申请前要确认什么？</h2><p>必须在购买符合条件的产品时加入，购买后不能补办。确认机型、付款安排和归还要求。故障费用可能为22,000日元或更高，取决于机型及设备状态；部分设备无法回收。</p></section><section><h2>归还前的准备</h2><p>备份数据、解除账户锁定并恢复出厂设置，按指定方式在期限内归还。如果打算使用同一部手机多年，也应比较一次性购买与本计划的总费用。</p></section><section><h2>相关阅读</h2><ul><li><a href=\"/zh/guide/topics/replacement-program-android/\">Android设备适用条件</a></li><li><a href=\"/zh/guide/topics/replacement-program-disadvantages/\">缺点与注意事项</a></li></ul></section><footer><p>核对日期：2026年9月13日。条件可能调整。</p><a href=\"https://network.mobile.rakuten.co.jp/service/replacement-program/\" rel=\"noopener\">官方计划条款（日语）</a></footer></main>",
+  "mainHtml": "<main class=\"program-page\" data-component=\"replacement-program-v2\"><nav class=\"breadcrumb\" aria-label=\"Breadcrumb\"><a href=\"/zh/\">首页</a><span aria-hidden=\"true\">›</span><span>乐天手机换新超值计划是什么？归还时间与费用说明</span></nav><section class=\"program-hero\"><div><p class=\"eyebrow\">换机计划指南</p><h1>轻松读懂<br><span>手机换新计划。</span></h1><p class=\"program-hero-message\">符合条件的手机分48期付款。在第25至47个月归还并通过检查后，后续分期可免除；如不归还，则继续付款至第48期。</p><div class=\"program-hero-actions\"><a class=\"button\" href=\"#how-it-works\">查看运作方式 ↓</a><a class=\"program-text-link\" href=\"https://network.mobile.rakuten.co.jp/service/replacement-program/\" rel=\"noopener\">前往乐天移动官网 ↗（日语）</a></div></div><aside class=\"program-summary-card\"><p class=\"pill\">先记住3个数字</p><ol><li><b>48</b><span>设备分期次数</span></li><li><b>25–47</b><span>可申请归还的月份</span></li><li><b>最多24</b><span>可能免除的剩余期数</span></li></ol></aside></section><section class=\"program-answer\" id=\"how-it-works\"><p class=\"section-label\">运作方式</p><h2>归还并满足条件后，剩余分期才会免除</h2><p>这是将设备款分为48期支付的计划。第25至47个月归还设备并满足乐天手机的检查条件后，后续分期可免除。它并非“必定半价购机”，还需考虑3,300日元手续费及设备状态产生的费用。如不归还，需付款至第48期；48个月届满后计划自动结束，无需归还设备。</p></section><section class=\"program-section\"><div class=\"program-section-heading\"><p class=\"section-label\">付款时间线</p><h2>按时间顺序了解流程</h2></div><ol class=\"payment-timeline\"><li><span>购买时</span><div><b>选择适用设备并分48期付款</b><p>购买时加入计划，必须使用本人名下的乐天信用卡。</p></div></li><li><span>第1～24个月</span><div><b>每月支付规定的设备款</b><p>每月金额因机型和活动而异。</p></div></li><li class=\"timeline-choice\"><span>第25至47个月</span><div><b>选择归还或继续使用</b><p>请在my 乐天手机的“设备信息”中确认准确可办理日期，再申请仅归还设备或换机。</p></div></li></ol><div class=\"choice-grid\"><article><p class=\"pill\">归还</p><h3>可免除后续付款</h3><p>通过检查后，后续分期可免除。归还时需支付3,300日元手续费。</p></article><article><p class=\"pill\">不归还</p><h3>支付至第48期</h3><p>如不归还，将继续付款至第48期。48个月届满后计划自动结束，无需归还设备。</p></article></div></section><section class=\"program-section program-example\"><div class=\"program-section-heading\"><p class=\"section-label\">简单示例</p><h2>以12万日元手机为例</h2></div><p class=\"example-note\">为便于理解，假设每期金额相同。实际金额可能不同。</p><div class=\"example-formula\"><div><span>设备价格</span><strong>¥120,000</strong></div><b>÷</b><div><span>48期</span><strong>¥2,500</strong></div></div><div class=\"example-result\"><div><span>已付24期</span><strong>¥60,000</strong></div><span aria-hidden=\"true\">＋</span><div><span>归还手续费</span><strong>¥3,300</strong></div><span aria-hidden=\"true\">＝</span><div class=\"example-total\"><span>示例总负担</span><strong>¥63,300</strong></div></div><p class=\"caution\">不含损坏费用与通信费。</p></section><section class=\"program-section\"><div class=\"program-section-heading\"><p class=\"section-label\">适用人群</p><h2>适合与需要慎重考虑的人</h2></div><div class=\"fit-grid\"><article class=\"fit-card good\"><h3><span>○</span>比较适合</h3><ul><li>约两年更换一次手机</li><li>希望降低每月设备款</li><li>能妥善保管设备</li><li>持有乐天信用卡</li></ul></article><article class=\"fit-card caution-card\"><h3><span>△</span>需要慎重考虑</h3><ul><li>计划使用同一设备三至四年</li><li>希望保留旧手机</li><li>担心破损或进水</li><li>不想使用乐天信用卡</li></ul></article></div></section><section class=\"program-section program-cautions\"><div class=\"program-section-heading\"><p class=\"section-label\">重要</p><h2>申请前要确认的事项</h2></div><div class=\"caution-grid\"><article><b>01</b><h3>需要乐天信用卡</h3><p>必须是申请人本人名下。</p></article><article><b>02</b><h3>购买时加入</h3><p>购买后无法补办加入。</p></article><article><b>03</b><h3>归还手续费</h3><p>归还设备时需要支付手续费。</p></article><article><b>04</b><h3>损坏可能加收费用</h3><p>严重损坏时可能无法回收。</p></article><article><b>05</b><h3>清除个人数据</h3><p>请备份、解除锁定并恢复出厂设置。</p></article><article><b>06</b><h3>确认取消规则</h3><p>申请前查看最新条款。</p></article></div><div class=\"damage-note\"><strong>故障费用因购买时间而异</strong><p>2026年7月23日9时以后购买的设备，故障费用按机型而异；同日8时59分以前购买的设备，仍适用调整前统一22,000日元（免税）的规则。请确认最新机型金额及保修条件。无法受理的设备会被退回，剩余款项可能被一次性收取。</p></div></section><section class=\"program-section\"><div class=\"program-section-heading\"><p class=\"section-label\">办理步骤</p><h2>从购买到归还</h2></div><ol class=\"program-steps\"><li><b>1</b><div><h3>选择适用设备</h3><p>在设备页面确认是否适用。</p></div></li><li><b>2</b><div><h3>购买时选择计划</h3><p>使用乐天信用卡分48期。</p></div></li><li><b>3</b><div><h3>继续支付分期款</h3><p>从收到设备的月份开始付款。</p></div></li><li><b>4</b><div><h3>第25至47个月申请</h3><p>在my 乐天手机确认准确日期，然后申请仅归还设备或换机。</p></div></li><li><b>5</b><div><h3>备份并初始化</h3><p>解除账户锁定并删除个人数据。</p></div></li><li><b>6</b><div><h3>按期归还</h3><p>按照指定方法寄回并等待验收。</p></div></li></ol></section><section class=\"program-section faq-home program-faq\"><div class=\"program-section-heading\"><p class=\"section-label\">常见问题</p><h2>常见问题</h2></div><div class=\"faq-list\"><details><summary>第25个月可以归还吗？<span aria-hidden=\"true\">＋</span></summary><p>可在第25至47个月申请归还。准确日期因合同而异，请在my 乐天手机的“设备信息”中确认。归还时需支付3,300日元手续费。</p></details><details><summary>不归还会怎样？<span aria-hidden=\"true\">＋</span></summary><p>分期将继续到第48期。48个月届满后计划自动结束，设备无需归还。</p></details><details><summary>线路解约后仍可归还设备吗？<span aria-hidden=\"true\">＋</span></summary><p>线路合同与设备分期及计划彼此独立。线路解约不会停止设备付款。请确认合同条件，并在my 乐天手机申请归还。</p></details><details><summary>故障费用是多少？<span aria-hidden=\"true\">＋</span></summary><p>2026年7月23日9时以后购买的设备，金额按机型而异；同日8时59分以前购买的设备适用调整前统一22,000日元（免税）的规则。请确认最新机型金额及保修条件。</p></details><details><summary>如果设备无法受理会怎样？<span aria-hidden=\"true\">＋</span></summary><p>设备会被退回，剩余款项可能被一次性收取。请解除屏幕锁、关联账户和“查找设备”功能，并确认官方归还条件。</p></details></div></section><section class=\"program-section\"><div class=\"program-section-heading\"><h2>相关阅读</h2></div><ul><li><a href=\"/zh/guide/topics/replacement-program-android/\">Android设备适用条件</a></li><li><a href=\"/zh/guide/topics/replacement-program-disadvantages/\">缺点与注意事项</a></li></ul></section><section class=\"source-panel\"><h2>最后请确认官方最新信息</h2><p>适用机型、每月金额、故障费用及归还条件可能调整。通信线路合同与设备计划彼此独立；解约线路不会终止设备分期。请查看官方条款，并在my 乐天手机确认准确归还日期。</p><div class=\"source-actions\"><a class=\"button\" href=\"https://network.mobile.rakuten.co.jp/service/replacement-program/\" rel=\"noopener\">官方计划页面 ↗（日语）</a><a class=\"official-link\" href=\"https://network.mobile.rakuten.co.jp/guide/replacement-program/\" rel=\"noopener\">官方办理方法 ↗（日语）</a><a class=\"official-link\" href=\"https://network.mobile.rakuten.co.jp/information/news/service/3781/\" rel=\"noopener\">故障费用调整及按购买时间划分的规则 ↗（日文）</a></div><p class=\"updated\">官方信息确认日期：2026年10月1日</p></section><section class=\"final-cta program-final-cta\"><p class=\"eyebrow\">下一步</p><h2>同时确认携号转网优惠</h2><p>请分别确认推荐活动和设备购买条件，并按规定顺序申请。</p><a class=\"button light\" href=\"https://go.mnp-navi.jp/r/switching-guide_zh_topics-replacement\" rel=\"sponsored nofollow noopener\">查看推荐活动 →</a><p class=\"updated\">本网站含有推荐链接。</p></section></main>",
   "program": {
-    "title": "乐天手机换新超值计划指南",
-    "description": "选购新手机前，先了解分期付款、归还条件与实际费用。",
+    "title": "乐天手机换新超值计划是什么？归还时间与费用说明",
+    "description": "说明48期付款、25至47个月归还、满足条件后免除剩余款项、不归还时的处理，以及按购买时间区分的故障费用。",
     "home": "首页",
     "eyebrow": "换机计划指南",
     "heading": "轻松读懂",
     "headingAccent": "手机换新计划。",
-    "lead": "符合条件的手机分48期购买。从第25个月起归还并通过验收，最多可免除剩余24期付款。",
+    "lead": "符合条件的手机分48期付款。在第25至47个月归还并通过检查后，后续分期可免除；如不归还，则继续付款至第48期。",
     "jump": "查看运作方式 ↓",
     "official": "前往乐天移动官网 ↗（日语）",
     "summaryLabel": "先记住3个数字",
     "summary": [
       [
         "48",
-        "设备款分48期支付"
+        "设备分期次数"
       ],
       [
-        "25",
-        "第25个月起可选择归还"
+        "25–47",
+        "可申请归还的月份"
       ],
       [
         "最多24",
-        "归还后可能免除的期数"
+        "可能免除的剩余期数"
       ]
     ],
     "answerLabel": "运作方式",
-    "answerTitle": "这并不是“支付一半后手机就归自己”的计划。",
-    "answerBody": "若要免除剩余付款，必须从第25个月起归还设备并通过验收。不归还时则继续支付至第48期。",
+    "answerTitle": "归还并满足条件后，剩余分期才会免除",
+    "answerBody": "这是将设备款分为48期支付的计划。第25至47个月归还设备并满足乐天手机的检查条件后，后续分期可免除。它并非“必定半价购机”，还需考虑3,300日元手续费及设备状态产生的费用。如不归还，需付款至第48期；48个月届满后计划自动结束，无需归还设备。",
     "timelineLabel": "付款时间线",
     "timelineTitle": "按时间顺序了解流程",
     "timeline": [
@@ -51,17 +55,17 @@
         "body": "每月金额因机型和活动而异。"
       },
       {
-        "when": "第25个月起",
+        "when": "第25至47个月",
         "title": "选择归还或继续使用",
-        "body": "在现行条件下，可于第47个月前办理归还。"
+        "body": "请在my 乐天手机的“设备信息”中确认准确可办理日期，再申请仅归还设备或换机。"
       }
     ],
     "returnLabel": "归还",
     "returnTitle": "可免除后续付款",
-    "returnBody": "通过验收后免除后续分期，但需支付归还手续费。",
+    "returnBody": "通过检查后，后续分期可免除。归还时需支付3,300日元手续费。",
     "keepLabel": "不归还",
     "keepTitle": "支付至第48期",
-    "keepBody": "继续使用设备并付清全部款项。",
+    "keepBody": "如不归还，将继续付款至第48期。48个月届满后计划自动结束，无需归还设备。",
     "exampleLabel": "简单示例",
     "exampleTitle": "以12万日元手机为例",
     "exampleNote": "为便于理解，假设每期金额相同。实际金额可能不同。",
@@ -115,8 +119,8 @@
         "body": "申请前查看最新条款。"
       }
     ],
-    "damageTitle": "损坏费用",
-    "damageBody": "根据机型与设备状况，符合条件的损坏可能需要支付22,000日元。",
+    "damageTitle": "故障费用因购买时间而异",
+    "damageBody": "2026年7月23日9时以后购买的设备，故障费用按机型而异；同日8时59分以前购买的设备，仍适用调整前统一22,000日元（免税）的规则。请确认最新机型金额及保修条件。无法受理的设备会被退回，剩余款项可能被一次性收取。",
     "stepsLabel": "办理步骤",
     "stepsTitle": "从购买到归还",
     "steps": [
@@ -129,12 +133,12 @@
         "body": "使用乐天信用卡分48期。"
       },
       {
-        "title": "支付前24期",
+        "title": "继续支付分期款",
         "body": "从收到设备的月份开始付款。"
       },
       {
-        "title": "第25个月起申请",
-        "body": "通过my 乐天移动或适用门店办理。"
+        "title": "第25至47个月申请",
+        "body": "在my 乐天手机确认准确日期，然后申请仅归还设备或换机。"
       },
       {
         "title": "备份并初始化",
@@ -149,27 +153,31 @@
     "faqTitle": "常见问题",
     "faq": [
       {
-        "title": "支付24期后手机属于我吗？",
-        "body": "不是。只有归还并通过验收后，才可能免除剩余付款。"
+        "title": "第25个月可以归还吗？",
+        "body": "可在第25至47个月申请归还。准确日期因合同而异，请在my 乐天手机的“设备信息”中确认。归还时需支付3,300日元手续费。"
       },
       {
-        "title": "可以使用其他信用卡吗？",
-        "body": "不可以，必须使用本人名下的乐天信用卡。"
+        "title": "不归还会怎样？",
+        "body": "分期将继续到第48期。48个月届满后计划自动结束，设备无需归还。"
       },
       {
-        "title": "购买后还能加入吗？",
-        "body": "不能，必须在购买时选择。"
+        "title": "线路解约后仍可归还设备吗？",
+        "body": "线路合同与设备分期及计划彼此独立。线路解约不会停止设备付款。请确认合同条件，并在my 乐天手机申请归还。"
       },
       {
-        "title": "取消通信套餐后设备款也停止吗？",
-        "body": "不会，通信合同与设备分期是分开的。"
+        "title": "故障费用是多少？",
+        "body": "2026年7月23日9时以后购买的设备，金额按机型而异；同日8时59分以前购买的设备适用调整前统一22,000日元（免税）的规则。请确认最新机型金额及保修条件。"
+      },
+      {
+        "title": "如果设备无法受理会怎样？",
+        "body": "设备会被退回，剩余款项可能被一次性收取。请解除屏幕锁、关联账户和“查找设备”功能，并确认官方归还条件。"
       }
     ],
     "sourceTitle": "最后请确认官方最新信息",
-    "sourceBody": "适用机型、金额、活动和归还条件可能变更。",
+    "sourceBody": "适用机型、每月金额、故障费用及归还条件可能调整。通信线路合同与设备计划彼此独立；解约线路不会终止设备分期。请查看官方条款，并在my 乐天手机确认准确归还日期。",
     "sourceButton": "官方计划页面 ↗（日语）",
     "sourceProcedure": "官方办理方法 ↗（日语）",
-    "checked": "信息确认日期：2026年9月13日",
+    "checked": "官方信息确认日期：2026年10月1日",
     "ctaLabel": "下一步",
     "ctaTitle": "同时确认携号转网优惠",
     "ctaBody": "请分别确认推荐活动和设备购买条件，并按规定顺序申请。",
@@ -185,6 +193,9 @@
         "label": "缺点与注意事项",
         "href": "/zh/guide/topics/replacement-program-disadvantages/"
       }
-    ]
+    ],
+    "damageSourceHref": "https://network.mobile.rakuten.co.jp/information/news/service/3781/",
+    "damageSourceLabel": "故障费用调整及按购买时间划分的规则 ↗（日文）",
+    "ctaHref": "https://go.mnp-navi.jp/r/switching-guide_zh_topics-replacement"
   }
 }

@@ -14,6 +14,7 @@
     "test:promotion": "node --test tests/promotion-release.test.mjs tests/promotion-build.test.mjs tests/promotion-production.test.mjs",
     "test:foundation": "node --test tests/foundation-migration.test.mjs",
     "test:edge-response": "node --test tests/promotion-edge-response.test.mjs",
+    "test:guide-release": "node --test tests/guide-release.test.mjs",
     "promotion:validate": "node scripts/promotion-release.mjs validate",
     "promotion:stage": "node scripts/promotion-release.mjs stage",
     "maintenance:full-build": "node scripts/release.mjs build",
