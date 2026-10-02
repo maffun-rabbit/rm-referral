@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "kind": "promotion",
+  "promotionId": "mnp-before-switching-checklist",
+  "locale": "ja",
+  "worker": "rm-referral",
+  "config": "wrangler.jsonc",
+  "slug": "mnp-before-switching-checklist",
+  "approvedPathname": "/topics/mnp-before-switching-checklist/",
+  "assetPath": "/topics/mnp-before-switching-checklist/index.html",
+  "sitemapAssetPath": "/sitemap.xml",
+  "candidate": ".deploy/candidate-ja",
+  "candidateFileCount": 7981,
+  "candidateInventorySha256": "79a224abccebed2285216bdc664f6aece0bee8222038b4633740d5349db63207",
+  "allowedChangedPaths": ["/topics/mnp-before-switching-checklist/index.html", "/sitemap.xml"],
+  "added": ["/topics/mnp-before-switching-checklist/index.html"],
+  "changed": ["/sitemap.xml"],
+  "deleted": [],
+  "unexpected": [],
+  "publicationState": {
+    "schema": 1,
+    "promotionId": "mnp-before-switching-checklist",
+    "slug": "mnp-before-switching-checklist",
+    "currentLocale": "ja",
+    "locales": {
+      "ja": {"locale":"ja","status":"CURRENT_RELEASE_CANDIDATE","pathname":"/topics/mnp-before-switching-checklist/","bindingSource":"2026-10-02-ja-topic"},
+      "en": {"locale":"en","status":"UNPUBLISHED","pathname":"/en/topics/mnp-before-switching-checklist/","bindingSource":"ja-only-release"},
+      "ko": {"locale":"ko","status":"UNPUBLISHED","pathname":"/ko/topics/mnp-before-switching-checklist/","bindingSource":"ja-only-release"},
+      "pt": {"locale":"pt","status":"UNPUBLISHED","pathname":"/pt/topics/mnp-before-switching-checklist/","bindingSource":"ja-only-release"},
+      "vi": {"locale":"vi","status":"UNPUBLISHED","pathname":"/vi/topics/mnp-before-switching-checklist/","bindingSource":"ja-only-release"},
+      "zh": {"locale":"zh","status":"UNPUBLISHED","pathname":"/zh/topics/mnp-before-switching-checklist/","bindingSource":"ja-only-release"}
+    }
+  },
+  "publicationStateSha256": "20845d5525ff3e933527490f673c5e759eb983cabebade8d65f4a12264e796c6",
+  "publicationLocales": ["ja"],
+  "source": "content/pages/ja/topics/mnp-before-switching-checklist/page.json",
+  "sourceSha256": "3364eb2ad20d4c2617ed12ba2eb8622f45662084655aae109b068ec5cde6fa6a",
+  "targetSha256": "a217d82ec3d0f5343d6a704577936b04737987e3f9e7b38082d51c8d2762b1b7",
+  "sitemapAfterSha256": "9dee843a5433a67fa44b849aa3142508f8b0eb802292315bcd60e24be5b895c6"
+}

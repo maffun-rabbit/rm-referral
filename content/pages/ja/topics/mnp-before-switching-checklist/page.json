@@ -1,0 +1,57 @@
+{
+  "locale": "ja",
+  "route": "topics/mnp-before-switching-checklist",
+  "pageType": "guide-topic-v1",
+  "title": "楽天モバイルへ乗り換える前に確認する5つ｜不安を減らす準備チェック",
+  "description": "楽天モバイルへ乗り換える前に確認したい、対応端末・SIMロック・MNP手続き・本人確認・開通準備の5項目を公式情報をもとに整理します。",
+  "robots": "index, follow",
+  "schemas": [],
+  "styles": [],
+  "scripts": [],
+  "topic": {
+    "breadcrumb": {"ariaLabel": "パンくずリスト", "home": "トップ", "topics": "トピック", "current": "乗り換え前の確認5つ"},
+    "hero": {
+      "eyebrow": "BEFORE SWITCHING",
+      "heading": "乗り換え前に、5つだけ確認しておく",
+      "lead": "不安を感じたまま申し込まず、端末・手続き・必要書類・開通の順に確認すると、乗り換え後の行き違いを減らせます。",
+      "primaryActionLabel": "5つの確認項目を読む",
+      "sourceActionLabel": "公式の申込み手順を見る",
+      "summaryLabel": "先に押さえる3点",
+      "points": ["今のスマホが楽天回線に対応しているか確認する", "MNP方式と本人確認書類を先に整理する", "開通前に旧回線が止まるタイミングとデータ移行を確認する"]
+    },
+    "sections": [
+      {"id": "answer", "type": "prose", "eyebrow": "ANSWER FIRST", "heading": "乗り換えの不安は、申し込み前の確認で小さくできる", "paragraphs": ["他社から楽天モバイルへ乗り換えるときは、料金だけでなく、今使っている端末が対応しているか、電話番号を引き継ぐ手続きがどの方式になるか、本人確認や支払い情報を準備できているかを先に確認しておくと安心です。", "確認が終わっていない状態でMNP開通を進めると、元の携帯電話会社の回線が利用できなくなることがあります。申し込みと開通は同じ作業ではないため、端末と必要なものを用意してから進めましょう."]},
+      {"id": "checklist", "type": "steps", "eyebrow": "CHECKLIST", "heading": "乗り換え前に確認する5つ", "items": [
+        {"title": "1. 使うスマホが楽天回線に対応しているか", "body": "今のスマホをそのまま使う場合は、楽天回線対応製品の一覧や公式の対応確認で機種を確認します。対応状況は機種やソフトウェアで変わることがあるため、端末名だけで判断しません。"},
+        {"title": "2. SIMロックが解除されているか", "body": "2021年10月以前に発売された製品などでは、購入元の携帯電話会社でSIMロック解除が必要な場合があります。iPhoneは設定の「SIMロック」欄などで状態を確認し、分からなければ購入元の案内を確認します。"},
+        {"title": "3. 電話番号を引き継ぐ方法を確認する", "body": "MNPワンストップに対応する携帯電話会社からの乗り換えは、予約番号を取得せずに進められる場合があります。対象外の場合はMNP予約番号が必要です。ショップ手続きなど条件が異なる場合もあるため、申し込み方法に合わせて確認します。"},
+        {"title": "4. 本人確認と支払いに必要なものをそろえる", "body": "本人確認書類、楽天会員のユーザID・パスワード、支払い方法を準備します。申込情報と本人確認書類の氏名・住所・生年月日が一致しているか、有効期限が切れていないかも確認します。"},
+        {"title": "5. 開通前のデータ移行と連絡手段を準備する", "body": "写真や連絡先、認証アプリなどをバックアップし、必要なログイン情報を確認します。MNP開通手続きが完了すると元の回線が使えなくなるため、SIMや製品が手元に届いてから開通する順番を確認します。"}
+      ]},
+      {"id": "worries", "type": "cards", "eyebrow": "COMMON WORRIES", "heading": "迷ったときに確認するポイント", "items": [
+        {"kicker": "端末", "title": "買い替えなくても使える？", "body": "対応端末で、必要なSIMロック解除などが済んでいれば、今のスマホを使い続けられる場合があります。対応状況を先に確認しましょう。"},
+        {"kicker": "電話番号", "title": "MNP予約番号は必ず必要？", "body": "乗り換え元と手続き方法によって異なります。MNPワンストップ対象か、予約番号が必要かを公式手順で確認します。"},
+        {"kicker": "開通", "title": "いつ回線が切り替わる？", "body": "開通手続きを完了したタイミングで元の回線が利用できなくなることがあります。通信できる環境と必要な情報を確保してから実施します。"}
+      ]},
+      {"id": "warning", "type": "warning", "eyebrow": "IMPORTANT", "heading": "申し込み前に、公式の最新条件を確認", "label": "確認ポイント", "paragraphs": ["料金、対応端末、本人確認書類、MNPの受付条件は変更されることがあります。この記事は確認項目を整理するためのものなので、申し込み時は必ず楽天モバイル公式の最新案内を確認してください。", "キャンペーンや紹介制度を利用する場合は、対象者、エントリー、申込時期、利用開始などの条件も別に確認しましょう。"]},
+      {"id": "faq", "type": "faq", "eyebrow": "FAQ", "heading": "乗り換え前によくある質問", "items": [
+        {"question": "今の電話番号はそのまま使えますか？", "answer": "MNPの手続きを使えば、現在の電話番号を引き継いで乗り換えられます。MNPワンストップの対象や、予約番号が必要かどうかは乗り換え元と申込方法で確認してください。"},
+        {"question": "SIMカードとeSIMはどちらを選べばいいですか？", "answer": "端末の対応状況と設定方法で選びます。eSIM対応端末なら開通までの流れが異なるため、申し込み時に端末とSIMの種類の組み合わせを確認してください。"},
+        {"question": "開通前に古い回線を解約してもいいですか？", "answer": "電話番号を引き継ぐ場合は、先に元の回線を解約せず、楽天モバイルのMNP手続きを公式案内に沿って進めます。開通後の契約状態は元の携帯電話会社にも確認してください。"}
+      ]}
+    ],
+    "sources": {"eyebrow": "OFFICIAL SOURCES", "heading": "申し込み前に公式の案内を確認", "description": "対応端末、MNP、本人確認、料金などの条件は変わることがあります。最新情報は楽天モバイル公式サイトで確認してください。", "updatedLabel": "情報確認日", "items": [
+      {"label": "はじめてでも安心！お申し込みガイド（楽天モバイル公式）", "href": "https://network.mobile.rakuten.co.jp/guide/procedure/", "external": true},
+      {"label": "他社から電話番号そのままで乗り換え（MNP）", "href": "https://network.mobile.rakuten.co.jp/guide/mnp/", "external": true},
+      {"label": "楽天回線対応製品", "href": "https://network.mobile.rakuten.co.jp/product/certified-products/", "external": true},
+      {"label": "本人確認書類", "href": "https://network.mobile.rakuten.co.jp/guide/verify/", "external": true}
+    ]},
+    "updatedAt": "2026-10-02",
+    "cta": {"eyebrow": "NEXT STEP", "heading": "公式の申込み手順を確認する", "body": "5つの確認ができたら、端末とSIMの種類、本人確認方法を選び、公式の申込み手順へ進みます。", "link": {"label": "楽天モバイル公式の申込みガイドを見る", "href": "https://network.mobile.rakuten.co.jp/guide/procedure/"}, "disclosure": "リンク先は楽天モバイル公式サイトです。"},
+    "related": {"eyebrow": "RELATED GUIDES", "heading": "乗り換えを検討するときに読むページ", "linkLabel": "記事を読む", "items": [
+      {"title": "楽天モバイルで迷うことが減る3つの特徴", "summary": "料金・通話・乗り換えの基本をまとめて確認する。", "href": "/guide/rakuten-mobile-three-features/"},
+      {"title": "買い替え超トクプログラムの仕組みと注意点", "summary": "端末の買い替えと返却の仕組みを確認する。", "href": "/guide/replacement-program/"},
+      {"title": "買い替え超トクの25カ月目はいつ？", "summary": "端末返却の時期と手続きを整理する。", "href": "/topics/replacement-program-return-timing/"}
+    ]}
+  }
+}

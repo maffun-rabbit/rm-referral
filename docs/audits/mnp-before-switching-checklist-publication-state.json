@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "promotionId": "mnp-before-switching-checklist",
+  "slug": "mnp-before-switching-checklist",
+  "currentLocale": "ja",
+  "locales": {
+    "ja": {"locale":"ja","status":"CURRENT_RELEASE_CANDIDATE","pathname":"/topics/mnp-before-switching-checklist/","bindingSource":"2026-10-02-ja-topic"},
+    "en": {"locale":"en","status":"UNPUBLISHED","pathname":"/en/topics/mnp-before-switching-checklist/","bindingSource":"ja-only-release"},
+    "ko": {"locale":"ko","status":"UNPUBLISHED","pathname":"/ko/topics/mnp-before-switching-checklist/","bindingSource":"ja-only-release"},
+    "pt": {"locale":"pt","status":"UNPUBLISHED","pathname":"/pt/topics/mnp-before-switching-checklist/","bindingSource":"ja-only-release"},
+    "vi": {"locale":"vi","status":"UNPUBLISHED","pathname":"/vi/topics/mnp-before-switching-checklist/","bindingSource":"ja-only-release"},
+    "zh": {"locale":"zh","status":"UNPUBLISHED","pathname":"/zh/topics/mnp-before-switching-checklist/","bindingSource":"ja-only-release"}
+  }
+}
