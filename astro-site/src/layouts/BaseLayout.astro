@@ -38,7 +38,8 @@ const resolvedCanonical = canonical ?? (canonicalPath ? getAbsoluteLocaleUrl(loc
 const alternateLinks = canonicalPath && availableLocales.length
   ? getAlternateLinks(canonicalPath, availableLocales)
   : [];
-const useEdgeIncludes = usesEdgeIncludes(locale, canonicalPath);
+const retainedProductionGuide = locale === "ja" && canonicalPath === "/guide/replacement-program/";
+const useEdgeIncludes = usesEdgeIncludes(locale, canonicalPath) && !retainedProductionGuide;
 ---
 
 <!doctype html>
@@ -67,12 +68,14 @@ const useEdgeIncludes = usesEdgeIncludes(locale, canonicalPath);
     {canonicalPath === '/' ? <HomeHeader locale={locale} /> : useEdgeIncludes ? <rm-include src={getIncludePath(locale, "header")} data-locales={availableLocales.join(',')} data-header-label={headerLinkLabel ?? messages.header.defaultLinkLabel}><SiteHeader
         locale={locale}
         homeHref={getLocalePath(locale)}
+      pathOverride={retainedProductionGuide ? canonicalPath : undefined}
         linkHref={headerLinkHref}
         linkLabel={headerLinkLabel}
         availableLocales={availableLocales.length ? availableLocales : undefined}
       /></rm-include> : <SiteHeader
         locale={locale}
         homeHref={getLocalePath(locale)}
+      pathOverride={retainedProductionGuide ? canonicalPath : undefined}
         linkHref={headerLinkHref}
         linkLabel={headerLinkLabel}
         availableLocales={availableLocales.length ? availableLocales : undefined}

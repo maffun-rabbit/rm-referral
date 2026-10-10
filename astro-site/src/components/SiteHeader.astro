@@ -8,6 +8,7 @@ type Props = {
   linkHref?: string;
   linkLabel?: string;
   availableLocales?: readonly Locale[];
+  pathOverride?: string;
 };
 
 const {
@@ -16,6 +17,7 @@ const {
   linkHref = "/guide/",
   linkLabel,
   availableLocales = SUPPORTED_LOCALES,
+  pathOverride,
 } = Astro.props;
 const messages = getMessages(locale);
 const localeLabels: Record<Locale, string> = {
@@ -27,7 +29,7 @@ const localeLabels: Record<Locale, string> = {
   pt: "🇧🇷 Português",
 };
 const currentPrefix = LOCALE_CONFIG[locale].pathPrefix;
-const currentPath = Astro.url.pathname;
+const currentPath = pathOverride ?? Astro.url.pathname;
 const sharedPath = currentPrefix && (currentPath === currentPrefix || currentPath.startsWith(`${currentPrefix}/`))
   ? currentPath.slice(currentPrefix.length) || "/"
   : currentPath;
