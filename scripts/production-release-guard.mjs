@@ -13,15 +13,20 @@ export async function verifyProductionCandidate({plan,approvedPlanSha256,candida
   if(sha256(Buffer.from(JSON.stringify(plan)))!==approvedPlanSha256)fail('Plan hash mismatch');
   const runtime=LOCALE_RUNTIME[locale];
   if(!runtime||plan.locale!==locale||plan.worker!==runtime.worker||plan.config!==config)fail('Locale/Worker/config mismatch');
-  const files=await inventory(candidate),hash=inventorySha256(files);
-  if(hash!==plan.candidateInventorySha256||Object.keys(files).length!==plan.candidateFileCount)fail('Candidate inventory mismatch');
   if(plan.deleted?.length)fail('Deleted assets are forbidden');
   const allowed=new Set(plan.allowedChangedPaths??[]);
   if((plan.changed??[]).some(p=>!allowed.has(p))||(plan.added??[]).some(p=>!allowed.has(p)))fail('Allowlist mismatch');
   if(plan.kind==='guide-single-page'){
     if(!plan.baselineDirectory)fail('Guide baseline directory missing');
-    await verifyGuidePlan({plan,approvedPlanSha256,baseline:plan.baselineDirectory,candidate});
-  }else if(plan.kind==='promotion'){
+    // The Guide verifier freshly hashes both directories and binds the exact
+    // diff to this approved plan. Reuse its output only within this call,
+    // instead of reading the same candidate once before and once inside it.
+    const verified=await verifyGuidePlan({plan,approvedPlanSha256,baseline:plan.baselineDirectory,candidate,includeInventory:true});
+    return {files:verified.files,inventorySha256:verified.candidateInventorySha256};
+  }
+  const files=await inventory(candidate),hash=inventorySha256(files);
+  if(hash!==plan.candidateInventorySha256||Object.keys(files).length!==plan.candidateFileCount)fail('Candidate inventory mismatch');
+  if(plan.kind==='promotion'){
     if(!plan.approvedPathname||!plan.slug)fail('Promotion exact pathname missing');
     validatePublicationState(plan.publicationState,{promotionId:plan.promotionId,slug:plan.slug,currentLocale:locale});
     if(plan.publicationStateSha256!==publicationStateSha256(plan.publicationState))fail('Publication State hash mismatch');

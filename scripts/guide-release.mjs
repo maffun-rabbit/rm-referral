@@ -26,7 +26,7 @@ export function verifyExactGuidePath(locale, pathname) {
   return expected;
 }
 
-export async function verifyGuideCandidate({locale, baseline, candidate, approvedPathname}) {
+export async function verifyGuideCandidate({locale, baseline, candidate, approvedPathname, includeInventory = false}) {
   const mapping = guideReleaseMapping(locale);
   verifyExactGuidePath(locale, approvedPathname);
   const before = await inventory(path.resolve(baseline));
@@ -54,13 +54,15 @@ export async function verifyGuideCandidate({locale, baseline, candidate, approve
     changed,
     deleted,
     unexpected: [],
+    // Output only: never accept caller-supplied/cached inventories.
+    ...(includeInventory ? {files: after} : {}),
   };
 }
 
-export async function verifyGuidePlan({plan, approvedPlanSha256, baseline, candidate}) {
+export async function verifyGuidePlan({plan, approvedPlanSha256, baseline, candidate, includeInventory = false}) {
   if (!plan || plan.schema !== 1 || plan.kind !== 'guide-single-page') fail('Invalid plan');
   if (sha256(Buffer.from(JSON.stringify(plan))) !== approvedPlanSha256) fail('Plan hash mismatch');
-  const result = await verifyGuideCandidate({locale: plan.locale, baseline, candidate, approvedPathname: plan.approvedPathname});
+  const result = await verifyGuideCandidate({locale: plan.locale, baseline, candidate, approvedPathname: plan.approvedPathname, includeInventory});
   for (const key of ['assetPath','baselineFileCount','candidateFileCount','baselineInventorySha256','candidateInventorySha256'])
     if (plan[key] !== result[key]) fail(`Plan binding mismatch: ${key}`);
   if (JSON.stringify(plan.changed) !== JSON.stringify(result.changed) || plan.added?.length || plan.deleted?.length || plan.unexpected?.length)
