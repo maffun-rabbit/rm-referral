@@ -10,7 +10,7 @@ description: GitHub＋Cloudflare版RMリファラルのページ・共通UI・�
 ## 対象と正本
 
 - 対象は `maffun-rabbit/rm-referral`（Cloudflare、公開サイト `mnp-navi.jp`）。ユーザーが媒体を確認していない場合は、はてなブログかCloudflareかを一問で確認してから変更する。確認済みの同一作業中は繰り返さない。
-- Vaultからのコード実体は `../制作ワークスペース/RMリファラル/cloudflare-site/`。リポジトリの `package.json` と `AGENTS.md` を確認して作業する。
+- 正式なローカル開発環境は `/Users/masayuki/Developer/projects/RMリファラル/cloudflare-site/`。リポジトリの `package.json` と `AGENTS.md` を確認して作業する。
 - 状況説明・診断だけの依頼では編集・公開しない。サイト修正の許可と公開の許可を区別し、承認されていない公開を自動実行しない。
 
 ## 編集箇所を絞る
