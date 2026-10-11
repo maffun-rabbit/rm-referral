@@ -1,5 +1,18 @@
 # RMリファラル（GitHub＋Cloudflare）
 
+## Phase 0 運用入口（設計段階）
+
+- 作業開始時に [docs/operations/CURRENT.md](docs/operations/CURRENT.md) を確認し、運用仕様ID・Version・状態を確認する。
+- 目的に応じてCURRENT.mdからPHASE0.md、RELEASE.md、RETENTION.mdを参照する。
+- 旧運用指示と矛盾する場合は該当処理を停止し、矛盾と参照元を報告する。
+- 過去の検証clone・archive内のAGENTS.mdを現行ルールとして採用しない。
+- 一時成果物の保護期限・削除条件はRETENTION.mdと台帳に従う。期限のない保留を提案しない。
+- 削除と公開には独立したユーザー承認が必要。今回の文書作成はその承認ではない。
+- 現在はDESIGN_ONLY、Genesis未認定、新方式の公開不許可。以下の既存開発手順を無条件に置き換えない。
+- 正式mainへ反映後は、この入口をプロジェクト作業に適用する。古いcloneは自動更新されない。既存公開経路への機械制御は未接続。
+
+## 既存開発手順（正式切り替え前は維持）
+
 このリポジトリのサイト変更は、使用モデルを問わず `.agents/skills/rm-cloudflare-components/SKILL.md` を読んで従う。
 
 - UIは `astro-site/src/components/`、全体は `BaseLayout.astro`、言語別文言は `src/i18n/` を編集する。

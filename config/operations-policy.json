@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "operationsId": "mnp-navi.phase0.operations.v1",
+  "operationsVersion": "1.0.0",
+  "operationsState": "DESIGN_ONLY",
+  "genesisCertified": false,
+  "genesisId": null,
+  "productionPublishEnabled": false,
+  "retentionPolicyVersion": "1.0.0",
+  "retentionRequired": true,
+  "retentionDeadlineRequired": true,
+  "retentionThresholdRequired": true,
+  "allowIndefiniteRetention": false,
+  "deletionRequiresApproval": true,
+  "allowLegacyArtifacts": false,
+  "allowArchivedInputs": false,
+  "legacyInputScope": "new-phase0-workflow-only",
+  "legacyDevelopmentPreserved": true,
+  "releaseScriptsConnected": false,
+  "enforcementImplemented": false,
+  "automaticDeletionEnabled": false,
+  "deadlineTimezone": "Asia/Tokyo",
+  "decisionStartDate": "2026-10-11",
+  "defaultTemporaryDays": 7,
+  "productionEvidenceReviewDays": 14,
+  "existingTemporaryDeadline": "2026-10-18",
+  "existingProductionReviewDeadline": "2026-10-25",
+  "extensionRequiresNewConditionAndUserApproval": true,
+  "documents": {
+    "current": "docs/operations/CURRENT.md",
+    "phase0": "docs/operations/PHASE0.md",
+    "release": "docs/operations/RELEASE.md",
+    "retention": "docs/operations/RETENTION.md",
+    "register": "docs/operations/retention-register.json"
+  },
+  "registerSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "required": [
+      "schemaVersion",
+      "operationsId",
+      "retentionPolicyVersion",
+      "decisionStartDate",
+      "entries"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": 1
+      },
+      "operationsId": {
+        "const": "mnp-navi.phase0.operations.v1"
+      },
+      "retentionPolicyVersion": {
+        "const": "1.0.0"
+      },
+      "decisionStartDate": {
+        "const": "2026-10-11"
+      },
+      "entries": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "id",
+            "path",
+            "classification",
+            "reason",
+            "dependencies",
+            "retentionCondition",
+            "threshold",
+            "deadline",
+            "decisionMethod",
+            "decisionOwner",
+            "status",
+            "onConditionMet",
+            "onConditionUnmet",
+            "deletionMethod",
+            "approvalRequired",
+            "registeredAt"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "path": {
+              "type": "string",
+              "pattern": "^/"
+            },
+            "classification": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "dependencies": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "retentionCondition": {
+              "type": "string",
+              "minLength": 1
+            },
+            "threshold": {
+              "type": "object",
+              "required": [
+                "metric",
+                "operator",
+                "value",
+                "evidenceRequired"
+              ],
+              "properties": {
+                "metric": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "operator": {
+                  "enum": [
+                    "all",
+                    "equals",
+                    "atLeast"
+                  ]
+                },
+                "value": {},
+                "evidenceRequired": {
+                  "const": true
+                }
+              }
+            },
+            "deadline": {
+              "type": "string",
+              "format": "date"
+            },
+            "decisionMethod": {
+              "type": "string",
+              "minLength": 1
+            },
+            "decisionOwner": {
+              "type": "string",
+              "minLength": 1
+            },
+            "status": {
+              "enum": [
+                "ACTIVE",
+                "TEMPORARILY_PROTECTED",
+                "DELETE_CANDIDATE",
+                "ADOPTED",
+                "DELETED",
+                "BLOCKED_BY_SAFETY_DEPENDENCY"
+              ]
+            },
+            "onConditionMet": {
+              "type": "string",
+              "minLength": 1
+            },
+            "onConditionUnmet": {
+              "type": "string",
+              "minLength": 1
+            },
+            "deletionMethod": {
+              "type": "string",
+              "minLength": 1
+            },
+            "approvalRequired": {
+              "const": true
+            },
+            "registeredAt": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "TEMPORARILY_PROTECTED",
+                      "BLOCKED_BY_SAFETY_DEPENDENCY"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "dependencies": {
+                    "minItems": 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "decisionRules": {
+    "deadlineConditionMet": "ADOPTED only with timely objective evidence and separately verified adoption approval",
+    "deadlineConditionUnmet": "DELETE_CANDIDATE",
+    "deadlineEvidenceMissing": "DELETE_CANDIDATE",
+    "expiredProtectionRestartsAllowed": false,
+    "safetyRiskBlocksDeletionExecution": true,
+    "deletionExecutesAutomatically": false,
+    "exceptionExtensionRequired": [
+      "newDependencies",
+      "newCondition",
+      "newThreshold",
+      "newDeadline",
+      "specificReason",
+      "userApprovalEvidence"
+    ]
+  }
+}

@@ -1,0 +1,2268 @@
+{
+  "schemaVersion": 1,
+  "operationsId": "mnp-navi.phase0.operations.v1",
+  "retentionPolicyVersion": "1.0.0",
+  "decisionStartDate": "2026-10-11",
+  "snapshotMainCommit": "3530975b70eb77934192e94142d8eb133ff0711b",
+  "productionInspected": false,
+  "deletionAuthorized": false,
+  "entries": [
+    {
+      "id": "prototype-01",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-cloudflare-assets.py",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "CF hash/manifest/bucket要求/fixture uploadアダプター。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "scripts/offline-cloudflare-assets.py",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-cloudflare-assets.py",
+        "sha256": "ef3d2fbb31ae8b25bd9e29da93e49c0bef0d1d7529d55571c77bbe3e6587c8c5",
+        "bytes": 18421,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": [
+          "scripts/offline-release-flow.py",
+          "tests/offline-cloudflare-assets.test.py"
+        ]
+      }
+    },
+    {
+      "id": "prototype-02",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-cloudflare-hash.cjs",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "Wrangler依存を使うBLAKE3ストリームIPC helper。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "scripts/offline-cloudflare-hash.cjs",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-cloudflare-hash.cjs",
+        "sha256": "9583a097d8fa951a6877b17116d27b6c8bf81273b3758da4e736f1b6b82e0c4b",
+        "bytes": 3114,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": [
+          "scripts/offline-cloudflare-assets.py",
+          "tests/offline-cloudflare-hash.test.cjs"
+        ]
+      }
+    },
+    {
+      "id": "prototype-03",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-delta-assets.mjs",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "プロセス内資産ストアと差分plan。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "scripts/offline-delta-assets.mjs",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-delta-assets.mjs",
+        "sha256": "c27c36b78cfb6875d009b1e5115afa2103487c07f23d052c552659cb9feb760d",
+        "bytes": 9297,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": [
+          "scripts/offline-release-envelope.mjs",
+          "scripts/offline-release-flow.mjs",
+          "tests/offline-delta-assets.test.mjs",
+          "tests/offline-release-binding.test.py",
+          "tests/offline-release-envelope.test.mjs",
+          "tests/offline-release-flow.test.mjs"
+        ]
+      }
+    },
+    {
+      "id": "prototype-04",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-persistent-cas.py",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "永続SHA-256 CAS。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "scripts/offline-persistent-cas.py",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-persistent-cas.py",
+        "sha256": "6cc12acd9beb1515e70b4fc1243207bbf560958e0159f6bdf258aa7a7129afdf",
+        "bytes": 21027,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": [
+          "scripts/offline-release-binding.py",
+          "tests/offline-persistent-cas.test.py"
+        ]
+      }
+    },
+    {
+      "id": "prototype-05",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-release-binding.py",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "Production・package・承認fixture束縛。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "scripts/offline-release-binding.py",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-release-binding.py",
+        "sha256": "b43d4dbb2860827c69ce7ec95e05b604b5f53efae20bb96df76101ef941caa24",
+        "bytes": 39058,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": [
+          "scripts/offline-cloudflare-assets.py",
+          "tests/offline-release-binding.test.py"
+        ]
+      }
+    },
+    {
+      "id": "prototype-06",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-release-envelope.mjs",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "差分planのオフライン接続envelope。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "scripts/offline-release-envelope.mjs",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-release-envelope.mjs",
+        "sha256": "4fd906716eead3f8d5ded5dd12719190c6c8eb34e97f8018e62ab09bda02614e",
+        "bytes": 607,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": [
+          "scripts/offline-release-flow.mjs",
+          "tests/offline-release-binding.test.py",
+          "tests/offline-release-envelope.test.mjs"
+        ]
+      }
+    },
+    {
+      "id": "prototype-07",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-release-flow.mjs",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "旧ガード等を呼ぶ統合診断IPC bridge。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "scripts/offline-release-flow.mjs",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-release-flow.mjs",
+        "sha256": "585546d6b214ca452c4685e8db65fe9829d0073239c39662f4ccdcf23c8f4701",
+        "bytes": 16056,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": [
+          "scripts/offline-release-flow.py",
+          "tests/offline-release-flow.test.mjs"
+        ]
+      }
+    },
+    {
+      "id": "prototype-08",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-release-flow.py",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "JA固定・固定時計・fixture主体の統合診断。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "scripts/offline-release-flow.py",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/scripts/offline-release-flow.py",
+        "sha256": "c4a02301f2f2e48ca876db2d8551461e1289564d5e6e40025be2107eaa0cf530",
+        "bytes": 26798,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": [
+          "tests/offline-release-flow.test.py"
+        ]
+      }
+    },
+    {
+      "id": "prototype-09",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-cloudflare-assets.test.py",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "対応するオフライン試作のfixture・境界テスト。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "tests/offline-cloudflare-assets.test.py",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-cloudflare-assets.test.py",
+        "sha256": "6f79d975aec4cb8d6ec2492b994180bbe433e209a59909ae34dd98d4da86b403",
+        "bytes": 12937,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": []
+      }
+    },
+    {
+      "id": "prototype-10",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-cloudflare-hash.test.cjs",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "対応するオフライン試作のfixture・境界テスト。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "tests/offline-cloudflare-hash.test.cjs",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-cloudflare-hash.test.cjs",
+        "sha256": "8e4d8a66b78bed40a589da8ec6563f7081c579fb391803e8f6a9e5163db97357",
+        "bytes": 1812,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": []
+      }
+    },
+    {
+      "id": "prototype-11",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-delta-assets.test.mjs",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "対応するオフライン試作のfixture・境界テスト。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "tests/offline-delta-assets.test.mjs",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-delta-assets.test.mjs",
+        "sha256": "663df786134e94b1bc75dab8165c0daddd658780d11a0f3f37effeca47421122",
+        "bytes": 7977,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": []
+      }
+    },
+    {
+      "id": "prototype-12",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-persistent-cas.test.py",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "対応するオフライン試作のfixture・境界テスト。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "tests/offline-persistent-cas.test.py",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-persistent-cas.test.py",
+        "sha256": "8d220ebd39d2053779993049578dca64eb791399e630ce295da9dee0629ee438",
+        "bytes": 19146,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": []
+      }
+    },
+    {
+      "id": "prototype-13",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-release-binding.test.py",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "対応するオフライン試作のfixture・境界テスト。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "tests/offline-release-binding.test.py",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-release-binding.test.py",
+        "sha256": "3094e56541d9ac9c39a59b48b6b21a18ccc45473032391c063f2f8c175dc2099",
+        "bytes": 23848,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": [
+          "tests/offline-cloudflare-assets.test.py",
+          "tests/offline-release-flow.test.py"
+        ]
+      }
+    },
+    {
+      "id": "prototype-14",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-release-envelope.test.mjs",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "対応するオフライン試作のfixture・境界テスト。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "tests/offline-release-envelope.test.mjs",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-release-envelope.test.mjs",
+        "sha256": "aae40addc93fdcc00ce95c7b478102597a87c8b3a37c52faa25edd930083f2d8",
+        "bytes": 2722,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": []
+      }
+    },
+    {
+      "id": "prototype-15",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-release-flow.test.mjs",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "対応するオフライン試作のfixture・境界テスト。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "tests/offline-release-flow.test.mjs",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-release-flow.test.mjs",
+        "sha256": "470f1cdfaddc03fe5d3e91be2e18976fedea0ec5529d313a05f502b8c7ba5df0",
+        "bytes": 10789,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": []
+      }
+    },
+    {
+      "id": "prototype-16",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-release-flow.test.py",
+      "classification": "OFFLINE_PROTOTYPE",
+      "reason": "対応するオフライン試作のfixture・境界テスト。mainから参照されず、新方式の正式採用・実Production復旧の接続はない。完成/未コミットを保護根拠としない。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "relativePath": "tests/offline-release-flow.test.py",
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo/tests/offline-release-flow.test.py",
+        "sha256": "99d5b61561b748aa87996c87e4eb0242a4b3017780c9add6355e208d06948c51",
+        "bytes": 7863,
+        "mainTrackedReference": false
+      },
+      "assessment": {
+        "referencedByCurrentMain": false,
+        "neededForGenesisCertification": false,
+        "neededForCurrentProductionRecovery": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true,
+        "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
+        "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
+        "experimentalDependents": []
+      }
+    },
+    {
+      "id": "worktree-01",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/20261010-145925/baseline",
+      "classification": "REGISTERED_WORKTREE",
+      "reason": "過去検証用。tracked差分はすべて現在mainとbyte一致。新方式への追加採用決定はなく、現行ソースの代替は正式mainに存在。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/20261010-145925/baseline",
+        "head": "754d223f2f5b3a9bf0a8b70d6bfd4ce77a4cfa8b",
+        "branch": "DETACHED",
+        "status": "?? node_modules",
+        "changes": []
+      },
+      "assessment": {
+        "changedFiles": [],
+        "allTrackedChangesAlreadyInMain": true,
+        "neededForProductionReproduction": "既存コード比較に独立した旧checkoutは不要。mainに変更内容がある。実Productionとの一致は未認定。",
+        "neededForGenesisCertification": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true
+      }
+    },
+    {
+      "id": "worktree-02",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/20261010-145925/candidate",
+      "classification": "REGISTERED_WORKTREE",
+      "reason": "過去検証用。tracked差分はすべて現在mainとbyte一致。新方式への追加採用決定はなく、現行ソースの代替は正式mainに存在。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/20261010-145925/candidate",
+        "head": "754d223f2f5b3a9bf0a8b70d6bfd4ce77a4cfa8b",
+        "branch": "DETACHED",
+        "status": "M astro-site/src/components/SiteHeader.astro\n M astro-site/src/layouts/BaseLayout.astro\n M content/pages/ja/guide/replacement-program/page.json\n?? node_modules",
+        "changes": [
+          {
+            "path": "astro-site/src/components/SiteHeader.astro",
+            "identicalToMain": true,
+            "sha256": "40b8fcdb717d1934cfd3e66437548fd02ad98b92e89fe470cbdfe93a5cbf891b"
+          },
+          {
+            "path": "astro-site/src/layouts/BaseLayout.astro",
+            "identicalToMain": true,
+            "sha256": "dfdf4250193a2b03eb7050938607880aa812009851d0cfc5bb05666c9994b639"
+          },
+          {
+            "path": "content/pages/ja/guide/replacement-program/page.json",
+            "identicalToMain": true,
+            "sha256": "94133b040b3946cb96f808a1a4ed71c52fc5ecb217fe6ba52525e04127a4e32a"
+          }
+        ]
+      },
+      "assessment": {
+        "changedFiles": [
+          {
+            "path": "astro-site/src/components/SiteHeader.astro",
+            "identicalToMain": true,
+            "sha256": "40b8fcdb717d1934cfd3e66437548fd02ad98b92e89fe470cbdfe93a5cbf891b"
+          },
+          {
+            "path": "astro-site/src/layouts/BaseLayout.astro",
+            "identicalToMain": true,
+            "sha256": "dfdf4250193a2b03eb7050938607880aa812009851d0cfc5bb05666c9994b639"
+          },
+          {
+            "path": "content/pages/ja/guide/replacement-program/page.json",
+            "identicalToMain": true,
+            "sha256": "94133b040b3946cb96f808a1a4ed71c52fc5ecb217fe6ba52525e04127a4e32a"
+          }
+        ],
+        "allTrackedChangesAlreadyInMain": true,
+        "neededForProductionReproduction": "既存コード比較に独立した旧checkoutは不要。mainに変更内容がある。実Productionとの一致は未認定。",
+        "neededForGenesisCertification": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true
+      }
+    },
+    {
+      "id": "worktree-03",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/cta-tests-20261010-154842/baseline",
+      "classification": "REGISTERED_WORKTREE",
+      "reason": "過去検証用。tracked差分はすべて現在mainとbyte一致。新方式への追加採用決定はなく、現行ソースの代替は正式mainに存在。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/cta-tests-20261010-154842/baseline",
+        "head": "754d223f2f5b3a9bf0a8b70d6bfd4ce77a4cfa8b",
+        "branch": "DETACHED",
+        "status": "M tests/guide-release.test.mjs\n?? node_modules",
+        "changes": [
+          {
+            "path": "tests/guide-release.test.mjs",
+            "identicalToMain": true,
+            "sha256": "857a8a32b906ce64c1a3ff1c566edb3e296bafad5645fead94c742c1780bdad4"
+          }
+        ]
+      },
+      "assessment": {
+        "changedFiles": [
+          {
+            "path": "tests/guide-release.test.mjs",
+            "identicalToMain": true,
+            "sha256": "857a8a32b906ce64c1a3ff1c566edb3e296bafad5645fead94c742c1780bdad4"
+          }
+        ],
+        "allTrackedChangesAlreadyInMain": true,
+        "neededForProductionReproduction": "既存コード比較に独立した旧checkoutは不要。mainに変更内容がある。実Productionとの一致は未認定。",
+        "neededForGenesisCertification": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true
+      }
+    },
+    {
+      "id": "worktree-04",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/cta-tests-20261010-154842/candidate",
+      "classification": "REGISTERED_WORKTREE",
+      "reason": "過去検証用。tracked差分はすべて現在mainとbyte一致。新方式への追加採用決定はなく、現行ソースの代替は正式mainに存在。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/cta-tests-20261010-154842/candidate",
+        "head": "754d223f2f5b3a9bf0a8b70d6bfd4ce77a4cfa8b",
+        "branch": "DETACHED",
+        "status": "M astro-site/src/components/SiteHeader.astro\n M astro-site/src/layouts/BaseLayout.astro\n M content/pages/ja/guide/replacement-program/page.json\n M tests/guide-release.test.mjs\n?? node_modules",
+        "changes": [
+          {
+            "path": "astro-site/src/components/SiteHeader.astro",
+            "identicalToMain": true,
+            "sha256": "40b8fcdb717d1934cfd3e66437548fd02ad98b92e89fe470cbdfe93a5cbf891b"
+          },
+          {
+            "path": "astro-site/src/layouts/BaseLayout.astro",
+            "identicalToMain": true,
+            "sha256": "dfdf4250193a2b03eb7050938607880aa812009851d0cfc5bb05666c9994b639"
+          },
+          {
+            "path": "content/pages/ja/guide/replacement-program/page.json",
+            "identicalToMain": true,
+            "sha256": "94133b040b3946cb96f808a1a4ed71c52fc5ecb217fe6ba52525e04127a4e32a"
+          },
+          {
+            "path": "tests/guide-release.test.mjs",
+            "identicalToMain": true,
+            "sha256": "857a8a32b906ce64c1a3ff1c566edb3e296bafad5645fead94c742c1780bdad4"
+          }
+        ]
+      },
+      "assessment": {
+        "changedFiles": [
+          {
+            "path": "astro-site/src/components/SiteHeader.astro",
+            "identicalToMain": true,
+            "sha256": "40b8fcdb717d1934cfd3e66437548fd02ad98b92e89fe470cbdfe93a5cbf891b"
+          },
+          {
+            "path": "astro-site/src/layouts/BaseLayout.astro",
+            "identicalToMain": true,
+            "sha256": "dfdf4250193a2b03eb7050938607880aa812009851d0cfc5bb05666c9994b639"
+          },
+          {
+            "path": "content/pages/ja/guide/replacement-program/page.json",
+            "identicalToMain": true,
+            "sha256": "94133b040b3946cb96f808a1a4ed71c52fc5ecb217fe6ba52525e04127a4e32a"
+          },
+          {
+            "path": "tests/guide-release.test.mjs",
+            "identicalToMain": true,
+            "sha256": "857a8a32b906ce64c1a3ff1c566edb3e296bafad5645fead94c742c1780bdad4"
+          }
+        ],
+        "allTrackedChangesAlreadyInMain": true,
+        "neededForProductionReproduction": "既存コード比較に独立した旧checkoutは不要。mainに変更内容がある。実Productionとの一致は未認定。",
+        "neededForGenesisCertification": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true
+      }
+    },
+    {
+      "id": "worktree-05",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase4a/20261010-162806/baseline",
+      "classification": "REGISTERED_WORKTREE",
+      "reason": "過去検証用。tracked差分はすべて現在mainとbyte一致。新方式への追加採用決定はなく、現行ソースの代替は正式mainに存在。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase4a/20261010-162806/baseline",
+        "head": "754d223f2f5b3a9bf0a8b70d6bfd4ce77a4cfa8b",
+        "branch": "DETACHED",
+        "status": "?? node_modules",
+        "changes": []
+      },
+      "assessment": {
+        "changedFiles": [],
+        "allTrackedChangesAlreadyInMain": true,
+        "neededForProductionReproduction": "既存コード比較に独立した旧checkoutは不要。mainに変更内容がある。実Productionとの一致は未認定。",
+        "neededForGenesisCertification": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true
+      }
+    },
+    {
+      "id": "worktree-06",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase4a/20261010-162806/candidate",
+      "classification": "REGISTERED_WORKTREE",
+      "reason": "過去検証用。tracked差分はすべて現在mainとbyte一致。新方式への追加採用決定はなく、現行ソースの代替は正式mainに存在。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase4a/20261010-162806/candidate",
+        "head": "754d223f2f5b3a9bf0a8b70d6bfd4ce77a4cfa8b",
+        "branch": "phase4a/production-alignment-20261010-162806",
+        "status": "M astro-site/src/components/SiteHeader.astro\n M astro-site/src/layouts/BaseLayout.astro\n M content/pages/ja/guide/replacement-program/page.json\n M tests/guide-release.test.mjs\n?? node_modules",
+        "changes": [
+          {
+            "path": "astro-site/src/components/SiteHeader.astro",
+            "identicalToMain": true,
+            "sha256": "40b8fcdb717d1934cfd3e66437548fd02ad98b92e89fe470cbdfe93a5cbf891b"
+          },
+          {
+            "path": "astro-site/src/layouts/BaseLayout.astro",
+            "identicalToMain": true,
+            "sha256": "dfdf4250193a2b03eb7050938607880aa812009851d0cfc5bb05666c9994b639"
+          },
+          {
+            "path": "content/pages/ja/guide/replacement-program/page.json",
+            "identicalToMain": true,
+            "sha256": "94133b040b3946cb96f808a1a4ed71c52fc5ecb217fe6ba52525e04127a4e32a"
+          },
+          {
+            "path": "tests/guide-release.test.mjs",
+            "identicalToMain": true,
+            "sha256": "857a8a32b906ce64c1a3ff1c566edb3e296bafad5645fead94c742c1780bdad4"
+          }
+        ]
+      },
+      "assessment": {
+        "changedFiles": [
+          {
+            "path": "astro-site/src/components/SiteHeader.astro",
+            "identicalToMain": true,
+            "sha256": "40b8fcdb717d1934cfd3e66437548fd02ad98b92e89fe470cbdfe93a5cbf891b"
+          },
+          {
+            "path": "astro-site/src/layouts/BaseLayout.astro",
+            "identicalToMain": true,
+            "sha256": "dfdf4250193a2b03eb7050938607880aa812009851d0cfc5bb05666c9994b639"
+          },
+          {
+            "path": "content/pages/ja/guide/replacement-program/page.json",
+            "identicalToMain": true,
+            "sha256": "94133b040b3946cb96f808a1a4ed71c52fc5ecb217fe6ba52525e04127a4e32a"
+          },
+          {
+            "path": "tests/guide-release.test.mjs",
+            "identicalToMain": true,
+            "sha256": "857a8a32b906ce64c1a3ff1c566edb3e296bafad5645fead94c742c1780bdad4"
+          }
+        ],
+        "allTrackedChangesAlreadyInMain": true,
+        "neededForProductionReproduction": "既存コード比較に独立した旧checkoutは不要。mainに変更内容がある。実Productionとの一致は未認定。",
+        "neededForGenesisCertification": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true
+      }
+    },
+    {
+      "id": "worktree-07",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase4b1/20261010-193142/baseline",
+      "classification": "REGISTERED_WORKTREE",
+      "reason": "過去検証用。tracked差分はすべて現在mainとbyte一致。新方式への追加採用決定はなく、現行ソースの代替は正式mainに存在。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase4b1/20261010-193142/baseline",
+        "head": "754d223f2f5b3a9bf0a8b70d6bfd4ce77a4cfa8b",
+        "branch": "DETACHED",
+        "status": "?? astro-site/node_modules\n?? node_modules",
+        "changes": []
+      },
+      "assessment": {
+        "changedFiles": [],
+        "allTrackedChangesAlreadyInMain": true,
+        "neededForProductionReproduction": "既存コード比較に独立した旧checkoutは不要。mainに変更内容がある。実Productionとの一致は未認定。",
+        "neededForGenesisCertification": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true
+      }
+    },
+    {
+      "id": "worktree-08",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase4b1/20261010-193142/candidate",
+      "classification": "REGISTERED_WORKTREE",
+      "reason": "過去検証用。tracked差分はすべて現在mainとbyte一致。新方式への追加採用決定はなく、現行ソースの代替は正式mainに存在。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase4b1/20261010-193142/candidate",
+        "head": "754d223f2f5b3a9bf0a8b70d6bfd4ce77a4cfa8b",
+        "branch": "phase4b1/production-alignment-20261010-193142",
+        "status": "M astro-site/src/components/SiteHeader.astro\n M astro-site/src/layouts/BaseLayout.astro\n M content/pages/ja/guide/replacement-program/page.json\n M tests/guide-release.test.mjs\n?? .single-page-source/\n?? astro-site/node_modules\n?? node_modules",
+        "changes": [
+          {
+            "path": "astro-site/src/components/SiteHeader.astro",
+            "identicalToMain": true,
+            "sha256": "40b8fcdb717d1934cfd3e66437548fd02ad98b92e89fe470cbdfe93a5cbf891b"
+          },
+          {
+            "path": "astro-site/src/layouts/BaseLayout.astro",
+            "identicalToMain": true,
+            "sha256": "dfdf4250193a2b03eb7050938607880aa812009851d0cfc5bb05666c9994b639"
+          },
+          {
+            "path": "content/pages/ja/guide/replacement-program/page.json",
+            "identicalToMain": true,
+            "sha256": "94133b040b3946cb96f808a1a4ed71c52fc5ecb217fe6ba52525e04127a4e32a"
+          },
+          {
+            "path": "tests/guide-release.test.mjs",
+            "identicalToMain": true,
+            "sha256": "857a8a32b906ce64c1a3ff1c566edb3e296bafad5645fead94c742c1780bdad4"
+          }
+        ]
+      },
+      "assessment": {
+        "changedFiles": [
+          {
+            "path": "astro-site/src/components/SiteHeader.astro",
+            "identicalToMain": true,
+            "sha256": "40b8fcdb717d1934cfd3e66437548fd02ad98b92e89fe470cbdfe93a5cbf891b"
+          },
+          {
+            "path": "astro-site/src/layouts/BaseLayout.astro",
+            "identicalToMain": true,
+            "sha256": "dfdf4250193a2b03eb7050938607880aa812009851d0cfc5bb05666c9994b639"
+          },
+          {
+            "path": "content/pages/ja/guide/replacement-program/page.json",
+            "identicalToMain": true,
+            "sha256": "94133b040b3946cb96f808a1a4ed71c52fc5ecb217fe6ba52525e04127a4e32a"
+          },
+          {
+            "path": "tests/guide-release.test.mjs",
+            "identicalToMain": true,
+            "sha256": "857a8a32b906ce64c1a3ff1c566edb3e296bafad5645fead94c742c1780bdad4"
+          }
+        ],
+        "allTrackedChangesAlreadyInMain": true,
+        "neededForProductionReproduction": "既存コード比較に独立した旧checkoutは不要。mainに変更内容がある。実Productionとの一致は未認定。",
+        "neededForGenesisCertification": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true
+      }
+    },
+    {
+      "id": "worktree-09",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase5/legacy-path-fix-20261010",
+      "classification": "REGISTERED_WORKTREE",
+      "reason": "過去検証用。tracked差分はすべて現在mainとbyte一致。新方式への追加採用決定はなく、現行ソースの代替は正式mainに存在。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null,
+      "sourceEvidence": {
+        "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase5/legacy-path-fix-20261010",
+        "head": "af6612cf4ea8da6840bff26a462722667aed3770",
+        "branch": "phase5/remove-legacy-path-20261010",
+        "status": "",
+        "changes": []
+      },
+      "assessment": {
+        "changedFiles": [],
+        "allTrackedChangesAlreadyInMain": true,
+        "neededForProductionReproduction": "既存コード比較に独立した旧checkoutは不要。mainに変更内容がある。実Productionとの一致は未認定。",
+        "neededForGenesisCertification": false,
+        "formallyAdoptedForNewWorkflow": false,
+        "replaceable": true
+      }
+    },
+    {
+      "id": "legacy-area-01",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-independent",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-02",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-migration",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [
+        "/Users/masayuki/Developer/workspaces/mnp-navi-migration/phase2a-20261010-104501/preservation"
+      ],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-03",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [
+        "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/20261010-145925/baseline",
+        "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/20261010-145925/candidate",
+        "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/cta-tests-20261010-154842/baseline",
+        "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/cta-tests-20261010-154842/candidate"
+      ],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-04",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase4a",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [
+        "/Users/masayuki/Developer/workspaces/mnp-navi-phase4a/20261010-162806/baseline",
+        "/Users/masayuki/Developer/workspaces/mnp-navi-phase4a/20261010-162806/candidate",
+        "/Users/masayuki/Developer/workspaces/mnp-navi-phase4a/20261010-162806/api"
+      ],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-05",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase4b1",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [
+        "/Users/masayuki/Developer/workspaces/mnp-navi-phase4b1/20261010-193142/baseline",
+        "/Users/masayuki/Developer/workspaces/mnp-navi-phase4b1/20261010-193142/candidate"
+      ],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-06",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase4b2",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-07",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase4b3",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-08",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase5",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [
+        "/Users/masayuki/Developer/workspaces/mnp-navi-phase5/legacy-path-fix-20261010"
+      ],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-09",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b1",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-10",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b2",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-11",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [
+        "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo"
+      ],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-12",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-asset-store",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-13",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b4b1",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-14",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b4b2",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-15",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b4b3",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "legacy-area-16",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b4b4",
+      "classification": "PAST_VALIDATION_AREA",
+      "reason": "過去の検証環境・生成物・報告。mainの公開入力としてこのパスへの固定参照は確認されず、新方式での採用未決定。必要性の個別証拠がない部分は削除候補。",
+      "dependencies": [],
+      "retentionCondition": "新方式での具体的用途・依存と対象別採用承認を期限内に証拠で確定する。",
+      "threshold": {
+        "metric": "formalAdoptionDecision",
+        "operator": "all",
+        "value": [
+          "namedPhase0Requirement",
+          "exactTargetUserAdoptionApproval",
+          "destinationAndRetentionPolicyRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "DELETE_CANDIDATE",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "production-review-01",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-production-audit",
+      "classification": "PRODUCTION_OR_PRESERVATION_EVIDENCE",
+      "reason": "既知のProduction監査・API取得記録または移行保全領域。実Productionの対応・復旧用途・代替の確認を2026-10-25までに完了する。必要な唯一の復旧手段と認定したわけではない。",
+      "dependencies": [
+        "過去Production照合/復旧資料の所在判定。現行対応・代替手段はUNKNOWN。正式ソース移行時の保全データを含む可能性。"
+      ],
+      "retentionCondition": "現行Productionとの対応、必要な復旧用途、代替/保管方針を検証し、必要性と対象限定の正式保管承認を期限内に確認する。不要と確認されたものはDELETE_CANDIDATE。",
+      "threshold": {
+        "metric": "productionDependencyReview",
+        "operator": "all",
+        "value": [
+          "currentProductionMappingVerified",
+          "recoveryUseNecessary",
+          "replacementPlanVerified",
+          "userAdoptionOrStorageApprovalVerified"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-25",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "BLOCKED_BY_SAFETY_DEPENDENCY",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象パス・種類・symlink・依存・除外childを再確認し、ユーザーが承認したallowlistのみ削除。今回は実行しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-25",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": "本番証跡の現行性・復旧依存・代替の有無が未確認。期限だけでは削除実行しない。",
+      "assessment": {
+        "currentProductionNeed": "UNKNOWN",
+        "alternativeRecoveryAvailable": "UNKNOWN",
+        "adoptedAsGenesis": false,
+        "deletionApproval": false
+      }
+    },
+    {
+      "id": "production-review-02",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase4a/20261010-162806/api",
+      "classification": "PRODUCTION_OR_PRESERVATION_EVIDENCE",
+      "reason": "既知のProduction監査・API取得記録または移行保全領域。実Productionの対応・復旧用途・代替の確認を2026-10-25までに完了する。必要な唯一の復旧手段と認定したわけではない。",
+      "dependencies": [
+        "過去Production照合/復旧資料の所在判定。現行対応・代替手段はUNKNOWN。正式ソース移行時の保全データを含む可能性。"
+      ],
+      "retentionCondition": "現行Productionとの対応、必要な復旧用途、代替/保管方針を検証し、必要性と対象限定の正式保管承認を期限内に確認する。不要と確認されたものはDELETE_CANDIDATE。",
+      "threshold": {
+        "metric": "productionDependencyReview",
+        "operator": "all",
+        "value": [
+          "currentProductionMappingVerified",
+          "recoveryUseNecessary",
+          "replacementPlanVerified",
+          "userAdoptionOrStorageApprovalVerified"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-25",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "BLOCKED_BY_SAFETY_DEPENDENCY",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象パス・種類・symlink・依存・除外childを再確認し、ユーザーが承認したallowlistのみ削除。今回は実行しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-25",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": "本番証跡の現行性・復旧依存・代替の有無が未確認。期限だけでは削除実行しない。",
+      "assessment": {
+        "currentProductionNeed": "UNKNOWN",
+        "alternativeRecoveryAvailable": "UNKNOWN",
+        "adoptedAsGenesis": false,
+        "deletionApproval": false
+      }
+    },
+    {
+      "id": "production-review-03",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-migration/phase2a-20261010-104501/preservation",
+      "classification": "PRODUCTION_OR_PRESERVATION_EVIDENCE",
+      "reason": "既知のProduction監査・API取得記録または移行保全領域。実Productionの対応・復旧用途・代替の確認を2026-10-25までに完了する。必要な唯一の復旧手段と認定したわけではない。",
+      "dependencies": [
+        "過去Production照合/復旧資料の所在判定。現行対応・代替手段はUNKNOWN。正式ソース移行時の保全データを含む可能性。"
+      ],
+      "retentionCondition": "現行Productionとの対応、必要な復旧用途、代替/保管方針を検証し、必要性と対象限定の正式保管承認を期限内に確認する。不要と確認されたものはDELETE_CANDIDATE。",
+      "threshold": {
+        "metric": "productionDependencyReview",
+        "operator": "all",
+        "value": [
+          "currentProductionMappingVerified",
+          "recoveryUseNecessary",
+          "replacementPlanVerified",
+          "userAdoptionOrStorageApprovalVerified"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-25",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "BLOCKED_BY_SAFETY_DEPENDENCY",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象パス・種類・symlink・依存・除外childを再確認し、ユーザーが承認したallowlistのみ削除。今回は実行しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-25",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": "本番証跡の現行性・復旧依存・代替の有無が未確認。期限だけでは削除実行しない。",
+      "assessment": {
+        "currentProductionNeed": "UNKNOWN",
+        "alternativeRecoveryAvailable": "UNKNOWN",
+        "adoptedAsGenesis": false,
+        "deletionApproval": false
+      }
+    },
+    {
+      "id": "phase0-design-area",
+      "path": "/Users/masayuki/Developer/workspaces/mnp-navi-phase0/20261011-operations-rules",
+      "classification": "CURRENT_DESIGN_WORKSPACE",
+      "reason": "今回作成する運用入口・台帳・ポリシーのレビューを完了するための独立作業領域。",
+      "dependencies": [
+        "今回承認された7ファイルの文書/ポリシー/期限検証と、正式mainへの対象別採用判断。"
+      ],
+      "retentionCondition": "7ファイルの検証が全件PASSし、正式採用または必要な保存先への移行についてユーザーが対象別に判断する。",
+      "threshold": {
+        "metric": "operationsDocumentAdoption",
+        "operator": "all",
+        "value": [
+          "authorizedSevenFilesOnly",
+          "targetedValidationPass",
+          "userAdoptionOrStorageApprovalRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "TEMPORARILY_PROTECTED",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象パス・種類・symlink・依存・除外childを再確認し、ユーザーが承認したallowlistのみ削除。今回は実行しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "phase0-validation-scratch",
+      "path": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/work/phase0-operations",
+      "classification": "CURRENT_REVIEW_MATERIAL",
+      "reason": "今回の運用設計の証拠照合・レビューに使用する資料。レビュー後の正式保管/採用は別判定。",
+      "dependencies": [
+        "今回の7ファイルの内容・台帳判定・限定検証結果のレビュー。"
+      ],
+      "retentionCondition": "限定検証がPASSし、ユーザーが資料の正式保管先と用途を期限内に決定する。",
+      "threshold": {
+        "metric": "reviewMaterialDisposition",
+        "operator": "all",
+        "value": [
+          "targetedValidationPass",
+          "namedReviewUse",
+          "userStorageDecisionRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "TEMPORARILY_PROTECTED",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象パス・種類・symlink・依存・除外childを再確認し、ユーザーが承認したallowlistのみ削除。今回は実行しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "phase0-deliverable-01",
+      "path": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-operations-report.md",
+      "classification": "CURRENT_REVIEW_MATERIAL",
+      "reason": "今回の運用設計の証拠照合・レビューに使用する資料。レビュー後の正式保管/採用は別判定。",
+      "dependencies": [
+        "今回の7ファイルの内容・台帳判定・限定検証結果のレビュー。"
+      ],
+      "retentionCondition": "限定検証がPASSし、ユーザーが資料の正式保管先と用途を期限内に決定する。",
+      "threshold": {
+        "metric": "reviewMaterialDisposition",
+        "operator": "all",
+        "value": [
+          "targetedValidationPass",
+          "namedReviewUse",
+          "userStorageDecisionRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "TEMPORARILY_PROTECTED",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象パス・種類・symlink・依存・除外childを再確認し、ユーザーが承認したallowlistのみ削除。今回は実行しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "phase0-deliverable-02",
+      "path": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-retention-decisions.md",
+      "classification": "CURRENT_REVIEW_MATERIAL",
+      "reason": "今回の運用設計の証拠照合・レビューに使用する資料。レビュー後の正式保管/採用は別判定。",
+      "dependencies": [
+        "今回の7ファイルの内容・台帳判定・限定検証結果のレビュー。"
+      ],
+      "retentionCondition": "限定検証がPASSし、ユーザーが資料の正式保管先と用途を期限内に決定する。",
+      "threshold": {
+        "metric": "reviewMaterialDisposition",
+        "operator": "all",
+        "value": [
+          "targetedValidationPass",
+          "namedReviewUse",
+          "userStorageDecisionRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "TEMPORARILY_PROTECTED",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象パス・種類・symlink・依存・除外childを再確認し、ユーザーが承認したallowlistのみ削除。今回は実行しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "phase0-deliverable-03",
+      "path": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-operations-verification.json",
+      "classification": "CURRENT_REVIEW_MATERIAL",
+      "reason": "今回の運用設計の証拠照合・レビューに使用する資料。レビュー後の正式保管/採用は別判定。",
+      "dependencies": [
+        "今回の7ファイルの内容・台帳判定・限定検証結果のレビュー。"
+      ],
+      "retentionCondition": "限定検証がPASSし、ユーザーが資料の正式保管先と用途を期限内に決定する。",
+      "threshold": {
+        "metric": "reviewMaterialDisposition",
+        "operator": "all",
+        "value": [
+          "targetedValidationPass",
+          "namedReviewUse",
+          "userStorageDecisionRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "TEMPORARILY_PROTECTED",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象パス・種類・symlink・依存・除外childを再確認し、ユーザーが承認したallowlistのみ削除。今回は実行しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "phase0-deliverable-04",
+      "path": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-operations-review.patch",
+      "classification": "CURRENT_REVIEW_MATERIAL",
+      "reason": "今回の運用設計の証拠照合・レビューに使用する資料。レビュー後の正式保管/採用は別判定。",
+      "dependencies": [
+        "今回の7ファイルの内容・台帳判定・限定検証結果のレビュー。"
+      ],
+      "retentionCondition": "限定検証がPASSし、ユーザーが資料の正式保管先と用途を期限内に決定する。",
+      "threshold": {
+        "metric": "reviewMaterialDisposition",
+        "operator": "all",
+        "value": [
+          "targetedValidationPass",
+          "namedReviewUse",
+          "userStorageDecisionRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "TEMPORARILY_PROTECTED",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象パス・種類・symlink・依存・除外childを再確認し、ユーザーが承認したallowlistのみ削除。今回は実行しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    },
+    {
+      "id": "phase0-deliverable-05",
+      "path": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-operations-register.json",
+      "classification": "CURRENT_REVIEW_MATERIAL",
+      "reason": "今回の運用設計の証拠照合・レビューに使用する資料。レビュー後の正式保管/採用は別判定。",
+      "dependencies": [
+        "今回の7ファイルの内容・台帳判定・限定検証結果のレビュー。"
+      ],
+      "retentionCondition": "限定検証がPASSし、ユーザーが資料の正式保管先と用途を期限内に決定する。",
+      "threshold": {
+        "metric": "reviewMaterialDisposition",
+        "operator": "all",
+        "value": [
+          "targetedValidationPass",
+          "namedReviewUse",
+          "userStorageDecisionRecorded"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-18",
+      "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
+      "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
+      "status": "TEMPORARILY_PROTECTED",
+      "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
+      "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
+      "deletionMethod": "対象パス・種類・symlink・依存・除外childを再確認し、ユーザーが承認したallowlistのみ削除。今回は実行しない。",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-11",
+      "evidenceDeadline": "2026-10-18",
+      "conditionEvidence": [],
+      "exclusions": [],
+      "safetyBlocker": null
+    }
+  ],
+  "openSafetyIssues": [
+    {
+      "id": "current-production-baseline-location",
+      "description": "監査に既存Production artifact/receipt/attestation参照はあるが現行正本の所在・対応・代替は未確認。架空パスを台帳登録しない。",
+      "resolutionCondition": "対象別所在、Production対応、復旧代替を証拠で確認し、残る依存を限定してユーザー承認を得る。",
+      "decisionOwner": "まさゆき / 明示依頼されたCodex",
+      "deadline": "2026-10-25"
+    }
+  ]
+}
