@@ -6,6 +6,7 @@
 - genesisCertified: `false`
 - productionPublishEnabled: `false`
 - retentionPolicyVersion: `1.0.0`
+- executionPolicyVersion: `1.0.0`
 - 発効範囲: 正式mainへ反映後、正式リポジトリのプロジェクト作業で参照する設計・成果物判定ルール。新公開方式の正式切り替えではない。
 - 正式GitHub: https://github.com/maffun-rabbit/rm-referral
 - 正式Developer環境: `/Users/masayuki/Developer/projects/RMリファラル/cloudflare-site`
@@ -17,6 +18,7 @@
 - [PHASE0.md](PHASE0.md): Genesisの認定、新方式の設計境界。
 - [RELEASE.md](RELEASE.md): 公開・復旧の承認境界と将来の連続状態管理。
 - [RETENTION.md](RETENTION.md): 保存・期限・削除の唯一の手順正本。
+- [EXECUTION_POLICY.md](EXECUTION_POLICY.md): 障害対応の探索上限、工程状態、独立した工程の継続。すべてのプロジェクト作業に適用する。
 - [operations-policy.json](../../config/operations-policy.json): 機械判定用値・台帳契約。
 - [retention-register.json](retention-register.json): 対象ごとの判定・期限・依存関係。
 
@@ -48,4 +50,5 @@
 新しい一時成果物はRETENTION.mdに従い、理由・具体的依存・条件・閾値・絶対期限・判定責任・処置を登録してから保留する。
 無期限保護、同じ理由での期限再登録、自動削除は禁止。必要性の証拠がなければDELETE_CANDIDATE。
 文書・ポリシーの不一致、未登録の保護、承認不足、不明なProduction対応、旧指示との衝突では安全側へ停止する。
+停止する範囲は影響する工程とその依存工程に限定する。独立した承認済み工程はEXECUTION_POLICY.mdに従って継続する。
 正式mainへ反映後は、プロジェクト作業の開始時にAGENTS.mdからこの最新版を参照する。古いclone・既に読み込まれたチャットの指示は自動更新されないため、使用元を確認する。

@@ -3,6 +3,7 @@
 ## Phase 0 運用入口（設計段階）
 
 - 作業開始時に [docs/operations/CURRENT.md](docs/operations/CURRENT.md) を確認し、運用仕様ID・Version・状態を確認する。
+- 障害対応・工程状態管理にも、CURRENT.md経由のEXECUTION_POLICY.mdを常時適用する。
 - 目的に応じてCURRENT.mdからPHASE0.md、RELEASE.md、RETENTION.mdを参照する。
 - 旧運用指示と矛盾する場合は該当処理を停止し、矛盾と参照元を報告する。
 - 過去の検証clone・archive内のAGENTS.mdを現行ルールとして採用しない。
