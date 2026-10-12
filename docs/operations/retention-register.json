@@ -27,7 +27,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -56,6 +56,18 @@
           "scripts/offline-release-flow.py",
           "tests/offline-cloudflare-assets.test.py"
         ]
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577023+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-01": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -78,7 +90,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -107,6 +119,18 @@
           "scripts/offline-cloudflare-assets.py",
           "tests/offline-cloudflare-hash.test.cjs"
         ]
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577047+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-02": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -129,7 +153,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -162,6 +186,18 @@
           "tests/offline-release-envelope.test.mjs",
           "tests/offline-release-flow.test.mjs"
         ]
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577065+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-03": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -184,7 +220,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -213,6 +249,18 @@
           "scripts/offline-release-binding.py",
           "tests/offline-persistent-cas.test.py"
         ]
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577082+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-04": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -235,7 +283,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -264,6 +312,18 @@
           "scripts/offline-cloudflare-assets.py",
           "tests/offline-release-binding.test.py"
         ]
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577098+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-05": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -286,7 +346,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -316,6 +376,18 @@
           "tests/offline-release-binding.test.py",
           "tests/offline-release-envelope.test.mjs"
         ]
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577115+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-06": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -338,7 +410,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -367,6 +439,18 @@
           "scripts/offline-release-flow.py",
           "tests/offline-release-flow.test.mjs"
         ]
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577136+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-07": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -389,7 +473,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -417,6 +501,18 @@
         "experimentalDependents": [
           "tests/offline-release-flow.test.py"
         ]
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577154+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-08": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -439,7 +535,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -465,6 +561,18 @@
         "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
         "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
         "experimentalDependents": []
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577171+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-09": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -487,7 +595,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -513,6 +621,18 @@
         "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
         "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
         "experimentalDependents": []
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577188+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-10": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -535,7 +655,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -561,6 +681,18 @@
         "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
         "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
         "experimentalDependents": []
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577206+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-11": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -583,7 +715,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -609,6 +741,18 @@
         "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
         "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
         "experimentalDependents": []
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577223+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-12": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -631,7 +775,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -660,6 +804,18 @@
           "tests/offline-cloudflare-assets.test.py",
           "tests/offline-release-flow.test.py"
         ]
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577239+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-13": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -682,7 +838,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -708,6 +864,18 @@
         "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
         "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
         "experimentalDependents": []
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577257+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-14": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -730,7 +898,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -756,6 +924,18 @@
         "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
         "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
         "experimentalDependents": []
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577273+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-15": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -778,7 +958,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "実験用import依存をまとめて確認し、承認された16ファイル中の対象だけ削除。正式main・他のtrackedコード・実CASデータは対象外。単体削除で残す試作を破壊しない。",
@@ -804,6 +984,18 @@
         "replacement": "新Phase 0仕様から独立実装可能。既存試作の採用は別審査・対象別承認。",
         "productionNeedBasis": "fixture-only/offlineコメント・実装、main非参照。実Productionの内容認定ではない。",
         "experimentalDependents": []
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577289+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "prototype-16": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -826,7 +1018,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
@@ -850,6 +1042,18 @@
         "neededForGenesisCertification": false,
         "formallyAdoptedForNewWorkflow": false,
         "replaceable": true
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577304+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "worktree-01": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -872,7 +1076,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
@@ -928,6 +1132,18 @@
         "neededForGenesisCertification": false,
         "formallyAdoptedForNewWorkflow": false,
         "replaceable": true
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577318+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "worktree-02": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -950,7 +1166,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
@@ -986,6 +1202,18 @@
         "neededForGenesisCertification": false,
         "formallyAdoptedForNewWorkflow": false,
         "replaceable": true
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577332+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "worktree-03": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -1008,7 +1236,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
@@ -1074,6 +1302,18 @@
         "neededForGenesisCertification": false,
         "formallyAdoptedForNewWorkflow": false,
         "replaceable": true
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577345+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "worktree-04": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -1096,7 +1336,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
@@ -1120,6 +1360,18 @@
         "neededForGenesisCertification": false,
         "formallyAdoptedForNewWorkflow": false,
         "replaceable": true
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577550+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "worktree-05": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -1142,7 +1394,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
@@ -1208,6 +1460,18 @@
         "neededForGenesisCertification": false,
         "formallyAdoptedForNewWorkflow": false,
         "replaceable": true
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577567+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "worktree-06": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -1230,7 +1494,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
@@ -1254,6 +1518,18 @@
         "neededForGenesisCertification": false,
         "formallyAdoptedForNewWorkflow": false,
         "replaceable": true
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577582+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "worktree-07": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -1276,7 +1552,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
@@ -1342,6 +1618,18 @@
         "neededForGenesisCertification": false,
         "formallyAdoptedForNewWorkflow": false,
         "replaceable": true
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577596+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "worktree-08": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -1364,7 +1652,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "Git登録・tracked/未追跡/ignoredファイル・symlink先を確認し、対象別承認後にGit worktree管理手順で解除・削除。forceの要否と失う差分を承認に明記。共有.git・ブランチを暗黙削除しない。今回は解除しない。",
@@ -1388,6 +1676,18 @@
         "neededForGenesisCertification": false,
         "formallyAdoptedForNewWorkflow": false,
         "replaceable": true
+      },
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577611+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "worktree-09": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
       }
     },
     {
@@ -1410,7 +1710,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
@@ -1419,7 +1719,19 @@
       "evidenceDeadline": "2026-10-18",
       "conditionEvidence": [],
       "exclusions": [],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577626+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "ordinary-001": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-02",
@@ -1452,7 +1764,23 @@
       "exclusions": [
         "/Users/masayuki/Developer/workspaces/mnp-navi-migration/phase2a-20261010-104501/preservation"
       ],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577648+09:00",
+        "result": "PARTIALLY_DELETED",
+        "pathExists": true,
+        "unitResults": {
+          "ordinary-002": "DELETED",
+          "ordinary-003": "DELETED",
+          "ordinary-004": "DELETED",
+          "ordinary-005": "DELETED",
+          "ordinary-006": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-03",
@@ -1474,7 +1802,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
@@ -1488,7 +1816,43 @@
         "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/cta-tests-20261010-154842/baseline",
         "/Users/masayuki/Developer/workspaces/mnp-navi-phase3a/cta-tests-20261010-154842/candidate"
       ],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577758+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "ordinary-007": "DELETED",
+          "ordinary-008": "DELETED",
+          "ordinary-009": "DELETED",
+          "ordinary-010": "DELETED",
+          "ordinary-011": "DELETED",
+          "ordinary-012": "DELETED",
+          "ordinary-013": "DELETED",
+          "ordinary-014": "DELETED",
+          "ordinary-015": "DELETED",
+          "ordinary-016": "DELETED",
+          "ordinary-017": "DELETED",
+          "ordinary-018": "DELETED",
+          "ordinary-019": "DELETED",
+          "ordinary-020": "DELETED",
+          "ordinary-021": "DELETED",
+          "ordinary-022": "DELETED",
+          "ordinary-023": "DELETED",
+          "ordinary-024": "DELETED",
+          "ordinary-025": "DELETED",
+          "ordinary-026": "DELETED",
+          "ordinary-027": "DELETED",
+          "ordinary-028": "DELETED",
+          "empty-01": "DELETED",
+          "empty-02": "DELETED",
+          "empty-04": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-04",
@@ -1523,7 +1887,32 @@
         "/Users/masayuki/Developer/workspaces/mnp-navi-phase4a/20261010-162806/candidate",
         "/Users/masayuki/Developer/workspaces/mnp-navi-phase4a/20261010-162806/api"
       ],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577778+09:00",
+        "result": "PARTIALLY_DELETED",
+        "pathExists": true,
+        "unitResults": {
+          "ordinary-029": "DELETED",
+          "ordinary-030": "DELETED",
+          "ordinary-031": "DELETED",
+          "ordinary-032": "DELETED",
+          "ordinary-033": "DELETED",
+          "ordinary-034": "DELETED",
+          "ordinary-035": "DELETED",
+          "ordinary-036": "DELETED",
+          "ordinary-037": "DELETED",
+          "ordinary-038": "DELETED",
+          "ordinary-039": "DELETED",
+          "ordinary-040": "DELETED",
+          "ordinary-041": "DELETED",
+          "ordinary-042": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-05",
@@ -1545,7 +1934,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
@@ -1557,7 +1946,30 @@
         "/Users/masayuki/Developer/workspaces/mnp-navi-phase4b1/20261010-193142/baseline",
         "/Users/masayuki/Developer/workspaces/mnp-navi-phase4b1/20261010-193142/candidate"
       ],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577838+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "ordinary-043": "DELETED",
+          "ordinary-044": "DELETED",
+          "ordinary-045": "DELETED",
+          "ordinary-046": "DELETED",
+          "ordinary-047": "DELETED",
+          "ordinary-048": "DELETED",
+          "ordinary-049": "DELETED",
+          "ordinary-050": "DELETED",
+          "ordinary-051": "DELETED",
+          "ordinary-052": "DELETED",
+          "empty-03": "DELETED",
+          "empty-05": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-06",
@@ -1579,7 +1991,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
@@ -1588,7 +2000,19 @@
       "evidenceDeadline": "2026-10-18",
       "conditionEvidence": [],
       "exclusions": [],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577855+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "ordinary-053": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-07",
@@ -1619,7 +2043,29 @@
       "evidenceDeadline": "2026-10-18",
       "conditionEvidence": [],
       "exclusions": [],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.577871+09:00",
+        "result": "PARTIALLY_DELETED",
+        "pathExists": true,
+        "unitResults": {
+          "ordinary-054": "DELETED",
+          "ordinary-055": "DELETED",
+          "ordinary-056": "DELETED",
+          "ordinary-057": "DELETED",
+          "ordinary-058": "DELETED",
+          "ordinary-059": "DELETED",
+          "ordinary-060": "DELETED",
+          "ordinary-061": "DELETED",
+          "ordinary-062": "DELETED",
+          "ordinary-063": "DELETED",
+          "ordinary-064": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-08",
@@ -1641,7 +2087,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
@@ -1652,7 +2098,23 @@
       "exclusions": [
         "/Users/masayuki/Developer/workspaces/mnp-navi-phase5/legacy-path-fix-20261010"
       ],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.578010+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "ordinary-065": "DELETED",
+          "ordinary-066": "DELETED",
+          "ordinary-067": "DELETED",
+          "ordinary-068": "DELETED",
+          "empty-06": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-09",
@@ -1674,7 +2136,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
@@ -1683,7 +2145,19 @@
       "evidenceDeadline": "2026-10-18",
       "conditionEvidence": [],
       "exclusions": [],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.578027+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "ordinary-069": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-10",
@@ -1705,7 +2179,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
@@ -1714,7 +2188,19 @@
       "evidenceDeadline": "2026-10-18",
       "conditionEvidence": [],
       "exclusions": [],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.578042+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "ordinary-070": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-11",
@@ -1747,7 +2233,64 @@
       "exclusions": [
         "/Users/masayuki/Developer/workspaces/mnp-navi-phase6b3/20261011-065458/repo"
       ],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.578058+09:00",
+        "result": "PARTIALLY_DELETED",
+        "pathExists": true,
+        "unitResults": {
+          "ordinary-071": "DELETED",
+          "ordinary-072": "DELETED",
+          "ordinary-073": "DELETED",
+          "ordinary-074": "DELETED",
+          "ordinary-075": "DELETED",
+          "ordinary-076": "DELETED",
+          "ordinary-077": "DELETED",
+          "ordinary-078": "DELETED",
+          "ordinary-079": "DELETED",
+          "ordinary-080": "DELETED",
+          "ordinary-081": "DELETED",
+          "ordinary-082": "DELETED",
+          "ordinary-083": "DELETED",
+          "ordinary-084": "DELETED",
+          "ordinary-085": "DELETED",
+          "ordinary-086": "DELETED",
+          "ordinary-087": "DELETED",
+          "ordinary-088": "DELETED",
+          "ordinary-089": "DELETED",
+          "ordinary-090": "DELETED",
+          "ordinary-091": "DELETED",
+          "ordinary-092": "DELETED",
+          "ordinary-093": "DELETED",
+          "ordinary-094": "DELETED",
+          "ordinary-095": "DELETED",
+          "ordinary-096": "DELETED",
+          "ordinary-097": "DELETED",
+          "ordinary-098": "DELETED",
+          "ordinary-099": "DELETED",
+          "ordinary-100": "DELETED",
+          "ordinary-101": "DELETED",
+          "ordinary-102": "DELETED",
+          "ordinary-103": "DELETED",
+          "ordinary-104": "DELETED",
+          "ordinary-105": "DELETED",
+          "ordinary-106": "DELETED",
+          "ordinary-107": "DELETED",
+          "ordinary-108": "DELETED",
+          "ordinary-109": "DELETED",
+          "ordinary-110": "DELETED",
+          "ordinary-111": "DELETED",
+          "ordinary-112": "DELETED",
+          "ordinary-113": "DELETED",
+          "ordinary-114": "DELETED",
+          "ordinary-115": "DELETED",
+          "ordinary-116": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-12",
@@ -1769,7 +2312,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
@@ -1778,7 +2321,19 @@
       "evidenceDeadline": "2026-10-18",
       "conditionEvidence": [],
       "exclusions": [],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.578117+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "ordinary-117": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-13",
@@ -1800,7 +2355,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
@@ -1809,7 +2364,19 @@
       "evidenceDeadline": "2026-10-18",
       "conditionEvidence": [],
       "exclusions": [],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.578133+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "ordinary-118": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-14",
@@ -1831,7 +2398,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
@@ -1840,7 +2407,19 @@
       "evidenceDeadline": "2026-10-18",
       "conditionEvidence": [],
       "exclusions": [],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.578149+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "ordinary-119": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-15",
@@ -1862,7 +2441,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
@@ -1871,7 +2450,19 @@
       "evidenceDeadline": "2026-10-18",
       "conditionEvidence": [],
       "exclusions": [],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.578163+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "ordinary-120": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "legacy-area-16",
@@ -1893,7 +2484,7 @@
       "deadline": "2026-10-18",
       "decisionMethod": "対象別のソース参照・内容比較・承認記録・用途/代替証拠を確認。UNKNOWNは条件未達。Production対応は別途承認された調査が必要。",
       "decisionOwner": "まさゆき（採用/削除/延長承認）、Codex（明示依頼された証拠照合）",
-      "status": "DELETE_CANDIDATE",
+      "status": "DELETED",
       "onConditionMet": "ユーザーの対象別承認後、用途と保存方針を持つ正式採用先へ必要な部分だけ移行。旧作業領域全体は自動保護しない。",
       "onConditionUnmet": "DELETE_CANDIDATEへ確定。Production安全問題が残ればsafetyBlockerへ記録し、対象限定の個別承認を求める。自動削除しない。",
       "deletionMethod": "対象配下のallowlistを承認前に確定し、exclusionsと台帳childを除外。parent全体の再帰削除は禁止。参考資料の正式保管も無期限archiveへ自動移行しない。実験コード/CASへの依存は整理順序の根拠であり保護根拠ではない。",
@@ -1902,7 +2493,19 @@
       "evidenceDeadline": "2026-10-18",
       "conditionEvidence": [],
       "exclusions": [],
-      "safetyBlocker": null
+      "safetyBlocker": null,
+      "deletionExecution": {
+        "planId": "mnp-navi-phase0-delete-20261012-v1",
+        "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+        "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+        "recordedAt": "2026-10-12T11:22:21.578178+09:00",
+        "result": "DELETED",
+        "pathExists": false,
+        "unitResults": {
+          "ordinary-121": "DELETED"
+        },
+        "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+      }
     },
     {
       "id": "production-review-01",
@@ -2264,5 +2867,19 @@
       "decisionOwner": "まさゆき / 明示依頼されたCodex",
       "deadline": "2026-10-25"
     }
-  ]
+  ],
+  "lastDeletionExecution": {
+    "planId": "mnp-navi-phase0-delete-20261012-v1",
+    "planSha256": "ab80155f7f042036a39c04bef9175d515adafac2ab0d12facb33e981d29ce336",
+    "inventorySha256": "267fd9ca3b256d6557e528726c063eef406cd9d096372b2164a6b7c31e7f8217",
+    "authorizationSource": "Current explicit user request: Phase 0 承認済み削除計画の実行再開",
+    "recordedAt": "2026-10-12T11:22:21.578190+09:00",
+    "counts146": {
+      "DELETED": 146
+    },
+    "countsEmpty6": {
+      "DELETED": 6
+    },
+    "evidencePath": "/Users/masayuki/Documents/Codex/2026-10-11/mnp-navi-jp-web-mnp-navi-6/outputs/phase0-deletion-execution-results.json"
+  }
 }
