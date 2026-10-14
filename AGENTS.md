@@ -1,5 +1,9 @@
 # RMリファラル（GitHub＋Cloudflare）
 
+## 統合プロモーションの入口
+
+「プロモーションの制作進行をお願い」等の依頼は `.agents/skills/promotion-content-release/SKILL.md` を使用する。通常制作・計測・限定検証の正本は `docs/operations/PROMOTION.md`、次工程は `PROMOTION_STATE.json`。この入口の詳細を他のSkillへ複製しない。
+
 ## Phase 0 運用入口（設計段階）
 
 - 作業開始時に [docs/operations/CURRENT.md](docs/operations/CURRENT.md) を確認し、運用仕様ID・Version・状態を確認する。

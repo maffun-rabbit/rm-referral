@@ -15,6 +15,9 @@
 
 ## 参照
 
+- [PROMOTION.md](PROMOTION.md): 統合プロモーションの依頼入口、記事別/ショップ別CTA計測、Threads、対象限定の通常制作。Phase 0の公開禁止状態を解除しない。
+- [PROMOTION_STATE.json](PROMOTION_STATE.json): 公開実績と次工程の短い引継ぎ。本番Currentの代用ではない。
+
 - [PHASE0.md](PHASE0.md): Genesisの認定、新方式の設計境界。
 - [RELEASE.md](RELEASE.md): 公開・復旧の承認境界と将来の連続状態管理。
 - [RETENTION.md](RETENTION.md): 保存・期限・削除の唯一の手順正本。

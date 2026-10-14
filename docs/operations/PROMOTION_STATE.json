@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-14",
+  "policyVersion": "1.0.0",
+  "lastPublication": {
+    "url": "https://mnp-navi.jp/guide/replacement-program/return-not-sent/",
+    "sourceCommit": "66fd4c1383b2f539c86e4074eec6bdfaa8f76c61",
+    "worker": "rm-referral-content-updates",
+    "version": "b56da4ce-4a20-4ff5-a60c-278864d03fab",
+    "deployment": "4e9e6c27-4999-4c91-9700-811b38af21ef",
+    "trafficPercent": 100,
+    "evidence": "https://mnp-navi.jp/guide/replacement-program/return-not-sent/",
+    "liveCurrentMustBeRechecked": true
+  },
+  "capabilities": {
+    "arbitraryPageGeneration": "SHOP_SINGLE_PAGE_PROVEN",
+    "arbitraryUrlPublication": "NOT_IMPLEMENTED",
+    "currentRoutePattern": "https://mnp-navi.jp/guide/replacement-program/*",
+    "shortUrlCtaIntegration": "REQUIRED_FOR_NEXT_CONTENT_NOT_IMPLEMENTED",
+    "threadsTracking": "REQUIRED_NOT_IMPLEMENTED"
+  },
+  "nextRequest": {
+    "theme": "select nonduplicate replacement-program topic if unspecified",
+    "scopePolicy": "PROMOTION.md",
+    "mustNotRepeat": "completed article production, upload or deployment"
+  },
+  "activeTask": null
+}
