@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "updatedAt": "2026-10-14",
-  "policyVersion": "1.0.0",
+  "policyVersion": "1.1.0",
   "lastPublication": {
     "url": "https://mnp-navi.jp/guide/replacement-program/repaired-device/",
     "sourceCommit": "94e2bbb26d45e9123ba02b47a6cc860dcd508d71",
