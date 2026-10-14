@@ -39,7 +39,7 @@ body {
 header,
 main,
 footer {
-  width: min(100% - 32px, 760px);
+  width: min(100% - 32px, 1116px);
   margin-inline: auto;
 }
 
