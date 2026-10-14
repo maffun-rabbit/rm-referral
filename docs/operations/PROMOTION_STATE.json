@@ -3,26 +3,54 @@
   "updatedAt": "2026-10-14",
   "policyVersion": "1.0.0",
   "lastPublication": {
-    "url": "https://mnp-navi.jp/guide/replacement-program/return-not-sent/",
-    "sourceCommit": "66fd4c1383b2f539c86e4074eec6bdfaa8f76c61",
+    "url": "https://mnp-navi.jp/guide/replacement-program/repaired-device/",
+    "sourceCommit": "94e2bbb26d45e9123ba02b47a6cc860dcd508d71",
     "worker": "rm-referral-content-updates",
-    "version": "b56da4ce-4a20-4ff5-a60c-278864d03fab",
-    "deployment": "4e9e6c27-4999-4c91-9700-811b38af21ef",
+    "version": "ed826078-996f-4280-8e6a-0a4ae16b74d8",
+    "deployment": "de5530e0-54c5-4bf7-9c14-313d8bde76fc",
     "trafficPercent": 100,
-    "evidence": "https://mnp-navi.jp/guide/replacement-program/return-not-sent/",
+    "evidence": "/Users/masayuki/Documents/Codex/2026-10-14/referenced-chatgpt-conversation-this-is-an/outputs/imei-promotion/production-result.json",
     "liveCurrentMustBeRechecked": true
   },
   "capabilities": {
     "arbitraryPageGeneration": "SHOP_SINGLE_PAGE_PROVEN",
     "arbitraryUrlPublication": "NOT_IMPLEMENTED",
     "currentRoutePattern": "https://mnp-navi.jp/guide/replacement-program/*",
-    "shortUrlCtaIntegration": "REQUIRED_FOR_NEXT_CONTENT_NOT_IMPLEMENTED",
-    "threadsTracking": "REQUIRED_NOT_IMPLEMENTED"
+    "shortUrlCtaIntegration": "CURRENT_ARTICLE_REGISTERED_AND_REFLECTED; future content required",
+    "threadsTracking": "CURRENT_ARTICLE_LINK_REGISTERED_NOT_POSTED"
   },
   "nextRequest": {
     "theme": "select nonduplicate replacement-program topic if unspecified",
     "scopePolicy": "PROMOTION.md",
     "mustNotRepeat": "completed article production, upload or deployment"
   },
-  "activeTask": null
+  "activeTask": {
+    "id": "promotion-repaired-device-20261014",
+    "theme": "メーカー修理後のIMEI変更・保証書送付手順",
+    "cloudflare": {
+      "status": "PUBLICATION_CONFIRMED",
+      "url": "https://mnp-navi.jp/guide/replacement-program/repaired-device/",
+      "plan": "/Users/masayuki/Documents/Codex/2026-10-14/referenced-chatgpt-conversation-this-is-an/outputs/imei-promotion/release-plan.json",
+      "version": "ed826078-996f-4280-8e6a-0a4ae16b74d8",
+      "deployment": "de5530e0-54c5-4bf7-9c14-313d8bde76fc",
+      "sourceCommit": "94e2bbb26d45e9123ba02b47a6cc860dcd508d71"
+    },
+    "hatena": {
+      "status": "PUBLICATION_CONFIRMED",
+      "url": "https://phone-cost-down.hatenablog.com/entry/2026/10/14/121154",
+      "cta": "https://go.mnp-navi.jp/r/92fd6469"
+    },
+    "social": {
+      "status": "MATERIALS_CREATED_NOT_POSTED",
+      "directory": "/Users/masayuki/Documents/Codex/2026-10-14/referenced-chatgpt-conversation-this-is-an/outputs/imei-promotion/20261014_3/",
+      "threadsCopy": "/Users/masayuki/Documents/Codex/2026-10-14/referenced-chatgpt-conversation-this-is-an/outputs/imei-promotion/threads.txt",
+      "videoSeconds": 16,
+      "fps": 30,
+      "style": "AI whole-slide composition, vivid blue photography and large bold headline",
+      "userAccepted": true
+    },
+    "tracking": "/Users/masayuki/Documents/Codex/2026-10-14/referenced-chatgpt-conversation-this-is-an/outputs/imei-promotion/tracking-links.json",
+    "nextAction": "Cloudflare・はてな公開完了。Instagram・TikTok・Threadsは投稿承認/リンク設置確認後に投稿。",
+    "decisionDeadline": "2026-10-21T23:59:59+09:00"
+  }
 }

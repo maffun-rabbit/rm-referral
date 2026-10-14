@@ -2857,6 +2857,46 @@
       "conditionEvidence": [],
       "exclusions": [],
       "safetyBlocker": null
+    },
+    {
+      "id": "promotion-repaired-device-20261014",
+      "path": "/Users/masayuki/Documents/Codex/2026-10-14/referenced-chatgpt-conversation-this-is-an/work/imei-promotion",
+      "classification": "ARTICLE_PUBLICATION_PREPARATION",
+      "reason": "今回の記事生成・親Current・公開パッケージの準備",
+      "dependencies": [
+        "/Users/masayuki/Developer/projects/RMリファラル/cloudflare-site/content/pages/ja/guide/replacement-program/repaired-device/page.json",
+        "/Users/masayuki/Documents/Codex/2026-10-14/referenced-chatgpt-conversation-this-is-an/outputs/imei-promotion/release-plan.json"
+      ],
+      "retentionCondition": "対象記事の承認済みmain反映と公開確認を期限内に完了",
+      "threshold": {
+        "metric": "approvedPublication",
+        "operator": "all",
+        "value": [
+          "mainReflected",
+          "versionUploaded",
+          "productionConfirmed"
+        ],
+        "evidenceRequired": true
+      },
+      "deadline": "2026-10-21",
+      "decisionMethod": "対象記事のGit commit・Version・Deployment・公開URLと照合",
+      "decisionOwner": "User/approval; Codex/execution",
+      "status": "TEMPORARILY_PROTECTED",
+      "onConditionMet": "必要証跡と正式ソースを採用し、一時生成物を再判定",
+      "onConditionUnmet": "DELETE_CANDIDATE; 自動削除なし",
+      "deletionMethod": "対象allowlistを別途承認後に削除",
+      "approvalRequired": true,
+      "registeredAt": "2026-10-14",
+      "publicationEvidence": {
+        "sourceCommit": "94e2bbb26d45e9123ba02b47a6cc860dcd508d71",
+        "version": "ed826078-996f-4280-8e6a-0a4ae16b74d8",
+        "deployment": "de5530e0-54c5-4bf7-9c14-313d8bde76fc",
+        "url": "https://mnp-navi.jp/guide/replacement-program/repaired-device/",
+        "receipt": "/Users/masayuki/Documents/Codex/2026-10-14/referenced-chatgpt-conversation-this-is-an/outputs/imei-promotion/production-result.json",
+        "confirmedAt": "2026-10-14T06:54:10.151531+00:00"
+      },
+      "conditionMet": true,
+      "remainingDisposition": "2026-10-21までに一時生成物と復旧証跡の保管要否を再判定。削除未承認。"
     }
   ],
   "openSafetyIssues": [
